@@ -12,7 +12,7 @@ namespace Entities
 
 
 Krampus::Krampus()
-   : AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D()
+   : AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D()
 {
 }
 

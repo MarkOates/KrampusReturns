@@ -1,7 +1,7 @@
 parent_classes:
 
 
-  - class: AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D
+  - class: AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D
     scope: public
     init_with: ''
 
@@ -19,7 +19,7 @@ properties:
 dependencies:
 
 
-  - symbol: AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D
-    headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D.hpp ]
+  - symbol: AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D
+    headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D.hpp ]
 
 
