@@ -9,9 +9,9 @@
 
 // TODO: improve this:
 #if defined(_WIN32) || defined(_WIN64)
-#define TEST_BASE_FOLDER "/msys64/home/Mark/Repos/allegro_flare/bin/data/"
+#define TEST_BASE_FOLDER "/msys64/home/Mark/Repos/KrampusReturns/bin/programs/data/"
 #else
-#define TEST_BASE_FOLDER "/Users/markoates/Repos/allegro_flare/bin/data/"
+#define TEST_BASE_FOLDER "/Users/markoates/Repos/KrampusReturns/bin/programs/data/"
 #endif
 
 
@@ -37,8 +37,8 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
    platforming_2d.set_display(framework.get_primary_display());
    platforming_2d.set_event_emitter(&framework.get_event_emitter_ref());
    platforming_2d.set_map_dictionary({
-      { "map_a", TEST_BASE_FOLDER "maps/map1-0x.tmj" },
-      { "map_b", TEST_BASE_FOLDER "maps/map1b-0x.tmj" },
+      { "map_a", TEST_BASE_FOLDER "maps/krampus-returns-map01-0x.tmj" },
+      { "map_b", TEST_BASE_FOLDER "maps/krampus-returns-map02-0x.tmj" },
    });
    platforming_2d.initialize_maps();
    platforming_2d.set_currently_active_map("map_a");
@@ -50,8 +50,8 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
    // create an animation book (to create an frame_animated type from the factory)
    // TODO: introduce this concept to the test
    AllegroFlare::FrameAnimation::Book animation_book(
-      "/Users/markoates/Repos/allegro_flare/bin/data/bitmaps/sprites_grid-x.png",
-      "/Users/markoates/Repos/allegro_flare/bin/data/bitmaps/sprites_grid-x.json",
+      "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.png",
+      "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.json",
       1
    );
    animation_book.initialize();
