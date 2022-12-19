@@ -1,0 +1,108 @@
+{
+  "AllegroFlare/BitmapBin": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "al_color_name": [
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "std/map<int, int>": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/VirtualControls": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/VirtualControlsProcessor": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/TileMaps/PrimMeshAtlas": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/EventNames": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/Screen": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/Frameworks/Full": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/Placement2D": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/vec2d": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/Physics/TileMapCollisionStepper": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/Physics/AABB2D": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/Prototypes/Platforming2D/EntityFlagNames": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/CameraControlStrategies2D/Base": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/CameraControlStrategies2D/Snap": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/CameraControlStrategies2D/SmoothSnap": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/CameraControlStrategies2D/SmoothSnapWithZoomEffect": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/CameraControlStrategies2D/HorizontalRail": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/Prototypes/Platforming2D/EntityCollectionHelper": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/Prototypes/Platforming2D/Entities/TileMaps/Basic2D": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/Prototypes/Platforming2D/Entities/Doors/Basic2D": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "std/find": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "tan": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/TileMaps/PrimMesh": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/TileMaps/TileMap": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "ALLEGRO_EVENT": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/Display": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/EventEmitter": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/Screens/Base": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/Camera2D": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "ALLEGRO_BITMAP": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/Vec2D": [
+    "KrampusReturns/Gameplay/Screen"
+  ]
+}
