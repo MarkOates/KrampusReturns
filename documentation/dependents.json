@@ -18,7 +18,8 @@
     "KrampusReturns/EntityFactory"
   ],
   "AllegroFlare/BitmapBin": [
-    "KrampusReturns/Gameplay/Screen"
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Shaders/Primary"
   ],
   "al_color_name": [
     "KrampusReturns/Gameplay/Screen",
@@ -100,7 +101,8 @@
     "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/EventEmitter": [
-    "KrampusReturns/Gameplay/Screen"
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Shaders/Primary"
   ],
   "AllegroFlare/Screens/Base": [
     "KrampusReturns/Gameplay/Screen"
@@ -113,5 +115,19 @@
   ],
   "AllegroFlare/Vec2D": [
     "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/Shader": [
+    "KrampusReturns/Shaders/AllegroDefault",
+    "KrampusReturns/Shaders/Primary"
+  ],
+  "ALLEGRO_COLOR": [
+    "KrampusReturns/Shaders/AllegroDefault",
+    "KrampusReturns/Shaders/Primary"
+  ],
+  "AllegroFlare/FontBin": [
+    "KrampusReturns/Shaders/Primary"
+  ],
+  "AllegroFlare/Prototypes/FixedRoom2D/EntityCollectionHelper": [
+    "KrampusReturns/Shaders/Primary"
   ]
 }

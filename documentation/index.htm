@@ -53,6 +53,8 @@ table td
   <li><a href="#quintessence/KrampusReturns/EntityFactory.q.yml">quintessence/KrampusReturns/EntityFactory.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Gameplay/Screen.q.yml">quintessence/KrampusReturns/Gameplay/Screen.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Runner.q.yml">quintessence/KrampusReturns/Runner.q.yml</a></li>
+  <li><a href="#quintessence/KrampusReturns/Shaders/AllegroDefault.q.yml">quintessence/KrampusReturns/Shaders/AllegroDefault.q.yml</a></li>
+  <li><a href="#quintessence/KrampusReturns/Shaders/Primary.q.yml">quintessence/KrampusReturns/Shaders/Primary.q.yml</a></li>
 </ul>
 <h1>Components</h1>
 <ul>
@@ -451,6 +453,95 @@ table td
     </table>
   </div>
 </ul>
+<ul>
+  <div class="component">
+    <h3 id="quintessence/KrampusReturns/Shaders/AllegroDefault.q.yml">quintessence/KrampusReturns/Shaders/AllegroDefault.q.yml</h3>
+     <table>
+<tr>
+  <td class="property">initialized</td>
+  <td class="property">bool</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="method">initialize()</td>
+</tr>
+<tr>
+  <td class="method">activate()</td>
+</tr>
+<tr>
+  <td class="private_method">obtain_vertex_source()</td>
+</tr>
+<tr>
+  <td class="private_method">obtain_fragment_source()</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Shader&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Shader.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;ALLEGRO_COLOR&quot;, &quot;headers&quot;=&gt;[&quot;allegro5/allegro.h&quot;]}</td>
+</tr>
+    </table>
+  </div>
+</ul>
+<ul>
+  <div class="component">
+    <h3 id="quintessence/KrampusReturns/Shaders/Primary.q.yml">quintessence/KrampusReturns/Shaders/Primary.q.yml</h3>
+     <table>
+<tr>
+  <td class="property">initialized</td>
+  <td class="property">bool</td>
+</tr>
+<tr>
+  <td class="property">tint</td>
+  <td class="property">ALLEGRO_COLOR</td>
+</tr>
+<tr>
+  <td class="property">tint_intensity</td>
+  <td class="property">float</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="method">initialize()</td>
+</tr>
+<tr>
+  <td class="method">activate()</td>
+</tr>
+<tr>
+  <td class="private_method">set_values_to_activated_shader()</td>
+</tr>
+<tr>
+  <td class="private_method">obtain_vertex_source()</td>
+</tr>
+<tr>
+  <td class="private_method">obtain_fragment_source()</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Shader&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Shader.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;ALLEGRO_COLOR&quot;, &quot;headers&quot;=&gt;[&quot;allegro5/allegro.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::BitmapBin&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/BitmapBin.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::EventEmitter&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/EventEmitter.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::FontBin&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/FontBin.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::FixedRoom2D::EntityCollectionHelper&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/FixedRoom2D/EntityCollectionHelper.hpp&quot;]}</td>
+</tr>
+    </table>
+  </div>
+</ul>
 <h1>Dependents</h1>
 <pre>
 {
@@ -473,7 +564,8 @@ table td
     "KrampusReturns/EntityFactory"
   ],
   "AllegroFlare/BitmapBin": [
-    "KrampusReturns/Gameplay/Screen"
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Shaders/Primary"
   ],
   "al_color_name": [
     "KrampusReturns/Gameplay/Screen",
@@ -555,7 +647,8 @@ table td
     "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/EventEmitter": [
-    "KrampusReturns/Gameplay/Screen"
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Shaders/Primary"
   ],
   "AllegroFlare/Screens/Base": [
     "KrampusReturns/Gameplay/Screen"
@@ -568,6 +661,20 @@ table td
   ],
   "AllegroFlare/Vec2D": [
     "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/Shader": [
+    "KrampusReturns/Shaders/AllegroDefault",
+    "KrampusReturns/Shaders/Primary"
+  ],
+  "ALLEGRO_COLOR": [
+    "KrampusReturns/Shaders/AllegroDefault",
+    "KrampusReturns/Shaders/Primary"
+  ],
+  "AllegroFlare/FontBin": [
+    "KrampusReturns/Shaders/Primary"
+  ],
+  "AllegroFlare/Prototypes/FixedRoom2D/EntityCollectionHelper": [
+    "KrampusReturns/Shaders/Primary"
   ]
 }
 </pre>

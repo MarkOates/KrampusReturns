@@ -1,0 +1,135 @@
+parent_classes:
+
+
+  - class: AllegroFlare::Shader
+    scope: public
+    init_with: "obtain_vertex_source(), obtain_fragment_source()"
+
+
+properties:
+
+
+  - name: initialized
+    type: bool
+    init_with: false
+
+  - name: tint
+    type: ALLEGRO_COLOR
+    init_with: ALLEGRO_COLOR{1, 1, 1, 1}
+    getter: true
+    setter: true
+
+  - name: tint_intensity
+    type: float
+    init_with: 1.0f
+    getter: true
+    setter: true
+
+
+functions:
+
+
+  - name: initialize
+    type: void
+    guards: [ (!initialized) ]
+    body: |
+      AllegroFlare::Shader::initialize();
+      initialized = true;
+      return;
+
+
+  - name: activate
+    type: void
+    virtual: true
+    override: true
+    body: |
+      if (!initialized)
+      {
+         throw std::runtime_error("[KrampusReturns::Shaders::Primary] Attempting to activate() "
+                                  "shader before it has been initialized");
+      }
+      AllegroFlare::Shader::activate();
+      set_values_to_activated_shader();
+      return;
+
+
+  - name: set_values_to_activated_shader
+    private: true
+    body: |
+      set_vec3("tint", tint.r, tint.g, tint.b);
+      set_float("tint_intensity", tint_intensity);
+      return;
+    body_dependency_symbols:
+      - std::cout
+
+
+  - name: obtain_vertex_source
+    type: std::string
+    static: true
+    private: true
+    body: |
+      static const std::string source = R"DELIM(
+        attribute vec4 al_pos;
+        attribute vec4 al_color;
+        attribute vec2 al_texcoord;
+        uniform mat4 al_projview_matrix;
+        varying vec4 varying_color;
+        varying vec2 varying_texcoord;
+
+        void main()
+        {
+           varying_color = al_color;
+           varying_texcoord = al_texcoord;
+           gl_Position = al_projview_matrix * al_pos;
+        }
+      )DELIM";
+      return source;
+
+
+  - name: obtain_fragment_source
+    type: std::string
+    static: true
+    private: true
+    body: |
+      static const std::string source = R"DELIM(
+        uniform sampler2D al_tex;
+        uniform float tint_intensity;
+        uniform vec3 tint;
+        varying vec4 varying_color;
+        varying vec2 varying_texcoord;
+
+        void main()
+        {
+           vec4 tmp = texture2D(al_tex, varying_texcoord);
+           float inverse_tint_intensity = 1.0 - tint_intensity;
+           //tmp.r = (tmp.r * inverse_tint_intensity + tint.r * tint_intensity) * tmp.a;
+           //tmp.g = (tmp.g * inverse_tint_intensity + tint.g * tint_intensity) * tmp.a;
+           //tmp.b = (tmp.b * inverse_tint_intensity + tint.b * tint_intensity) * tmp.a;
+           //tmp.a = tmp.a;
+           //gl_FragColor = tmp * tint;
+           tmp.r = (tmp.r * (0.4 + 0.6 * tmp.r) * tint.r);
+           tmp.g = (tmp.g * (0.4 + 0.6 * tmp.g) * tint.g); //inverse_tint_intensity + tint.g * tint_intensity) * tmp.a;
+           tmp.b = (tmp.b * (0.5 + 0.5 * tmp.b) * tint.b); //inverse_tint_intensity + tint.b * tint_intensity) * tmp.a;
+           tmp.a = tmp.a;
+
+           gl_FragColor = tmp;
+        }
+      )DELIM";
+      return source;
+
+
+dependencies:
+
+
+  - symbol: AllegroFlare::Shader
+    headers: [ AllegroFlare/Shader.hpp ]
+  - symbol: ALLEGRO_COLOR
+    headers: [ allegro5/allegro.h ]
+  - symbol: AllegroFlare::BitmapBin
+    headers: [ AllegroFlare/BitmapBin.hpp ]
+  - symbol: AllegroFlare::EventEmitter
+    headers: [ AllegroFlare/EventEmitter.hpp ]
+  - symbol: AllegroFlare::FontBin
+    headers: [ AllegroFlare/FontBin.hpp ]
+  - symbol: AllegroFlare::Prototypes::FixedRoom2D::EntityCollectionHelper
+    headers: [ AllegroFlare/Prototypes/FixedRoom2D/EntityCollectionHelper.hpp ]
