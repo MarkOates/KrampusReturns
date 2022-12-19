@@ -9,11 +9,28 @@ parent_classes:
 properties:
 
 
+  - name: initialized
+    type: bool
+    init_with: false
+
   - name: TYPE
     type: char*
     init_with: '(char*)"Entities/Krampus"'
     static: true
     constexpr: true
+
+
+functions:
+
+
+  - name: initialize
+    guards: [ (!initialized) ]
+    body: |
+      get_place_ref().size = { 30, 30 };
+      set_bitmap_alignment_strategy("bottom_centered");
+      set_animation("krampus");
+      initialized = true;
+      return;
 
 
 dependencies:

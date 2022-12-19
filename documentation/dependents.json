@@ -2,6 +2,21 @@
   "AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D": [
     "KrampusReturns/Entities/Krampus"
   ],
+  "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory": [
+    "KrampusReturns/EntityFactory",
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/Prototypes/Platforming2D/EntityFlagNames": [
+    "KrampusReturns/EntityFactory",
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D": [
+    "KrampusReturns/EntityFactory",
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "KrampusReturns/Entities/Krampus": [
+    "KrampusReturns/EntityFactory"
+  ],
   "AllegroFlare/BitmapBin": [
     "KrampusReturns/Gameplay/Screen"
   ],
@@ -24,9 +39,6 @@
   "AllegroFlare/EventNames": [
     "KrampusReturns/Gameplay/Screen"
   ],
-  "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory": [
-    "KrampusReturns/Gameplay/Screen"
-  ],
   "AllegroFlare/Screen": [
     "KrampusReturns/Gameplay/Screen"
   ],
@@ -43,9 +55,6 @@
     "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/Physics/AABB2D": [
-    "KrampusReturns/Gameplay/Screen"
-  ],
-  "AllegroFlare/Prototypes/Platforming2D/EntityFlagNames": [
     "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/CameraControlStrategies2D/Base": [
@@ -88,9 +97,6 @@
     "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/Display": [
-    "KrampusReturns/Gameplay/Screen"
-  ],
-  "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D": [
     "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/EventEmitter": [

@@ -14,6 +14,7 @@ namespace KrampusReturns
          static constexpr char* TYPE = (char*)"Entities/Krampus";
 
       private:
+         bool initialized;
 
       protected:
 
@@ -22,6 +23,7 @@ namespace KrampusReturns
          Krampus();
          ~Krampus();
 
+         void initialize();
       };
    }
 }

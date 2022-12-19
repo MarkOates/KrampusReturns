@@ -5,6 +5,7 @@
 
 #include <AllegroFlare/Frameworks/Full.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory.hpp>
+#include <KrampusReturns/EntityFactory.hpp>
 
 
 // TODO: improve this:
@@ -52,13 +53,17 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
    AllegroFlare::FrameAnimation::Book animation_book(
       "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.png",
       "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.json",
-      1
+      2
    );
    animation_book.initialize();
 
 
 
 
+
+   KrampusReturns::EntityFactory entity_factory;
+   entity_factory.set_bitmap_bin(&framework.get_bitmap_bin_ref());
+   entity_factory.set_animation_book(&animation_book);
 
 
       AllegroFlare::Prototypes::Platforming2D::Entities::Basic2DFactory factory(
@@ -67,22 +72,26 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
       );
       factory.set_init_entities_drawing_debug(true);
 
-      AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* created_entity =
-         factory.create_for_aabb2d("map_a", 16-1, 32-1);
-      created_entity->get_place_ref().position.x = 400/2;
-      created_entity->get_place_ref().position.y = 240/2;
-
-      platforming_2d.add_entity_to_pool(created_entity);
-
-      AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* created_animated_entity =
-         factory.create_frame_animated("map_a", 400/2, 240/2, 12, 8, "blob", "bottom_centered_edge");
-      created_animated_entity->get_place_ref().scale = { 1.5f, 1.5f };
+      //AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* created_entity =
+         //factory.create_for_aabb2d("map_a", 16-1, 32-1);
+      //created_entity->get_place_ref().position.x = 400/2;
+      //created_entity->get_place_ref().position.y = 240/2;
+      //platforming_2d.add_entity_to_pool(created_entity);
 
 
-      platforming_2d.add_entity_to_pool(created_animated_entity);
+      //AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* created_animated_entity =
+         //factory.create_frame_animated("map_a", 400/2, 240/2, 12, 8, "blob", "bottom_centered_edge");
+      //created_animated_entity->get_place_ref().scale = { 1.5f, 1.5f };
+      //platforming_2d.add_entity_to_pool(created_animated_entity);
 
 
-      platforming_2d.set_player_controlled_entity(created_entity);
+
+      AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D *krampus =
+         entity_factory.create_krampus("map_a", 400/2, 240/2);
+      platforming_2d.add_entity_to_pool(krampus);
+
+      platforming_2d.set_player_controlled_entity(krampus);
+      //platforming_2d.set_player_controlled_entity(created_entity);
 
 
       for (unsigned i=0; i<6; i++)

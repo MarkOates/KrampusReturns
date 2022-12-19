@@ -50,6 +50,7 @@ table td
 <h1>TOC</h1>
 <ul>
   <li><a href="#quintessence/KrampusReturns/Entities/Krampus.q.yml">quintessence/KrampusReturns/Entities/Krampus.q.yml</a></li>
+  <li><a href="#quintessence/KrampusReturns/EntityFactory.q.yml">quintessence/KrampusReturns/EntityFactory.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Gameplay/Screen.q.yml">quintessence/KrampusReturns/Gameplay/Screen.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Runner.q.yml">quintessence/KrampusReturns/Runner.q.yml</a></li>
 </ul>
@@ -59,15 +60,48 @@ table td
     <h3 id="quintessence/KrampusReturns/Entities/Krampus.q.yml">quintessence/KrampusReturns/Entities/Krampus.q.yml</h3>
      <table>
 <tr>
+  <td class="property">initialized</td>
+  <td class="property">bool</td>
+</tr>
+<tr>
   <td class="property">TYPE</td>
   <td class="property">char*</td>
 </tr>
     </table>
      <table>
+<tr>
+  <td class="method">initialize()</td>
+</tr>
     </table>
      <table>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D.hpp&quot;]}</td>
+</tr>
+    </table>
+  </div>
+</ul>
+<ul>
+  <div class="component">
+    <h3 id="quintessence/KrampusReturns/EntityFactory.q.yml">quintessence/KrampusReturns/EntityFactory.q.yml</h3>
+     <table>
+    </table>
+     <table>
+<tr>
+  <td class="method">create_krampus(3)</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::Platforming2D::Entities::Basic2DFactory&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::Platforming2D::EntityFlagNames&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/Platforming2D/EntityFlagNames.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Entities::Krampus&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Entities/Krampus.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -423,6 +457,21 @@ table td
   "AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D": [
     "KrampusReturns/Entities/Krampus"
   ],
+  "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory": [
+    "KrampusReturns/EntityFactory",
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/Prototypes/Platforming2D/EntityFlagNames": [
+    "KrampusReturns/EntityFactory",
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D": [
+    "KrampusReturns/EntityFactory",
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "KrampusReturns/Entities/Krampus": [
+    "KrampusReturns/EntityFactory"
+  ],
   "AllegroFlare/BitmapBin": [
     "KrampusReturns/Gameplay/Screen"
   ],
@@ -445,9 +494,6 @@ table td
   "AllegroFlare/EventNames": [
     "KrampusReturns/Gameplay/Screen"
   ],
-  "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory": [
-    "KrampusReturns/Gameplay/Screen"
-  ],
   "AllegroFlare/Screen": [
     "KrampusReturns/Gameplay/Screen"
   ],
@@ -464,9 +510,6 @@ table td
     "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/Physics/AABB2D": [
-    "KrampusReturns/Gameplay/Screen"
-  ],
-  "AllegroFlare/Prototypes/Platforming2D/EntityFlagNames": [
     "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/CameraControlStrategies2D/Base": [
@@ -509,9 +552,6 @@ table td
     "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/Display": [
-    "KrampusReturns/Gameplay/Screen"
-  ],
-  "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D": [
     "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/EventEmitter": [
