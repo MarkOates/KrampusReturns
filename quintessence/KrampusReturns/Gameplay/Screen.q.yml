@@ -1175,3 +1175,4 @@ dependencies:
   - symbol: AllegroFlare::Vec2D
     headers: [ AllegroFlare/Vec2D.hpp ]
 
+
