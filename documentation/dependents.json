@@ -1,4 +1,8 @@
 {
+  "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D": [
+    "KrampusReturns/Entities/Krampus",
+    "KrampusReturns/Gameplay/Screen"
+  ],
   "AllegroFlare/BitmapBin": [
     "KrampusReturns/Gameplay/Screen"
   ],
@@ -85,9 +89,6 @@
     "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/Display": [
-    "KrampusReturns/Gameplay/Screen"
-  ],
-  "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D": [
     "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/EventEmitter": [
