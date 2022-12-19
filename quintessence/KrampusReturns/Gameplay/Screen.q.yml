@@ -752,6 +752,9 @@ functions:
   - name: draw
     guards: [ initialized, currently_active_map, get_tile_mesh() ]
     body: |
+      al_clear_to_color(al_color_html("291d29")); // TODO: this double-clears the background color since
+                                                  // framework does it already
+
       camera.setup_dimentional_projection(backbuffer_sub_bitmap);
 
       ALLEGRO_STATE previous_target_bitmap;

@@ -48,12 +48,13 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
 
 
 
+
    // create an animation book (to create an frame_animated type from the factory)
    // TODO: introduce this concept to the test
    AllegroFlare::FrameAnimation::Book animation_book(
       "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.png",
       "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.json",
-      2
+      3
    );
    animation_book.initialize();
 
@@ -96,17 +97,17 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
 
       for (unsigned i=0; i<6; i++)
       {
-         AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* enemy = factory.create_flapping_enemy(
-            "map_a",
-            400/8*6,
-            240/3*1,
-            16.0-1.0f,
-            16.0-1.0f,
-            80.0f, // target elevation
-            4.0f, // flap strength
-            0.1f // recovery rate
-         );
-         platforming_2d.add_entity_to_pool(enemy);
+         //AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* enemy = factory.create_flapping_enemy(
+            //"map_a",
+            //400/8*6,
+            //240/3*1,
+            //16.0-1.0f,
+            //16.0-1.0f,
+            //80.0f, // target elevation
+            //4.0f, // flap strength
+            //0.1f // recovery rate
+         //);
+         //platforming_2d.add_entity_to_pool(enemy);
       }
 
       AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* collectable2 =
