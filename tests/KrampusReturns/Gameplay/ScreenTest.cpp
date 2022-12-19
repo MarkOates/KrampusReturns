@@ -54,7 +54,7 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
    AllegroFlare::FrameAnimation::Book animation_book(
       "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.png",
       "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.json",
-      3
+      2
    );
    animation_book.initialize();
 
