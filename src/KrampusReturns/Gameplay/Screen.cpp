@@ -40,7 +40,7 @@ Screen::Screen(AllegroFlare::BitmapBin* bitmap_bin, AllegroFlare::Display* displ
    , currently_active_map_name("[currently-active-map-name-unset]")
    , entity_pool({})
    , map_dictionary({})
-   , gravity(0.25f)
+   , gravity(0.0f)
    , gravity_reversed(false)
    , camera()
    , camera_baseline_zoom({4.8f, 4.5f})
@@ -791,14 +791,19 @@ void Screen::update_player_controls_on_player_controlled_entity()
 
    if (player_controls.get_right_bumper_pressed())
    {
+      // player character is in a defensive position and not moving (or, they're aiming and not moving)
       player_controlled_entity->get_velocity_ref().position.x = 0.0;
+      player_controlled_entity->get_velocity_ref().position.y = 0.0;
    }
    else
    {
       // if this block is active, the player cannot control themselves while in the air, only when on the ground:
-      if (player_controlled_entity->exists(ADJACENT_TO_FLOOR))
+      // NOTE: previously, being ajacent to the floor would stop the player from moving unless
+      // they have a movment control button pressed
+      //if (player_controlled_entity->exists(ADJACENT_TO_FLOOR))
       {
          player_controlled_entity->get_velocity_ref().position.x = 0.0;
+         player_controlled_entity->get_velocity_ref().position.y = 0.0;
       }
 
          if (player_controls.get_right_button_pressed())
@@ -808,6 +813,14 @@ void Screen::update_player_controls_on_player_controlled_entity()
          if (player_controls.get_left_button_pressed())
          {
             player_controlled_entity->get_velocity_ref().position.x = -1.5; //-2.0;
+         }
+         if (player_controls.get_up_button_pressed())
+         {
+            player_controlled_entity->get_velocity_ref().position.y = -1.5; //2.0;
+         }
+         if (player_controls.get_down_button_pressed())
+         {
+            player_controlled_entity->get_velocity_ref().position.y = 1.5; //-2.0;
          }
    }
    return;
@@ -964,6 +977,14 @@ void Screen::key_up_func(ALLEGRO_EVENT* event)
       case ALLEGRO_KEY_RIGHT:
          player_controls.set_right_button_pressed(false);
       break;
+
+      case ALLEGRO_KEY_UP:
+         player_controls.set_up_button_pressed(false);
+      break;
+
+      case ALLEGRO_KEY_DOWN:
+         player_controls.set_down_button_pressed(false);
+      break;
    }
    return;
 }
@@ -997,7 +1018,12 @@ void Screen::key_down_func(ALLEGRO_EVENT* event)
 
       case ALLEGRO_KEY_UP:
          player_controls.set_up_button_pressed(true);
-         check_player_collisions_with_doors();
+         //check_player_collisions_with_doors();
+      break;
+
+      case ALLEGRO_KEY_DOWN:
+         player_controls.set_down_button_pressed(true);
+         //check_player_collisions_with_doors();
       break;
 
       case ALLEGRO_KEY_SPACE:
