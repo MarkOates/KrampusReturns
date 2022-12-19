@@ -809,6 +809,7 @@ functions:
         default_argument: nullptr
     guards: [ initialized, event ]
     body: |
+      // TODO: remove explicit key_*_func functions and prefer virtual input
       switch (event->keyboard.keycode)
       {
       case ALLEGRO_KEY_1:
@@ -838,6 +839,7 @@ functions:
         default_argument: nullptr
     guards: [ initialized, event ]
     body: |
+      // TODO: remove explicit key_*_func functions and prefer virtual input
       switch (event->keyboard.keycode)
       {
          case ALLEGRO_KEY_LEFT:
@@ -860,6 +862,7 @@ functions:
         default_argument: nullptr
     guards: [ initialized, event ]
     body: |
+      // TODO: remove explicit key_*_func functions and prefer virtual input
       switch (event->keyboard.keycode)
       {
          case ALLEGRO_KEY_LEFT:
@@ -914,7 +917,12 @@ functions:
       else if (button_num == AllegroFlare::VirtualControls::BUTTON_UP)
       {
          player_controls.set_up_button_pressed(true);
-         check_player_collisions_with_doors();
+         //check_player_collisions_with_doors();
+      }
+      else if (button_num == AllegroFlare::VirtualControls::BUTTON_DOWN)
+      {
+         player_controls.set_down_button_pressed(true);
+         //check_player_collisions_with_doors();
       }
       else if (button_num == AllegroFlare::VirtualControls::BUTTON_RIGHT_BUMPER)
       {
@@ -942,6 +950,14 @@ functions:
       else if (button_num == AllegroFlare::VirtualControls::BUTTON_LEFT)
       {
          player_controls.set_left_button_pressed(false);
+      }
+      else if (button_num == AllegroFlare::VirtualControls::BUTTON_UP)
+      {
+         player_controls.set_up_button_pressed(false);
+      }
+      else if (button_num == AllegroFlare::VirtualControls::BUTTON_DOWN)
+      {
+         player_controls.set_down_button_pressed(false);
       }
       else if (button_num == AllegroFlare::VirtualControls::BUTTON_RIGHT_BUMPER)
       {
@@ -997,20 +1013,20 @@ functions:
         type: ALLEGRO_EVENT*
         default_argument: nullptr
     body: |
-      switch(event->type)
-      {
-         case ALLEGRO_FLARE_EVENT_VIRTUAL_CONTROL_BUTTON_UP:
-           virtual_control_button_up_func(event);
-         break;
+      //switch(event->type)
+      //{
+         //case ALLEGRO_FLARE_EVENT_VIRTUAL_CONTROL_BUTTON_UP:
+           //virtual_control_button_up_func(event);
+         //break;
 
-         case ALLEGRO_FLARE_EVENT_VIRTUAL_CONTROL_BUTTON_DOWN:
-           virtual_control_button_down_func(event);
-         break;
+         //case ALLEGRO_FLARE_EVENT_VIRTUAL_CONTROL_BUTTON_DOWN:
+           //virtual_control_button_down_func(event);
+         //break;
 
-         case ALLEGRO_FLARE_EVENT_VIRTUAL_CONTROL_AXIS_CHANGE:
-           virtual_control_axis_change_func(event);
-         break;
-      }
+         //case ALLEGRO_FLARE_EVENT_VIRTUAL_CONTROL_AXIS_CHANGE:
+           //virtual_control_axis_change_func(event);
+         //break;
+      //}
 
       return;
     body_dependency_symbols:

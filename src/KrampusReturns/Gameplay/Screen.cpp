@@ -886,6 +886,7 @@ void Screen::key_char_func(ALLEGRO_EVENT* event)
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
       throw std::runtime_error("Screen::key_char_func: error: guard \"event\" not met");
    }
+   // TODO: remove explicit key_*_func functions and prefer virtual input
    switch (event->keyboard.keycode)
    {
    case ALLEGRO_KEY_1:
@@ -922,6 +923,7 @@ void Screen::key_up_func(ALLEGRO_EVENT* event)
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
       throw std::runtime_error("Screen::key_up_func: error: guard \"event\" not met");
    }
+   // TODO: remove explicit key_*_func functions and prefer virtual input
    switch (event->keyboard.keycode)
    {
       case ALLEGRO_KEY_LEFT:
@@ -951,6 +953,7 @@ void Screen::key_down_func(ALLEGRO_EVENT* event)
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
       throw std::runtime_error("Screen::key_down_func: error: guard \"event\" not met");
    }
+   // TODO: remove explicit key_*_func functions and prefer virtual input
    switch (event->keyboard.keycode)
    {
       case ALLEGRO_KEY_LEFT:
@@ -1001,7 +1004,12 @@ void Screen::virtual_control_button_down_func(ALLEGRO_EVENT* event)
    else if (button_num == AllegroFlare::VirtualControls::BUTTON_UP)
    {
       player_controls.set_up_button_pressed(true);
-      check_player_collisions_with_doors();
+      //check_player_collisions_with_doors();
+   }
+   else if (button_num == AllegroFlare::VirtualControls::BUTTON_DOWN)
+   {
+      player_controls.set_down_button_pressed(true);
+      //check_player_collisions_with_doors();
    }
    else if (button_num == AllegroFlare::VirtualControls::BUTTON_RIGHT_BUMPER)
    {
@@ -1025,6 +1033,14 @@ void Screen::virtual_control_button_up_func(ALLEGRO_EVENT* event)
    else if (button_num == AllegroFlare::VirtualControls::BUTTON_LEFT)
    {
       player_controls.set_left_button_pressed(false);
+   }
+   else if (button_num == AllegroFlare::VirtualControls::BUTTON_UP)
+   {
+      player_controls.set_up_button_pressed(false);
+   }
+   else if (button_num == AllegroFlare::VirtualControls::BUTTON_DOWN)
+   {
+      player_controls.set_down_button_pressed(false);
    }
    else if (button_num == AllegroFlare::VirtualControls::BUTTON_RIGHT_BUMPER)
    {
@@ -1068,20 +1084,20 @@ void Screen::virtual_control_axis_change_func(ALLEGRO_EVENT* event)
 
 void Screen::user_event_func(ALLEGRO_EVENT* event)
 {
-   switch(event->type)
-   {
-      case ALLEGRO_FLARE_EVENT_VIRTUAL_CONTROL_BUTTON_UP:
-        virtual_control_button_up_func(event);
-      break;
+   //switch(event->type)
+   //{
+      //case ALLEGRO_FLARE_EVENT_VIRTUAL_CONTROL_BUTTON_UP:
+        //virtual_control_button_up_func(event);
+      //break;
 
-      case ALLEGRO_FLARE_EVENT_VIRTUAL_CONTROL_BUTTON_DOWN:
-        virtual_control_button_down_func(event);
-      break;
+      //case ALLEGRO_FLARE_EVENT_VIRTUAL_CONTROL_BUTTON_DOWN:
+        //virtual_control_button_down_func(event);
+      //break;
 
-      case ALLEGRO_FLARE_EVENT_VIRTUAL_CONTROL_AXIS_CHANGE:
-        virtual_control_axis_change_func(event);
-      break;
-   }
+      //case ALLEGRO_FLARE_EVENT_VIRTUAL_CONTROL_AXIS_CHANGE:
+        //virtual_control_axis_change_func(event);
+      //break;
+   //}
 
    return;
 }
