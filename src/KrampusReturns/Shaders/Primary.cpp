@@ -117,15 +117,16 @@ std::string Primary::obtain_fragment_source()
      {
         vec4 tmp = texture2D(al_tex, varying_texcoord);
         float inverse_tint_intensity = 1.0 - tint_intensity;
-        //tmp.r = (tmp.r * inverse_tint_intensity + tint.r * tint_intensity) * tmp.a;
-        //tmp.g = (tmp.g * inverse_tint_intensity + tint.g * tint_intensity) * tmp.a;
-        //tmp.b = (tmp.b * inverse_tint_intensity + tint.b * tint_intensity) * tmp.a;
-        //tmp.a = tmp.a;
-        //gl_FragColor = tmp * tint;
-        tmp.r = (tmp.r * (0.4 + 0.6 * tmp.r) * tint.r);
-        tmp.g = (tmp.g * (0.4 + 0.6 * tmp.g) * tint.g); //inverse_tint_intensity + tint.g * tint_intensity) * tmp.a;
-        tmp.b = (tmp.b * (0.5 + 0.5 * tmp.b) * tint.b); //inverse_tint_intensity + tint.b * tint_intensity) * tmp.a;
+        tmp.r = (tmp.r * inverse_tint_intensity + tint.r * tint_intensity) * tmp.a;
+        tmp.g = (tmp.g * inverse_tint_intensity + tint.g * tint_intensity) * tmp.a;
+        tmp.b = (tmp.b * inverse_tint_intensity + tint.b * tint_intensity) * tmp.a;
         tmp.a = tmp.a;
+
+        //gl_FragColor = tmp * tint;
+        //tmp.r = (tmp.r * (0.4 + 0.6 * tmp.r) * tint.r);
+        //tmp.g = (tmp.g * (0.4 + 0.6 * tmp.g) * tint.g); //inverse_tint_intensity + tint.g * tint_intensity) * tmp.a;
+        //tmp.b = (tmp.b * (0.5 + 0.5 * tmp.b) * tint.b); //inverse_tint_intensity + tint.b * tint_intensity) * tmp.a;
+        //tmp.a = tmp.a;
 
         gl_FragColor = tmp;
      }

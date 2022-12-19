@@ -116,7 +116,14 @@
   "AllegroFlare/Vec2D": [
     "KrampusReturns/Gameplay/Screen"
   ],
+  "KrampusReturns/Shaders/Primary": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "KrampusReturns/Shaders/AllegroDefault": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
   "AllegroFlare/Shader": [
+    "KrampusReturns/Gameplay/Screen",
     "KrampusReturns/Shaders/AllegroDefault",
     "KrampusReturns/Shaders/Primary"
   ],

@@ -83,6 +83,10 @@ properties:
     getter: true
     setter: true
 
+  - name: shader
+    type: AllegroFlare::Shader*
+    init_with: nullptr
+
   - name: show_tile_mesh
     type: bool
     init_with: true
@@ -353,8 +357,29 @@ functions:
       initialize_player_controls();
       initialize_backbuffer_sub_bitmap();
       initialize_camera();
+      initialize_shader();
       initialized = true;
       return;
+
+
+  - name: initialize_shader
+    private: true
+    guards: [ (!shader) ]
+    body: |
+      // NOTE: Using a custom shader will requires some work because the *tile map* has a different vertex format
+      //KrampusReturns::Shaders::Primary *primary_shader = new KrampusReturns::Shaders::Primary();
+      //primary_shader->initialize();
+      //shader = primary_shader;
+
+      //KrampusReturns::Shaders::AllegroDefault *allegro_default_shader = new KrampusReturns::Shaders::AllegroDefault();
+      //allegro_default_shader->initialize();
+      //shader = allegro_default_shader;
+
+      //shader = primary_shader;
+      return;
+    body_dependency_symbols:
+      - KrampusReturns::Shaders::Primary
+      - KrampusReturns::Shaders::AllegroDefault
 
 
   - name: initialize_camera
@@ -770,9 +795,11 @@ functions:
                                                                               // "traditional" drawing functions
       //draw_entities(); // entities are drawn before the tilemap so there is not collision with the
                          // zbuffer
+      if (shader) shader->activate();
       if (show_tile_mesh) get_tile_mesh()->render();
       draw_entities();
       if (show_collision_tile_mesh) render_collision_tile_mesh();
+      if (shader) shader->deactivate();
 
       camera.restore_transform();
       al_restore_state(&previous_target_bitmap);
@@ -1177,5 +1204,11 @@ dependencies:
     headers: [ allegro5/allegro.h ]
   - symbol: AllegroFlare::Vec2D
     headers: [ AllegroFlare/Vec2D.hpp ]
+  - symbol: KrampusReturns::Shaders::Primary
+    headers: [ KrampusReturns/Shaders/Primary.hpp ]
+  - symbol: KrampusReturns::Shaders::AllegroDefault
+    headers: [ KrampusReturns/Shaders/AllegroDefault.hpp ]
+  - symbol: AllegroFlare::Shader
+    headers: [ AllegroFlare/Shader.hpp ]
 
 

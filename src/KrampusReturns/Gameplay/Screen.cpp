@@ -13,6 +13,8 @@
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/Doors/Basic2D.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/EntityCollectionHelper.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/EntityFlagNames.hpp>
+#include <KrampusReturns/Shaders/AllegroDefault.hpp>
+#include <KrampusReturns/Shaders/Primary.hpp>
 #include <algorithm>
 #include <allegro5/allegro_color.h>
 #include <iostream>
@@ -43,6 +45,7 @@ Screen::Screen(AllegroFlare::BitmapBin* bitmap_bin, AllegroFlare::Display* displ
    , camera()
    , camera_baseline_zoom({4.8f, 4.5f})
    , player_controlled_entity(nullptr)
+   , shader(nullptr)
    , show_tile_mesh(true)
    , show_collision_tile_mesh(false)
    , player_controls()
@@ -371,7 +374,30 @@ void Screen::initialize()
    initialize_player_controls();
    initialize_backbuffer_sub_bitmap();
    initialize_camera();
+   initialize_shader();
    initialized = true;
+   return;
+}
+
+void Screen::initialize_shader()
+{
+   if (!((!shader)))
+   {
+      std::stringstream error_message;
+      error_message << "[Screen::initialize_shader]: error: guard \"(!shader)\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Screen::initialize_shader: error: guard \"(!shader)\" not met");
+   }
+   // NOTE: Using a custom shader will requires some work because the *tile map* has a different vertex format
+   //KrampusReturns::Shaders::Primary *primary_shader = new KrampusReturns::Shaders::Primary();
+   //primary_shader->initialize();
+   //shader = primary_shader;
+
+   //KrampusReturns::Shaders::AllegroDefault *allegro_default_shader = new KrampusReturns::Shaders::AllegroDefault();
+   //allegro_default_shader->initialize();
+   //shader = allegro_default_shader;
+
+   //shader = primary_shader;
    return;
 }
 
@@ -844,9 +870,11 @@ void Screen::draw()
                                                                            // "traditional" drawing functions
    //draw_entities(); // entities are drawn before the tilemap so there is not collision with the
                       // zbuffer
+   if (shader) shader->activate();
    if (show_tile_mesh) get_tile_mesh()->render();
    draw_entities();
    if (show_collision_tile_mesh) render_collision_tile_mesh();
+   if (shader) shader->deactivate();
 
    camera.restore_transform();
    al_restore_state(&previous_target_bitmap);
