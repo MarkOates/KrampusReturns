@@ -185,7 +185,8 @@ void Runner::initialize()
       });
    new_game_intro_storyboard_screen->set_event_emitter(&event_emitter);
    new_game_intro_storyboard_screen->set_game_event_name_to_emit_after_completing(
-      "activate_nvestigation_room_screen"
+      "finish_new_game_intro_storyboard_screen"
+      //"activate_nvestigation_room_screen"
    );
    framework->register_screen("new_game_intro_storyboard_screen", new_game_intro_storyboard_screen);
 
@@ -360,6 +361,10 @@ void Runner::game_event_func(AllegroFlare::GameEvent* ev)
       }},
       { "start_title_screen", [this](){
          framework->activate_screen("title_screen");
+      }},
+      { "finish_new_game_intro_storyboard_screen", [this](){
+         // TODO: replace this with an event EVENT_ACTIVATE_PLATFORMING_2D_SCREEN
+         framework->activate_screen("platforming_2d_screen");
       }},
       //{ EVENT_ACTIVATE_TILE_DRIVE_SCREEN, [this](){
          //framework->activate_screen("tile_drive_screen");
