@@ -14,6 +14,7 @@
 #include <AllegroFlare/TileMaps/PrimMeshAtlas.hpp>
 #include <AllegroFlare/TileMaps/TileMap.hpp>
 #include <AllegroFlare/Vec2D.hpp>
+#include <KrampusReturns/Entities/Krampus.hpp>
 #include <KrampusReturns/KrampusController.hpp>
 #include <allegro5/allegro.h>
 #include <map>
@@ -65,7 +66,6 @@ namespace KrampusReturns
 
          void set_entity_pool(std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> entity_pool);
          void set_camera_baseline_zoom(AllegroFlare::Vec2D camera_baseline_zoom);
-         void set_player_controlled_entity(AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* player_controlled_entity);
          void set_show_tile_mesh(bool show_tile_mesh);
          void set_show_collision_tile_mesh(bool show_collision_tile_mesh);
          AllegroFlare::BitmapBin* get_bitmap_bin() const;
@@ -79,13 +79,13 @@ namespace KrampusReturns
          void set_event_emitter(AllegroFlare::EventEmitter* event_emitter=nullptr);
          void set_bitmap_bin(AllegroFlare::BitmapBin* bitmap_bin=nullptr);
          void set_currently_active_map(std::string name="[unset-current-map-name-to-use]");
+         void set_player_controlled_entity(KrampusReturns::Entities::Krampus* player_controlled_entity=nullptr);
          AllegroFlare::Prototypes::Platforming2D::Entities::TileMaps::Basic2D* find_map_by_name(std::string name="[unset-map-name]");
          virtual void on_activate() override;
          virtual void on_deactivate() override;
          void initialize_maps();
          void add_entity_to_pool(AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* entity=nullptr);
          void initialize_camera_control();
-         void initialize_player_controls();
          void initialize_backbuffer_sub_bitmap();
          void initialize();
          void reverse_gravity();

@@ -28,6 +28,7 @@
   ],
   "KrampusReturns/Entities/Krampus": [
     "KrampusReturns/EntityFactory",
+    "KrampusReturns/Gameplay/Screen",
     "KrampusReturns/KrampusController"
   ],
   "AllegroFlare/BitmapBin": [

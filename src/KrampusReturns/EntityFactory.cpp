@@ -24,7 +24,7 @@ EntityFactory::~EntityFactory()
 }
 
 
-AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* EntityFactory::create_krampus(std::string on_map, float x, float y)
+KrampusReturns::Entities::Krampus* EntityFactory::create_krampus(std::string on_map, float x, float y)
 {
    if (!(get_animation_book()))
    {

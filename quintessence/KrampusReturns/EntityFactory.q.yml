@@ -10,7 +10,7 @@ functions:
 
 
   - name: create_krampus
-    type: AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*
+    type: KrampusReturns::Entities::Krampus*
     parameters:
       - name: on_map
         type: std::string

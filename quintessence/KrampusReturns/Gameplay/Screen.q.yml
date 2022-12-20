@@ -85,7 +85,7 @@ properties:
     type: AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*
     init_with: nullptr
     getter: true
-    setter: true
+    setter: false
 
   - name: shader
     type: AllegroFlare::Shader*
@@ -169,6 +169,21 @@ functions:
       currently_active_map = find_map_by_name(name);
       if (!currently_active_map) throw std::runtime_error("Bruh, no map");
       currently_active_map_name = name;
+      return;
+
+
+  - name: set_player_controlled_entity
+    parameters:
+      - name: player_controlled_entity
+        type: KrampusReturns::Entities::Krampus*
+        default_argument: nullptr
+    body: |
+      // TODO: Consider having a warning displayed on the screen if there is no actively controlled character.
+
+      // NOTE: for now, this "player_controlled_entity" is a Krampus type. This will likely change eventually.
+      this->player_controlled_entity = player_controlled_entity;
+      krampus_controller.set_krampus(player_controlled_entity);
+      krampus_controller.reset();
       return;
 
 
@@ -322,18 +337,6 @@ functions:
       - AllegroFlare::CameraControlStrategies2D::HorizontalRail
 
 
-  - name: initialize_player_controls
-    body: |
-      // TODO: Convert this to eventually *not* assume the controlled character is a Krampus.
-      KrampusReturns::Entities::Krampus* krampus =
-         static_cast<KrampusReturns::Entities::Krampus*>(player_controlled_entity);
-
-      krampus_controller.set_krampus(krampus);
-      //krampus_controller.set_virtual_controls(&virtual_controls);
-      krampus_controller.reset();
-      return;
-
-
   - name: initialize_backbuffer_sub_bitmap
     body: |
       ALLEGRO_BITMAP *backbuffer = al_get_backbuffer(al_get_current_display());
@@ -362,7 +365,6 @@ functions:
       - al_get_current_display()
     body: |
       initialize_camera_control();
-      initialize_player_controls();
       initialize_backbuffer_sub_bitmap();
       initialize_camera();
       initialize_shader();
@@ -680,15 +682,15 @@ functions:
       al_store_state(&previous_target_bitmap, ALLEGRO_STATE_TARGET_BITMAP);
       al_set_target_bitmap(backbuffer_sub_bitmap);
       camera.start_reverse_transform();
-      //camera.start_transform();
 
       al_set_render_state(ALLEGRO_DEPTH_FUNCTION, ALLEGRO_RENDER_LESS_EQUAL); // less or equal allows 
                                                                               // subsequent renders at the same
                                                                               // z-level to overwrite. This 
-                                                                              // mimics the rendering of typical
-                                                                              // "traditional" drawing functions
-      //draw_entities(); // entities are drawn before the tilemap so there is not collision with the
-                         // zbuffer
+                                                                              // mimics the rendering of the
+                                                                              // typical drawing functions when using
+                                                                              // 2d. The reason this exists is so that
+                                                                              // the players are drawn on top of the
+                                                                              // tile mesh.
       if (shader) shader->activate();
       if (show_tile_mesh) get_tile_mesh()->render();
       draw_entities();
@@ -969,5 +971,7 @@ dependencies:
     headers: [ AllegroFlare/Shader.hpp ]
   - symbol: KrampusReturns::KrampusController
     headers: [ KrampusReturns/KrampusController.hpp ]
+  - symbol: KrampusReturns::Entities::Krampus
+    headers: [ KrampusReturns/Entities/Krampus.hpp ]
 
 

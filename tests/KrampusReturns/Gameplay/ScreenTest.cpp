@@ -87,8 +87,7 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
 
 
 
-      AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D *krampus =
-         entity_factory.create_krampus("map_a", 400/2, 240/2);
+      KrampusReturns::Entities::Krampus *krampus = entity_factory.create_krampus("map_a", 400/2, 240/2);
       platforming_2d.add_entity_to_pool(krampus);
 
       platforming_2d.set_player_controlled_entity(krampus);

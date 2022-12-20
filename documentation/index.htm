@@ -275,6 +275,9 @@ table td
   <td class="method">set_currently_active_map(1)</td>
 </tr>
 <tr>
+  <td class="method">set_player_controlled_entity(1)</td>
+</tr>
+<tr>
   <td class="method">find_map_by_name(1)</td>
 </tr>
 <tr>
@@ -291,9 +294,6 @@ table td
 </tr>
 <tr>
   <td class="method">initialize_camera_control()</td>
-</tr>
-<tr>
-  <td class="method">initialize_player_controls()</td>
 </tr>
 <tr>
   <td class="method">initialize_backbuffer_sub_bitmap()</td>
@@ -494,6 +494,9 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::KrampusController&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/KrampusController.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Entities::Krampus&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Entities/Krampus.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -1071,6 +1074,7 @@ table td
   ],
   "KrampusReturns/Entities/Krampus": [
     "KrampusReturns/EntityFactory",
+    "KrampusReturns/Gameplay/Screen",
     "KrampusReturns/KrampusController"
   ],
   "AllegroFlare/BitmapBin": [

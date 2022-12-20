@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include <AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory.hpp>
+#include <KrampusReturns/Entities/Krampus.hpp>
 #include <string>
 
 
@@ -19,7 +19,7 @@ namespace KrampusReturns
       EntityFactory();
       ~EntityFactory();
 
-      AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* create_krampus(std::string on_map="[unset-on_map]", float x=0.0f, float y=0.0f);
+      KrampusReturns::Entities::Krampus* create_krampus(std::string on_map="[unset-on_map]", float x=0.0f, float y=0.0f);
    };
 }
 
