@@ -49,6 +49,7 @@ table td
 <body>
 <h1>TOC</h1>
 <ul>
+  <li><a href="#quintessence/KrampusReturns/Entities/Blob.q.yml">quintessence/KrampusReturns/Entities/Blob.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Entities/Krampus.q.yml">quintessence/KrampusReturns/Entities/Krampus.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/EntityFactory.q.yml">quintessence/KrampusReturns/EntityFactory.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Gameplay/Screen.q.yml">quintessence/KrampusReturns/Gameplay/Screen.q.yml</a></li>
@@ -58,6 +59,37 @@ table td
   <li><a href="#quintessence/KrampusReturns/Testing/Gym.q.yml">quintessence/KrampusReturns/Testing/Gym.q.yml</a></li>
 </ul>
 <h1>Components</h1>
+<ul>
+  <div class="component">
+    <h3 id="quintessence/KrampusReturns/Entities/Blob.q.yml">quintessence/KrampusReturns/Entities/Blob.q.yml</h3>
+     <table>
+<tr>
+  <td class="property">initialized</td>
+  <td class="property">bool</td>
+</tr>
+<tr>
+  <td class="property">TYPE</td>
+  <td class="property">char*</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="method">walk_left()</td>
+</tr>
+<tr>
+  <td class="method">walk_right()</td>
+</tr>
+<tr>
+  <td class="method">initialize()</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D.hpp&quot;]}</td>
+</tr>
+    </table>
+  </div>
+</ul>
 <ul>
   <div class="component">
     <h3 id="quintessence/KrampusReturns/Entities/Krampus.q.yml">quintessence/KrampusReturns/Entities/Krampus.q.yml</h3>
@@ -705,6 +737,7 @@ table td
 <pre>
 {
   "AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D": [
+    "KrampusReturns/Entities/Blob",
     "KrampusReturns/Entities/Krampus"
   ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory": [
