@@ -83,10 +83,12 @@ void KrampusController::key_down_func(int al_key_num, bool is_repeat)
    switch (al_key_num)
    {
       case ALLEGRO_KEY_LEFT:
+         krampus->face_left();
          player_controls.set_left_button_pressed(true);
       break;
 
       case ALLEGRO_KEY_RIGHT:
+         krampus->face_right();
          player_controls.set_right_button_pressed(true);
       break;
 

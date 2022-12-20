@@ -25,13 +25,13 @@ Krampus::~Krampus()
 }
 
 
-void Krampus::walk_left()
+void Krampus::face_left()
 {
    set_bitmap_flip_h(true);
    return;
 }
 
-void Krampus::walk_right()
+void Krampus::face_right()
 {
    set_bitmap_flip_h(false);
    return;

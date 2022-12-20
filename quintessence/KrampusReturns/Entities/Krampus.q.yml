@@ -23,13 +23,13 @@ properties:
 functions:
 
 
-  - name: walk_left
+  - name: face_left
     body: |
       set_bitmap_flip_h(true);
       return;
 
 
-  - name: walk_right
+  - name: face_right
     body: |
       set_bitmap_flip_h(false);
       return;
