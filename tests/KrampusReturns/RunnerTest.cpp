@@ -10,11 +10,13 @@ TEST(KrampusReturns_RunnerTest, can_be_created_without_blowing_up)
 }
 
 
-TEST(KrampusReturns_RunnerTest, run__returns_the_expected_response)
+TEST(KrampusReturns_RunnerTest,
+   //DISABLED__INTERACTIVE__run__runs_the_program)
+   INTERACTIVE__run__runs_the_program)
 {
    KrampusReturns::Runner runner;
-   std::string expected_string = "Hello World!";
-   EXPECT_EQ(expected_string, runner.run());
+   runner.run("test");
+   SUCCEED();
 }
 
 

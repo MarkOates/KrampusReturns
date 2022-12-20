@@ -522,13 +522,268 @@ table td
   <div class="component">
     <h3 id="quintessence/KrampusReturns/Runner.q.yml">quintessence/KrampusReturns/Runner.q.yml</h3>
      <table>
-    </table>
-     <table>
 <tr>
-  <td class="method">run()</td>
+  <td class="property">mode</td>
+  <td class="property">std::string</td>
+</tr>
+<tr>
+  <td class="property">framework</td>
+  <td class="property">AllegroFlare::Frameworks::Full*</td>
+</tr>
+<tr>
+  <td class="property">event_emitter</td>
+  <td class="property">AllegroFlare::EventEmitter*</td>
+</tr>
+<tr>
+  <td class="property">opening_logos_storyboard_screen</td>
+  <td class="property">AllegroFlare::Screens::Storyboard*</td>
+</tr>
+<tr>
+  <td class="property">title_screen</td>
+  <td class="property">AllegroFlare::Screens::TitleScreen</td>
+</tr>
+<tr>
+  <td class="property">pause_screen</td>
+  <td class="property">AllegroFlare::Screens::PauseScreen</td>
+</tr>
+<tr>
+  <td class="property">new_game_intro_storyboard_screen</td>
+  <td class="property">AllegroFlare::Screens::Storyboard*</td>
+</tr>
+<tr>
+  <td class="property">platforming_2d_screen</td>
+  <td class="property">KrampusReturns::Gameplay::Screen</td>
+</tr>
+<tr>
+  <td class="property">achievements_screen</td>
+  <td class="property">AllegroFlare::Screens::Achievements</td>
+</tr>
+<tr>
+  <td class="property">credits_screen</td>
+  <td class="property">AllegroFlare::Screens::Storyboard*</td>
+</tr>
+<tr>
+  <td class="property">blurry_background_screen_capture</td>
+  <td class="property">ALLEGRO_BITMAP*</td>
+</tr>
+<tr>
+  <td class="property">prior_screens_stack</td>
+  <td class="property">std::vector&lt;std::string&gt;</td>
+</tr>
+<tr>
+  <td class="property">initialized</td>
+  <td class="property">bool</td>
+</tr>
+<tr>
+  <td class="property">MODE_TEST</td>
+  <td class="property">char*</td>
+</tr>
+<tr>
+  <td class="property">MODE_PRODUCTION</td>
+  <td class="property">char*</td>
+</tr>
+<tr>
+  <td class="property">MODE_DEVELOPMENT</td>
+  <td class="property">char*</td>
+</tr>
+<tr>
+  <td class="property">EVENT_ACTIVATE_PLATFORMING_2D_SCREEN</td>
+  <td class="property">char*</td>
+</tr>
+<tr>
+  <td class="property">EVENT_ACTIVATE_ACHIEVEMENTS_SCREEN</td>
+  <td class="property">char*</td>
+</tr>
+<tr>
+  <td class="property">EVENT_EXIT_ACHIEVEMENTS_SCREEN</td>
+  <td class="property">char*</td>
+</tr>
+<tr>
+  <td class="property">EVENT_ACTIVATE_CREDITS_SCREEN</td>
+  <td class="property">char*</td>
+</tr>
+<tr>
+  <td class="property">EVENT_CREDITS_SCREEN_FINISHED</td>
+  <td class="property">char*</td>
+</tr>
+<tr>
+  <td class="property">EVENT_EXIT_GAME</td>
+  <td class="property">char*</td>
+</tr>
+<tr>
+  <td class="property">EVENT_PAUSE_GAME</td>
+  <td class="property">char*</td>
+</tr>
+<tr>
+  <td class="property">EVENT_UNPAUSE_GAME</td>
+  <td class="property">char*</td>
 </tr>
     </table>
      <table>
+<tr>
+  <td class="method">initialize()</td>
+</tr>
+<tr>
+  <td class="method">refresh_blurry_background_screen_capture()</td>
+</tr>
+<tr>
+  <td class="method">load_development_data()</td>
+</tr>
+<tr>
+  <td class="method">load_test_data()</td>
+</tr>
+<tr>
+  <td class="method">build_item_dictionary()</td>
+</tr>
+<tr>
+  <td class="method">setup_platforming_2d_screen()</td>
+</tr>
+<tr>
+  <td class="method">unlock_achievement()</td>
+</tr>
+<tr>
+  <td class="method">push_screen()</td>
+</tr>
+<tr>
+  <td class="method">pop_screen()</td>
+</tr>
+<tr>
+  <td class="method">reactivate_prior_screen(1)</td>
+</tr>
+<tr>
+  <td class="method">prior_screen_is_in_stack()</td>
+</tr>
+<tr>
+  <td class="method">game_event_func(1)</td>
+</tr>
+<tr>
+  <td class="method">run(1)</td>
+</tr>
+<tr>
+  <td class="method">is_test_mode(1)</td>
+</tr>
+<tr>
+  <td class="method">is_development_mode(1)</td>
+</tr>
+<tr>
+  <td class="method">is_production_mode(1)</td>
+</tr>
+<tr>
+  <td class="method">in_development_mode()</td>
+</tr>
+<tr>
+  <td class="method">in_production_mode()</td>
+</tr>
+<tr>
+  <td class="method">in_test_mode()</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/EventNames.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Screens::Base&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Screens/Base.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Screens::TitleScreen&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Screens/TitleScreen.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Screens::PauseScreen&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Screens/PauseScreen.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::StoryboardFactory&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/StoryboardFactory.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Screens::GameWonScreen&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Screens/GameWonScreen.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::FixedRoom2D::Screen&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/FixedRoom2D/Screen.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::Platforming2D::Screen&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/Platforming2D/Screen.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::TileDrive::Screen&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/TileDrive/Screen.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Color&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Color.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::FixedRoom2D::Configuration&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/FixedRoom2D/Configuration.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;ALLEGRO_COLOR&quot;, &quot;headers&quot;=&gt;[&quot;allegro5/allegro.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;ALLEGRO_EVENT&quot;, &quot;headers&quot;=&gt;[&quot;allegro5/allegro.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;ALLEGRO_BITMAP&quot;, &quot;headers&quot;=&gt;[&quot;allegro5/allegro.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Color&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Color.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Screens::Achievements&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Screens/Achievements.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::EventEmitter&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/EventEmitter.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Frameworks::Full&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Frameworks/Full.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::GameEvent&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/GameEvent.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Screens::Storyboard&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Screens/Storyboard.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Shader&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Shader.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Screens::CharacterNameInput&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Screens/CharacterNameInput.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;Wicked::Entities::Basic2DFactory&quot;, &quot;headers&quot;=&gt;[&quot;Wicked/Entities/Basic2DFactory.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::TileDrive::TerrainMeshDictionaryRecord&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/TileDrive/TerrainMeshDictionaryRecord.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Inventory&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Inventory.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::InventoryDictionary&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/InventoryDictionary.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::InventoryDictionaryItems::WithAttributes&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/InventoryDictionaryItems/WithAttributes.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::ScreenCapture&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/ScreenCapture.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::FixedRoom2D::EventNames&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/FixedRoom2D/EventNames.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::FixedRoom2D::ScriptEventDatas::CollectItem&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/FixedRoom2D/ScriptEventDatas/CollectItem.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::FixedRoom2D::ScriptEventDatas::CollectEvidence&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/FixedRoom2D/ScriptEventDatas/CollectEvidence.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::FixedRoom2D::DialogEventDatas::CreateYouGotEvidenceDialog&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/FixedRoom2D/DialogEventDatas/CreateYouGotEvidenceDialog.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::FixedRoom2D::DialogEventDatas::CreateYouGotAnItemDialog&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/FixedRoom2D/DialogEventDatas/CreateYouGotAnItemDialog.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::FixedRoom2D::ScriptRunner&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/FixedRoom2D/ScriptRunner.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Gameplay::Screen&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Gameplay/Screen.hpp&quot;]}</td>
+</tr>
     </table>
   </div>
 </ul>
@@ -819,6 +1074,7 @@ table td
   ],
   "AllegroFlare/Frameworks/Full": [
     "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Runner",
     "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/Placement2D": [
@@ -871,23 +1127,27 @@ table td
     "KrampusReturns/Gameplay/Screen"
   ],
   "ALLEGRO_EVENT": [
-    "KrampusReturns/Gameplay/Screen"
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Runner"
   ],
   "AllegroFlare/Display": [
     "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/EventEmitter": [
     "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Runner",
     "KrampusReturns/Shaders/Primary"
   ],
   "AllegroFlare/Screens/Base": [
-    "KrampusReturns/Gameplay/Screen"
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Runner"
   ],
   "AllegroFlare/Camera2D": [
     "KrampusReturns/Gameplay/Screen"
   ],
   "ALLEGRO_BITMAP": [
     "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Runner",
     "KrampusReturns/Testing/Gym"
   ],
   "KrampusReturns/Shaders/Primary": [
@@ -898,12 +1158,97 @@ table td
   ],
   "AllegroFlare/Shader": [
     "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Runner",
     "KrampusReturns/Shaders/AllegroDefault",
     "KrampusReturns/Shaders/Primary"
   ],
+  "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Screens/TitleScreen": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Screens/PauseScreen": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/StoryboardFactory": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Screens/GameWonScreen": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Prototypes/FixedRoom2D/Screen": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Prototypes/Platforming2D/Screen": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Prototypes/TileDrive/Screen": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Color": [
+    "KrampusReturns/Runner",
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Prototypes/FixedRoom2D/Configuration": [
+    "KrampusReturns/Runner"
+  ],
   "ALLEGRO_COLOR": [
+    "KrampusReturns/Runner",
     "KrampusReturns/Shaders/AllegroDefault",
     "KrampusReturns/Shaders/Primary",
+    "KrampusReturns/Testing/Gym"
+  ],
+  "AllegroFlare/Screens/Achievements": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/GameEvent": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Screens/Storyboard": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Screens/CharacterNameInput": [
+    "KrampusReturns/Runner"
+  ],
+  "Wicked/Entities/Basic2DFactory": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Prototypes/TileDrive/TerrainMeshDictionaryRecord": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Inventory": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/InventoryDictionary": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/InventoryDictionaryItems/WithAttributes": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/ScreenCapture": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Prototypes/FixedRoom2D/EventNames": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Prototypes/FixedRoom2D/ScriptEventDatas/CollectItem": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Prototypes/FixedRoom2D/ScriptEventDatas/CollectEvidence": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Prototypes/FixedRoom2D/DialogEventDatas/CreateYouGotEvidenceDialog": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Prototypes/FixedRoom2D/DialogEventDatas/CreateYouGotAnItemDialog": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Prototypes/FixedRoom2D/ScriptRunner": [
+    "KrampusReturns/Runner"
+  ],
+  "KrampusReturns/Gameplay/Screen": [
+    "KrampusReturns/Runner",
     "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/FontBin": [
@@ -946,9 +1291,6 @@ table td
     "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/TerminalColors": [
-    "KrampusReturns/Testing/Gym"
-  ],
-  "KrampusReturns/Gameplay/Screen": [
     "KrampusReturns/Testing/Gym"
   ]
 }

@@ -58,6 +58,7 @@
   ],
   "AllegroFlare/Frameworks/Full": [
     "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Runner",
     "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/Placement2D": [
@@ -110,23 +111,27 @@
     "KrampusReturns/Gameplay/Screen"
   ],
   "ALLEGRO_EVENT": [
-    "KrampusReturns/Gameplay/Screen"
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Runner"
   ],
   "AllegroFlare/Display": [
     "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/EventEmitter": [
     "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Runner",
     "KrampusReturns/Shaders/Primary"
   ],
   "AllegroFlare/Screens/Base": [
-    "KrampusReturns/Gameplay/Screen"
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Runner"
   ],
   "AllegroFlare/Camera2D": [
     "KrampusReturns/Gameplay/Screen"
   ],
   "ALLEGRO_BITMAP": [
     "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Runner",
     "KrampusReturns/Testing/Gym"
   ],
   "KrampusReturns/Shaders/Primary": [
@@ -137,12 +142,97 @@
   ],
   "AllegroFlare/Shader": [
     "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Runner",
     "KrampusReturns/Shaders/AllegroDefault",
     "KrampusReturns/Shaders/Primary"
   ],
+  "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Screens/TitleScreen": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Screens/PauseScreen": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/StoryboardFactory": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Screens/GameWonScreen": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Prototypes/FixedRoom2D/Screen": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Prototypes/Platforming2D/Screen": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Prototypes/TileDrive/Screen": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Color": [
+    "KrampusReturns/Runner",
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Prototypes/FixedRoom2D/Configuration": [
+    "KrampusReturns/Runner"
+  ],
   "ALLEGRO_COLOR": [
+    "KrampusReturns/Runner",
     "KrampusReturns/Shaders/AllegroDefault",
     "KrampusReturns/Shaders/Primary",
+    "KrampusReturns/Testing/Gym"
+  ],
+  "AllegroFlare/Screens/Achievements": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/GameEvent": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Screens/Storyboard": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Screens/CharacterNameInput": [
+    "KrampusReturns/Runner"
+  ],
+  "Wicked/Entities/Basic2DFactory": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Prototypes/TileDrive/TerrainMeshDictionaryRecord": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Inventory": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/InventoryDictionary": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/InventoryDictionaryItems/WithAttributes": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/ScreenCapture": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Prototypes/FixedRoom2D/EventNames": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Prototypes/FixedRoom2D/ScriptEventDatas/CollectItem": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Prototypes/FixedRoom2D/ScriptEventDatas/CollectEvidence": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Prototypes/FixedRoom2D/DialogEventDatas/CreateYouGotEvidenceDialog": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Prototypes/FixedRoom2D/DialogEventDatas/CreateYouGotAnItemDialog": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Prototypes/FixedRoom2D/ScriptRunner": [
+    "KrampusReturns/Runner"
+  ],
+  "KrampusReturns/Gameplay/Screen": [
+    "KrampusReturns/Runner",
     "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/FontBin": [
@@ -185,9 +275,6 @@
     "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/TerminalColors": [
-    "KrampusReturns/Testing/Gym"
-  ],
-  "KrampusReturns/Gameplay/Screen": [
     "KrampusReturns/Testing/Gym"
   ]
 }
