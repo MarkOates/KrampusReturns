@@ -25,6 +25,18 @@ Krampus::~Krampus()
 }
 
 
+void Krampus::walk_left()
+{
+   set_bitmap_flip_h(true);
+   return;
+}
+
+void Krampus::walk_right()
+{
+   set_bitmap_flip_h(false);
+   return;
+}
+
 void Krampus::initialize()
 {
    if (!((!initialized)))

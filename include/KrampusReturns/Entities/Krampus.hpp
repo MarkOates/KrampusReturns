@@ -23,6 +23,8 @@ namespace KrampusReturns
          Krampus();
          ~Krampus();
 
+         void walk_left();
+         void walk_right();
          void initialize();
       };
    }

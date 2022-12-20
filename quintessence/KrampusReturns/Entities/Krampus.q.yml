@@ -23,6 +23,18 @@ properties:
 functions:
 
 
+  - name: walk_left
+    body: |
+      set_bitmap_flip_h(true);
+      return;
+
+
+  - name: walk_right
+    body: |
+      set_bitmap_flip_h(false);
+      return;
+
+
   - name: initialize
     guards: [ (!initialized) ]
     body: |
