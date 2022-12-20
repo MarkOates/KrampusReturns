@@ -38,7 +38,6 @@ TEST_F(KrampusReturns_Entities_BlobGym, can_be_created_without_blowing_up)
    blob.set(ON_MAP_NAME, "gym");
 
    get_platforming_2d_ref().add_entity_to_pool(&blob);
-   //get_platforming_2d_ref().set_player_controlled_entity(&blob);
 
    run_gym();
 }
