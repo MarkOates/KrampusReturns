@@ -99,10 +99,13 @@ void Runner::initialize()
      //{ "menu-click-01.wav", { "menu-click-01.wav", false } },
      //{ "door-locked-hall", { "door-locked-hall-03.ogg", false } },
      //{ "doorbell", { "doorbell-02.ogg", false } },
+     //{ "intro_music", { "krampus-intro-1.ogg", false } },
    });
 
 
    audio_controller.set_and_load_music_track_elements({
+     { "intro_music", { "krampus-intro-1.ogg", false } },
+
      //{ "rain_on_roof", { "indoor-rain-looped-03.ogg", true } },
      //{ "heavy_outdoor_rain", { "heavy-rain-looped-01.ogg", true } },
      ////{ "file_example_OOG_1MG.ogg", { "file_example_OOG_1MG.ogg", true } },
@@ -114,7 +117,9 @@ void Runner::initialize()
    title_screen.set_font_bin(&font_bin);
    title_screen.set_bitmap_bin(&bitmap_bin);
    title_screen.set_title_text("KRAMPUS RETURNS");
-   title_screen.set_title_text_color(AllegroFlare::Color(AllegroFlare::Color::Goldenrod, 1.0).to_al());
+   title_screen.set_title_text_color(AllegroFlare::Color(AllegroFlare::Color::AliceBlue, 1.0).to_al());
+   title_screen.set_title_font_size(-130);
+   title_screen.set_font_name("ChronoTrigger.ttf");
    //title_screen.set_title_text_color(AllegroFlare::Color(0x000000, 1.0).to_al());
    //title_screen.set_background_bitmap_name("placeholder-title-background.jpg");
    title_screen.set_event_emitter(&event_emitter);
@@ -185,8 +190,9 @@ void Runner::initialize()
          "Thank you to all the members of the Allegro game programming community.",
             //"which had a huge impact in my development as a programmer.",
          "Thank you to Elias and SiegeLord for your continued dedication to Allegro.",
-         "Thank you to amarillion for your continued work to support interest in Allegro.",
+         "Thank you to amarillion for your work to support Allegro, including creating KrampuHack.",
          //"Thank you to Matthew Leverton for creating allegro.cc",
+         "Thank you to pmprog for your wishlist ideas.",
          "And thank you for playing.",
       });
    credits_screen->set_event_emitter(&event_emitter);
@@ -321,6 +327,8 @@ void Runner::game_event_func(AllegroFlare::GameEvent* ev)
       { "initialize", [this](){
          //if (in_production_mode())
          //{
+            //event_emitter->emit_play_sound_effect_event("intro_music");
+            event_emitter->emit_play_music_track_event("intro_music");
             framework->activate_screen("opening_logos_storyboard_screen");
          //}
          //else
@@ -471,10 +479,10 @@ void Runner::run(std::string mode)
    // data when switching to "production"
    if (is_test_mode(mode) || is_development_mode(mode))
    {
-      font_bin.set_full_path("/Users/markoates/Repos/CatDetective/bin/programs/data/fonts");
-      bitmap_bin.set_full_path("/Users/markoates/Repos/CatDetective/bin/programs/data/bitmaps");
-      sample_bin.set_full_path("/Users/markoates/Repos/CatDetective/bin/programs/data/samples");
-      model_bin.set_full_path("/Users/markoates/Repos/CatDetective/bin/programs/data/models");
+      font_bin.set_full_path("/Users/markoates/Repos/KrampusReturns/bin/programs/data/fonts");
+      bitmap_bin.set_full_path("/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps");
+      sample_bin.set_full_path("/Users/markoates/Repos/KrampusReturns/bin/programs/data/samples");
+      model_bin.set_full_path("/Users/markoates/Repos/KrampusReturns/bin/programs/data/models");
    }
 
    Runner runner(mode, &framework, &framework.get_event_emitter_ref());
