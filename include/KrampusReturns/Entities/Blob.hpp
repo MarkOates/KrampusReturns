@@ -21,10 +21,9 @@ namespace KrampusReturns
 
       public:
          Blob();
-         ~Blob();
+         virtual ~Blob();
 
-         void walk_left();
-         void walk_right();
+         virtual void update() override;
          void initialize();
       };
    }

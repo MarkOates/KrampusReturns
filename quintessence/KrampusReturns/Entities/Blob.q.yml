@@ -23,22 +23,41 @@ properties:
 functions:
 
 
-  - name: walk_left
+  - name: update
+    virtual: true
+    override: true
     body: |
-      set_bitmap_flip_h(true);
-      return;
+      FrameAnimated2D::update();
+
+      float counter = al_get_time();
 
 
-  - name: walk_right
-    body: |
-      set_bitmap_flip_h(false);
+      // behavior
+
+      AllegroFlare::Vec2D jump_vector = {
+         (float)sin(counter) * 0.2f,
+         (float)cos(counter*0.78) * 0.3f,
+      };
+      jump_vector *= 1.3;
+
+      //get_velocity_ref().position *= 0.01;
+
+      get_velocity_ref().position = jump_vector;
+
+
+      // appearance
+
+      get_bitmap_placement_ref().rotation = (sin(counter*3) * sin(counter*2.3)) * 0.1;
+
       return;
+    body_dependency_symbols:
+      - sin
 
 
   - name: initialize
     guards: [ (!initialized) ]
     body: |
-      get_place_ref().size = { 32, 6 };
+      get_place_ref().size = { 15, 7 };
       get_bitmap_placement_ref().scale = { 0.6, 0.6 };
       set_bitmap_alignment_strategy("bottom_centered");
       set_animation("blob");
@@ -51,5 +70,7 @@ dependencies:
 
   - symbol: AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D
     headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D.hpp ]
+  - symbol: sin
+    headers: [ cmath ]
 
 

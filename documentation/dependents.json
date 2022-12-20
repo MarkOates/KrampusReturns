@@ -3,6 +3,9 @@
     "KrampusReturns/Entities/Blob",
     "KrampusReturns/Entities/Krampus"
   ],
+  "sin": [
+    "KrampusReturns/Entities/Blob"
+  ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory": [
     "KrampusReturns/EntityFactory",
     "KrampusReturns/Gameplay/Screen"

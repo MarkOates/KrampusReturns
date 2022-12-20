@@ -31,7 +31,7 @@ TEST_F(KrampusReturns_Entities_BlobGym, can_be_created_without_blowing_up)
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
 
    KrampusReturns::Entities::Blob blob;
-   blob.set_draw_debug(true);
+   //blob.set_draw_debug(true);
    blob.set_animation_book(&animation_book);
    blob.initialize();
    blob.get_place_ref().position = { 400/2, 240/2 };
