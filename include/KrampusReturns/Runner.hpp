@@ -60,7 +60,7 @@ namespace KrampusReturns
       void load_test_data();
       void build_item_dictionary();
       void setup_platforming_2d_screen();
-      void unlock_achievement();
+      void unlock_achievement(std::string achievement_name="[unset-achievement_name]");
       void push_screen();
       std::string pop_screen();
       void reactivate_prior_screen(std::string fallback_if_stack_is_empty="tile_drive_screen");

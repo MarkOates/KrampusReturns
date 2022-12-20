@@ -74,7 +74,9 @@ void Runner::initialize()
       //{ "start_the_game", { new AllegroFlare::Achievement("In Da House"), false, false } },
       //{ "do_thing", { new AllegroFlare::Achievement("Save the Zoo", "Will unhide when achieved"), false, false } },
       //{ "a_hidden_gem2", { new AllegroFlare::Achievement("Hidden Gem", "Will unhide when achieved"), false, true } },
-      //{ "an_unlocked_gem", { new AllegroFlare::Achievement("Unlocked Hidden Gem", "Will unhide when achieved"), true, true } },
+      { "stay_through_the_credits", { new AllegroFlare::Achievement(
+         "Stay Through the Credits",
+         "Watch the credits"), false, false } },
    });
 
 
@@ -293,11 +295,14 @@ void Runner::setup_platforming_2d_screen()
    return;
 }
 
-void Runner::unlock_achievement()
+void Runner::unlock_achievement(std::string achievement_name)
 {
    // TODO: make this an event_emitter->emit_unlock_achievement_event();
-   //event_emitter->emit_event(ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT, intptr_t(new std::string("free_seat")));
-   //event_emitter->emit_unlock_achievement_event("view_the_title");
+   event_emitter->emit_event(
+      ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT,
+      intptr_t(new std::string(achievement_name))
+   );
+   //event_emitter->emit_unlock_achievement_event(achievement_name);
    //event_emitter->emit_post_unlocked_achievement_notification_event("Take the title");
    return;
 }
@@ -403,6 +408,7 @@ void Runner::game_event_func(AllegroFlare::GameEvent* ev)
          //reactivate_prior_screen();
       //}},
       { EVENT_CREDITS_SCREEN_FINISHED, [this](){
+         unlock_achievement("stay_through_the_credits");
          framework->activate_screen("title_screen");
       }},
       { EVENT_EXIT_GAME, [this](){
