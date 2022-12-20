@@ -161,29 +161,11 @@ void Runner::initialize()
 
 
 
-   // setup the name your character screen
-   //AllegroFlare::Screens::CharacterNameInput *character_name_input_screen =
-      //new AllegroFlare::Screens::CharacterNameInput;
-   //character_name_input_screen->set_font_bin(&font_bin);
-   //character_name_input_screen->set_event_emitter(&event_emitter);
-   //character_name_input_screen->set_event_to_emit_on_pressing_ok_key(EVENT_ACTIVATE_TILE_DRIVE_SCREEN);
-   //character_name_input_screen->initialize();
-   //framework->register_screen("character_name_input_screen", character_name_input_screen);
-
-
-
    // setup the intro storyboards screen
    new_game_intro_storyboard_screen = storyboard_factory.create_advancing_text_storyboard_screen({
          "I found myself here.",
          "Stranded in a rainstorm.",
          "With my car broken down.",
-         //"No cell reception.",
-         //"Unbelievable.",
-         //"This storm is bad, too. They were talking about it on the radio.",
-         //"I don't know if being in the car is even safe.",
-         //"I need to find shelter.",
-         //"It looks like there's a light just up in the woods.",
-         //"Maybe I can find luck there.",
       });
    new_game_intro_storyboard_screen->set_event_emitter(&event_emitter);
    new_game_intro_storyboard_screen->set_game_event_name_to_emit_after_completing(
@@ -191,21 +173,6 @@ void Runner::initialize()
       //"activate_nvestigation_room_screen"
    );
    framework->register_screen("new_game_intro_storyboard_screen", new_game_intro_storyboard_screen);
-
-
-
-   // setup the cut-in storyboard screen
-   //cut_in_storyboard_screen = storyboard_factory.create_advancing_text_storyboard_screen({
-         //"This mystery has me perplexed.",
-         //"Daniel couldn't have been there when the crime had taken place.",
-         //"But the crime scene had his prints all over it.",
-         //"I know I can figure this out.",
-      //});
-   //cut_in_storyboard_screen->set_event_emitter(&event_emitter);
-   //cut_in_storyboard_screen->set_game_event_name_to_emit_after_completing(
-      //EVENT_CUT_IN_STORYBOARD_SCREEN_FINISHED
-   //);
-   //framework->register_screen("cut_in_storyboard_screen", cut_in_storyboard_screen);
 
 
 
@@ -302,8 +269,6 @@ void Runner::unlock_achievement(std::string achievement_name)
       ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT,
       intptr_t(new std::string(achievement_name))
    );
-   //event_emitter->emit_unlock_achievement_event(achievement_name);
-   //event_emitter->emit_post_unlocked_achievement_notification_event("Take the title");
    return;
 }
 
