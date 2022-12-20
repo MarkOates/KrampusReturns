@@ -146,6 +146,9 @@
     "KrampusReturns/Shaders/AllegroDefault",
     "KrampusReturns/Shaders/Primary"
   ],
+  "KrampusReturns/KrampusController": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
   "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [
     "KrampusReturns/Runner"
   ],

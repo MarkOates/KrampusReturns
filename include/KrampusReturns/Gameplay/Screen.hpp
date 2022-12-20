@@ -14,7 +14,7 @@
 #include <AllegroFlare/TileMaps/PrimMeshAtlas.hpp>
 #include <AllegroFlare/TileMaps/TileMap.hpp>
 #include <AllegroFlare/Vec2D.hpp>
-#include <AllegroFlare/VirtualControls.hpp>
+#include <KrampusReturns/KrampusController.hpp>
 #include <allegro5/allegro.h>
 #include <map>
 #include <string>
@@ -42,11 +42,11 @@ namespace KrampusReturns
          bool gravity_reversed;
          AllegroFlare::Camera2D camera;
          AllegroFlare::Vec2D camera_baseline_zoom;
+         KrampusReturns::KrampusController krampus_controller;
          AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* player_controlled_entity;
          AllegroFlare::Shader* shader;
          bool show_tile_mesh;
          bool show_collision_tile_mesh;
-         AllegroFlare::VirtualControls player_controls;
          AllegroFlare::CameraControlStrategies2D::Base* camera_control_strategy;
          ALLEGRO_BITMAP* backbuffer_sub_bitmap;
          void initialize_shader();
@@ -88,14 +88,9 @@ namespace KrampusReturns
          void initialize_player_controls();
          void initialize_backbuffer_sub_bitmap();
          void initialize();
-         void unset_player_controlled_entity_vertical_velocity();
-         void unset_player_controlled_entity_horizontal_velocity();
-         void set_player_controlled_entity_jump();
-         void player_emit_projectile(float magnitude=3.0f);
          void reverse_gravity();
          void update_entities();
          void draw_entities();
-         void update_player_controls_on_player_controlled_entity();
          void update();
          void draw();
          void toggle_show_collision_tile_mesh();
@@ -104,9 +99,6 @@ namespace KrampusReturns
          virtual void key_char_func(ALLEGRO_EVENT* event=nullptr) override;
          virtual void key_up_func(ALLEGRO_EVENT* event=nullptr) override;
          virtual void key_down_func(ALLEGRO_EVENT* event=nullptr) override;
-         void virtual_control_button_down_func(ALLEGRO_EVENT* event=nullptr);
-         void virtual_control_button_up_func(ALLEGRO_EVENT* event=nullptr);
-         virtual void virtual_control_axis_change_func(ALLEGRO_EVENT* event=nullptr) override;
          virtual void user_event_func(ALLEGRO_EVENT* event=nullptr) override;
          void render_collision_tile_mesh();
          AllegroFlare::TileMaps::PrimMeshAtlas* get_tile_atlas();

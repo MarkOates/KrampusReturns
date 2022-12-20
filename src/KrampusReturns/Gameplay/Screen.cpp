@@ -44,11 +44,11 @@ Screen::Screen(AllegroFlare::BitmapBin* bitmap_bin, AllegroFlare::Display* displ
    , gravity_reversed(false)
    , camera()
    , camera_baseline_zoom({4.8f, 4.5f})
+   , krampus_controller({})
    , player_controlled_entity(nullptr)
    , shader(nullptr)
    , show_tile_mesh(true)
    , show_collision_tile_mesh(false)
-   , player_controls()
    , camera_control_strategy(nullptr)
    , backbuffer_sub_bitmap(nullptr)
 {
@@ -329,7 +329,13 @@ void Screen::initialize_camera_control()
 
 void Screen::initialize_player_controls()
 {
-   player_controls.clear();
+   // TODO: Convert this to eventually *not* assume the controlled character is a Krampus.
+   KrampusReturns::Entities::Krampus* krampus =
+      static_cast<KrampusReturns::Entities::Krampus*>(player_controlled_entity);
+
+   krampus_controller.set_player_controlled_entity(krampus);
+   //krampus_controller.set_virtual_controls(&virtual_controls);
+   krampus_controller.reset();
    return;
 }
 
@@ -446,78 +452,6 @@ void Screen::initialize_camera()
    //AllegroFlare::vec2d(1.0 / 4.8, 1.0 / 4.5);
    camera.position = {room_width/2, room_height/2};
 
-   return;
-}
-
-void Screen::unset_player_controlled_entity_vertical_velocity()
-{
-   if (!player_controlled_entity) return;
-   player_controlled_entity->get_velocity_ref().position.y = 0;
-   return;
-}
-
-void Screen::unset_player_controlled_entity_horizontal_velocity()
-{
-   if (!player_controlled_entity) return;
-   player_controlled_entity->get_velocity_ref().position.x = 0;
-   return;
-}
-
-void Screen::set_player_controlled_entity_jump()
-{
-   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
-
-   if (!player_controlled_entity) return;
-   if (player_controlled_entity->exists(ADJACENT_TO_FLOOR))
-   {
-      player_controlled_entity->get_velocity_ref().position.y -= 4.25;
-   }
-   else if (player_controlled_entity->exists(ADJACENT_TO_LEFT_WALL))
-   {
-      player_controlled_entity->get_velocity_ref().position.y = -3.5;
-      player_controlled_entity->get_velocity_ref().position.x = 3.0;
-   }
-   else if (player_controlled_entity->exists(ADJACENT_TO_RIGHT_WALL))
-   {
-      player_controlled_entity->get_velocity_ref().position.y = -3.5;
-      player_controlled_entity->get_velocity_ref().position.x = -3.0;
-   }
-   return;
-}
-
-void Screen::player_emit_projectile(float magnitude)
-{
-   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
-
-   AllegroFlare::vec2d player_pos = player_controlled_entity->get_place_ref().position;
-   //AllegroFlare::vec2d player_center_pos = player_pos;
-   //AllegroFlare::vec2d aim_dir = player_controls.get_primary_stick_position(); //.normalized();
-   AllegroFlare::vec2d aim_pos = player_controls.get_primary_stick_position(); //.normalized();
-
-   if ((aim_pos.x < 0.00001) && (aim_pos.x > -0.00001))
-   if ((aim_pos.y < 0.00001) && (aim_pos.y > -0.00001))
-   {
-      aim_pos = {1, 0};
-   }
-
-
-   std::string on_map_name = player_controlled_entity->get(ON_MAP_NAME);
-
-
-   AllegroFlare::Prototypes::Platforming2D::Entities::Basic2DFactory factory(bitmap_bin);
-   AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* projectile = factory.create_player_projectile(
-      on_map_name,
-      player_pos.x,
-      player_pos.y,
-      8-1,
-      8-1,
-      aim_pos,
-      magnitude
-   );
-   entity_pool.push_back(projectile);
-
-
-   // HERE
    return;
 }
 
@@ -776,60 +710,6 @@ void Screen::draw_entities()
    return;
 }
 
-void Screen::update_player_controls_on_player_controlled_entity()
-{
-   if (!(player_controlled_entity))
-   {
-      std::stringstream error_message;
-      error_message << "[Screen::update_player_controls_on_player_controlled_entity]: error: guard \"player_controlled_entity\" not met.";
-      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
-      throw std::runtime_error("Screen::update_player_controls_on_player_controlled_entity: error: guard \"player_controlled_entity\" not met");
-   }
-   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
-
-   // if this block is active, the player cannot control themselves while in the air, only when on the ground:
-   //if (player_controlled_entity->exists(ADJACENT_TO_FLOOR))
-   //{
-      //player_controlled_entity->get_velocity_ref().position.x = 0.0;
-   //}
-
-   if (player_controls.get_right_bumper_pressed())
-   {
-      // player character is in a defensive position and not moving (or, they're aiming and not moving)
-      player_controlled_entity->get_velocity_ref().position.x = 0.0;
-      player_controlled_entity->get_velocity_ref().position.y = 0.0;
-   }
-   else
-   {
-      // if this block is active, the player cannot control themselves while in the air, only when on the ground:
-      // NOTE: previously, being ajacent to the floor would stop the player from moving unless
-      // they have a movment control button pressed
-      //if (player_controlled_entity->exists(ADJACENT_TO_FLOOR))
-      {
-         player_controlled_entity->get_velocity_ref().position.x = 0.0;
-         player_controlled_entity->get_velocity_ref().position.y = 0.0;
-      }
-
-         if (player_controls.get_right_button_pressed())
-         {
-            player_controlled_entity->get_velocity_ref().position.x = 1.5; //2.0;
-         }
-         if (player_controls.get_left_button_pressed())
-         {
-            player_controlled_entity->get_velocity_ref().position.x = -1.5; //-2.0;
-         }
-         if (player_controls.get_up_button_pressed())
-         {
-            player_controlled_entity->get_velocity_ref().position.y = -1.5; //2.0;
-         }
-         if (player_controls.get_down_button_pressed())
-         {
-            player_controlled_entity->get_velocity_ref().position.y = 1.5; //-2.0;
-         }
-   }
-   return;
-}
-
 void Screen::update()
 {
    if (!(initialized))
@@ -840,7 +720,7 @@ void Screen::update()
       throw std::runtime_error("Screen::update: error: guard \"initialized\" not met");
    }
    //return;
-   if (player_controlled_entity) update_player_controls_on_player_controlled_entity();
+   if (player_controlled_entity) krampus_controller.update();
    //return;
    update_entities();
    return;
@@ -934,7 +814,8 @@ void Screen::key_char_func(ALLEGRO_EVENT* event)
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
       throw std::runtime_error("Screen::key_char_func: error: guard \"event\" not met");
    }
-   // TODO: remove explicit key_*_func functions and prefer virtual input
+   // TODO: Consider if this should be removed in favor of explicit key_*_func functions.  In some cases
+   // this function should remain in place so that the keyboard could be used for debugging control.
    switch (event->keyboard.keycode)
    {
    case ALLEGRO_KEY_1:
@@ -971,25 +852,8 @@ void Screen::key_up_func(ALLEGRO_EVENT* event)
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
       throw std::runtime_error("Screen::key_up_func: error: guard \"event\" not met");
    }
-   // TODO: remove explicit key_*_func functions and prefer virtual input
-   switch (event->keyboard.keycode)
-   {
-      case ALLEGRO_KEY_LEFT:
-         player_controls.set_left_button_pressed(false);
-      break;
-
-      case ALLEGRO_KEY_RIGHT:
-         player_controls.set_right_button_pressed(false);
-      break;
-
-      case ALLEGRO_KEY_UP:
-         player_controls.set_up_button_pressed(false);
-      break;
-
-      case ALLEGRO_KEY_DOWN:
-         player_controls.set_down_button_pressed(false);
-      break;
-   }
+   // TODO: move this to a virtual input func rather than an explicit "key_up_func"
+   krampus_controller.key_up_func(event->keyboard.keycode, false);
    return;
 }
 
@@ -1009,137 +873,8 @@ void Screen::key_down_func(ALLEGRO_EVENT* event)
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
       throw std::runtime_error("Screen::key_down_func: error: guard \"event\" not met");
    }
-   // TODO: remove explicit key_*_func functions and prefer virtual input
-   switch (event->keyboard.keycode)
-   {
-      case ALLEGRO_KEY_LEFT:
-         player_controls.set_left_button_pressed(true);
-      break;
-
-      case ALLEGRO_KEY_RIGHT:
-         player_controls.set_right_button_pressed(true);
-      break;
-
-      case ALLEGRO_KEY_UP:
-         player_controls.set_up_button_pressed(true);
-         //check_player_collisions_with_doors();
-      break;
-
-      case ALLEGRO_KEY_DOWN:
-         player_controls.set_down_button_pressed(true);
-         //check_player_collisions_with_doors();
-      break;
-
-      case ALLEGRO_KEY_SPACE:
-         set_player_controlled_entity_jump();
-      break;
-   }
-   return;
-}
-
-void Screen::virtual_control_button_down_func(ALLEGRO_EVENT* event)
-{
-   int button_num = event->user.data1;
-
-   if (button_num == AllegroFlare::VirtualControls::BUTTON_B)
-   {
-      player_controls.set_a_button_pressed(true);
-      set_player_controlled_entity_jump();
-   }
-   else if (button_num == AllegroFlare::VirtualControls::BUTTON_X)
-   {
-      reverse_gravity();
-   }
-   else if (button_num == AllegroFlare::VirtualControls::BUTTON_Y)
-   {
-      player_emit_projectile();
-   }
-   else if (button_num == AllegroFlare::VirtualControls::BUTTON_RIGHT)
-   {
-      player_controls.set_right_button_pressed(true);
-   }
-   else if (button_num == AllegroFlare::VirtualControls::BUTTON_LEFT)
-   {
-      player_controls.set_left_button_pressed(true);
-   }
-   else if (button_num == AllegroFlare::VirtualControls::BUTTON_UP)
-   {
-      player_controls.set_up_button_pressed(true);
-      //check_player_collisions_with_doors();
-   }
-   else if (button_num == AllegroFlare::VirtualControls::BUTTON_DOWN)
-   {
-      player_controls.set_down_button_pressed(true);
-      //check_player_collisions_with_doors();
-   }
-   else if (button_num == AllegroFlare::VirtualControls::BUTTON_RIGHT_BUMPER)
-   {
-      player_controls.set_right_bumper_pressed(true);
-   }
-   return;
-}
-
-void Screen::virtual_control_button_up_func(ALLEGRO_EVENT* event)
-{
-   int button_num = event->user.data1;
-
-   if (button_num == AllegroFlare::VirtualControls::BUTTON_B)
-   {
-      player_controls.set_a_button_pressed(false);
-   }
-   else if (button_num == AllegroFlare::VirtualControls::BUTTON_RIGHT)
-   {
-      player_controls.set_right_button_pressed(false);
-   }
-   else if (button_num == AllegroFlare::VirtualControls::BUTTON_LEFT)
-   {
-      player_controls.set_left_button_pressed(false);
-   }
-   else if (button_num == AllegroFlare::VirtualControls::BUTTON_UP)
-   {
-      player_controls.set_up_button_pressed(false);
-   }
-   else if (button_num == AllegroFlare::VirtualControls::BUTTON_DOWN)
-   {
-      player_controls.set_down_button_pressed(false);
-   }
-   else if (button_num == AllegroFlare::VirtualControls::BUTTON_RIGHT_BUMPER)
-   {
-      player_controls.set_right_bumper_pressed(false);
-   }
-   return;
-}
-
-void Screen::virtual_control_axis_change_func(ALLEGRO_EVENT* event)
-{
-   int stick = event->user.data1;
-   int axis = event->user.data2;
-   float position = event->user.data3 / 255.0f;
-
-   if (stick == AllegroFlare::VirtualControls::PRIMARY_STICK)
-   {
-      if (axis == 0)
-      {
-         AllegroFlare::vec2d vec = player_controls.get_primary_stick_position();
-         vec.x = position;
-         player_controls.set_primary_stick_position(vec);
-      }
-      if (axis == 1)
-      {
-         AllegroFlare::vec2d vec = player_controls.get_primary_stick_position();
-         vec.y = position;
-         player_controls.set_primary_stick_position(vec);
-      }
-   }
-
-   if (axis == 0 && position > 0.5) player_controls.set_right_button_pressed(true);
-   if (axis == 0 && position < 0.5 && position > -0.5)
-   {
-      player_controls.set_right_button_pressed(false);
-      player_controls.set_left_button_pressed(false);
-   }
-   if (axis == 0 && position < -0.5) player_controls.set_left_button_pressed(true);
-
+   // TODO: move this to a virtual input func rather than an explicit "key_down_func"
+   krampus_controller.key_down_func(event->keyboard.keycode, false);
    return;
 }
 

@@ -229,6 +229,10 @@ table td
   <td class="property">AllegroFlare::Vec2D</td>
 </tr>
 <tr>
+  <td class="property">krampus_controller</td>
+  <td class="property">KrampusReturns::KrampusController</td>
+</tr>
+<tr>
   <td class="property">player_controlled_entity</td>
   <td class="property">AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*</td>
 </tr>
@@ -243,10 +247,6 @@ table td
 <tr>
   <td class="property">show_collision_tile_mesh</td>
   <td class="property">bool</td>
-</tr>
-<tr>
-  <td class="property">player_controls</td>
-  <td class="property">AllegroFlare::VirtualControls</td>
 </tr>
 <tr>
   <td class="property">camera_control_strategy</td>
@@ -307,18 +307,6 @@ table td
   <td class="private_method">initialize_camera()</td>
 </tr>
 <tr>
-  <td class="method">unset_player_controlled_entity_vertical_velocity()</td>
-</tr>
-<tr>
-  <td class="method">unset_player_controlled_entity_horizontal_velocity()</td>
-</tr>
-<tr>
-  <td class="method">set_player_controlled_entity_jump()</td>
-</tr>
-<tr>
-  <td class="method">player_emit_projectile(1)</td>
-</tr>
-<tr>
   <td class="method">reverse_gravity()</td>
 </tr>
 <tr>
@@ -338,9 +326,6 @@ table td
 </tr>
 <tr>
   <td class="method">draw_entities()</td>
-</tr>
-<tr>
-  <td class="method">update_player_controls_on_player_controlled_entity()</td>
 </tr>
 <tr>
   <td class="method">update()</td>
@@ -365,15 +350,6 @@ table td
 </tr>
 <tr>
   <td class="method">key_down_func(1)</td>
-</tr>
-<tr>
-  <td class="method">virtual_control_button_down_func(1)</td>
-</tr>
-<tr>
-  <td class="method">virtual_control_button_up_func(1)</td>
-</tr>
-<tr>
-  <td class="method">virtual_control_axis_change_func(1)</td>
 </tr>
 <tr>
   <td class="method">user_event_func(1)</td>
@@ -514,6 +490,9 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Shader&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Shader.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::KrampusController&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/KrampusController.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -1165,6 +1144,9 @@ table td
     "KrampusReturns/Runner",
     "KrampusReturns/Shaders/AllegroDefault",
     "KrampusReturns/Shaders/Primary"
+  ],
+  "KrampusReturns/KrampusController": [
+    "KrampusReturns/Gameplay/Screen"
   ],
   "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [
     "KrampusReturns/Runner"
