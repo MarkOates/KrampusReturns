@@ -34,7 +34,8 @@ void Krampus::initialize()
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
       throw std::runtime_error("Krampus::initialize: error: guard \"(!initialized)\" not met");
    }
-   get_place_ref().size = { 30, 30 };
+   get_place_ref().size = { 25, 10 };
+   get_bitmap_placement_ref().scale = { 0.8, 0.8 };
    set_bitmap_alignment_strategy("bottom_centered");
    set_animation("krampus");
    initialized = true;
