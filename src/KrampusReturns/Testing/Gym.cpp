@@ -22,11 +22,10 @@ namespace Testing
 {
 
 
-Gym::Gym()
+Gym::Gym(KrampusReturns::Gameplay::Screen platforming_2d)
    : ::testing::Test()
-   , display(nullptr)
-   , font_bin({})
-   , bitmap_bin({})
+   , framework({})
+   , platforming_2d(platforming_2d)
 {
 }
 
@@ -36,21 +35,9 @@ Gym::~Gym()
 }
 
 
-ALLEGRO_DISPLAY* Gym::get_display() const
+AllegroFlare::Frameworks::Full &Gym::get_framework_ref()
 {
-   return display;
-}
-
-
-AllegroFlare::FontBin &Gym::get_font_bin_ref()
-{
-   return font_bin;
-}
-
-
-AllegroFlare::BitmapBin &Gym::get_bitmap_bin_ref()
-{
-   return bitmap_bin;
+   return framework;
 }
 
 
@@ -73,26 +60,18 @@ void Gym::SetUp()
    #define TEST_FIXTURE_TEST_RUN_SNAPSHOTS_FOLDER "/Users/markoates/Repos/allegro_flare/tmp/test_snapshots/"
    #endif
 
-   font_bin.set_full_path(TEST_FIXTURE_FONT_FOLDER);
-   bitmap_bin.set_full_path(TEST_FIXTURE_BITMAP_FOLDER);
+   //AllegroFlare::Frameworks::Full framework;
+   framework.disable_fullscreen();
+   framework.initialize();
 
-   //display = al_create_display(1280 * 2, 720 * 2);
-   //al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
-   al_set_new_display_option(ALLEGRO_SAMPLE_BUFFERS, 2, ALLEGRO_SUGGEST);
-   al_set_new_display_option(ALLEGRO_DEPTH_SIZE, 32, ALLEGRO_SUGGEST);
-   al_set_new_display_option(ALLEGRO_SAMPLES, 16, ALLEGRO_SUGGEST);
-   al_set_new_display_flags(ALLEGRO_OPENGL | ALLEGRO_PROGRAMMABLE_PIPELINE);
-   display = al_create_display(1920, 1080);
+   framework.get_bitmap_bin_ref().set_full_path(TEST_FIXTURE_BITMAP_FOLDER);
+   framework.get_font_bin_ref().set_full_path(TEST_FIXTURE_FONT_FOLDER);
 
-   ASSERT_NE(nullptr, display);
+   //KrampusReturns::Gameplay::Screen platforming_2d;
+   platforming_2d.set_bitmap_bin(&framework.get_bitmap_bin_ref());
+   platforming_2d.set_display(framework.get_primary_display());
+   platforming_2d.set_event_emitter(&framework.get_event_emitter_ref());
 
-   // clear the display to a slightly gray black color
-   al_clear_to_color(ALLEGRO_COLOR{0.05f, 0.05f, 0.055f, 1.0f});
-
-   // set the window title to the current test name
-   std::string new_window_title = build_full_test_name_str();
-
-   al_set_window_title(display, new_window_title.c_str());
 
    return;
 }
@@ -104,23 +83,24 @@ void Gym::TearDown()
       capture_screenshot(build_full_test_name_str() + ".png");
    }
 
-   font_bin.clear();
-   bitmap_bin.clear();
-   al_destroy_display(display);
-   al_shutdown_ttf_addon(); // this is required otherwise subsequent al_init_ttf_addon will not work
-                            // this is a bug in Allegro
-   al_uninstall_system();
+   //font_bin.clear();
+   //bitmap_bin.clear();
+   //al_destroy_display(display);
+   //al_shutdown_ttf_addon(); // this is required otherwise subsequent al_init_ttf_addon will not work
+                             //this is a bug in Allegro
+   //al_uninstall_system();
    return;
 }
 
 ALLEGRO_FONT* Gym::get_any_font()
 {
-   return font_bin.auto_get("consolas.ttf 32");
+   return framework.get_font_bin_ref().auto_get("consolas.ttf 32");
 }
 
 ALLEGRO_BITMAP* Gym::get_display_backbuffer()
 {
-   return al_get_backbuffer(display);
+   throw std::runtime_error("Testing/Gym::get_display_backbuffer() not implemented");
+   //return al_get_backbuffer(framework.get_current_display()->get_al_display());
 }
 
 void Gym::sleep_for_frame()
@@ -164,7 +144,8 @@ AllegroFlare::Placement2D Gym::build_centered_placement(float width, float heigh
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
       throw std::runtime_error("Gym::build_centered_placement: error: guard \"al_get_target_bitmap()\" not met");
    }
-   AllegroFlare::Placement2D place(al_get_display_width(display)/2, al_get_display_height(display)/2, width, height);
+   AllegroFlare::Placement2D place;
+   //AllegroFlare::Placement2D place(al_get_display_width(display)/2, al_get_display_height(display)/2, width, height);
    return place;
 }
 
@@ -236,30 +217,31 @@ void Gym::clear()
 
 void Gym::capture_screenshot(std::string base_filename)
 {
-   // TODO: use AllegroFlare::Testing::TestNameInference for this logic
-   std::string full_file_save_location = TEST_FIXTURE_TEST_RUN_SNAPSHOTS_FOLDER + base_filename;
+   throw std::runtime_error("Testing/Gym::capture_screenshot() not implemented");
+   //// TODO: use AllegroFlare::Testing::TestNameInference for this logic
+   //std::string full_file_save_location = TEST_FIXTURE_TEST_RUN_SNAPSHOTS_FOLDER + base_filename;
 
-   al_flip_display(); // this capture_screenshot technique assumes the pixels to capture are currently being
-                      // shown on the display.  This al_flip_display is added here in order to flip the
+   //al_flip_display(); // this capture_screenshot technique assumes the pixels to capture are currently being
+                       //shown on the display.  This al_flip_display is added here in order to flip the
                       // front-buffer *back* to the backbuffer so it can be used to capture the screenshot
 
-   bool screenshot_successful = al_save_bitmap(full_file_save_location.c_str(), al_get_backbuffer(display));
-   if (screenshot_successful)
-   {
-      std::cout << AllegroFlare::TerminalColors::CYAN
-                << "[AllegroFlare::Testing::Gym::screenshot]: info: screenshot saved to "
-                << "\"" << full_file_save_location << "\""
-                << AllegroFlare::TerminalColors::DEFAULT
-                << std::endl;
-   }
-   else
-   {
-      std::cout << AllegroFlare::TerminalColors::RED
-                << "[AllegroFlare::Testing::Gym::screenshot]: error: screenshot "
-                << "CAPTURE was not successful when trying to saving to \"" << full_file_save_location << "\""
-                << AllegroFlare::TerminalColors::DEFAULT
-                << std::endl;
-   }
+   //bool screenshot_successful = al_save_bitmap(full_file_save_location.c_str(), al_get_backbuffer(display));
+   //if (screenshot_successful)
+   //{
+      //std::cout << AllegroFlare::TerminalColors::CYAN
+                //<< "[AllegroFlare::Testing::Gym::screenshot]: info: screenshot saved to "
+                //<< "\"" << full_file_save_location << "\""
+                //<< AllegroFlare::TerminalColors::DEFAULT
+                //<< std::endl;
+   //}
+   //else
+   //{
+      //std::cout << AllegroFlare::TerminalColors::RED
+                //<< "[AllegroFlare::Testing::Gym::screenshot]: error: screenshot "
+                //<< "CAPTURE was not successful when trying to saving to \"" << full_file_save_location << "\""
+                //<< AllegroFlare::TerminalColors::DEFAULT
+                //<< std::endl;
+   //}
 }
 
 

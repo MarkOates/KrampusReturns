@@ -1,9 +1,9 @@
 #pragma once
 
 
-#include <AllegroFlare/BitmapBin.hpp>
-#include <AllegroFlare/FontBin.hpp>
+#include <AllegroFlare/Frameworks/Full.hpp>
 #include <AllegroFlare/Placement2D.hpp>
+#include <KrampusReturns/Gameplay/Screen.hpp>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
 #include <gtest/gtest.h>
@@ -17,20 +17,17 @@ namespace KrampusReturns
       class Gym : public ::testing::Test
       {
       private:
-         ALLEGRO_DISPLAY* display;
-         AllegroFlare::FontBin font_bin;
-         AllegroFlare::BitmapBin bitmap_bin;
+         AllegroFlare::Frameworks::Full framework;
+         KrampusReturns::Gameplay::Screen platforming_2d;
 
       protected:
 
 
       public:
-         Gym();
+         Gym(KrampusReturns::Gameplay::Screen platforming_2d=nullptr);
          virtual ~Gym();
 
-         ALLEGRO_DISPLAY* get_display() const;
-         AllegroFlare::FontBin &get_font_bin_ref();
-         AllegroFlare::BitmapBin &get_bitmap_bin_ref();
+         AllegroFlare::Frameworks::Full &get_framework_ref();
          virtual void SetUp() override;
          virtual void TearDown() override;
          ALLEGRO_FONT* get_any_font();

@@ -46,7 +46,8 @@
     "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/Frameworks/Full": [
-    "KrampusReturns/Gameplay/Screen"
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/Placement2D": [
     "KrampusReturns/Gameplay/Screen",
@@ -176,6 +177,9 @@
     "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/TerminalColors": [
+    "KrampusReturns/Testing/Gym"
+  ],
+  "KrampusReturns/Gameplay/Screen": [
     "KrampusReturns/Testing/Gym"
   ]
 }

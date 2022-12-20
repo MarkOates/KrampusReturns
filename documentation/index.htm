@@ -570,16 +570,12 @@ table td
     <h3 id="quintessence/KrampusReturns/Testing/Gym.q.yml">quintessence/KrampusReturns/Testing/Gym.q.yml</h3>
      <table>
 <tr>
-  <td class="property">display</td>
-  <td class="property">ALLEGRO_DISPLAY*</td>
+  <td class="property">framework</td>
+  <td class="property">AllegroFlare::Frameworks::Full</td>
 </tr>
 <tr>
-  <td class="property">font_bin</td>
-  <td class="property">AllegroFlare::FontBin</td>
-</tr>
-<tr>
-  <td class="property">bitmap_bin</td>
-  <td class="property">AllegroFlare::BitmapBin</td>
+  <td class="property">platforming_2d</td>
+  <td class="property">KrampusReturns::Gameplay::Screen</td>
 </tr>
     </table>
      <table>
@@ -693,6 +689,12 @@ table td
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::TerminalColors&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/TerminalColors.hpp&quot;]}</td>
 </tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Frameworks::Full&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Frameworks/Full.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Gameplay::Screen&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Gameplay/Screen.hpp&quot;]}</td>
+</tr>
     </table>
   </div>
 </ul>
@@ -746,7 +748,8 @@ table td
     "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/Frameworks/Full": [
-    "KrampusReturns/Gameplay/Screen"
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/Placement2D": [
     "KrampusReturns/Gameplay/Screen",
@@ -876,6 +879,9 @@ table td
     "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/TerminalColors": [
+    "KrampusReturns/Testing/Gym"
+  ],
+  "KrampusReturns/Gameplay/Screen": [
     "KrampusReturns/Testing/Gym"
   ]
 }
