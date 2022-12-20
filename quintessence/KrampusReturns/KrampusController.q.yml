@@ -21,95 +21,6 @@ functions:
       player_controls.clear();
 
 
-  - name: update
-    guards: [ player_controlled_entity ]
-    body: |
-      using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
-
-      // if this block is active, the player cannot control themselves while in the air, only when on the ground:
-      //if (player_controlled_entity->exists(ADJACENT_TO_FLOOR))
-      //{
-         //player_controlled_entity->get_velocity_ref().position.x = 0.0;
-      //}
-
-      if (player_controls.get_right_bumper_pressed())
-      {
-         // player character is in a defensive position and not moving (or, they're aiming and not moving)
-         player_controlled_entity->get_velocity_ref().position.x = 0.0;
-         player_controlled_entity->get_velocity_ref().position.y = 0.0;
-      }
-      else
-      {
-         // if this block is active, the player cannot control themselves while in the air, only when on the ground:
-         // NOTE: previously, being ajacent to the floor would stop the player from moving unless
-         // they have a movment control button pressed
-         //if (player_controlled_entity->exists(ADJACENT_TO_FLOOR))
-         {
-            player_controlled_entity->get_velocity_ref().position.x = 0.0;
-            player_controlled_entity->get_velocity_ref().position.y = 0.0;
-         }
-
-            if (player_controls.get_right_button_pressed())
-            {
-               player_controlled_entity->get_velocity_ref().position.x = 1.5; //2.0;
-            }
-            if (player_controls.get_left_button_pressed())
-            {
-               player_controlled_entity->get_velocity_ref().position.x = -1.5; //-2.0;
-            }
-            if (player_controls.get_up_button_pressed())
-            {
-               player_controlled_entity->get_velocity_ref().position.y = -1.5; //2.0;
-            }
-            if (player_controls.get_down_button_pressed())
-            {
-               player_controlled_entity->get_velocity_ref().position.y = 1.5; //-2.0;
-            }
-      }
-      return;
-    body_dependency_symbols:
-      - AllegroFlare::Prototypes::Platforming2D::EntityFlagNames
-
-
-
-  - name: unset_player_controlled_entity_vertical_velocity
-    body: |
-      if (!player_controlled_entity) return;
-      player_controlled_entity->get_velocity_ref().position.y = 0;
-      return;
-
-
-  - name: unset_player_controlled_entity_horizontal_velocity
-    body: |
-      if (!player_controlled_entity) return;
-      player_controlled_entity->get_velocity_ref().position.x = 0;
-      return;
-
-
-  - name: set_player_controlled_entity_jump
-    body: |
-      using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
-
-      if (!player_controlled_entity) return;
-      if (player_controlled_entity->exists(ADJACENT_TO_FLOOR))
-      {
-         player_controlled_entity->get_velocity_ref().position.y -= 4.25;
-      }
-      else if (player_controlled_entity->exists(ADJACENT_TO_LEFT_WALL))
-      {
-         player_controlled_entity->get_velocity_ref().position.y = -3.5;
-         player_controlled_entity->get_velocity_ref().position.x = 3.0;
-      }
-      else if (player_controlled_entity->exists(ADJACENT_TO_RIGHT_WALL))
-      {
-         player_controlled_entity->get_velocity_ref().position.y = -3.5;
-         player_controlled_entity->get_velocity_ref().position.x = -3.0;
-      }
-      return;
-    body_dependency_symbols:
-      - AllegroFlare::Prototypes::Platforming2D::EntityFlagNames
-
-
   - name: key_up_func
     virtual: true
     parameters:
@@ -172,10 +83,85 @@ functions:
          break;
 
          case ALLEGRO_KEY_SPACE:
-            set_player_controlled_entity_jump();
+            jump();
          break;
       }
       return;
+
+
+  - name: update
+    guards: [ player_controlled_entity ]
+    body: |
+      using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+
+      // if this block is active, the player cannot control themselves while in the air, only when on the ground:
+      //if (player_controlled_entity->exists(ADJACENT_TO_FLOOR))
+      //{
+         //player_controlled_entity->get_velocity_ref().position.x = 0.0;
+      //}
+
+      if (player_controls.get_right_bumper_pressed())
+      {
+         // player character is in a defensive position and not moving (or, they're aiming and not moving)
+         player_controlled_entity->get_velocity_ref().position.x = 0.0;
+         player_controlled_entity->get_velocity_ref().position.y = 0.0;
+      }
+      else
+      {
+         // if this block is active, the player cannot control themselves while in the air, only when on the ground:
+         // NOTE: previously, being ajacent to the floor would stop the player from moving unless
+         // they have a movment control button pressed
+         //if (player_controlled_entity->exists(ADJACENT_TO_FLOOR))
+         {
+            player_controlled_entity->get_velocity_ref().position.x = 0.0;
+            player_controlled_entity->get_velocity_ref().position.y = 0.0;
+         }
+
+            if (player_controls.get_right_button_pressed())
+            {
+               player_controlled_entity->get_velocity_ref().position.x = 1.5; //2.0;
+            }
+            if (player_controls.get_left_button_pressed())
+            {
+               player_controlled_entity->get_velocity_ref().position.x = -1.5; //-2.0;
+            }
+            if (player_controls.get_up_button_pressed())
+            {
+               player_controlled_entity->get_velocity_ref().position.y = -1.5; //2.0;
+            }
+            if (player_controls.get_down_button_pressed())
+            {
+               player_controlled_entity->get_velocity_ref().position.y = 1.5; //-2.0;
+            }
+      }
+      return;
+    body_dependency_symbols:
+      - AllegroFlare::Prototypes::Platforming2D::EntityFlagNames
+
+
+  - name: jump
+    private: true
+    body: |
+      using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+
+      if (!player_controlled_entity) return;
+      if (player_controlled_entity->exists(ADJACENT_TO_FLOOR))
+      {
+         player_controlled_entity->get_velocity_ref().position.y -= 4.25;
+      }
+      else if (player_controlled_entity->exists(ADJACENT_TO_LEFT_WALL))
+      {
+         player_controlled_entity->get_velocity_ref().position.y = -3.5;
+         player_controlled_entity->get_velocity_ref().position.x = 3.0;
+      }
+      else if (player_controlled_entity->exists(ADJACENT_TO_RIGHT_WALL))
+      {
+         player_controlled_entity->get_velocity_ref().position.y = -3.5;
+         player_controlled_entity->get_velocity_ref().position.x = -3.0;
+      }
+      return;
+    body_dependency_symbols:
+      - AllegroFlare::Prototypes::Platforming2D::EntityFlagNames
 
 
 dependencies:

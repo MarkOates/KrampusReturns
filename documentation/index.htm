@@ -53,6 +53,7 @@ table td
   <li><a href="#quintessence/KrampusReturns/Entities/Krampus.q.yml">quintessence/KrampusReturns/Entities/Krampus.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/EntityFactory.q.yml">quintessence/KrampusReturns/EntityFactory.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Gameplay/Screen.q.yml">quintessence/KrampusReturns/Gameplay/Screen.q.yml</a></li>
+  <li><a href="#quintessence/KrampusReturns/KrampusController.q.yml">quintessence/KrampusReturns/KrampusController.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Runner.q.yml">quintessence/KrampusReturns/Runner.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Shaders/AllegroDefault.q.yml">quintessence/KrampusReturns/Shaders/AllegroDefault.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Shaders/Primary.q.yml">quintessence/KrampusReturns/Shaders/Primary.q.yml</a></li>
@@ -493,6 +494,49 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::KrampusController&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/KrampusController.hpp&quot;]}</td>
+</tr>
+    </table>
+  </div>
+</ul>
+<ul>
+  <div class="component">
+    <h3 id="quintessence/KrampusReturns/KrampusController.q.yml">quintessence/KrampusReturns/KrampusController.q.yml</h3>
+     <table>
+<tr>
+  <td class="property">player_controls</td>
+  <td class="property">AllegroFlare::VirtualControls</td>
+</tr>
+<tr>
+  <td class="property">player_controlled_entity</td>
+  <td class="property">KrampusReturns::Entities::Krampus*</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="method">reset()</td>
+</tr>
+<tr>
+  <td class="method">key_up_func(2)</td>
+</tr>
+<tr>
+  <td class="method">key_down_func(2)</td>
+</tr>
+<tr>
+  <td class="method">update()</td>
+</tr>
+<tr>
+  <td class="private_method">jump()</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Entities::Krampus&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Entities/Krampus.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::VirtualControls&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/VirtualControls.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::Platforming2D::EntityFlagNames&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/Platforming2D/EntityFlagNames.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -1018,14 +1062,16 @@ table td
   ],
   "AllegroFlare/Prototypes/Platforming2D/EntityFlagNames": [
     "KrampusReturns/EntityFactory",
-    "KrampusReturns/Gameplay/Screen"
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/KrampusController"
   ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D": [
     "KrampusReturns/EntityFactory",
     "KrampusReturns/Gameplay/Screen"
   ],
   "KrampusReturns/Entities/Krampus": [
-    "KrampusReturns/EntityFactory"
+    "KrampusReturns/EntityFactory",
+    "KrampusReturns/KrampusController"
   ],
   "AllegroFlare/BitmapBin": [
     "KrampusReturns/Gameplay/Screen",
@@ -1041,7 +1087,8 @@ table td
     "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/VirtualControls": [
-    "KrampusReturns/Gameplay/Screen"
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/KrampusController"
   ],
   "AllegroFlare/VirtualControlsProcessor": [
     "KrampusReturns/Gameplay/Screen"

@@ -12,6 +12,7 @@ namespace KrampusReturns
    private:
       AllegroFlare::VirtualControls player_controls;
       KrampusReturns::Entities::Krampus* player_controlled_entity;
+      void jump();
 
    protected:
 
@@ -23,12 +24,9 @@ namespace KrampusReturns
       void set_player_controlled_entity(KrampusReturns::Entities::Krampus* player_controlled_entity);
       KrampusReturns::Entities::Krampus* get_player_controlled_entity() const;
       void reset();
-      void update();
-      void unset_player_controlled_entity_vertical_velocity();
-      void unset_player_controlled_entity_horizontal_velocity();
-      void set_player_controlled_entity_jump();
       virtual void key_up_func(int al_key_num=0, bool is_repeat=false);
       virtual void key_down_func(int al_key_num=0, bool is_repeat=false);
+      void update();
    };
 }
 
