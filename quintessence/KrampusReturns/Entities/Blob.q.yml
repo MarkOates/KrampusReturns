@@ -13,6 +13,14 @@ properties:
     type: bool
     init_with: false
 
+  - name: preferred_direction
+    type: AllegroFlare::Vec2D
+    init_with: AllegroFlare::Vec2D(1, 0)
+
+  - name: preferred_direction_started_at
+    type: float
+    init_with: 0.0f
+
   - name: TYPE
     type: char*
     init_with: '(char*)"Entities/Blob"'
@@ -26,23 +34,33 @@ functions:
   - name: update
     virtual: true
     override: true
+    guards: [ initialized ]
     body: |
       FrameAnimated2D::update();
 
       float counter = al_get_time();
+      float time_now = al_get_time();
+
+      float age = time_now - preferred_direction_started_at;
+
+      if (age > 3.0)
+      {
+         set_preferred_direction();
+      }
+    
 
 
       // behavior
 
-      AllegroFlare::Vec2D jump_vector = {
+      AllegroFlare::Vec2D wander_vector = {
          (float)sin(counter) * 0.2f,
          (float)cos(counter*0.78) * 0.3f,
       };
-      jump_vector *= 1.3;
+      wander_vector *= 1.3;
 
       //get_velocity_ref().position *= 0.01;
 
-      get_velocity_ref().position = jump_vector;
+      get_velocity_ref().position = preferred_direction * 0.2 + wander_vector * 0.3;
 
 
       // appearance
@@ -54,6 +72,21 @@ functions:
       - sin
 
 
+  - name: set_preferred_direction
+    body: |
+      preferred_direction_started_at = al_get_time();
+      float random_seed = preferred_direction_started_at;
+
+      AllegroFlare::Vec2D wander_vector = {
+         (float)sin(random_seed * 99979.2f), // just some random numbers
+         (float)cos(random_seed * 68896.71f),
+      };
+      //wander_vector *= 1.3;
+      preferred_direction = wander_vector.normalized();
+
+      return;
+
+
   - name: initialize
     guards: [ (!initialized) ]
     body: |
@@ -61,6 +94,7 @@ functions:
       get_bitmap_placement_ref().scale = { 0.6, 0.6 };
       set_bitmap_alignment_strategy("bottom_centered");
       set_animation("blob");
+      set_preferred_direction();
       initialized = true;
       return;
 
@@ -72,5 +106,7 @@ dependencies:
     headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D.hpp ]
   - symbol: sin
     headers: [ cmath ]
+  - symbol: AllegroFlare::Vec2D
+    headers: [ AllegroFlare/Vec2D.hpp ]
 
 

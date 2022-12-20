@@ -68,6 +68,14 @@ table td
   <td class="property">bool</td>
 </tr>
 <tr>
+  <td class="property">preferred_direction</td>
+  <td class="property">AllegroFlare::Vec2D</td>
+</tr>
+<tr>
+  <td class="property">preferred_direction_started_at</td>
+  <td class="property">float</td>
+</tr>
+<tr>
   <td class="property">TYPE</td>
   <td class="property">char*</td>
 </tr>
@@ -75,6 +83,9 @@ table td
      <table>
 <tr>
   <td class="method">update()</td>
+</tr>
+<tr>
+  <td class="method">set_preferred_direction()</td>
 </tr>
 <tr>
   <td class="method">initialize()</td>
@@ -86,6 +97,9 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;sin&quot;, &quot;headers&quot;=&gt;[&quot;cmath&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Vec2D&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Vec2D.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -743,6 +757,10 @@ table td
   "sin": [
     "KrampusReturns/Entities/Blob"
   ],
+  "AllegroFlare/Vec2D": [
+    "KrampusReturns/Entities/Blob",
+    "KrampusReturns/Gameplay/Screen"
+  ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory": [
     "KrampusReturns/EntityFactory",
     "KrampusReturns/Gameplay/Screen"
@@ -858,9 +876,6 @@ table td
   "ALLEGRO_BITMAP": [
     "KrampusReturns/Gameplay/Screen",
     "KrampusReturns/Testing/Gym"
-  ],
-  "AllegroFlare/Vec2D": [
-    "KrampusReturns/Gameplay/Screen"
   ],
   "KrampusReturns/Shaders/Primary": [
     "KrampusReturns/Gameplay/Screen"
