@@ -5,7 +5,7 @@ properties:
     type: AllegroFlare::VirtualControls
     init_with: ''
 
-  - name: player_controlled_entity
+  - name: krampus
     type: KrampusReturns::Entities::Krampus*
     init_with: nullptr
     constructor_arg: true
@@ -30,7 +30,7 @@ functions:
       - name: is_repeat
         type: bool
         default_argument: false
-    guards: [ player_controlled_entity ]
+    guards: [ krampus ]
     body: |
       switch (al_key_num)
       {
@@ -62,7 +62,7 @@ functions:
       - name: is_repeat
         type: bool
         default_argument: false
-    guards: [ player_controlled_entity ]
+    guards: [ krampus ]
     body: |
       switch (al_key_num)
       {
@@ -90,48 +90,48 @@ functions:
 
 
   - name: update
-    guards: [ player_controlled_entity ]
+    guards: [ krampus ]
     body: |
       using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
 
       // if this block is active, the player cannot control themselves while in the air, only when on the ground:
-      //if (player_controlled_entity->exists(ADJACENT_TO_FLOOR))
+      //if (krampus->exists(ADJACENT_TO_FLOOR))
       //{
-         //player_controlled_entity->get_velocity_ref().position.x = 0.0;
+         //krampus->get_velocity_ref().position.x = 0.0;
       //}
 
       if (player_controls.get_right_bumper_pressed())
       {
          // player character is in a defensive position and not moving (or, they're aiming and not moving)
-         player_controlled_entity->get_velocity_ref().position.x = 0.0;
-         player_controlled_entity->get_velocity_ref().position.y = 0.0;
+         krampus->get_velocity_ref().position.x = 0.0;
+         krampus->get_velocity_ref().position.y = 0.0;
       }
       else
       {
          // if this block is active, the player cannot control themselves while in the air, only when on the ground:
          // NOTE: previously, being ajacent to the floor would stop the player from moving unless
          // they have a movment control button pressed
-         //if (player_controlled_entity->exists(ADJACENT_TO_FLOOR))
+         //if (krampus->exists(ADJACENT_TO_FLOOR))
          {
-            player_controlled_entity->get_velocity_ref().position.x = 0.0;
-            player_controlled_entity->get_velocity_ref().position.y = 0.0;
+            krampus->get_velocity_ref().position.x = 0.0;
+            krampus->get_velocity_ref().position.y = 0.0;
          }
 
             if (player_controls.get_right_button_pressed())
             {
-               player_controlled_entity->get_velocity_ref().position.x = 1.5; //2.0;
+               krampus->get_velocity_ref().position.x = 1.5; //2.0;
             }
             if (player_controls.get_left_button_pressed())
             {
-               player_controlled_entity->get_velocity_ref().position.x = -1.5; //-2.0;
+               krampus->get_velocity_ref().position.x = -1.5; //-2.0;
             }
             if (player_controls.get_up_button_pressed())
             {
-               player_controlled_entity->get_velocity_ref().position.y = -1.5; //2.0;
+               krampus->get_velocity_ref().position.y = -1.5; //2.0;
             }
             if (player_controls.get_down_button_pressed())
             {
-               player_controlled_entity->get_velocity_ref().position.y = 1.5; //-2.0;
+               krampus->get_velocity_ref().position.y = 1.5; //-2.0;
             }
       }
       return;
@@ -144,20 +144,21 @@ functions:
     body: |
       using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
 
-      if (!player_controlled_entity) return;
-      if (player_controlled_entity->exists(ADJACENT_TO_FLOOR))
+
+      if (!krampus) return;
+      if (krampus->exists(ADJACENT_TO_FLOOR))
       {
-         player_controlled_entity->get_velocity_ref().position.y -= 4.25;
+         krampus->get_velocity_ref().position.y -= 4.25;
       }
-      else if (player_controlled_entity->exists(ADJACENT_TO_LEFT_WALL))
+      else if (krampus->exists(ADJACENT_TO_LEFT_WALL))
       {
-         player_controlled_entity->get_velocity_ref().position.y = -3.5;
-         player_controlled_entity->get_velocity_ref().position.x = 3.0;
+         krampus->get_velocity_ref().position.y = -3.5;
+         krampus->get_velocity_ref().position.x = 3.0;
       }
-      else if (player_controlled_entity->exists(ADJACENT_TO_RIGHT_WALL))
+      else if (krampus->exists(ADJACENT_TO_RIGHT_WALL))
       {
-         player_controlled_entity->get_velocity_ref().position.y = -3.5;
-         player_controlled_entity->get_velocity_ref().position.x = -3.0;
+         krampus->get_velocity_ref().position.y = -3.5;
+         krampus->get_velocity_ref().position.x = -3.0;
       }
       return;
     body_dependency_symbols:

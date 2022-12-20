@@ -333,7 +333,7 @@ void Screen::initialize_player_controls()
    KrampusReturns::Entities::Krampus* krampus =
       static_cast<KrampusReturns::Entities::Krampus*>(player_controlled_entity);
 
-   krampus_controller.set_player_controlled_entity(krampus);
+   krampus_controller.set_krampus(krampus);
    //krampus_controller.set_virtual_controls(&virtual_controls);
    krampus_controller.reset();
    return;
