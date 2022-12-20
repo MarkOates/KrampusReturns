@@ -38,7 +38,7 @@ functions:
   - name: initialize
     guards: [ (!initialized) ]
     body: |
-      get_place_ref().size = { 25, 10 };
+      get_place_ref().size = { 32, 6 };
       get_bitmap_placement_ref().scale = { 0.8, 0.8 };
       set_bitmap_alignment_strategy("bottom_centered");
       set_animation("krampus");

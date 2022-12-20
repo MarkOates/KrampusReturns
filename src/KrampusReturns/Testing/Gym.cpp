@@ -57,12 +57,12 @@ void Gym::SetUp()
    ASSERT_EQ(true, al_init_image_addon());
 
    #if defined(_WIN32) || defined(_WIN64)
-   #define TEST_BASE_FOLDER "/msys64/home/Mark/Repos/KrampusReturns/bin/programs/data/"
+   #define TEST_FIXTURES_FOLDER "/msys64/home/Mark/Repos/KrampusReturns/tests/fixtures/"
    #define TEST_FIXTURE_FONT_FOLDER "/msys64/home/Mark/Repos/allegro_flare/bin/data/fonts/"
    #define TEST_FIXTURE_BITMAP_FOLDER "/msys64/home/Mark/Repos/allegro_flare/bin/data/bitmaps/"
    #define TEST_FIXTURE_TEST_RUN_SNAPSHOTS_FOLDER "/msys64/home/Mark/Repos/allegro_flare/tmp/test_snapshots/"
    #else
-   #define TEST_BASE_FOLDER "/Users/markoates/Repos/KrampusReturns/bin/programs/data/"
+   #define TEST_FIXTURES_FOLDER "/Users/markoates/Repos/KrampusReturns/tests/fixtures/"
    #define TEST_FIXTURE_FONT_FOLDER "/Users/markoates/Repos/allegro_flare/bin/data/fonts/"
    #define TEST_FIXTURE_BITMAP_FOLDER "/Users/markoates/Repos/allegro_flare/bin/data/bitmaps/"
    #define TEST_FIXTURE_TEST_RUN_SNAPSHOTS_FOLDER "/Users/markoates/Repos/allegro_flare/tmp/test_snapshots/"
@@ -81,11 +81,12 @@ void Gym::SetUp()
    platforming_2d.set_display(framework.get_primary_display());
    platforming_2d.set_event_emitter(&framework.get_event_emitter_ref());
    platforming_2d.set_map_dictionary({
-      { "map_a", TEST_BASE_FOLDER "maps/krampus-returns-map01-0x.tmj" },
+      { "gym", TEST_FIXTURES_FOLDER "maps/krampus-returns-gym-0x.tmj" },
+      //maps/krampus-returns-map01-0x.tmj" },
       //{ "map_b", TEST_BASE_FOLDER "maps/krampus-returns-map02-0x.tmj" },
    });
    platforming_2d.initialize_maps();
-   platforming_2d.set_currently_active_map("map_a");
+   platforming_2d.set_currently_active_map("gym");
    //platforming_2d.initialize();
 
    framework.register_screen("platforming_2d", &platforming_2d);

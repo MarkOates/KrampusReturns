@@ -9,9 +9,11 @@
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
     },
+    "map.lastUsedFormat": "json",
     "openFiles": [
     ],
     "project": "krampus-returns-0x.tiled-project",
     "recentFiles": [
-    ]
+    ],
+    "resizeMap.removeObjects": false
 }

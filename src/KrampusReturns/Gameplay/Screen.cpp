@@ -297,7 +297,7 @@ void Screen::initialize_maps()
       entity_pool.push_back(created_map);
    }
 
-   set_currently_active_map("map_a");
+   //set_currently_active_map("map_a");
 
    return;
 }
