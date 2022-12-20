@@ -130,7 +130,8 @@ void Runner::initialize()
    title_screen.set_copyright_font_size(-26);
    title_screen.set_menu_options({
       //{ "Investigate", "start_new_game" },
-      { "Start New Game", EVENT_ACTIVATE_PLATFORMING_2D_SCREEN }, //EVENT_ACTIVATE_NAME_YOUR_CHARACTER_SCREEN },
+      { "Start New Game", EVENT_START_NEW_GAME },
+                        //EVENT_ACTIVATE_PLATFORMING_2D_SCREEN }, //EVENT_ACTIVATE_NAME_YOUR_CHARACTER_SCREEN },
       //{ "Chronicle",      EVENT_OPEN_CHRONICLE_SCREEN },
       //{ "Driving",        EVENT_ACTIVATE_TILE_DRIVE_SCREEN },
       //{ "Platforming",    EVENT_ACTIVATE_PLATFORMING_2D_SCREEN },
@@ -168,9 +169,27 @@ void Runner::initialize()
 
    // setup the intro storyboards screen
    new_game_intro_storyboard_screen = storyboard_factory.create_advancing_text_storyboard_screen({
-         "I found myself here.",
-         "Stranded in a rainstorm.",
-         "With my car broken down.",
+         // music starts
+         "December 2022",
+         //"Christmas Eve.",
+         "[image showing aliens invading]",
+         "Aliens have invaded Earth",
+         "They are after Santa's magical powers",
+
+         "And this night, Christmas Eve, is when his magical powers are the strongest",
+         "[image showing santa's power chaimber, glowing]",
+
+         "Santa and his elves were unable to stop the aliens",
+         "[image showing santa's losing battle]",
+
+         "With all options gone, Santa must no do the unthinkable",
+         "[image showing krampus with his back to the screen]",
+         "Santa has no choice. He must face his biggest fear...",
+
+         "[image showing santa appraoching krampus]",
+         "...and team up with his ultimate rival...",
+         "[image showing krampus turned around]",
+         "Krampus.",
       });
    new_game_intro_storyboard_screen->set_event_emitter(&event_emitter);
    new_game_intro_storyboard_screen->set_game_event_name_to_emit_after_completing(
@@ -339,6 +358,11 @@ void Runner::game_event_func(AllegroFlare::GameEvent* ev)
       }},
       { "start_title_screen", [this](){
          framework->activate_screen("title_screen");
+      }},
+      { EVENT_START_NEW_GAME, [this](){
+         event_emitter->emit_play_music_track_event("intro_music");
+         //framework->activate_screen("opening_logos_storyboard_screen");
+         framework->activate_screen("new_game_intro_storyboard_screen");
       }},
       { "finish_new_game_intro_storyboard_screen", [this](){
          // TODO: replace this with an event EVENT_ACTIVATE_PLATFORMING_2D_SCREEN

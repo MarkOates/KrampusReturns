@@ -23,6 +23,7 @@ namespace KrampusReturns
       static constexpr char* MODE_TEST = "test";
       static constexpr char* MODE_PRODUCTION = "production";
       static constexpr char* MODE_DEVELOPMENT = "development";
+      static constexpr char* EVENT_START_NEW_GAME = "event_start_new_game";
       static constexpr char* EVENT_ACTIVATE_PLATFORMING_2D_SCREEN = "activate_platforming_2d_screen";
       static constexpr char* EVENT_ACTIVATE_ACHIEVEMENTS_SCREEN = "activate_achievements_screen";
       static constexpr char* EVENT_EXIT_ACHIEVEMENTS_SCREEN = "exit_achievements_screen";
