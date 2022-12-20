@@ -1,0 +1,341 @@
+parent_classes:
+
+
+  - class: ::testing::Test
+    scope: public
+    init_with: ''
+
+
+properties:
+
+
+  - name: display
+    type: ALLEGRO_DISPLAY*
+    init_with: nullptr
+    getter: true
+
+  - name: font_bin
+    type: AllegroFlare::FontBin
+    init_with: '{}'
+    getter_ref: true
+
+  - name: bitmap_bin
+    type: AllegroFlare::BitmapBin
+    init_with: '{}'
+    getter_ref: true
+
+
+functions:
+
+
+  - name: SetUp
+    type: void
+    virtual: true
+    override: true
+    body: |
+      ASSERT_EQ(false, al_is_system_installed());
+      ASSERT_EQ(true, al_init());
+      ASSERT_EQ(true, al_init_primitives_addon());
+      ASSERT_EQ(true, al_init_font_addon());
+      ASSERT_EQ(true, al_init_ttf_addon());
+      ASSERT_EQ(true, al_init_image_addon());
+
+      #if defined(_WIN32) || defined(_WIN64)
+      #define TEST_FIXTURE_FONT_FOLDER "/msys64/home/Mark/Repos/allegro_flare/bin/data/fonts/"
+      #define TEST_FIXTURE_BITMAP_FOLDER "/msys64/home/Mark/Repos/allegro_flare/bin/data/bitmaps/"
+      #define TEST_FIXTURE_TEST_RUN_SNAPSHOTS_FOLDER "/msys64/home/Mark/Repos/allegro_flare/tmp/test_snapshots/"
+      #else
+      #define TEST_FIXTURE_FONT_FOLDER "/Users/markoates/Repos/allegro_flare/bin/data/fonts/"
+      #define TEST_FIXTURE_BITMAP_FOLDER "/Users/markoates/Repos/allegro_flare/bin/data/bitmaps/"
+      #define TEST_FIXTURE_TEST_RUN_SNAPSHOTS_FOLDER "/Users/markoates/Repos/allegro_flare/tmp/test_snapshots/"
+      #endif
+
+      font_bin.set_full_path(TEST_FIXTURE_FONT_FOLDER);
+      bitmap_bin.set_full_path(TEST_FIXTURE_BITMAP_FOLDER);
+
+      //display = al_create_display(1280 * 2, 720 * 2);
+      //al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
+      al_set_new_display_option(ALLEGRO_SAMPLE_BUFFERS, 2, ALLEGRO_SUGGEST);
+      al_set_new_display_option(ALLEGRO_DEPTH_SIZE, 32, ALLEGRO_SUGGEST);
+      al_set_new_display_option(ALLEGRO_SAMPLES, 16, ALLEGRO_SUGGEST);
+      al_set_new_display_flags(ALLEGRO_OPENGL | ALLEGRO_PROGRAMMABLE_PIPELINE);
+      display = al_create_display(1920, 1080);
+
+      ASSERT_NE(nullptr, display);
+
+      // clear the display to a slightly gray black color
+      al_clear_to_color(ALLEGRO_COLOR{0.05f, 0.05f, 0.055f, 1.0f});
+
+      // set the window title to the current test name
+      std::string new_window_title = build_full_test_name_str();
+
+      al_set_window_title(display, new_window_title.c_str());
+
+      return;
+    body_dependency_symbols:
+      - al_init_image_addon
+      - al_init_font_addon
+      - al_init_ttf_addon
+      - al_init_primitives_addon
+
+
+  - name: TearDown
+    type: void
+    virtual: true
+    override: true
+    body: |
+      if (test_name_indicates_it_wants_a_screenshot())
+      {
+         capture_screenshot(build_full_test_name_str() + ".png");
+      }
+
+      font_bin.clear();
+      bitmap_bin.clear();
+      al_destroy_display(display);
+      al_shutdown_ttf_addon(); // this is required otherwise subsequent al_init_ttf_addon will not work
+                               // this is a bug in Allegro
+      al_uninstall_system();
+      return;
+
+
+  - name: get_any_font
+    type: ALLEGRO_FONT*
+    body: |
+      return font_bin.auto_get("consolas.ttf 32");
+
+
+  - name: get_display_backbuffer
+    type: ALLEGRO_BITMAP*
+    body: |
+      return al_get_backbuffer(display);
+
+
+  - name: sleep_for_frame
+    type: void
+    body: |
+      static int frame_length_in_milliseconds = 1000/60;
+      std::this_thread::sleep_for(std::chrono::milliseconds(frame_length_in_milliseconds));
+    body_dependency_symbols:
+      - std::chrono::milliseconds
+      - std::this_thread::sleep_for
+
+
+  - name: sleep_for
+    type: void
+    parameters:
+      - name: length_in_seconds
+        type: float
+        default_argument: 0.0f
+    body: |
+      int length_in_milliseconds = (int)(length_in_seconds * 1000.0);
+      std::this_thread::sleep_for(std::chrono::milliseconds(length_in_milliseconds));
+    body_dependency_symbols:
+      - std::chrono::milliseconds
+      - std::this_thread::sleep_for
+
+
+  - name: get_test_name
+    type: std::string
+    body: |
+      // TODO: use AllegroFlare::Testing::TestNameInference for this logic
+      const testing::TestInfo* const test_info = testing::UnitTest::GetInstance()->current_test_info();
+      return test_info->name();
+
+
+  - name: get_test_suite_name
+    type: std::string
+    body: |
+      // TODO: use AllegroFlare::Testing::TestNameInference for this logic
+      const testing::TestInfo* const test_info = testing::UnitTest::GetInstance()->current_test_info();
+      return test_info->test_suite_name();
+
+
+  - name: build_full_test_name_str
+    type: std::string
+    body: |
+      // TODO: use AllegroFlare::Testing::TestNameInference for this logic
+      return get_test_suite_name() + " - " + get_test_name();
+
+
+  - name: build_centered_placement
+    type: AllegroFlare::Placement2D
+    parameters:
+      - name: width
+        type: float
+        default_argument: 0.0f
+      - name: height
+        type: float
+        default_argument: 0.0f
+    guards: [ al_get_target_bitmap() ]
+    body: |
+      AllegroFlare::Placement2D place(al_get_display_width(display)/2, al_get_display_height(display)/2, width, height);
+      return place;
+
+
+  - name: draw_rulers
+    guards: [ al_get_target_bitmap() ]
+    body: |
+      al_draw_line(1920/2, 0, 1920/2, 1080, al_color_name("gray"), 1.0); // rulers down the center
+      al_draw_line(0, 1080/2, 1920, 1080/2, al_color_name("gray"), 1.0); // rulers across the middle
+    body_dependency_symbols:
+      - al_color_name
+
+
+  - name: draw_crosshair
+    guards: [ al_get_target_bitmap() ]
+    parameters:
+      - name: x
+        type: float
+        default_argument: 0.0f
+      - name: y
+        type: float
+        default_argument: 0.0f
+      - name: color
+        type: ALLEGRO_COLOR
+        default_argument: ALLEGRO_COLOR{1, 0, 0, 1}
+      - name: size
+        type: float
+        default_argument: 200.0f
+    body: |
+      float h_size = size * 0.5;
+      // draw horizontal line
+      al_draw_line(x-h_size, y, x+h_size, y, color, 1.0);
+      // draw vertical line
+      al_draw_line(x, y-h_size, x, y+h_size, color, 1.0);
+    body_dependency_symbols:
+      - al_color_name
+
+
+  - name: draw_horizontal_crosshair
+    guards: [ al_get_target_bitmap() ]
+    parameters:
+      - name: x
+        type: float
+        default_argument: 0.0f
+      - name: y
+        type: float
+        default_argument: 0.0f
+      - name: color
+        type: ALLEGRO_COLOR
+        default_argument: ALLEGRO_COLOR{1, 1, 0, 1}
+      - name: size_v
+        type: float
+        default_argument: 30.0f
+      - name: size_h
+        type: float
+        default_argument: 500.0f
+    body: |
+      float h_size_h = size_h * 0.5;
+      float h_size_v = size_v * 0.5;
+      // draw horizontal line
+      al_draw_line(x-h_size_h, y, x+h_size_h, y, color, 1.0);
+      // draw vertical line
+      al_draw_line(x, y-h_size_v, x, y+h_size_v, color, 1.0);
+    body_dependency_symbols:
+      - al_color_name
+
+
+  - name: test_name_indicates_it_wants_a_screenshot
+    type: bool
+    body: |
+      return (get_test_name().substr(0, 9) == "CAPTURE__");
+
+
+  - name: clear_display
+    body: |
+      // depreciated, please use clear();
+      clear();
+      return;
+    body_dependency_symbols:
+      - ALLEGRO_COLOR
+
+
+  - name: clear
+    body: |
+      al_clear_depth_buffer(1);
+      ALLEGRO_COLOR eigengrau = ALLEGRO_COLOR{0.086f, 0.086f, 0.114f, 1.0f};
+      al_clear_to_color(eigengrau);
+      return;
+    body_dependency_symbols:
+      - ALLEGRO_COLOR
+
+
+  - name: capture_screenshot
+    parameters:
+      - name: base_filename
+        type: std::string
+        default_argument: '"Gym-screenshot.png"'
+    body: |
+      // TODO: use AllegroFlare::Testing::TestNameInference for this logic
+      std::string full_file_save_location = TEST_FIXTURE_TEST_RUN_SNAPSHOTS_FOLDER + base_filename;
+
+      al_flip_display(); // this capture_screenshot technique assumes the pixels to capture are currently being
+                         // shown on the display.  This al_flip_display is added here in order to flip the
+                         // front-buffer *back* to the backbuffer so it can be used to capture the screenshot
+
+      bool screenshot_successful = al_save_bitmap(full_file_save_location.c_str(), al_get_backbuffer(display));
+      if (screenshot_successful)
+      {
+         std::cout << AllegroFlare::TerminalColors::CYAN
+                   << "[AllegroFlare::Testing::Gym::screenshot]: info: screenshot saved to "
+                   << "\"" << full_file_save_location << "\""
+                   << AllegroFlare::TerminalColors::DEFAULT
+                   << std::endl;
+      }
+      else
+      {
+         std::cout << AllegroFlare::TerminalColors::RED
+                   << "[AllegroFlare::Testing::Gym::screenshot]: error: screenshot "
+                   << "CAPTURE was not successful when trying to saving to \"" << full_file_save_location << "\""
+                   << AllegroFlare::TerminalColors::DEFAULT
+                   << std::endl;
+      }
+    body_dependency_symbols:
+      - AllegroFlare::TerminalColors
+      - std::chrono::milliseconds
+      - std::this_thread::sleep_for
+
+
+dependencies:
+
+
+  - symbol: AllegroFlare::Testing::CustomComparison
+    headers: [ AllegroFlare/Testing/CustomComparison.hpp ]
+  - symbol: al_init_primitives_addon
+    headers: [ allegro5/allegro_primitives.h ]
+  - symbol: al_init_ttf_addon
+    headers: [ allegro5/allegro_ttf.h ]
+  - symbol: al_init_font_addon
+    headers: [ allegro5/allegro_font.h ]
+  - symbol: al_init_image_addon
+    headers: [ allegro5/allegro_image.h ]
+  - symbol: ALLEGRO_DISPLAY*
+    headers: [ allegro5/allegro.h ]
+  - symbol: ALLEGRO_FONT*
+    headers: [ allegro5/allegro_font.h ]
+  - symbol: ALLEGRO_COLOR
+    headers: [ allegro5/allegro.h ]
+  - symbol: al_color_name
+    headers: [ allegro5/allegro_color.h ]
+  - symbol: AllegroFlare::FontBin
+    headers: [ AllegroFlare/FontBin.hpp ]
+  - symbol: AllegroFlare::BitmapBin
+    headers: [ AllegroFlare/BitmapBin.hpp ]
+  - symbol: ::testing::Test
+    headers: [ gtest/gtest.h ]
+  - symbol: AllegroFlare::Placement2D
+    headers: [ AllegroFlare/Placement2D.hpp ]
+  - symbol: std::chrono::milliseconds
+    headers: [ chrono ]
+  - symbol: std::this_thread::sleep_for
+    headers: [ thread ]
+  - symbol: ALLEGRO_DISPLAY
+    headers: [ allegro5/allegro.h ]
+  - symbol: ALLEGRO_FONT
+    headers: [ allegro5/allegro_font.h ]
+  - symbol: ALLEGRO_BITMAP
+    headers: [ allegro5/allegro.h ]
+  - symbol: AllegroFlare::TerminalColors
+    headers: [ AllegroFlare/TerminalColors.hpp ]
+
+

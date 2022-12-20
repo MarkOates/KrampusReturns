@@ -55,6 +55,7 @@ table td
   <li><a href="#quintessence/KrampusReturns/Runner.q.yml">quintessence/KrampusReturns/Runner.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Shaders/AllegroDefault.q.yml">quintessence/KrampusReturns/Shaders/AllegroDefault.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Shaders/Primary.q.yml">quintessence/KrampusReturns/Shaders/Primary.q.yml</a></li>
+  <li><a href="#quintessence/KrampusReturns/Testing/Gym.q.yml">quintessence/KrampusReturns/Testing/Gym.q.yml</a></li>
 </ul>
 <h1>Components</h1>
 <ul>
@@ -564,6 +565,137 @@ table td
     </table>
   </div>
 </ul>
+<ul>
+  <div class="component">
+    <h3 id="quintessence/KrampusReturns/Testing/Gym.q.yml">quintessence/KrampusReturns/Testing/Gym.q.yml</h3>
+     <table>
+<tr>
+  <td class="property">display</td>
+  <td class="property">ALLEGRO_DISPLAY*</td>
+</tr>
+<tr>
+  <td class="property">font_bin</td>
+  <td class="property">AllegroFlare::FontBin</td>
+</tr>
+<tr>
+  <td class="property">bitmap_bin</td>
+  <td class="property">AllegroFlare::BitmapBin</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="method">SetUp()</td>
+</tr>
+<tr>
+  <td class="method">TearDown()</td>
+</tr>
+<tr>
+  <td class="method">get_any_font()</td>
+</tr>
+<tr>
+  <td class="method">get_display_backbuffer()</td>
+</tr>
+<tr>
+  <td class="method">sleep_for_frame()</td>
+</tr>
+<tr>
+  <td class="method">sleep_for(1)</td>
+</tr>
+<tr>
+  <td class="method">get_test_name()</td>
+</tr>
+<tr>
+  <td class="method">get_test_suite_name()</td>
+</tr>
+<tr>
+  <td class="method">build_full_test_name_str()</td>
+</tr>
+<tr>
+  <td class="method">build_centered_placement(2)</td>
+</tr>
+<tr>
+  <td class="method">draw_rulers()</td>
+</tr>
+<tr>
+  <td class="method">draw_crosshair(4)</td>
+</tr>
+<tr>
+  <td class="method">draw_horizontal_crosshair(5)</td>
+</tr>
+<tr>
+  <td class="method">test_name_indicates_it_wants_a_screenshot()</td>
+</tr>
+<tr>
+  <td class="method">clear_display()</td>
+</tr>
+<tr>
+  <td class="method">clear()</td>
+</tr>
+<tr>
+  <td class="method">capture_screenshot(1)</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Testing::CustomComparison&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Testing/CustomComparison.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;al_init_primitives_addon&quot;, &quot;headers&quot;=&gt;[&quot;allegro5/allegro_primitives.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;al_init_ttf_addon&quot;, &quot;headers&quot;=&gt;[&quot;allegro5/allegro_ttf.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;al_init_font_addon&quot;, &quot;headers&quot;=&gt;[&quot;allegro5/allegro_font.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;al_init_image_addon&quot;, &quot;headers&quot;=&gt;[&quot;allegro5/allegro_image.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;ALLEGRO_DISPLAY*&quot;, &quot;headers&quot;=&gt;[&quot;allegro5/allegro.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;ALLEGRO_FONT*&quot;, &quot;headers&quot;=&gt;[&quot;allegro5/allegro_font.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;ALLEGRO_COLOR&quot;, &quot;headers&quot;=&gt;[&quot;allegro5/allegro.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;al_color_name&quot;, &quot;headers&quot;=&gt;[&quot;allegro5/allegro_color.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::FontBin&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/FontBin.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::BitmapBin&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/BitmapBin.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;:&quot;:testing::Test&quot;, &quot;headers&quot;=&gt;[&quot;gtest/gtest.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Placement2D&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Placement2D.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;std::chrono::milliseconds&quot;, &quot;headers&quot;=&gt;[&quot;chrono&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;std::this_thread::sleep_for&quot;, &quot;headers&quot;=&gt;[&quot;thread&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;ALLEGRO_DISPLAY&quot;, &quot;headers&quot;=&gt;[&quot;allegro5/allegro.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;ALLEGRO_FONT&quot;, &quot;headers&quot;=&gt;[&quot;allegro5/allegro_font.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;ALLEGRO_BITMAP&quot;, &quot;headers&quot;=&gt;[&quot;allegro5/allegro.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::TerminalColors&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/TerminalColors.hpp&quot;]}</td>
+</tr>
+    </table>
+  </div>
+</ul>
 <h1>Dependents</h1>
 <pre>
 {
@@ -587,11 +719,13 @@ table td
   ],
   "AllegroFlare/BitmapBin": [
     "KrampusReturns/Gameplay/Screen",
-    "KrampusReturns/Shaders/Primary"
+    "KrampusReturns/Shaders/Primary",
+    "KrampusReturns/Testing/Gym"
   ],
   "al_color_name": [
     "KrampusReturns/Gameplay/Screen",
-    "KrampusReturns/Gameplay/Screen"
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Testing/Gym"
   ],
   "std/map<int, int>": [
     "KrampusReturns/Gameplay/Screen"
@@ -615,7 +749,8 @@ table td
     "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/Placement2D": [
-    "KrampusReturns/Gameplay/Screen"
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/vec2d": [
     "KrampusReturns/Gameplay/Screen"
@@ -679,7 +814,8 @@ table td
     "KrampusReturns/Gameplay/Screen"
   ],
   "ALLEGRO_BITMAP": [
-    "KrampusReturns/Gameplay/Screen"
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/Vec2D": [
     "KrampusReturns/Gameplay/Screen"
@@ -697,13 +833,50 @@ table td
   ],
   "ALLEGRO_COLOR": [
     "KrampusReturns/Shaders/AllegroDefault",
-    "KrampusReturns/Shaders/Primary"
+    "KrampusReturns/Shaders/Primary",
+    "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/FontBin": [
-    "KrampusReturns/Shaders/Primary"
+    "KrampusReturns/Shaders/Primary",
+    "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/Prototypes/FixedRoom2D/EntityCollectionHelper": [
     "KrampusReturns/Shaders/Primary"
+  ],
+  "AllegroFlare/Testing/CustomComparison": [
+    "KrampusReturns/Testing/Gym"
+  ],
+  "al_init_primitives_addon": [
+    "KrampusReturns/Testing/Gym"
+  ],
+  "al_init_ttf_addon": [
+    "KrampusReturns/Testing/Gym"
+  ],
+  "al_init_font_addon": [
+    "KrampusReturns/Testing/Gym"
+  ],
+  "al_init_image_addon": [
+    "KrampusReturns/Testing/Gym"
+  ],
+  "ALLEGRO_DISPLAY": [
+    "KrampusReturns/Testing/Gym",
+    "KrampusReturns/Testing/Gym"
+  ],
+  "ALLEGRO_FONT": [
+    "KrampusReturns/Testing/Gym",
+    "KrampusReturns/Testing/Gym"
+  ],
+  ":testing/Test": [
+    "KrampusReturns/Testing/Gym"
+  ],
+  "std/chrono/milliseconds": [
+    "KrampusReturns/Testing/Gym"
+  ],
+  "std/this_thread/sleep_for": [
+    "KrampusReturns/Testing/Gym"
+  ],
+  "AllegroFlare/TerminalColors": [
+    "KrampusReturns/Testing/Gym"
   ]
 }
 </pre>
