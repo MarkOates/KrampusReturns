@@ -79,8 +79,8 @@ void Blob::set_preferred_direction()
    float random_seed = preferred_direction_started_at;
 
    AllegroFlare::Vec2D wander_vector = {
-      (float)sin(random_seed * 99979.2f), // just some random numbers
-      (float)cos(random_seed * 68896.71f),
+      (float)sin(random_seed * 99979.2f * get_id()), // just some random numbers
+      (float)cos(random_seed * 68896.71f * get_id()),
    };
    //wander_vector *= 1.3;
    preferred_direction = wander_vector.normalized();

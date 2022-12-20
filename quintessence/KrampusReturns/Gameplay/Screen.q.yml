@@ -722,7 +722,7 @@ functions:
     body: |
       using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
 
-      for (auto &entity : get_current_map_entities())
+      for (auto &entity : get_current_map_entities_y_sorted())
       {
          if (!entity->exists(INVISIBLE)) entity->draw();
       }
@@ -1154,6 +1154,16 @@ functions:
       AllegroFlare::Prototypes::Platforming2D::EntityCollectionHelper collection_helper(&entity_pool);
       std::string on_map_name = currently_active_map_name;
       return collection_helper.select_on_map(on_map_name);
+    body_dependency_symbols:
+      - AllegroFlare::Prototypes::Platforming2D::EntityCollectionHelper
+
+
+  - name: get_current_map_entities_y_sorted
+    type: std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*>
+    body: |
+      AllegroFlare::Prototypes::Platforming2D::EntityCollectionHelper collection_helper(&entity_pool);
+      std::string on_map_name = currently_active_map_name;
+      return collection_helper.select_on_map_y_sorted(on_map_name);
     body_dependency_symbols:
       - AllegroFlare::Prototypes::Platforming2D::EntityCollectionHelper
 
