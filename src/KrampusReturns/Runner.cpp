@@ -172,23 +172,23 @@ void Runner::initialize()
          // music starts
          "December 2022",
          //"Christmas Eve.",
-         "[image showing aliens invading]",
+         //"[image showing aliens invading]",
          "Aliens have invaded Earth",
          "They are after Santa's magical powers",
 
          "And this night, Christmas Eve, is when his magical powers are the strongest",
-         "[image showing santa's power chaimber, glowing]",
+         //"[image showing santa's power chaimber, glowing]",
 
          "Santa and his elves were unable to stop the aliens",
-         "[image showing santa's losing battle]",
+         //"[image showing santa's losing battle]",
 
          "With all options gone, Santa must no do the unthinkable",
-         "[image showing krampus with his back to the screen]",
+         //"[image showing krampus with his back to the screen]",
          "Santa has no choice. He must face his biggest fear...",
 
-         "[image showing santa appraoching krampus]",
+         //"[image showing santa appraoching krampus]",
          "...and team up with his ultimate rival...",
-         "[image showing krampus turned around]",
+         //"[image showing krampus turned around]",
          "Krampus.",
       });
    new_game_intro_storyboard_screen->set_event_emitter(&event_emitter);
