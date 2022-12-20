@@ -3,6 +3,7 @@
 #include <KrampusReturns/Entities/Blob.hpp>
 
 #include <cmath>
+#include <cstdlib>
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
@@ -19,6 +20,7 @@ Blob::Blob()
    , initialized(false)
    , preferred_direction(AllegroFlare::Vec2D(1, 0))
    , preferred_direction_started_at(0.0f)
+   , preferred_direction_next_update_duration(0.0f)
 {
 }
 
@@ -44,11 +46,11 @@ void Blob::update()
 
    float age = time_now - preferred_direction_started_at;
 
-   if (age > 3.0)
+   if (age > preferred_direction_next_update_duration)
    {
       set_preferred_direction();
+      // TODO: update randomly to update preferred_direction_next_update_duration;
    }
-
 
 
    // behavior

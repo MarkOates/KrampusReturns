@@ -21,6 +21,10 @@ properties:
     type: float
     init_with: 0.0f
 
+  - name: preferred_direction_next_update_duration
+    type: float
+    init_with: 0.0f
+
   - name: TYPE
     type: char*
     init_with: '(char*)"Entities/Blob"'
@@ -43,11 +47,11 @@ functions:
 
       float age = time_now - preferred_direction_started_at;
 
-      if (age > 3.0)
+      if (age > preferred_direction_next_update_duration)
       {
          set_preferred_direction();
+         // TODO: update randomly to update preferred_direction_next_update_duration;
       }
-    
 
 
       // behavior
@@ -70,6 +74,7 @@ functions:
       return;
     body_dependency_symbols:
       - sin
+      - std::rand
 
 
   - name: set_preferred_direction
@@ -108,5 +113,7 @@ dependencies:
     headers: [ cmath ]
   - symbol: AllegroFlare::Vec2D
     headers: [ AllegroFlare/Vec2D.hpp ]
+  - symbol: std::rand
+    headers: [ cstdlib ]
 
 

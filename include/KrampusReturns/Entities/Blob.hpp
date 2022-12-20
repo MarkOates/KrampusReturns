@@ -18,6 +18,7 @@ namespace KrampusReturns
          bool initialized;
          AllegroFlare::Vec2D preferred_direction;
          float preferred_direction_started_at;
+         float preferred_direction_next_update_duration;
 
       protected:
 

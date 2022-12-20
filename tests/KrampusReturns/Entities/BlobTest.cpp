@@ -28,6 +28,7 @@ public:
 
 TEST_F(KrampusReturns_Entities_BlobGym, can_be_created_without_blowing_up)
 {
+   GTEST_SKIP();
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
 
    KrampusReturns::Entities::Blob blob;
@@ -38,6 +39,27 @@ TEST_F(KrampusReturns_Entities_BlobGym, can_be_created_without_blowing_up)
    blob.set(ON_MAP_NAME, "gym");
 
    get_platforming_2d_ref().add_entity_to_pool(&blob);
+
+   run_gym();
+}
+
+
+TEST_F(KrampusReturns_Entities_BlobGym, multiple_instances_are_interesting_and_unique)
+{
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+
+   int num = 3;
+   for (int i=0; i<num; i++)
+   {
+      KrampusReturns::Entities::Blob *blob = new KrampusReturns::Entities::Blob();
+      //blob.set_draw_debug(true);
+      blob->set_animation_book(&animation_book);
+      blob->initialize();
+      blob->get_place_ref().position = { 400/2, 240/2 };
+      blob->set(ON_MAP_NAME, "gym");
+
+      get_platforming_2d_ref().add_entity_to_pool(blob);
+   }
 
    run_gym();
 }
