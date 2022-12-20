@@ -41,6 +41,12 @@ AllegroFlare::Frameworks::Full &Gym::get_framework_ref()
 }
 
 
+KrampusReturns::Gameplay::Screen &Gym::get_platforming_2d_ref()
+{
+   return platforming_2d;
+}
+
+
 void Gym::SetUp()
 {
    ASSERT_EQ(false, al_is_system_installed());
@@ -51,10 +57,12 @@ void Gym::SetUp()
    ASSERT_EQ(true, al_init_image_addon());
 
    #if defined(_WIN32) || defined(_WIN64)
+   #define TEST_BASE_FOLDER "/msys64/home/Mark/Repos/KrampusReturns/bin/programs/data/"
    #define TEST_FIXTURE_FONT_FOLDER "/msys64/home/Mark/Repos/allegro_flare/bin/data/fonts/"
    #define TEST_FIXTURE_BITMAP_FOLDER "/msys64/home/Mark/Repos/allegro_flare/bin/data/bitmaps/"
    #define TEST_FIXTURE_TEST_RUN_SNAPSHOTS_FOLDER "/msys64/home/Mark/Repos/allegro_flare/tmp/test_snapshots/"
    #else
+   #define TEST_BASE_FOLDER "/Users/markoates/Repos/KrampusReturns/bin/programs/data/"
    #define TEST_FIXTURE_FONT_FOLDER "/Users/markoates/Repos/allegro_flare/bin/data/fonts/"
    #define TEST_FIXTURE_BITMAP_FOLDER "/Users/markoates/Repos/allegro_flare/bin/data/bitmaps/"
    #define TEST_FIXTURE_TEST_RUN_SNAPSHOTS_FOLDER "/Users/markoates/Repos/allegro_flare/tmp/test_snapshots/"
@@ -62,6 +70,7 @@ void Gym::SetUp()
 
    //AllegroFlare::Frameworks::Full framework;
    framework.disable_fullscreen();
+   framework.disable_auto_created_config_warning();
    framework.initialize();
 
    framework.get_bitmap_bin_ref().set_full_path(TEST_FIXTURE_BITMAP_FOLDER);
@@ -71,8 +80,25 @@ void Gym::SetUp()
    platforming_2d.set_bitmap_bin(&framework.get_bitmap_bin_ref());
    platforming_2d.set_display(framework.get_primary_display());
    platforming_2d.set_event_emitter(&framework.get_event_emitter_ref());
+   platforming_2d.set_map_dictionary({
+      { "map_a", TEST_BASE_FOLDER "maps/krampus-returns-map01-0x.tmj" },
+      //{ "map_b", TEST_BASE_FOLDER "maps/krampus-returns-map02-0x.tmj" },
+   });
+   platforming_2d.initialize_maps();
+   platforming_2d.set_currently_active_map("map_a");
+   //platforming_2d.initialize();
+
+   framework.register_screen("platforming_2d", &platforming_2d);
 
 
+   return;
+}
+
+void Gym::run_gym()
+{
+   platforming_2d.initialize();
+   framework.activate_screen("platforming_2d");
+   framework.run_loop();
    return;
 }
 

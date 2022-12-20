@@ -15,9 +15,9 @@ TEST_F(TestClassFor_KrampusReturns_Testing_Gym, get_test_name__will_return_the_n
 }
 
 
-TEST_F(TestClassFor_KrampusReturns_Testing_Gym, works_quite_nicely)
+TEST_F(TestClassFor_KrampusReturns_Testing_Gym, run_gym__will_run_the_framework_loop_with_the_expected_content)
 {
-   // TODO
+   //run_gym();
 }
 
 

@@ -28,7 +28,9 @@ namespace KrampusReturns
          virtual ~Gym();
 
          AllegroFlare::Frameworks::Full &get_framework_ref();
+         KrampusReturns::Gameplay::Screen &get_platforming_2d_ref();
          virtual void SetUp() override;
+         void run_gym();
          virtual void TearDown() override;
          ALLEGRO_FONT* get_any_font();
          ALLEGRO_BITMAP* get_display_backbuffer();
