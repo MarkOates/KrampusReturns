@@ -28,6 +28,10 @@ properties:
     type: bool
     init_with: false
 
+  - name: attack_hit_activated
+    type: bool
+    init_with: false
+
   - name: initialized
     type: bool
     init_with: false
@@ -70,45 +74,6 @@ properties:
 functions:
 
 
-  - name: update
-    virtual: true
-    override: true
-    guards: [ event_emitter ]
-    body: |
-      float time_now = al_get_time();
-      AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D::update();
-
-      switch (state)
-      {
-         case STATE_STANDING:
-           // nothing
-         break;
-
-         case STATE_ATTACKING:
-           if (get_animation_finished())
-           {
-              state_is_busy = false;
-              set_state(STATE_STANDING);
-              emit_camera_shake_event();
-           }
-         break;
-
-         case STATE_WALKING:
-           float age = infer_state_age(time_now); 
-           //float bounce_amount = sin(age * 3.0);
-
-           float bounce_counter = sin(time_now*34)*0.5 + 0.5;
-           get_bitmap_placement_ref().anchor = { 0, bounce_counter * 3.0f };
-           
-           // TODO: bouncing effect
-         break;
-      }
-     
-      return;
-    body_dependency_symbols:
-      - sin
-
-
   - name: set_state
     type: bool
     private: true
@@ -139,11 +104,13 @@ functions:
          break;
 
          case STATE_ATTACKING:
+           std::cout << "-- ATTAKKKK ---------- " << std::endl;
             set_animation("attack");
             set_animation_playback_rate(1.0);
             get_velocity_ref().position.x = 0.0;
             get_velocity_ref().position.y = 0.0;
             state_is_busy = true;
+            attack_hit_activated = false;
          break;
 
          default:
@@ -154,6 +121,53 @@ functions:
       return true;
     body_dependency_symbols:
       - AllegroFlare::Errors
+
+
+  - name: update
+    virtual: true
+    override: true
+    guards: [ event_emitter ]
+    body: |
+      static int ANIMATION_FRAME_NUM_ON_HIT = 3;
+      float time_now = al_get_time();
+      AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D::update();
+
+      switch (state)
+      {
+         case STATE_STANDING:
+           // nothing
+         break;
+
+         case STATE_ATTACKING:
+           std::cout << "-- CURRENT ANIM FRAME: " << get_current_animation_frame_num() << std::endl;
+           if (get_animation_finished())
+           {
+              state_is_busy = false;
+              set_state(STATE_STANDING);
+              emit_camera_shake_event();
+           }
+           else if (!attack_hit_activated && (get_current_animation_frame_num() >= ANIMATION_FRAME_NUM_ON_HIT))
+           {
+              // TODO: add create emit damage zone
+              emit_camera_shake_event();
+              attack_hit_activated = true;
+           }
+         break;
+
+         case STATE_WALKING:
+           float age = infer_state_age(time_now); 
+           //float bounce_amount = sin(age * 3.0);
+
+           float bounce_counter = sin(time_now*34)*0.5 + 0.5;
+           get_bitmap_placement_ref().anchor = { 0, bounce_counter * 3.0f };
+           
+           // TODO: bouncing effect
+         break;
+      }
+     
+      return;
+    body_dependency_symbols:
+      - sin
 
 
   - name: emit_camera_shake_event

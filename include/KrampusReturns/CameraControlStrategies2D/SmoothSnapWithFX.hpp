@@ -3,6 +3,7 @@
 
 #include <AllegroFlare/CameraControlStrategies2D/Base.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D.hpp>
+#include <AllegroFlare/Random.hpp>
 
 
 namespace KrampusReturns
@@ -20,6 +21,8 @@ namespace KrampusReturns
          AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* entity_to_follow;
          float tracking_target_position_x;
          float tracking_target_position_y;
+         float shake_started_at;
+         AllegroFlare::Random random;
 
       protected:
 
@@ -31,7 +34,10 @@ namespace KrampusReturns
          void set_entity_to_follow(AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* entity_to_follow);
          AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* get_entity_to_follow() const;
          virtual void initialize() override;
+         void start_impact_shake(float time_now=al_get_time());
          virtual void update() override;
+         float calc_shake_age(float time_now=al_get_time());
+         float normalized_shake_age(float duration=1.0f, float time_now=al_get_time());
       };
    }
 }

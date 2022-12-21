@@ -33,6 +33,14 @@ properties:
     type: float
     init_with: 0.0
 
+  - name: shake_started_at
+    type: float
+    init_with: -9999.0
+
+  - name: random
+    type: AllegroFlare::Random
+    init_with: '{}'
+
   - name: TYPE
     type: char*
     init_with: '(char*)"KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX"'
@@ -53,7 +61,19 @@ functions:
       get_camera_ref()->scale = AllegroFlare::vec2d(1.0 / 4.8, 1.0 / 4.5);
       get_camera_ref()->position = {room_width/2, room_height/2};
 
+      random.set_seed(1337);
+
       Base::initialize();
+      return;
+
+
+  - name: start_impact_shake
+    parameters:
+      - name: time_now
+        type: float
+        default_argument: al_get_time()
+    body: |
+      shake_started_at = time_now;
       return;
 
 
@@ -62,8 +82,15 @@ functions:
     override: true
     guards: [ get_initialized(), get_camera() ]
     body: |
+      float time_now = al_get_time();
+      float shake_age = calc_shake_age(time_now);
+
+
+      // Track entity, snapping to frame coordinates
+
       // If the camera loses track of the "entity_to_follow" (the tracking target dies for example), this logic will
       // retain the last coordinate that had been tracked, and use it until a new tracking target is introduced.
+
       if (entity_to_follow)
       {
          tracking_target_position_x = entity_to_follow->get_place_ref().position.x;
@@ -81,8 +108,20 @@ functions:
 
       get_camera_ref()->position += (delta * 0.1);
 
-      float distance = AllegroFlare::distance(get_camera_ref()->position, target_position);
 
+      // Add shake effect
+
+      AllegroFlare::Vec2D max_shake_offset = { random.get_random_float(-5, 5), random.get_random_float(-5, 5) };
+      float effect_multiplier = 1.0 - normalized_shake_age(1.0, time_now);
+      AllegroFlare::Vec2D shake_offset = max_shake_offset * effect_multiplier;
+
+      get_camera_ref()->position += shake_offset;
+      
+
+
+      // Add zoom effect based on distance to target:
+
+      float distance = AllegroFlare::distance(get_camera_ref()->position, target_position);
       AllegroFlare::vec2d abs_delta = AllegroFlare::Vec2D(distance * 0.01, distance * 0.01);
       float xtra_zoom = (abs_delta.x + abs_delta.y);
       get_camera_ref()->scale = AllegroFlare::vec2d(1.0 / (4.8 + xtra_zoom), 1.0 / (4.5 + xtra_zoom));
@@ -91,6 +130,33 @@ functions:
     body_dependency_symbols:
       - AllegroFlare::Useful
       - fabs
+
+
+  - name: calc_shake_age
+    type: float
+    parameters:
+      - name: time_now
+        type: float
+        default_argument: al_get_time()
+    body: |
+      return time_now - shake_started_at;
+
+
+  - name: normalized_shake_age
+    type: float
+    parameters:
+      - name: duration
+        type: float
+        default_argument: 1.0f
+      - name: time_now
+        type: float
+        default_argument: al_get_time()
+    guards: [ (duration >= 0.0001f) ]
+    body: |
+      return std::max(0.0f, std::min(duration, (time_now - shake_started_at))) / duration;
+    body_dependency_symbols:
+      - std::max
+      - std::min
 
 
 dependencies:
@@ -104,5 +170,11 @@ dependencies:
     headers: [ cmath ]
   - symbol: AllegroFlare::Useful
     headers: [ AllegroFlare/Useful.hpp ]
+  - symbol: AllegroFlare::Random
+    headers: [ AllegroFlare/Random.hpp ]
+  - symbol: std::max
+    headers: [ algorithm ]
+  - symbol: std::min
+    headers: [ algorithm ]
 
 

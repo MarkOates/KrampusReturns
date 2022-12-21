@@ -21,6 +21,7 @@ Krampus::Krampus(AllegroFlare::EventEmitter* event_emitter)
    , state(STATE_UNDEF)
    , state_changed_at(0.0f)
    , state_is_busy(false)
+   , attack_hit_activated(false)
    , initialized(false)
 {
 }
@@ -36,47 +37,6 @@ void Krampus::set_event_emitter(AllegroFlare::EventEmitter* event_emitter)
    this->event_emitter = event_emitter;
 }
 
-
-void Krampus::update()
-{
-   if (!(event_emitter))
-   {
-      std::stringstream error_message;
-      error_message << "[Krampus::update]: error: guard \"event_emitter\" not met.";
-      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
-      throw std::runtime_error("Krampus::update: error: guard \"event_emitter\" not met");
-   }
-   float time_now = al_get_time();
-   AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D::update();
-
-   switch (state)
-   {
-      case STATE_STANDING:
-        // nothing
-      break;
-
-      case STATE_ATTACKING:
-        if (get_animation_finished())
-        {
-           state_is_busy = false;
-           set_state(STATE_STANDING);
-           emit_camera_shake_event();
-        }
-      break;
-
-      case STATE_WALKING:
-        float age = infer_state_age(time_now); 
-        //float bounce_amount = sin(age * 3.0);
-
-        float bounce_counter = sin(time_now*34)*0.5 + 0.5;
-        get_bitmap_placement_ref().anchor = { 0, bounce_counter * 3.0f };
-        
-        // TODO: bouncing effect
-      break;
-   }
-
-   return;
-}
 
 bool Krampus::set_state(uint32_t state, float time_now)
 {
@@ -99,11 +59,13 @@ bool Krampus::set_state(uint32_t state, float time_now)
       break;
 
       case STATE_ATTACKING:
+        std::cout << "-- ATTAKKKK ---------- " << std::endl;
          set_animation("attack");
          set_animation_playback_rate(1.0);
          get_velocity_ref().position.x = 0.0;
          get_velocity_ref().position.y = 0.0;
          state_is_busy = true;
+         attack_hit_activated = false;
       break;
 
       default:
@@ -112,6 +74,55 @@ bool Krampus::set_state(uint32_t state, float time_now)
    }
 
    return true;
+}
+
+void Krampus::update()
+{
+   if (!(event_emitter))
+   {
+      std::stringstream error_message;
+      error_message << "[Krampus::update]: error: guard \"event_emitter\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Krampus::update: error: guard \"event_emitter\" not met");
+   }
+   static int ANIMATION_FRAME_NUM_ON_HIT = 3;
+   float time_now = al_get_time();
+   AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D::update();
+
+   switch (state)
+   {
+      case STATE_STANDING:
+        // nothing
+      break;
+
+      case STATE_ATTACKING:
+        std::cout << "-- CURRENT ANIM FRAME: " << get_current_animation_frame_num() << std::endl;
+        if (get_animation_finished())
+        {
+           state_is_busy = false;
+           set_state(STATE_STANDING);
+           emit_camera_shake_event();
+        }
+        else if (!attack_hit_activated && (get_current_animation_frame_num() >= ANIMATION_FRAME_NUM_ON_HIT))
+        {
+           // TODO: add create emit damage zone
+           emit_camera_shake_event();
+           attack_hit_activated = true;
+        }
+      break;
+
+      case STATE_WALKING:
+        float age = infer_state_age(time_now); 
+        //float bounce_amount = sin(age * 3.0);
+
+        float bounce_counter = sin(time_now*34)*0.5 + 0.5;
+        get_bitmap_placement_ref().anchor = { 0, bounce_counter * 3.0f };
+        
+        // TODO: bouncing effect
+      break;
+   }
+
+   return;
 }
 
 void Krampus::emit_camera_shake_event()

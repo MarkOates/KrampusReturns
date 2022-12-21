@@ -86,6 +86,14 @@ table td
   <td class="property">float</td>
 </tr>
 <tr>
+  <td class="property">shake_started_at</td>
+  <td class="property">float</td>
+</tr>
+<tr>
+  <td class="property">random</td>
+  <td class="property">AllegroFlare::Random</td>
+</tr>
+<tr>
   <td class="property">TYPE</td>
   <td class="property">char*</td>
 </tr>
@@ -95,7 +103,16 @@ table td
   <td class="method">initialize()</td>
 </tr>
 <tr>
+  <td class="method">start_impact_shake(1)</td>
+</tr>
+<tr>
   <td class="method">update()</td>
+</tr>
+<tr>
+  <td class="method">calc_shake_age(1)</td>
+</tr>
+<tr>
+  <td class="method">normalized_shake_age(2)</td>
 </tr>
     </table>
      <table>
@@ -110,6 +127,15 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Useful&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Useful.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Random&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Random.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;std::max&quot;, &quot;headers&quot;=&gt;[&quot;algorithm&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;std::min&quot;, &quot;headers&quot;=&gt;[&quot;algorithm&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -187,6 +213,10 @@ table td
   <td class="property">bool</td>
 </tr>
 <tr>
+  <td class="property">attack_hit_activated</td>
+  <td class="property">bool</td>
+</tr>
+<tr>
   <td class="property">initialized</td>
   <td class="property">bool</td>
 </tr>
@@ -213,10 +243,10 @@ table td
     </table>
      <table>
 <tr>
-  <td class="method">update()</td>
+  <td class="private_method">set_state(2)</td>
 </tr>
 <tr>
-  <td class="private_method">set_state(2)</td>
+  <td class="method">update()</td>
 </tr>
 <tr>
   <td class="method">emit_camera_shake_event()</td>
@@ -474,6 +504,9 @@ table td
 </tr>
 <tr>
   <td class="method">primary_timer_func()</td>
+</tr>
+<tr>
+  <td class="method">shake_camera()</td>
 </tr>
 <tr>
   <td class="method">game_event_func(1)</td>
@@ -1199,6 +1232,15 @@ table td
     "KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX"
   ],
   "AllegroFlare/Useful": [
+    "KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX"
+  ],
+  "AllegroFlare/Random": [
+    "KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX"
+  ],
+  "std/max": [
+    "KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX"
+  ],
+  "std/min": [
     "KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX"
   ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D": [

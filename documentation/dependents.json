@@ -14,6 +14,15 @@
   "AllegroFlare/Useful": [
     "KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX"
   ],
+  "AllegroFlare/Random": [
+    "KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX"
+  ],
+  "std/max": [
+    "KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX"
+  ],
+  "std/min": [
+    "KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX"
+  ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D": [
     "KrampusReturns/Entities/Blob",
     "KrampusReturns/Entities/Krampus"

@@ -791,6 +791,22 @@ void Screen::primary_timer_func()
    return;
 }
 
+void Screen::shake_camera()
+{
+   using namespace KrampusReturns::CameraControlStrategies2D;
+   if (camera_control_strategy->is_type(SmoothSnapWithFX::TYPE))
+   {
+      SmoothSnapWithFX *as_smooth_snap_with_fx = static_cast<SmoothSnapWithFX*>(camera_control_strategy);
+      as_smooth_snap_with_fx->start_impact_shake();
+   }
+   else
+   {
+      // TODO: THROW on unshakable camera type
+   }
+
+   return;
+}
+
 void Screen::game_event_func(AllegroFlare::GameEvent* ev)
 {
    if (!(ev))
@@ -812,6 +828,8 @@ void Screen::game_event_func(AllegroFlare::GameEvent* ev)
 
    std::map<std::string, std::function<void()>> event_map = {
       { "camera_shake", [this](){
+          shake_camera();
+
           // TODO: actually shake camera
           std::cout << "> BOOM < CAMERA SHAKE!!" << std::endl;
       }},

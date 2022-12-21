@@ -727,6 +727,22 @@ functions:
       return;
 
 
+  - name: shake_camera
+    body: |
+      using namespace KrampusReturns::CameraControlStrategies2D;
+      if (camera_control_strategy->is_type(SmoothSnapWithFX::TYPE))
+      {
+         SmoothSnapWithFX *as_smooth_snap_with_fx = static_cast<SmoothSnapWithFX*>(camera_control_strategy);
+         as_smooth_snap_with_fx->start_impact_shake();
+      }
+      else
+      {
+         // TODO: THROW on unshakable camera type
+      }
+
+      return;
+
+
   - name: game_event_func
     virtual: true
     override: true
@@ -741,6 +757,8 @@ functions:
 
       std::map<std::string, std::function<void()>> event_map = {
          { "camera_shake", [this](){
+             shake_camera();
+
              // TODO: actually shake camera
              std::cout << "> BOOM < CAMERA SHAKE!!" << std::endl;
          }},
