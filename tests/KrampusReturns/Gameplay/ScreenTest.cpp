@@ -63,6 +63,7 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
 
 
    KrampusReturns::EntityFactory entity_factory;
+   entity_factory.set_event_emitter(&framework.get_event_emitter_ref());
    entity_factory.set_bitmap_bin(&framework.get_bitmap_bin_ref());
    entity_factory.set_animation_book(&animation_book);
 

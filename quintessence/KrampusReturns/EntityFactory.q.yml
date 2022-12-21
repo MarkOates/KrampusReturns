@@ -6,6 +6,17 @@ parent_classes:
     init_with: ''
 
 
+properties:
+
+
+  - name: event_emitter
+    type: AllegroFlare::EventEmitter*
+    init_with: nullptr
+    constructor_arg: true
+    setter: true
+    getter: true
+
+
 functions:
 
 
@@ -21,12 +32,13 @@ functions:
       - name: y
         type: float
         default_argument: 0.0f
-    guards: [ get_animation_book() ]
+    guards: [ get_animation_book(), event_emitter ]
     body: |
       using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
 
       KrampusReturns::Entities::Krampus *result = new KrampusReturns::Entities::Krampus();
       result->set_animation_book(get_animation_book());
+      result->set_event_emitter(event_emitter);
       result->initialize();
 
       result->get_place_ref().position = { x, y };
@@ -52,5 +64,7 @@ dependencies:
     headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D.hpp ]
   - symbol: KrampusReturns::Entities::Krampus
     headers: [ KrampusReturns/Entities/Krampus.hpp ]
+  - symbol: AllegroFlare::EventEmitter
+    headers: [ AllegroFlare/EventEmitter.hpp ]
 
 

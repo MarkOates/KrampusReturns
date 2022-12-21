@@ -6,6 +6,7 @@
 #include <AllegroFlare/CameraControlStrategies2D/Base.hpp>
 #include <AllegroFlare/Display.hpp>
 #include <AllegroFlare/EventEmitter.hpp>
+#include <AllegroFlare/GameEvent.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/TileMaps/Basic2D.hpp>
 #include <AllegroFlare/Screens/Base.hpp>
@@ -96,6 +97,7 @@ namespace KrampusReturns
          void toggle_show_collision_tile_mesh();
          void toggle_show_tile_mesh();
          virtual void primary_timer_func() override;
+         virtual void game_event_func(AllegroFlare::GameEvent* ev=nullptr) override;
          virtual void key_char_func(ALLEGRO_EVENT* event=nullptr) override;
          virtual void key_up_func(ALLEGRO_EVENT* event=nullptr) override;
          virtual void key_down_func(ALLEGRO_EVENT* event=nullptr) override;

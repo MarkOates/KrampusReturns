@@ -15,8 +15,9 @@ namespace Entities
 {
 
 
-Krampus::Krampus()
+Krampus::Krampus(AllegroFlare::EventEmitter* event_emitter)
    : AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D()
+   , event_emitter(event_emitter)
    , state(STATE_UNDEF)
    , state_changed_at(0.0f)
    , state_is_busy(false)
@@ -30,8 +31,21 @@ Krampus::~Krampus()
 }
 
 
+void Krampus::set_event_emitter(AllegroFlare::EventEmitter* event_emitter)
+{
+   this->event_emitter = event_emitter;
+}
+
+
 void Krampus::update()
 {
+   if (!(event_emitter))
+   {
+      std::stringstream error_message;
+      error_message << "[Krampus::update]: error: guard \"event_emitter\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Krampus::update: error: guard \"event_emitter\" not met");
+   }
    float time_now = al_get_time();
    AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D::update();
 
@@ -46,6 +60,7 @@ void Krampus::update()
         {
            state_is_busy = false;
            set_state(STATE_STANDING);
+           emit_camera_shake_event();
         }
       break;
 
@@ -97,6 +112,18 @@ bool Krampus::set_state(uint32_t state, float time_now)
    }
 
    return true;
+}
+
+void Krampus::emit_camera_shake_event()
+{
+   if (!(event_emitter))
+   {
+      std::stringstream error_message;
+      error_message << "[Krampus::emit_camera_shake_event]: error: guard \"event_emitter\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Krampus::emit_camera_shake_event: error: guard \"event_emitter\" not met");
+   }
+   event_emitter->emit_game_event(AllegroFlare::GameEvent("camera_shake"));
 }
 
 void Krampus::stand_still()

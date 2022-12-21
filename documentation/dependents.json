@@ -14,6 +14,13 @@
   "std/rand": [
     "KrampusReturns/Entities/Blob"
   ],
+  "AllegroFlare/EventEmitter": [
+    "KrampusReturns/Entities/Krampus",
+    "KrampusReturns/EntityFactory",
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Runner",
+    "KrampusReturns/Shaders/Primary"
+  ],
   "AllegroFlare/Errors": [
     "KrampusReturns/Entities/Krampus"
   ],
@@ -125,10 +132,9 @@
   "AllegroFlare/Display": [
     "KrampusReturns/Gameplay/Screen"
   ],
-  "AllegroFlare/EventEmitter": [
+  "AllegroFlare/GameEvent": [
     "KrampusReturns/Gameplay/Screen",
-    "KrampusReturns/Runner",
-    "KrampusReturns/Shaders/Primary"
+    "KrampusReturns/Runner"
   ],
   "AllegroFlare/Screens/Base": [
     "KrampusReturns/Gameplay/Screen",
@@ -195,9 +201,6 @@
     "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/Screens/Achievements": [
-    "KrampusReturns/Runner"
-  ],
-  "AllegroFlare/GameEvent": [
     "KrampusReturns/Runner"
   ],
   "AllegroFlare/Screens/Storyboard": [

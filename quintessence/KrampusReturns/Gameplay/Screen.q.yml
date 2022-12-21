@@ -726,6 +726,40 @@ functions:
       return;
 
 
+  - name: game_event_func
+    virtual: true
+    override: true
+    parameters:
+      - name: ev
+        type: AllegroFlare::GameEvent*
+        default_argument: nullptr
+    guards: [ ev, event_emitter ]
+    body: |
+      std::string event_name = ev->get_type();
+      //std::cout << "--- Gameplay/Screen --- EVENT RECEIVED: \"" << event_name << "\"" << std::endl;
+
+      std::map<std::string, std::function<void()>> event_map = {
+         { "camera_shake", [this](){
+             // TODO: actually shake camera
+             std::cout << "> BOOM < CAMERA SHAKE!!" << std::endl;
+         }},
+      };
+
+      // locate and call the function to handle the event 
+      if (event_map.count(event_name) == 0)
+      {
+         // event not found
+         //std::cout << "ERROR: event not found: \"" << event_name << "\"" << std::endl;
+      }
+      else
+      {
+         // call the event
+         event_map[event_name]();
+      }
+
+      return;
+
+
   - name: key_char_func
     virtual: true
     override: true
@@ -955,6 +989,8 @@ dependencies:
     headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D.hpp ]
   - symbol: AllegroFlare::EventEmitter
     headers: [ AllegroFlare/EventEmitter.hpp ]
+  - symbol: AllegroFlare::GameEvent
+    headers: [ AllegroFlare/GameEvent.hpp ]
   - symbol: AllegroFlare::Screens::Base
     headers: [ AllegroFlare/Screens/Base.hpp ]
   - symbol: AllegroFlare::Camera2D

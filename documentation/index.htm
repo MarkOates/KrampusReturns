@@ -117,6 +117,10 @@ table td
     <h3 id="quintessence/KrampusReturns/Entities/Krampus.q.yml">quintessence/KrampusReturns/Entities/Krampus.q.yml</h3>
      <table>
 <tr>
+  <td class="property">event_emitter</td>
+  <td class="property">AllegroFlare::EventEmitter*</td>
+</tr>
+<tr>
   <td class="property">state</td>
   <td class="property">uint32_t</td>
 </tr>
@@ -161,6 +165,9 @@ table td
   <td class="private_method">set_state(2)</td>
 </tr>
 <tr>
+  <td class="method">emit_camera_shake_event()</td>
+</tr>
+<tr>
   <td class="method">stand_still()</td>
 </tr>
 <tr>
@@ -196,6 +203,9 @@ table td
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D.hpp&quot;]}</td>
 </tr>
 <tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::EventEmitter&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/EventEmitter.hpp&quot;]}</td>
+</tr>
+<tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Errors&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Errors.hpp&quot;]}</td>
 </tr>
 <tr>
@@ -208,6 +218,10 @@ table td
   <div class="component">
     <h3 id="quintessence/KrampusReturns/EntityFactory.q.yml">quintessence/KrampusReturns/EntityFactory.q.yml</h3>
      <table>
+<tr>
+  <td class="property">event_emitter</td>
+  <td class="property">AllegroFlare::EventEmitter*</td>
+</tr>
     </table>
      <table>
 <tr>
@@ -226,6 +240,9 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Entities::Krampus&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Entities/Krampus.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::EventEmitter&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/EventEmitter.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -405,6 +422,9 @@ table td
   <td class="method">primary_timer_func()</td>
 </tr>
 <tr>
+  <td class="method">game_event_func(1)</td>
+</tr>
+<tr>
   <td class="method">key_char_func(1)</td>
 </tr>
 <tr>
@@ -531,6 +551,9 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::EventEmitter&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/EventEmitter.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::GameEvent&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/GameEvent.hpp&quot;]}</td>
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Screens::Base&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Screens/Base.hpp&quot;]}</td>
@@ -1121,6 +1144,13 @@ table td
   "std/rand": [
     "KrampusReturns/Entities/Blob"
   ],
+  "AllegroFlare/EventEmitter": [
+    "KrampusReturns/Entities/Krampus",
+    "KrampusReturns/EntityFactory",
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Runner",
+    "KrampusReturns/Shaders/Primary"
+  ],
   "AllegroFlare/Errors": [
     "KrampusReturns/Entities/Krampus"
   ],
@@ -1232,10 +1262,9 @@ table td
   "AllegroFlare/Display": [
     "KrampusReturns/Gameplay/Screen"
   ],
-  "AllegroFlare/EventEmitter": [
+  "AllegroFlare/GameEvent": [
     "KrampusReturns/Gameplay/Screen",
-    "KrampusReturns/Runner",
-    "KrampusReturns/Shaders/Primary"
+    "KrampusReturns/Runner"
   ],
   "AllegroFlare/Screens/Base": [
     "KrampusReturns/Gameplay/Screen",
@@ -1302,9 +1331,6 @@ table td
     "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/Screens/Achievements": [
-    "KrampusReturns/Runner"
-  ],
-  "AllegroFlare/GameEvent": [
     "KrampusReturns/Runner"
   ],
   "AllegroFlare/Screens/Storyboard": [

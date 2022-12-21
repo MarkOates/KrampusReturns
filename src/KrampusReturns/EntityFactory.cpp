@@ -13,14 +13,27 @@ namespace KrampusReturns
 {
 
 
-EntityFactory::EntityFactory()
+EntityFactory::EntityFactory(AllegroFlare::EventEmitter* event_emitter)
    : AllegroFlare::Prototypes::Platforming2D::Entities::Basic2DFactory()
+   , event_emitter(event_emitter)
 {
 }
 
 
 EntityFactory::~EntityFactory()
 {
+}
+
+
+void EntityFactory::set_event_emitter(AllegroFlare::EventEmitter* event_emitter)
+{
+   this->event_emitter = event_emitter;
+}
+
+
+AllegroFlare::EventEmitter* EntityFactory::get_event_emitter() const
+{
+   return event_emitter;
 }
 
 
@@ -33,10 +46,18 @@ KrampusReturns::Entities::Krampus* EntityFactory::create_krampus(std::string on_
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
       throw std::runtime_error("EntityFactory::create_krampus: error: guard \"get_animation_book()\" not met");
    }
+   if (!(event_emitter))
+   {
+      std::stringstream error_message;
+      error_message << "[EntityFactory::create_krampus]: error: guard \"event_emitter\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("EntityFactory::create_krampus: error: guard \"event_emitter\" not met");
+   }
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
 
    KrampusReturns::Entities::Krampus *result = new KrampusReturns::Entities::Krampus();
    result->set_animation_book(get_animation_book());
+   result->set_event_emitter(event_emitter);
    result->initialize();
 
    result->get_place_ref().position = { x, y };

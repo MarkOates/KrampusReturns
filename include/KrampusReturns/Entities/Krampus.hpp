@@ -1,6 +1,7 @@
 #pragma once
 
 
+#include <AllegroFlare/EventEmitter.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D.hpp>
 #include <cstdint>
 
@@ -19,6 +20,7 @@ namespace KrampusReturns
          static constexpr char* TYPE = (char*)"Entities/Krampus";
 
       private:
+         AllegroFlare::EventEmitter* event_emitter;
          uint32_t state;
          float state_changed_at;
          bool state_is_busy;
@@ -29,10 +31,12 @@ namespace KrampusReturns
 
 
       public:
-         Krampus();
+         Krampus(AllegroFlare::EventEmitter* event_emitter=nullptr);
          virtual ~Krampus();
 
+         void set_event_emitter(AllegroFlare::EventEmitter* event_emitter);
          virtual void update() override;
+         void emit_camera_shake_event();
          void stand_still();
          void walk_right();
          void walk_up();

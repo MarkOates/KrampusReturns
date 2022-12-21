@@ -790,6 +790,47 @@ void Screen::primary_timer_func()
    return;
 }
 
+void Screen::game_event_func(AllegroFlare::GameEvent* ev)
+{
+   if (!(ev))
+   {
+      std::stringstream error_message;
+      error_message << "[Screen::game_event_func]: error: guard \"ev\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Screen::game_event_func: error: guard \"ev\" not met");
+   }
+   if (!(event_emitter))
+   {
+      std::stringstream error_message;
+      error_message << "[Screen::game_event_func]: error: guard \"event_emitter\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Screen::game_event_func: error: guard \"event_emitter\" not met");
+   }
+   std::string event_name = ev->get_type();
+   //std::cout << "--- Gameplay/Screen --- EVENT RECEIVED: \"" << event_name << "\"" << std::endl;
+
+   std::map<std::string, std::function<void()>> event_map = {
+      { "camera_shake", [this](){
+          // TODO: actually shake camera
+          std::cout << "> BOOM < CAMERA SHAKE!!" << std::endl;
+      }},
+   };
+
+   // locate and call the function to handle the event 
+   if (event_map.count(event_name) == 0)
+   {
+      // event not found
+      //std::cout << "ERROR: event not found: \"" << event_name << "\"" << std::endl;
+   }
+   else
+   {
+      // call the event
+      event_map[event_name]();
+   }
+
+   return;
+}
+
 void Screen::key_char_func(ALLEGRO_EVENT* event)
 {
    if (!(initialized))

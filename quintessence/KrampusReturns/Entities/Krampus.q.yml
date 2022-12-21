@@ -9,6 +9,12 @@ parent_classes:
 properties:
 
 
+  - name: event_emitter
+    type: AllegroFlare::EventEmitter*
+    init_with: nullptr
+    constructor_arg: true
+    setter: true
+
   - name: state
     type: uint32_t
     init_with: STATE_UNDEF
@@ -67,6 +73,7 @@ functions:
   - name: update
     virtual: true
     override: true
+    guards: [ event_emitter ]
     body: |
       float time_now = al_get_time();
       AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D::update();
@@ -82,6 +89,7 @@ functions:
            {
               state_is_busy = false;
               set_state(STATE_STANDING);
+              emit_camera_shake_event();
            }
          break;
 
@@ -146,6 +154,12 @@ functions:
       return true;
     body_dependency_symbols:
       - AllegroFlare::Errors
+
+
+  - name: emit_camera_shake_event
+    guards: [ event_emitter ]
+    body: |
+      event_emitter->emit_game_event(AllegroFlare::GameEvent("camera_shake"));
 
 
   - name: stand_still
@@ -240,6 +254,8 @@ dependencies:
 
   - symbol: AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D
     headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D.hpp ]
+  - symbol: AllegroFlare::EventEmitter
+    headers: [ AllegroFlare/EventEmitter.hpp ]
   - symbol: AllegroFlare::Errors
     headers: [ AllegroFlare/Errors.hpp ]
   - symbol: sin
