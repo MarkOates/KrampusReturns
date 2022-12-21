@@ -76,6 +76,8 @@ void Krampus::set_state(uint32_t state, float time_now)
 void Krampus::stand_still()
 {
    if (state != STATE_STANDING) set_state(STATE_STANDING);
+   get_velocity_ref().position.x = 0.0;
+   get_velocity_ref().position.y = 0.0;
    return;
 }
 
@@ -83,18 +85,21 @@ void Krampus::walk_right()
 {
    face_right();
    if (state != STATE_WALKING) set_state(STATE_WALKING);
+   get_velocity_ref().position.x = 1.5;
    return;
 }
 
 void Krampus::walk_up()
 {
    if (state != STATE_WALKING) set_state(STATE_WALKING);
+   get_velocity_ref().position.y = -1.5;
    return;
 }
 
 void Krampus::walk_down()
 {
    if (state != STATE_WALKING) set_state(STATE_WALKING);
+   get_velocity_ref().position.y = 1.5;
    return;
 }
 
@@ -102,6 +107,7 @@ void Krampus::walk_left()
 {
    face_left();
    if (state != STATE_WALKING) set_state(STATE_WALKING);
+   get_velocity_ref().position.x = -1.5;
    return;
 }
 
@@ -136,7 +142,6 @@ void Krampus::initialize()
    get_bitmap_placement_ref().scale = { 0.8, 0.8 };
    set_bitmap_alignment_strategy("bottom_centered");
    set_state(STATE_STANDING);
-   //set_animation("krampus");
    initialized = true;
    return;
 }
