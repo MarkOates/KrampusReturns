@@ -13,6 +13,9 @@
   "std/rand": [
     "KrampusReturns/Entities/Blob"
   ],
+  "AllegroFlare/Errors": [
+    "KrampusReturns/Entities/Krampus"
+  ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory": [
     "KrampusReturns/EntityFactory",
     "KrampusReturns/Gameplay/Screen"

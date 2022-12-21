@@ -2,6 +2,7 @@
 
 #include <KrampusReturns/Entities/Krampus.hpp>
 
+#include <AllegroFlare/Errors.hpp>
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
@@ -15,6 +16,8 @@ namespace Entities
 
 Krampus::Krampus()
    : AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D()
+   , state(STATE_UNDEF)
+   , state_changed_at(0.0f)
    , initialized(false)
 {
 }
@@ -24,6 +27,83 @@ Krampus::~Krampus()
 {
 }
 
+
+void Krampus::update()
+{
+   AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D::update();
+
+   switch (state)
+   {
+      case STATE_STANDING:
+        // nothing
+      break;
+
+      case STATE_WALKING:
+        // TODO: bouncing effect
+      break;
+   }
+
+   return;
+}
+
+void Krampus::set_state(uint32_t state, float time_now)
+{
+   if (this->state == state) return; // TODO: consider "override_if_same" option
+
+   this->state = state;
+   state_changed_at = time_now;
+
+   switch (state)
+   {
+      case STATE_STANDING:
+         set_animation("krampus");
+         set_animation_playback_rate(1.0);
+      break;
+
+      case STATE_WALKING:
+         set_animation("krampus");
+         set_animation_playback_rate(1.7);
+      break;
+
+      default:
+         AllegroFlare::Errors::throw_error("KrampusReturns::Entities::Krampus::set_state", "unhandled state");
+      break;
+   }
+
+   return;
+}
+
+void Krampus::stand_still()
+{
+   if (state != STATE_STANDING) set_state(STATE_STANDING);
+   return;
+}
+
+void Krampus::walk_right()
+{
+   face_right();
+   if (state != STATE_WALKING) set_state(STATE_WALKING);
+   return;
+}
+
+void Krampus::walk_up()
+{
+   if (state != STATE_WALKING) set_state(STATE_WALKING);
+   return;
+}
+
+void Krampus::walk_down()
+{
+   if (state != STATE_WALKING) set_state(STATE_WALKING);
+   return;
+}
+
+void Krampus::walk_left()
+{
+   face_left();
+   if (state != STATE_WALKING) set_state(STATE_WALKING);
+   return;
+}
 
 void Krampus::face_left()
 {
@@ -55,9 +135,15 @@ void Krampus::initialize()
    get_place_ref().size = { 32, 6 };
    get_bitmap_placement_ref().scale = { 0.8, 0.8 };
    set_bitmap_alignment_strategy("bottom_centered");
-   set_animation("krampus");
+   set_state(STATE_STANDING);
+   //set_animation("krampus");
    initialized = true;
    return;
+}
+
+float Krampus::infer_state_age(float time_now)
+{
+   return time_now - state_changed_at;
 }
 
 

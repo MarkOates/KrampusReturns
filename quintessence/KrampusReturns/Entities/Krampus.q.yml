@@ -9,9 +9,46 @@ parent_classes:
 properties:
 
 
+  - name: state
+    type: uint32_t
+    init_with: STATE_UNDEF
+    setter: false
+
+  - name: state_changed_at
+    type: float
+    init_with: 0.0f
+
   - name: initialized
     type: bool
     init_with: false
+
+  - name: STATE_UNDEF
+    type: uint32_t
+    init_with: 0
+    static: true
+    const: true
+    constexpr: true
+
+  - name: STATE_STANDING
+    type: uint32_t
+    init_with: 1
+    static: true
+    const: true
+    constexpr: true
+
+  - name: STATE_ATTACKING
+    type: uint32_t
+    init_with: 2
+    static: true
+    const: true
+    constexpr: true
+
+  - name: STATE_WALKING
+    type: uint32_t
+    init_with: 3
+    static: true
+    const: true
+    constexpr: true
 
   - name: TYPE
     type: char*
@@ -21,6 +58,95 @@ properties:
 
 
 functions:
+
+
+  - name: update
+    virtual: true
+    override: true
+    body: |
+      AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D::update();
+
+      switch (state)
+      {
+         case STATE_STANDING:
+           // nothing
+         break;
+
+         case STATE_WALKING:
+           // TODO: bouncing effect
+         break;
+      }
+     
+      return;
+
+
+  - name: set_state
+    private: true
+    parameters:
+      - name: state
+        type: uint32_t
+        default_argument: STATE_UNDEF
+      - name: time_now
+        type: float
+        default_argument: al_get_time()
+    body: |
+      if (this->state == state) return; // TODO: consider "override_if_same" option
+
+      this->state = state;
+      state_changed_at = time_now;
+
+      switch (state)
+      {
+         case STATE_STANDING:
+            set_animation("krampus");
+            set_animation_playback_rate(1.0);
+         break;
+
+         case STATE_WALKING:
+            set_animation("krampus");
+            set_animation_playback_rate(1.7);
+         break;
+
+         default:
+            AllegroFlare::Errors::throw_error("KrampusReturns::Entities::Krampus::set_state", "unhandled state");
+         break;
+      }
+
+      return;
+    body_dependency_symbols:
+      - AllegroFlare::Errors
+
+
+  - name: stand_still
+    body: |
+      if (state != STATE_STANDING) set_state(STATE_STANDING);
+      return;
+
+
+  - name: walk_right
+    body: |
+      face_right();
+      if (state != STATE_WALKING) set_state(STATE_WALKING);
+      return;
+
+
+  - name: walk_up
+    body: |
+      if (state != STATE_WALKING) set_state(STATE_WALKING);
+      return;
+
+
+  - name: walk_down
+    body: |
+      if (state != STATE_WALKING) set_state(STATE_WALKING);
+      return;
+
+
+  - name: walk_left
+    body: |
+      face_left();
+      if (state != STATE_WALKING) set_state(STATE_WALKING);
+      return;
 
 
   - name: face_left
@@ -47,15 +173,28 @@ functions:
       get_place_ref().size = { 32, 6 };
       get_bitmap_placement_ref().scale = { 0.8, 0.8 };
       set_bitmap_alignment_strategy("bottom_centered");
-      set_animation("krampus");
+      set_state(STATE_STANDING);
+      //set_animation("krampus");
       initialized = true;
       return;
 
+
+  - name: infer_state_age
+    type: float
+    parameters:
+      - name: time_now
+        type: float
+        default_argument: al_get_time()
+    body: |
+      return time_now - state_changed_at;
+    
 
 dependencies:
 
 
   - symbol: AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D
     headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D.hpp ]
+  - symbol: AllegroFlare::Errors
+    headers: [ AllegroFlare/Errors.hpp ]
 
 

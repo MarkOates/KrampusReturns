@@ -137,26 +137,47 @@ void KrampusController::update()
       // NOTE: previously, being ajacent to the floor would stop the player from moving unless
       // they have a movment control button pressed
       //if (krampus->exists(ADJACENT_TO_FLOOR))
-      {
-         krampus->get_velocity_ref().position.x = 0.0;
-         krampus->get_velocity_ref().position.y = 0.0;
-      }
+      //{
+         //krampus->get_velocity_ref().position.x = 0.0;
+         //krampus->get_velocity_ref().position.y = 0.0;
+      //}
+
+
+         // TODO: Possibly move this logic to Krampus
+         
+         bool moving = false;
 
          if (player_controls.get_right_button_pressed())
          {
+            krampus->walk_right();
             krampus->get_velocity_ref().position.x = 1.5; //2.0;
+            moving = true;
          }
          if (player_controls.get_left_button_pressed())
          {
+            krampus->walk_left();
             krampus->get_velocity_ref().position.x = -1.5; //-2.0;
+            moving = true;
          }
          if (player_controls.get_up_button_pressed())
          {
+            krampus->walk_up();
             krampus->get_velocity_ref().position.y = -1.5; //2.0;
+            moving = true;
          }
          if (player_controls.get_down_button_pressed())
          {
+            krampus->walk_down();
             krampus->get_velocity_ref().position.y = 1.5; //-2.0;
+            moving = true;
+         }
+
+
+         if (!moving)
+         {
+            krampus->get_velocity_ref().position.x = 0.0;
+            krampus->get_velocity_ref().position.y = 0.0;
+            krampus->stand_still();
          }
    }
    return;

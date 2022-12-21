@@ -117,8 +117,32 @@ table td
     <h3 id="quintessence/KrampusReturns/Entities/Krampus.q.yml">quintessence/KrampusReturns/Entities/Krampus.q.yml</h3>
      <table>
 <tr>
+  <td class="property">state</td>
+  <td class="property">uint32_t</td>
+</tr>
+<tr>
+  <td class="property">state_changed_at</td>
+  <td class="property">float</td>
+</tr>
+<tr>
   <td class="property">initialized</td>
   <td class="property">bool</td>
+</tr>
+<tr>
+  <td class="property">STATE_UNDEF</td>
+  <td class="property">uint32_t</td>
+</tr>
+<tr>
+  <td class="property">STATE_STANDING</td>
+  <td class="property">uint32_t</td>
+</tr>
+<tr>
+  <td class="property">STATE_ATTACKING</td>
+  <td class="property">uint32_t</td>
+</tr>
+<tr>
+  <td class="property">STATE_WALKING</td>
+  <td class="property">uint32_t</td>
 </tr>
 <tr>
   <td class="property">TYPE</td>
@@ -126,6 +150,27 @@ table td
 </tr>
     </table>
      <table>
+<tr>
+  <td class="method">update()</td>
+</tr>
+<tr>
+  <td class="private_method">set_state(2)</td>
+</tr>
+<tr>
+  <td class="method">stand_still()</td>
+</tr>
+<tr>
+  <td class="method">walk_right()</td>
+</tr>
+<tr>
+  <td class="method">walk_up()</td>
+</tr>
+<tr>
+  <td class="method">walk_down()</td>
+</tr>
+<tr>
+  <td class="method">walk_left()</td>
+</tr>
 <tr>
   <td class="method">face_left()</td>
 </tr>
@@ -138,10 +183,16 @@ table td
 <tr>
   <td class="method">initialize()</td>
 </tr>
+<tr>
+  <td class="method">infer_state_age(1)</td>
+</tr>
     </table>
      <table>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Errors&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Errors.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -1061,6 +1112,9 @@ table td
   ],
   "std/rand": [
     "KrampusReturns/Entities/Blob"
+  ],
+  "AllegroFlare/Errors": [
+    "KrampusReturns/Entities/Krampus"
   ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory": [
     "KrampusReturns/EntityFactory",
