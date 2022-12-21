@@ -13,6 +13,7 @@
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/Doors/Basic2D.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/EntityCollectionHelper.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/EntityFlagNames.hpp>
+#include <KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.hpp>
 #include <KrampusReturns/Shaders/AllegroDefault.hpp>
 #include <KrampusReturns/Shaders/Primary.hpp>
 #include <algorithm>
@@ -320,8 +321,8 @@ void Screen::initialize_camera_control()
    float room_width = assumed_tile_width * 25; // tile_mesh->get_real_width();
    float room_height = assumed_tile_height * 15; //tile_mesh->get_real_height();
 
-   AllegroFlare::CameraControlStrategies2D::SmoothSnapWithZoomEffect *camera_control =
-      new AllegroFlare::CameraControlStrategies2D::SmoothSnapWithZoomEffect(room_width, room_height);
+   KrampusReturns::CameraControlStrategies2D::SmoothSnapWithFX *camera_control =
+      new KrampusReturns::CameraControlStrategies2D::SmoothSnapWithFX(room_width, room_height);
    //Wicked::CameraControlStrategies2D::HorizontalRail *camera_control =
       //new Wicked::CameraControlStrategies2D::HorizontalRail; //(room_width, room_height);
    camera_control->set_camera(&camera);

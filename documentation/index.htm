@@ -49,6 +49,7 @@ table td
 <body>
 <h1>TOC</h1>
 <ul>
+  <li><a href="#quintessence/KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.q.yml">quintessence/KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Entities/Blob.q.yml">quintessence/KrampusReturns/Entities/Blob.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Entities/Krampus.q.yml">quintessence/KrampusReturns/Entities/Krampus.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/EntityFactory.q.yml">quintessence/KrampusReturns/EntityFactory.q.yml</a></li>
@@ -60,6 +61,59 @@ table td
   <li><a href="#quintessence/KrampusReturns/Testing/Gym.q.yml">quintessence/KrampusReturns/Testing/Gym.q.yml</a></li>
 </ul>
 <h1>Components</h1>
+<ul>
+  <div class="component">
+    <h3 id="quintessence/KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.q.yml">quintessence/KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.q.yml</h3>
+     <table>
+<tr>
+  <td class="property">room_width</td>
+  <td class="property">float</td>
+</tr>
+<tr>
+  <td class="property">room_height</td>
+  <td class="property">float</td>
+</tr>
+<tr>
+  <td class="property">entity_to_follow</td>
+  <td class="property">AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*</td>
+</tr>
+<tr>
+  <td class="property">tracking_target_position_x</td>
+  <td class="property">float</td>
+</tr>
+<tr>
+  <td class="property">tracking_target_position_y</td>
+  <td class="property">float</td>
+</tr>
+<tr>
+  <td class="property">TYPE</td>
+  <td class="property">char*</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="method">initialize()</td>
+</tr>
+<tr>
+  <td class="method">update()</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::CameraControlStrategies2D::Base&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/CameraControlStrategies2D/Base.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;fabs&quot;, &quot;headers&quot;=&gt;[&quot;cmath&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Useful&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Useful.hpp&quot;]}</td>
+</tr>
+    </table>
+  </div>
+</ul>
 <ul>
   <div class="component">
     <h3 id="quintessence/KrampusReturns/Entities/Blob.q.yml">quintessence/KrampusReturns/Entities/Blob.q.yml</h3>
@@ -581,6 +635,9 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Entities::Krampus&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Entities/Krampus.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::CameraControlStrategies2D::SmoothSnapWithFX&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -1129,6 +1186,21 @@ table td
 <h1>Dependents</h1>
 <pre>
 {
+  "AllegroFlare/CameraControlStrategies2D/Base": [
+    "KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX",
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D": [
+    "KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX",
+    "KrampusReturns/EntityFactory",
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "fabs": [
+    "KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX"
+  ],
+  "AllegroFlare/Useful": [
+    "KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX"
+  ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D": [
     "KrampusReturns/Entities/Blob",
     "KrampusReturns/Entities/Krampus"
@@ -1162,10 +1234,6 @@ table td
     "KrampusReturns/EntityFactory",
     "KrampusReturns/Gameplay/Screen",
     "KrampusReturns/KrampusController"
-  ],
-  "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D": [
-    "KrampusReturns/EntityFactory",
-    "KrampusReturns/Gameplay/Screen"
   ],
   "KrampusReturns/Entities/Krampus": [
     "KrampusReturns/EntityFactory",
@@ -1217,9 +1285,6 @@ table td
     "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/Physics/AABB2D": [
-    "KrampusReturns/Gameplay/Screen"
-  ],
-  "AllegroFlare/CameraControlStrategies2D/Base": [
     "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/CameraControlStrategies2D/Snap": [
@@ -1291,6 +1356,9 @@ table td
     "KrampusReturns/Shaders/Primary"
   ],
   "KrampusReturns/KrampusController": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX": [
     "KrampusReturns/Gameplay/Screen"
   ],
   "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [

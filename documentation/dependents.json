@@ -1,4 +1,19 @@
 {
+  "AllegroFlare/CameraControlStrategies2D/Base": [
+    "KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX",
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D": [
+    "KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX",
+    "KrampusReturns/EntityFactory",
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "fabs": [
+    "KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX"
+  ],
+  "AllegroFlare/Useful": [
+    "KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX"
+  ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D": [
     "KrampusReturns/Entities/Blob",
     "KrampusReturns/Entities/Krampus"
@@ -32,10 +47,6 @@
     "KrampusReturns/EntityFactory",
     "KrampusReturns/Gameplay/Screen",
     "KrampusReturns/KrampusController"
-  ],
-  "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D": [
-    "KrampusReturns/EntityFactory",
-    "KrampusReturns/Gameplay/Screen"
   ],
   "KrampusReturns/Entities/Krampus": [
     "KrampusReturns/EntityFactory",
@@ -87,9 +98,6 @@
     "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/Physics/AABB2D": [
-    "KrampusReturns/Gameplay/Screen"
-  ],
-  "AllegroFlare/CameraControlStrategies2D/Base": [
     "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/CameraControlStrategies2D/Snap": [
@@ -161,6 +169,9 @@
     "KrampusReturns/Shaders/Primary"
   ],
   "KrampusReturns/KrampusController": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX": [
     "KrampusReturns/Gameplay/Screen"
   ],
   "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [
