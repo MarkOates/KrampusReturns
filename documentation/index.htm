@@ -125,6 +125,10 @@ table td
   <td class="property">float</td>
 </tr>
 <tr>
+  <td class="property">state_is_busy</td>
+  <td class="property">bool</td>
+</tr>
+<tr>
   <td class="property">initialized</td>
   <td class="property">bool</td>
 </tr>
@@ -193,6 +197,9 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Errors&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Errors.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;sin&quot;, &quot;headers&quot;=&gt;[&quot;cmath&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -1104,7 +1111,8 @@ table td
     "KrampusReturns/Entities/Krampus"
   ],
   "sin": [
-    "KrampusReturns/Entities/Blob"
+    "KrampusReturns/Entities/Blob",
+    "KrampusReturns/Entities/Krampus"
   ],
   "AllegroFlare/Vec2D": [
     "KrampusReturns/Entities/Blob",

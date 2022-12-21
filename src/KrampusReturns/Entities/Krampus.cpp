@@ -3,6 +3,7 @@
 #include <KrampusReturns/Entities/Krampus.hpp>
 
 #include <AllegroFlare/Errors.hpp>
+#include <cmath>
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
@@ -18,6 +19,7 @@ Krampus::Krampus()
    : AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D()
    , state(STATE_UNDEF)
    , state_changed_at(0.0f)
+   , state_is_busy(false)
    , initialized(false)
 {
 }
@@ -30,6 +32,7 @@ Krampus::~Krampus()
 
 void Krampus::update()
 {
+   float time_now = al_get_time();
    AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D::update();
 
    switch (state)
@@ -38,7 +41,21 @@ void Krampus::update()
         // nothing
       break;
 
+      case STATE_ATTACKING:
+        if (get_animation_finished())
+        {
+           state_is_busy = false;
+           set_state(STATE_STANDING);
+        }
+      break;
+
       case STATE_WALKING:
+        float age = infer_state_age(time_now); 
+        //float bounce_amount = sin(age * 3.0);
+
+        float bounce_counter = sin(time_now*34)*0.5 + 0.5;
+        get_bitmap_placement_ref().anchor = { 0, bounce_counter * 3.0f };
+        
         // TODO: bouncing effect
       break;
    }
@@ -46,9 +63,10 @@ void Krampus::update()
    return;
 }
 
-void Krampus::set_state(uint32_t state, float time_now)
+bool Krampus::set_state(uint32_t state, float time_now)
 {
-   if (this->state == state) return; // TODO: consider "override_if_same" option
+   if (this->state == state) return false; // TODO: consider "override_if_same" option
+   if (state_is_busy) return false;
 
    this->state = state;
    state_changed_at = time_now;
@@ -65,49 +83,67 @@ void Krampus::set_state(uint32_t state, float time_now)
          set_animation_playback_rate(1.7);
       break;
 
+      case STATE_ATTACKING:
+         set_animation("attack");
+         set_animation_playback_rate(1.0);
+         get_velocity_ref().position.x = 0.0;
+         get_velocity_ref().position.y = 0.0;
+         state_is_busy = true;
+      break;
+
       default:
          AllegroFlare::Errors::throw_error("KrampusReturns::Entities::Krampus::set_state", "unhandled state");
       break;
    }
 
-   return;
+   return true;
 }
 
 void Krampus::stand_still()
 {
-   if (state != STATE_STANDING) set_state(STATE_STANDING);
-   get_velocity_ref().position.x = 0.0;
-   get_velocity_ref().position.y = 0.0;
+   if (state == STATE_STANDING || set_state(STATE_STANDING))
+   {
+      get_velocity_ref().position.x = 0.0;
+      get_velocity_ref().position.y = 0.0;
+   }
    return;
 }
 
 void Krampus::walk_right()
 {
    face_right();
-   if (state != STATE_WALKING) set_state(STATE_WALKING);
-   get_velocity_ref().position.x = 1.5;
+   if (state == STATE_WALKING || set_state(STATE_WALKING))
+   {
+      get_velocity_ref().position.x = 1.5;
+   }
    return;
 }
 
 void Krampus::walk_up()
 {
-   if (state != STATE_WALKING) set_state(STATE_WALKING);
-   get_velocity_ref().position.y = -1.5;
+   if (state == STATE_WALKING || set_state(STATE_WALKING))
+   {
+      get_velocity_ref().position.y = -1.5;
+   }
    return;
 }
 
 void Krampus::walk_down()
 {
-   if (state != STATE_WALKING) set_state(STATE_WALKING);
-   get_velocity_ref().position.y = 1.5;
+   if (state == STATE_WALKING || set_state(STATE_WALKING))
+   {
+      get_velocity_ref().position.y = 1.5;
+   }
    return;
 }
 
 void Krampus::walk_left()
 {
    face_left();
-   if (state != STATE_WALKING) set_state(STATE_WALKING);
-   get_velocity_ref().position.x = -1.5;
+   if (state == STATE_WALKING || set_state(STATE_WALKING))
+   {
+      get_velocity_ref().position.x = -1.5;
+   }
    return;
 }
 
@@ -125,7 +161,7 @@ void Krampus::face_right()
 
 void Krampus::attack()
 {
-   set_animation("attack");
+   if (state != STATE_ATTACKING) set_state(STATE_ATTACKING);
    return;
 }
 

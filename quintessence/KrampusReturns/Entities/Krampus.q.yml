@@ -18,6 +18,10 @@ properties:
     type: float
     init_with: 0.0f
 
+  - name: state_is_busy
+    type: bool
+    init_with: false
+
   - name: initialized
     type: bool
     init_with: false
@@ -64,6 +68,7 @@ functions:
     virtual: true
     override: true
     body: |
+      float time_now = al_get_time();
       AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D::update();
 
       switch (state)
@@ -72,15 +77,32 @@ functions:
            // nothing
          break;
 
+         case STATE_ATTACKING:
+           if (get_animation_finished())
+           {
+              state_is_busy = false;
+              set_state(STATE_STANDING);
+           }
+         break;
+
          case STATE_WALKING:
+           float age = infer_state_age(time_now); 
+           //float bounce_amount = sin(age * 3.0);
+
+           float bounce_counter = sin(time_now*34)*0.5 + 0.5;
+           get_bitmap_placement_ref().anchor = { 0, bounce_counter * 3.0f };
+           
            // TODO: bouncing effect
          break;
       }
      
       return;
+    body_dependency_symbols:
+      - sin
 
 
   - name: set_state
+    type: bool
     private: true
     parameters:
       - name: state
@@ -90,7 +112,8 @@ functions:
         type: float
         default_argument: al_get_time()
     body: |
-      if (this->state == state) return; // TODO: consider "override_if_same" option
+      if (this->state == state) return false; // TODO: consider "override_if_same" option
+      if (state_is_busy) return false;
 
       this->state = state;
       state_changed_at = time_now;
@@ -107,51 +130,69 @@ functions:
             set_animation_playback_rate(1.7);
          break;
 
+         case STATE_ATTACKING:
+            set_animation("attack");
+            set_animation_playback_rate(1.0);
+            get_velocity_ref().position.x = 0.0;
+            get_velocity_ref().position.y = 0.0;
+            state_is_busy = true;
+         break;
+
          default:
             AllegroFlare::Errors::throw_error("KrampusReturns::Entities::Krampus::set_state", "unhandled state");
          break;
       }
 
-      return;
+      return true;
     body_dependency_symbols:
       - AllegroFlare::Errors
 
 
   - name: stand_still
     body: |
-      if (state != STATE_STANDING) set_state(STATE_STANDING);
-      get_velocity_ref().position.x = 0.0;
-      get_velocity_ref().position.y = 0.0;
+      if (state == STATE_STANDING || set_state(STATE_STANDING))
+      {
+         get_velocity_ref().position.x = 0.0;
+         get_velocity_ref().position.y = 0.0;
+      }
       return;
 
 
   - name: walk_right
     body: |
       face_right();
-      if (state != STATE_WALKING) set_state(STATE_WALKING);
-      get_velocity_ref().position.x = 1.5;
+      if (state == STATE_WALKING || set_state(STATE_WALKING))
+      {
+         get_velocity_ref().position.x = 1.5;
+      }
       return;
 
 
   - name: walk_up
     body: |
-      if (state != STATE_WALKING) set_state(STATE_WALKING);
-      get_velocity_ref().position.y = -1.5;
+      if (state == STATE_WALKING || set_state(STATE_WALKING))
+      {
+         get_velocity_ref().position.y = -1.5;
+      }
       return;
 
 
   - name: walk_down
     body: |
-      if (state != STATE_WALKING) set_state(STATE_WALKING);
-      get_velocity_ref().position.y = 1.5;
+      if (state == STATE_WALKING || set_state(STATE_WALKING))
+      {
+         get_velocity_ref().position.y = 1.5;
+      }
       return;
 
 
   - name: walk_left
     body: |
       face_left();
-      if (state != STATE_WALKING) set_state(STATE_WALKING);
-      get_velocity_ref().position.x = -1.5;
+      if (state == STATE_WALKING || set_state(STATE_WALKING))
+      {
+         get_velocity_ref().position.x = -1.5;
+      }
       return;
 
 
@@ -169,7 +210,7 @@ functions:
 
   - name: attack
     body: |
-      set_animation("attack");
+      if (state != STATE_ATTACKING) set_state(STATE_ATTACKING);
       return;
 
 
@@ -201,5 +242,7 @@ dependencies:
     headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D.hpp ]
   - symbol: AllegroFlare::Errors
     headers: [ AllegroFlare/Errors.hpp ]
+  - symbol: sin
+    headers: [ cmath ]
 
 

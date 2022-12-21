@@ -100,7 +100,7 @@ void KrampusController::key_down_func(int al_key_num, bool is_repeat)
 
       case ALLEGRO_KEY_SPACE:
          krampus->attack();
-         jump();
+         //jump();
       break;
    }
    return;

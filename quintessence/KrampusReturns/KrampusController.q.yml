@@ -84,7 +84,7 @@ functions:
 
          case ALLEGRO_KEY_SPACE:
             krampus->attack();
-            jump();
+            //jump();
          break;
       }
       return;

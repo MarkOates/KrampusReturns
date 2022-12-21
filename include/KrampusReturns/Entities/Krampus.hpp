@@ -21,8 +21,9 @@ namespace KrampusReturns
       private:
          uint32_t state;
          float state_changed_at;
+         bool state_is_busy;
          bool initialized;
-         void set_state(uint32_t state=STATE_UNDEF, float time_now=al_get_time());
+         bool set_state(uint32_t state=STATE_UNDEF, float time_now=al_get_time());
 
       protected:
 
