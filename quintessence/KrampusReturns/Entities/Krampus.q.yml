@@ -104,7 +104,6 @@ functions:
          break;
 
          case STATE_ATTACKING:
-           std::cout << "-- ATTAKKKK ---------- " << std::endl;
             set_animation("attack");
             set_animation_playback_rate(1.0);
             get_velocity_ref().position.x = 0.0;
@@ -139,17 +138,15 @@ functions:
          break;
 
          case STATE_ATTACKING:
-           std::cout << "-- CURRENT ANIM FRAME: " << get_current_animation_frame_num() << std::endl;
            if (get_animation_finished())
            {
               state_is_busy = false;
               set_state(STATE_STANDING);
-              emit_camera_shake_event();
            }
            else if (!attack_hit_activated && (get_current_animation_frame_num() >= ANIMATION_FRAME_NUM_ON_HIT))
            {
               // TODO: add create emit damage zone
-              emit_camera_shake_event();
+              emit_bump_camera_shake_event();
               attack_hit_activated = true;
            }
          break;
@@ -170,10 +167,10 @@ functions:
       - sin
 
 
-  - name: emit_camera_shake_event
+  - name: emit_bump_camera_shake_event
     guards: [ event_emitter ]
     body: |
-      event_emitter->emit_game_event(AllegroFlare::GameEvent("camera_shake"));
+      event_emitter->emit_game_event(AllegroFlare::GameEvent("camera_shake_bump"));
 
 
   - name: stand_still

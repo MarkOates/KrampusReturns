@@ -59,7 +59,6 @@ bool Krampus::set_state(uint32_t state, float time_now)
       break;
 
       case STATE_ATTACKING:
-        std::cout << "-- ATTAKKKK ---------- " << std::endl;
          set_animation("attack");
          set_animation_playback_rate(1.0);
          get_velocity_ref().position.x = 0.0;
@@ -96,17 +95,15 @@ void Krampus::update()
       break;
 
       case STATE_ATTACKING:
-        std::cout << "-- CURRENT ANIM FRAME: " << get_current_animation_frame_num() << std::endl;
         if (get_animation_finished())
         {
            state_is_busy = false;
            set_state(STATE_STANDING);
-           emit_camera_shake_event();
         }
         else if (!attack_hit_activated && (get_current_animation_frame_num() >= ANIMATION_FRAME_NUM_ON_HIT))
         {
            // TODO: add create emit damage zone
-           emit_camera_shake_event();
+           emit_bump_camera_shake_event();
            attack_hit_activated = true;
         }
       break;
@@ -125,16 +122,16 @@ void Krampus::update()
    return;
 }
 
-void Krampus::emit_camera_shake_event()
+void Krampus::emit_bump_camera_shake_event()
 {
    if (!(event_emitter))
    {
       std::stringstream error_message;
-      error_message << "[Krampus::emit_camera_shake_event]: error: guard \"event_emitter\" not met.";
+      error_message << "[Krampus::emit_bump_camera_shake_event]: error: guard \"event_emitter\" not met.";
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
-      throw std::runtime_error("Krampus::emit_camera_shake_event: error: guard \"event_emitter\" not met");
+      throw std::runtime_error("Krampus::emit_bump_camera_shake_event: error: guard \"event_emitter\" not met");
    }
-   event_emitter->emit_game_event(AllegroFlare::GameEvent("camera_shake"));
+   event_emitter->emit_game_event(AllegroFlare::GameEvent("camera_shake_bump"));
 }
 
 void Krampus::stand_still()

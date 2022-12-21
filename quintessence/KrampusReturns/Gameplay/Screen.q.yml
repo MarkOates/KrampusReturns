@@ -728,12 +728,22 @@ functions:
 
 
   - name: shake_camera
+    parameters:
+      - name: intensity
+        type: float
+        default_argument: 1.0
+      - name: duration
+        type: float
+        default_argument: 2.0
+      - name: time_now
+        type: float
+        default_argument: al_get_time()
     body: |
       using namespace KrampusReturns::CameraControlStrategies2D;
       if (camera_control_strategy->is_type(SmoothSnapWithFX::TYPE))
       {
          SmoothSnapWithFX *as_smooth_snap_with_fx = static_cast<SmoothSnapWithFX*>(camera_control_strategy);
-         as_smooth_snap_with_fx->start_impact_shake();
+         as_smooth_snap_with_fx->start_impact_shake(intensity, duration, time_now);
       }
       else
       {
@@ -753,14 +763,12 @@ functions:
     guards: [ ev, event_emitter ]
     body: |
       std::string event_name = ev->get_type();
+      float time_now = al_get_time();
       //std::cout << "--- Gameplay/Screen --- EVENT RECEIVED: \"" << event_name << "\"" << std::endl;
 
       std::map<std::string, std::function<void()>> event_map = {
-         { "camera_shake", [this](){
-             shake_camera();
-
-             // TODO: actually shake camera
-             std::cout << "> BOOM < CAMERA SHAKE!!" << std::endl;
+         { "camera_shake_bump", [this, time_now](){
+             shake_camera(3, 0.5, time_now);
          }},
       };
 

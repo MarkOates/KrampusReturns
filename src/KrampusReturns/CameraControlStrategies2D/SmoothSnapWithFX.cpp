@@ -24,6 +24,8 @@ SmoothSnapWithFX::SmoothSnapWithFX(float room_width, float room_height)
    , tracking_target_position_x(0.0)
    , tracking_target_position_y(0.0)
    , impact_shake_started_at(-9999.0)
+   , impact_shake_intensity(10.0)
+   , impact_shake_duration(1.0)
    , random({})
 {
 }
@@ -77,7 +79,6 @@ void SmoothSnapWithFX::initialize()
       throw std::runtime_error("SmoothSnapWithFX::initialize: error: guard \"(room_height > 0)\" not met");
    }
    // TODO: only allow setting "room_width" and "room_height" to positive values
-
    get_camera_ref()->scale = AllegroFlare::vec2d(1.0 / 4.8, 1.0 / 4.5);
    get_camera_ref()->position = {room_width/2, room_height/2};
 
@@ -87,8 +88,10 @@ void SmoothSnapWithFX::initialize()
    return;
 }
 
-void SmoothSnapWithFX::start_impact_shake(float time_now)
+void SmoothSnapWithFX::start_impact_shake(float intensity, float duration, float time_now)
 {
+   impact_shake_intensity = intensity;
+   impact_shake_duration = duration;
    impact_shake_started_at = time_now;
    return;
 }
@@ -138,11 +141,15 @@ void SmoothSnapWithFX::update()
 
    // Add impact shake effect
 
-   AllegroFlare::Vec2D max_impact_shake_offset = { random.get_random_float(-5, 5), random.get_random_float(-5, 5) };
-   float effect_multiplier = 1.0 - normalized_impact_shake_age(1.0, time_now);
+   float half_impact_shake_intensity = impact_shake_intensity * 0.5;
+   AllegroFlare::Vec2D max_impact_shake_offset = {
+      random.get_random_float(-half_impact_shake_intensity, half_impact_shake_intensity),
+      random.get_random_float(-half_impact_shake_intensity, half_impact_shake_intensity),
+   };
+   float effect_multiplier = 1.0 - normalized_impact_shake_age(impact_shake_duration, time_now);
    AllegroFlare::Vec2D impact_shake_offset = max_impact_shake_offset * effect_multiplier;
 
-   get_camera_ref()->position += impact_shake_offset;
+   get_camera_ref()->anchor = impact_shake_offset;
 
 
 

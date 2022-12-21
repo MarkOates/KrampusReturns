@@ -791,13 +791,13 @@ void Screen::primary_timer_func()
    return;
 }
 
-void Screen::shake_camera()
+void Screen::shake_camera(float intensity, float duration, float time_now)
 {
    using namespace KrampusReturns::CameraControlStrategies2D;
    if (camera_control_strategy->is_type(SmoothSnapWithFX::TYPE))
    {
       SmoothSnapWithFX *as_smooth_snap_with_fx = static_cast<SmoothSnapWithFX*>(camera_control_strategy);
-      as_smooth_snap_with_fx->start_impact_shake();
+      as_smooth_snap_with_fx->start_impact_shake(intensity, duration, time_now);
    }
    else
    {
@@ -824,14 +824,12 @@ void Screen::game_event_func(AllegroFlare::GameEvent* ev)
       throw std::runtime_error("Screen::game_event_func: error: guard \"event_emitter\" not met");
    }
    std::string event_name = ev->get_type();
+   float time_now = al_get_time();
    //std::cout << "--- Gameplay/Screen --- EVENT RECEIVED: \"" << event_name << "\"" << std::endl;
 
    std::map<std::string, std::function<void()>> event_map = {
-      { "camera_shake", [this](){
-          shake_camera();
-
-          // TODO: actually shake camera
-          std::cout << "> BOOM < CAMERA SHAKE!!" << std::endl;
+      { "camera_shake_bump", [this, time_now](){
+          shake_camera(3, 0.5, time_now);
       }},
    };
 

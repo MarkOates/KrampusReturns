@@ -37,7 +37,7 @@ namespace KrampusReturns
 
          void set_event_emitter(AllegroFlare::EventEmitter* event_emitter);
          virtual void update() override;
-         void emit_camera_shake_event();
+         void emit_bump_camera_shake_event();
          void stand_still();
          void walk_right();
          void walk_up();
