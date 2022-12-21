@@ -23,7 +23,7 @@ SmoothSnapWithFX::SmoothSnapWithFX(float room_width, float room_height)
    , entity_to_follow(nullptr)
    , tracking_target_position_x(0.0)
    , tracking_target_position_y(0.0)
-   , shake_started_at(-9999.0)
+   , impact_shake_started_at(-9999.0)
    , random({})
 {
 }
@@ -89,7 +89,7 @@ void SmoothSnapWithFX::initialize()
 
 void SmoothSnapWithFX::start_impact_shake(float time_now)
 {
-   shake_started_at = time_now;
+   impact_shake_started_at = time_now;
    return;
 }
 
@@ -110,7 +110,7 @@ void SmoothSnapWithFX::update()
       throw std::runtime_error("SmoothSnapWithFX::update: error: guard \"get_camera()\" not met");
    }
    float time_now = al_get_time();
-   float shake_age = calc_shake_age(time_now);
+   float impact_shake_age = calc_impact_shake_age(time_now);
 
 
    // Track entity, snapping to frame coordinates
@@ -136,13 +136,13 @@ void SmoothSnapWithFX::update()
    get_camera_ref()->position += (delta * 0.1);
 
 
-   // Add shake effect
+   // Add impact shake effect
 
-   AllegroFlare::Vec2D max_shake_offset = { random.get_random_float(-5, 5), random.get_random_float(-5, 5) };
-   float effect_multiplier = 1.0 - normalized_shake_age(1.0, time_now);
-   AllegroFlare::Vec2D shake_offset = max_shake_offset * effect_multiplier;
+   AllegroFlare::Vec2D max_impact_shake_offset = { random.get_random_float(-5, 5), random.get_random_float(-5, 5) };
+   float effect_multiplier = 1.0 - normalized_impact_shake_age(1.0, time_now);
+   AllegroFlare::Vec2D impact_shake_offset = max_impact_shake_offset * effect_multiplier;
 
-   get_camera_ref()->position += shake_offset;
+   get_camera_ref()->position += impact_shake_offset;
 
 
 
@@ -156,21 +156,21 @@ void SmoothSnapWithFX::update()
    return;
 }
 
-float SmoothSnapWithFX::calc_shake_age(float time_now)
+float SmoothSnapWithFX::calc_impact_shake_age(float time_now)
 {
-   return time_now - shake_started_at;
+   return time_now - impact_shake_started_at;
 }
 
-float SmoothSnapWithFX::normalized_shake_age(float duration, float time_now)
+float SmoothSnapWithFX::normalized_impact_shake_age(float duration, float time_now)
 {
    if (!((duration >= 0.0001f)))
    {
       std::stringstream error_message;
-      error_message << "[SmoothSnapWithFX::normalized_shake_age]: error: guard \"(duration >= 0.0001f)\" not met.";
+      error_message << "[SmoothSnapWithFX::normalized_impact_shake_age]: error: guard \"(duration >= 0.0001f)\" not met.";
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
-      throw std::runtime_error("SmoothSnapWithFX::normalized_shake_age: error: guard \"(duration >= 0.0001f)\" not met");
+      throw std::runtime_error("SmoothSnapWithFX::normalized_impact_shake_age: error: guard \"(duration >= 0.0001f)\" not met");
    }
-   return std::max(0.0f, std::min(duration, (time_now - shake_started_at))) / duration;
+   return std::max(0.0f, std::min(duration, (time_now - impact_shake_started_at))) / duration;
 }
 
 

@@ -33,7 +33,7 @@ properties:
     type: float
     init_with: 0.0
 
-  - name: shake_started_at
+  - name: impact_shake_started_at
     type: float
     init_with: -9999.0
 
@@ -73,7 +73,7 @@ functions:
         type: float
         default_argument: al_get_time()
     body: |
-      shake_started_at = time_now;
+      impact_shake_started_at = time_now;
       return;
 
 
@@ -83,7 +83,7 @@ functions:
     guards: [ get_initialized(), get_camera() ]
     body: |
       float time_now = al_get_time();
-      float shake_age = calc_shake_age(time_now);
+      float impact_shake_age = calc_impact_shake_age(time_now);
 
 
       // Track entity, snapping to frame coordinates
@@ -109,13 +109,13 @@ functions:
       get_camera_ref()->position += (delta * 0.1);
 
 
-      // Add shake effect
+      // Add impact shake effect
 
-      AllegroFlare::Vec2D max_shake_offset = { random.get_random_float(-5, 5), random.get_random_float(-5, 5) };
-      float effect_multiplier = 1.0 - normalized_shake_age(1.0, time_now);
-      AllegroFlare::Vec2D shake_offset = max_shake_offset * effect_multiplier;
+      AllegroFlare::Vec2D max_impact_shake_offset = { random.get_random_float(-5, 5), random.get_random_float(-5, 5) };
+      float effect_multiplier = 1.0 - normalized_impact_shake_age(1.0, time_now);
+      AllegroFlare::Vec2D impact_shake_offset = max_impact_shake_offset * effect_multiplier;
 
-      get_camera_ref()->position += shake_offset;
+      get_camera_ref()->position += impact_shake_offset;
       
 
 
@@ -132,17 +132,17 @@ functions:
       - fabs
 
 
-  - name: calc_shake_age
+  - name: calc_impact_shake_age
     type: float
     parameters:
       - name: time_now
         type: float
         default_argument: al_get_time()
     body: |
-      return time_now - shake_started_at;
+      return time_now - impact_shake_started_at;
 
 
-  - name: normalized_shake_age
+  - name: normalized_impact_shake_age
     type: float
     parameters:
       - name: duration
@@ -153,7 +153,7 @@ functions:
         default_argument: al_get_time()
     guards: [ (duration >= 0.0001f) ]
     body: |
-      return std::max(0.0f, std::min(duration, (time_now - shake_started_at))) / duration;
+      return std::max(0.0f, std::min(duration, (time_now - impact_shake_started_at))) / duration;
     body_dependency_symbols:
       - std::max
       - std::min
