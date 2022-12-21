@@ -35,6 +35,12 @@ functions:
       return;
 
 
+  - name: attack
+    body: |
+      set_animation("attack");
+      return;
+
+
   - name: initialize
     guards: [ (!initialized) ]
     body: |

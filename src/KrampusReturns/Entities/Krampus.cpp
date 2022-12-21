@@ -37,6 +37,12 @@ void Krampus::face_right()
    return;
 }
 
+void Krampus::attack()
+{
+   set_animation("attack");
+   return;
+}
+
 void Krampus::initialize()
 {
    if (!((!initialized)))

@@ -25,6 +25,7 @@ namespace KrampusReturns
 
          void face_left();
          void face_right();
+         void attack();
          void initialize();
       };
    }
