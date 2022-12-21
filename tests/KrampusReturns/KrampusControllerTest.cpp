@@ -15,7 +15,7 @@ TEST(KrampusReturns_KrampusControllerTest, can_be_created_without_blowing_up)
 #include <AllegroFlare/Prototypes/Platforming2D/EntityFlagNames.hpp>
 
 
-class KrampusReturns_Entities_KrampusGym : public KrampusReturns::Testing::Gym
+class KrampusReturns_Entities_KrampusControllerGym : public KrampusReturns::Testing::Gym
 {
 public:
    AllegroFlare::FrameAnimation::Book animation_book;
@@ -41,7 +41,7 @@ public:
 //}
 
 
-TEST_F(KrampusReturns_Entities_KrampusGym, can_be_created_without_blowing_up)
+TEST_F(KrampusReturns_Entities_KrampusControllerGym, can_be_created_without_blowing_up)
 {
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
 
