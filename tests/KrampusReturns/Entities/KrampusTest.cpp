@@ -39,7 +39,8 @@ TEST_F(KrampusReturns_Entities_KrampusGym, can_be_created_without_blowing_up)
      //{ "door-locked-hall", { "door-locked-hall-03.ogg", false } },
      //{ "doorbell", { "doorbell-02.ogg", false } },
       //{ "intro_music", { "krampus-intro-1.ogg", false } },
-      { "smash_club", { "smash-club-01.ogg", false } },
+      //{ "smash_club", { "smash-club-01.ogg", false } },
+      { "smash_club", { "smash-club-01.ogg", false, "restart" } },
    });
 
 
@@ -50,6 +51,7 @@ TEST_F(KrampusReturns_Entities_KrampusGym, can_be_created_without_blowing_up)
    krampus.initialize();
    krampus.get_place_ref().position = { 400/2, 240/2 };
    krampus.set(ON_MAP_NAME, "gym");
+
 
    get_platforming_2d_ref().add_entity_to_pool(&krampus);
    get_platforming_2d_ref().set_player_controlled_entity(&krampus);
