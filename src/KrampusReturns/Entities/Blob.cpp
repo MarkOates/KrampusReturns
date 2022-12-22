@@ -30,6 +30,27 @@ Blob::~Blob()
 }
 
 
+void Blob::initialize()
+{
+   if (!((!initialized)))
+   {
+      std::stringstream error_message;
+      error_message << "[Blob::initialize]: error: guard \"(!initialized)\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Blob::initialize: error: guard \"(!initialized)\" not met");
+   }
+   get_place_ref().size = { 15, 7 };
+   get_bitmap_placement_ref().scale = { 0.6, 0.6 };
+   set_bitmap_alignment_strategy("bottom_centered");
+   set_animation("blob");
+   set_preferred_direction();
+
+   set("damages_player");
+
+   initialized = true;
+   return;
+}
+
 void Blob::update()
 {
    if (!(initialized))
@@ -85,27 +106,6 @@ void Blob::set_preferred_direction()
    //wander_vector *= 1.3;
    preferred_direction = wander_vector.normalized();
 
-   return;
-}
-
-void Blob::initialize()
-{
-   if (!((!initialized)))
-   {
-      std::stringstream error_message;
-      error_message << "[Blob::initialize]: error: guard \"(!initialized)\" not met.";
-      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
-      throw std::runtime_error("Blob::initialize: error: guard \"(!initialized)\" not met");
-   }
-   get_place_ref().size = { 15, 7 };
-   get_bitmap_placement_ref().scale = { 0.6, 0.6 };
-   set_bitmap_alignment_strategy("bottom_centered");
-   set_animation("blob");
-   set_preferred_direction();
-
-   set("damages_player");
-
-   initialized = true;
    return;
 }
 

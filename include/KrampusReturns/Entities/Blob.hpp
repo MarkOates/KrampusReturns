@@ -27,9 +27,9 @@ namespace KrampusReturns
          Blob();
          virtual ~Blob();
 
+         void initialize();
          virtual void update() override;
          void set_preferred_direction();
-         void initialize();
       };
    }
 }
