@@ -33,6 +33,16 @@ TEST_F(KrampusReturns_Entities_KrampusGym, can_be_created_without_blowing_up)
 {
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
 
+   AllegroFlare::AudioController &audio_controller = get_framework_ref().get_audio_controller_ref();
+   audio_controller.set_and_load_sound_effect_elements({
+     //{ "menu-click-01.wav", { "menu-click-01.wav", false } },
+     //{ "door-locked-hall", { "door-locked-hall-03.ogg", false } },
+     //{ "doorbell", { "doorbell-02.ogg", false } },
+      //{ "intro_music", { "krampus-intro-1.ogg", false } },
+      { "smash_club", { "smash-club-01.ogg", false } },
+   });
+
+
    KrampusReturns::Entities::Krampus krampus;
    krampus.set_animation_book(&animation_book);
    krampus.set_event_emitter(event_emitter);

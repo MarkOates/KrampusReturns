@@ -100,17 +100,20 @@ void Runner::initialize()
      //{ "door-locked-hall", { "door-locked-hall-03.ogg", false } },
      //{ "doorbell", { "doorbell-02.ogg", false } },
      //{ "intro_music", { "krampus-intro-1.ogg", false } },
+     { "smash_club", { "smash-club-01.ogg", false } },
    });
 
 
    audio_controller.set_and_load_music_track_elements({
-     { "intro_music", { "krampus-intro-1.ogg", false } },
+     //{ "intro_music", { "krampus-intro-1.ogg", false } },
+     { "intro_music", { "krampus-intro-1.wav", false } },
 
      //{ "rain_on_roof", { "indoor-rain-looped-03.ogg", true } },
      //{ "heavy_outdoor_rain", { "heavy-rain-looped-01.ogg", true } },
      ////{ "file_example_OOG_1MG.ogg", { "file_example_OOG_1MG.ogg", true } },
      //{ "rain_while_in_basement", { "rain_while_in_basement.ogg", true } },
    });
+
 
 
    // setup the title screen

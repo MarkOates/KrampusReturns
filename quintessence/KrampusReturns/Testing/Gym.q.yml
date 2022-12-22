@@ -40,11 +40,13 @@ functions:
       #define TEST_FIXTURES_FOLDER "/msys64/home/Mark/Repos/KrampusReturns/tests/fixtures/"
       #define TEST_FIXTURE_FONT_FOLDER "/msys64/home/Mark/Repos/allegro_flare/bin/data/fonts/"
       #define TEST_FIXTURE_BITMAP_FOLDER "/msys64/home/Mark/Repos/allegro_flare/bin/data/bitmaps/"
+      #define TEST_FIXTURE_SAMPLE_FOLDER "/msys64/home/Mark/Repos/KrampusReturns/bin/programs/data/samples/"
       #define TEST_FIXTURE_TEST_RUN_SNAPSHOTS_FOLDER "/msys64/home/Mark/Repos/allegro_flare/tmp/test_snapshots/"
       #else
       #define TEST_FIXTURES_FOLDER "/Users/markoates/Repos/KrampusReturns/tests/fixtures/"
       #define TEST_FIXTURE_FONT_FOLDER "/Users/markoates/Repos/allegro_flare/bin/data/fonts/"
       #define TEST_FIXTURE_BITMAP_FOLDER "/Users/markoates/Repos/allegro_flare/bin/data/bitmaps/"
+      #define TEST_FIXTURE_SAMPLE_FOLDER "/Users/markoates/Repos/KrampusReturns/bin/programs/data/samples/"
       #define TEST_FIXTURE_TEST_RUN_SNAPSHOTS_FOLDER "/Users/markoates/Repos/allegro_flare/tmp/test_snapshots/"
       #endif
 
@@ -55,6 +57,7 @@ functions:
 
       framework.get_bitmap_bin_ref().set_full_path(TEST_FIXTURE_BITMAP_FOLDER);
       framework.get_font_bin_ref().set_full_path(TEST_FIXTURE_FONT_FOLDER);
+      framework.get_sample_bin_ref().set_full_path(TEST_FIXTURE_SAMPLE_FOLDER);
 
       //KrampusReturns::Gameplay::Screen platforming_2d;
       platforming_2d.set_bitmap_bin(&framework.get_bitmap_bin_ref());

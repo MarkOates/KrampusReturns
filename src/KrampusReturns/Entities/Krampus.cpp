@@ -95,27 +95,28 @@ void Krampus::update()
       break;
 
       case STATE_ATTACKING:
-        if (get_animation_finished())
-        {
-           state_is_busy = false;
-           set_state(STATE_STANDING);
-        }
-        else if (!attack_hit_activated && (get_current_animation_frame_num() >= ANIMATION_FRAME_NUM_ON_HIT))
-        {
-           // TODO: add create emit damage zone
-           emit_bump_camera_shake_event();
-           attack_hit_activated = true;
-        }
+         if (get_animation_finished())
+         {
+            state_is_busy = false;
+            set_state(STATE_STANDING);
+         }
+         else if (!attack_hit_activated && (get_current_animation_frame_num() >= ANIMATION_FRAME_NUM_ON_HIT))
+         {
+            // TODO: add create emit damage zone
+            emit_bump_camera_shake_event();
+            emit_smash_club_sound_effect();
+            attack_hit_activated = true;
+         }
       break;
 
       case STATE_WALKING:
-        float age = infer_state_age(time_now); 
-        //float bounce_amount = sin(age * 3.0);
+         float age = infer_state_age(time_now); 
+         //float bounce_amount = sin(age * 3.0);
 
-        float bounce_counter = sin(time_now*34)*0.5 + 0.5;
-        get_bitmap_placement_ref().anchor = { 0, bounce_counter * 3.0f };
+         float bounce_counter = sin(time_now*34)*0.5 + 0.5;
+         get_bitmap_placement_ref().anchor = { 0, bounce_counter * 3.0f };
         
-        // TODO: bouncing effect
+         // TODO: bouncing effect
       break;
    }
 
@@ -132,6 +133,18 @@ void Krampus::emit_bump_camera_shake_event()
       throw std::runtime_error("Krampus::emit_bump_camera_shake_event: error: guard \"event_emitter\" not met");
    }
    event_emitter->emit_game_event(AllegroFlare::GameEvent("camera_shake_bump"));
+}
+
+void Krampus::emit_smash_club_sound_effect()
+{
+   if (!(event_emitter))
+   {
+      std::stringstream error_message;
+      error_message << "[Krampus::emit_smash_club_sound_effect]: error: guard \"event_emitter\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Krampus::emit_smash_club_sound_effect: error: guard \"event_emitter\" not met");
+   }
+   event_emitter->emit_play_sound_effect_event("smash_club");
 }
 
 void Krampus::stand_still()
