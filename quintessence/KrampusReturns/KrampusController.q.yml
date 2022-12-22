@@ -119,33 +119,45 @@ functions:
          //}
 
 
-            bool moving = false;
+            bool moving_x = false;
 
             if (player_controls.get_right_button_pressed())
             {
                krampus->walk_right();
-               moving = true;
+               moving_x = true;
             }
             if (player_controls.get_left_button_pressed())
             {
                krampus->walk_left();
-               moving = true;
+               moving_x = true;
             }
+
+
+            bool moving_y = false;
+
             if (player_controls.get_up_button_pressed())
             {
                krampus->walk_up();
-               moving = true;
+               moving_y = true;
             }
             if (player_controls.get_down_button_pressed())
             {
                krampus->walk_down();
-               moving = true;
+               moving_y = true;
             }
 
   
-            if (!moving)
+            if (!moving_x && !moving_y)
             {
                krampus->stand_still();
+            }
+            else if (!moving_x)
+            {
+               krampus->stand_still_x();
+            }
+            else if (!moving_y)
+            {
+               krampus->stand_still_y();
             }
       }
       return;

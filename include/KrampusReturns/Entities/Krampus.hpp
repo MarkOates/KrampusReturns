@@ -40,6 +40,8 @@ namespace KrampusReturns
          void emit_bump_camera_shake_event();
          void emit_smash_club_sound_effect();
          void stand_still();
+         void stand_still_x();
+         void stand_still_y();
          void walk_right();
          void walk_up();
          void walk_down();

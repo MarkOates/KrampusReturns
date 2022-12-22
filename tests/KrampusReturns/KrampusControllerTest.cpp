@@ -47,6 +47,7 @@ TEST_F(KrampusReturns_Entities_KrampusControllerGym, can_be_created_without_blow
 
    KrampusReturns::Entities::Krampus krampus;
    krampus.set_draw_debug(true);
+   krampus.set_event_emitter(&get_framework_ref().get_event_emitter_ref());
    krampus.set_animation_book(&animation_book);
    krampus.initialize();
    krampus.get_place_ref().position = { 400/2, 240/2 };

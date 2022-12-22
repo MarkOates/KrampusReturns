@@ -13,6 +13,7 @@ namespace KrampusReturns
    {
    private:
       AllegroFlare::EventEmitter* event_emitter;
+      bool init_entities_drawing_debug;
 
    protected:
 
@@ -22,7 +23,9 @@ namespace KrampusReturns
       ~EntityFactory();
 
       void set_event_emitter(AllegroFlare::EventEmitter* event_emitter);
+      void set_init_entities_drawing_debug(bool init_entities_drawing_debug);
       AllegroFlare::EventEmitter* get_event_emitter() const;
+      bool get_init_entities_drawing_debug() const;
       KrampusReturns::Entities::Krampus* create_krampus(std::string on_map="[unset-on_map]", float x=0.0f, float y=0.0f);
    };
 }

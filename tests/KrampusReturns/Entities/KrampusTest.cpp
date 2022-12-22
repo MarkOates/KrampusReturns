@@ -47,8 +47,8 @@ TEST_F(KrampusReturns_Entities_KrampusGym, can_be_created_without_blowing_up)
    KrampusReturns::Entities::Krampus krampus;
    krampus.set_animation_book(&animation_book);
    krampus.set_event_emitter(event_emitter);
-   krampus.set_draw_debug(true);
    krampus.initialize();
+   //krampus.set_draw_debug(true);
    krampus.get_place_ref().position = { 400/2, 240/2 };
    krampus.set(ON_MAP_NAME, "gym");
 

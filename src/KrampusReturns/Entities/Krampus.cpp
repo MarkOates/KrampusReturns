@@ -157,6 +157,26 @@ void Krampus::stand_still()
    return;
 }
 
+void Krampus::stand_still_x()
+{
+   if (state == STATE_STANDING || set_state(STATE_STANDING))
+   {
+      get_velocity_ref().position.x = 0.0;
+      //get_velocity_ref().position.y = 0.0;
+   }
+   return;
+}
+
+void Krampus::stand_still_y()
+{
+   if (state == STATE_STANDING || set_state(STATE_STANDING))
+   {
+      //get_velocity_ref().position.x = 0.0;
+      get_velocity_ref().position.y = 0.0;
+   }
+   return;
+}
+
 void Krampus::walk_right()
 {
    face_right();

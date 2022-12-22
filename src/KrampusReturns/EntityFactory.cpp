@@ -16,6 +16,7 @@ namespace KrampusReturns
 EntityFactory::EntityFactory(AllegroFlare::EventEmitter* event_emitter)
    : AllegroFlare::Prototypes::Platforming2D::Entities::Basic2DFactory()
    , event_emitter(event_emitter)
+   , init_entities_drawing_debug(false)
 {
 }
 
@@ -31,9 +32,21 @@ void EntityFactory::set_event_emitter(AllegroFlare::EventEmitter* event_emitter)
 }
 
 
+void EntityFactory::set_init_entities_drawing_debug(bool init_entities_drawing_debug)
+{
+   this->init_entities_drawing_debug = init_entities_drawing_debug;
+}
+
+
 AllegroFlare::EventEmitter* EntityFactory::get_event_emitter() const
 {
    return event_emitter;
+}
+
+
+bool EntityFactory::get_init_entities_drawing_debug() const
+{
+   return init_entities_drawing_debug;
 }
 
 
@@ -55,16 +68,20 @@ KrampusReturns::Entities::Krampus* EntityFactory::create_krampus(std::string on_
    }
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
 
+   // dependencies
+
    KrampusReturns::Entities::Krampus *result = new KrampusReturns::Entities::Krampus();
    result->set_animation_book(get_animation_book());
    result->set_event_emitter(event_emitter);
    result->initialize();
 
+   // location
+
    result->get_place_ref().position = { x, y };
    result->set(ON_MAP_NAME, on_map);
 
-   //if (init_entities_drawing_debug) result->set_draw_debug(true);
-   if (true) result->set_draw_debug(true);
+   if (init_entities_drawing_debug) result->set_draw_debug(true);
+   //if (true) result->set_draw_debug(true);
 
    return result;
 }

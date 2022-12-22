@@ -16,6 +16,12 @@ properties:
     setter: true
     getter: true
 
+  - name: init_entities_drawing_debug
+    type: bool
+    init_with: false
+    setter: true
+    getter: true
+
 
 functions:
 
@@ -36,16 +42,20 @@ functions:
     body: |
       using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
 
+      // dependencies
+
       KrampusReturns::Entities::Krampus *result = new KrampusReturns::Entities::Krampus();
       result->set_animation_book(get_animation_book());
       result->set_event_emitter(event_emitter);
       result->initialize();
 
+      // location
+
       result->get_place_ref().position = { x, y };
       result->set(ON_MAP_NAME, on_map);
 
-      //if (init_entities_drawing_debug) result->set_draw_debug(true);
-      if (true) result->set_draw_debug(true);
+      if (init_entities_drawing_debug) result->set_draw_debug(true);
+      //if (true) result->set_draw_debug(true);
 
       return result;
     body_dependency_symbols:
