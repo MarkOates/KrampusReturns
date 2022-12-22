@@ -32,6 +32,14 @@ properties:
     type: bool
     init_with: false
 
+  - name: health
+    type: int
+    init_with: 5
+
+  - name: max_health
+    type: int
+    init_with: 5
+
   - name: initialized
     type: bool
     init_with: false
@@ -72,6 +80,17 @@ properties:
 
 
 functions:
+
+
+  - name: initialize
+    guards: [ (!initialized) ]
+    body: |
+      get_place_ref().size = { 32, 6 };
+      get_bitmap_placement_ref().scale = { 0.8, 0.8 };
+      set_bitmap_alignment_strategy("bottom_centered");
+      set_state(STATE_STANDING);
+      initialized = true;
+      return;
 
 
   - name: set_state
@@ -263,17 +282,6 @@ functions:
   - name: attack
     body: |
       if (state != STATE_ATTACKING) set_state(STATE_ATTACKING);
-      return;
-
-
-  - name: initialize
-    guards: [ (!initialized) ]
-    body: |
-      get_place_ref().size = { 32, 6 };
-      get_bitmap_placement_ref().scale = { 0.8, 0.8 };
-      set_bitmap_alignment_strategy("bottom_centered");
-      set_state(STATE_STANDING);
-      initialized = true;
       return;
 
 

@@ -796,6 +796,8 @@ functions:
       heart_placement.position = {80, 30} ;
       heart_placement.start_transform();
          AllegroFlare::Elements::HealthBars::Hearts hearts(font_bin, 5, 3);
+         hearts.set_heart_size(48);
+         hearts.set_heart_spacing(48+6);
          hearts.render();
       heart_placement.restore_transform();
 

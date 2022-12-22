@@ -25,6 +25,8 @@ namespace KrampusReturns
          float state_changed_at;
          bool state_is_busy;
          bool attack_hit_activated;
+         int health;
+         int max_health;
          bool initialized;
          bool set_state(uint32_t state=STATE_UNDEF, float time_now=al_get_time());
 
@@ -36,6 +38,7 @@ namespace KrampusReturns
          virtual ~Krampus();
 
          void set_event_emitter(AllegroFlare::EventEmitter* event_emitter);
+         void initialize();
          virtual void update() override;
          void emit_bump_camera_shake_event();
          void emit_smash_club_sound_effect();
@@ -49,7 +52,6 @@ namespace KrampusReturns
          void face_left();
          void face_right();
          void attack();
-         void initialize();
          float infer_state_age(float time_now=al_get_time());
       };
    }

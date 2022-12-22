@@ -22,6 +22,8 @@ Krampus::Krampus(AllegroFlare::EventEmitter* event_emitter)
    , state_changed_at(0.0f)
    , state_is_busy(false)
    , attack_hit_activated(false)
+   , health(5)
+   , max_health(5)
    , initialized(false)
 {
 }
@@ -37,6 +39,23 @@ void Krampus::set_event_emitter(AllegroFlare::EventEmitter* event_emitter)
    this->event_emitter = event_emitter;
 }
 
+
+void Krampus::initialize()
+{
+   if (!((!initialized)))
+   {
+      std::stringstream error_message;
+      error_message << "[Krampus::initialize]: error: guard \"(!initialized)\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Krampus::initialize: error: guard \"(!initialized)\" not met");
+   }
+   get_place_ref().size = { 32, 6 };
+   get_bitmap_placement_ref().scale = { 0.8, 0.8 };
+   set_bitmap_alignment_strategy("bottom_centered");
+   set_state(STATE_STANDING);
+   initialized = true;
+   return;
+}
 
 bool Krampus::set_state(uint32_t state, float time_now)
 {
@@ -230,23 +249,6 @@ void Krampus::face_right()
 void Krampus::attack()
 {
    if (state != STATE_ATTACKING) set_state(STATE_ATTACKING);
-   return;
-}
-
-void Krampus::initialize()
-{
-   if (!((!initialized)))
-   {
-      std::stringstream error_message;
-      error_message << "[Krampus::initialize]: error: guard \"(!initialized)\" not met.";
-      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
-      throw std::runtime_error("Krampus::initialize: error: guard \"(!initialized)\" not met");
-   }
-   get_place_ref().size = { 32, 6 };
-   get_bitmap_placement_ref().scale = { 0.8, 0.8 };
-   set_bitmap_alignment_strategy("bottom_centered");
-   set_state(STATE_STANDING);
-   initialized = true;
    return;
 }
 
