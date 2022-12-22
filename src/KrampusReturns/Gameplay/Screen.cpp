@@ -453,10 +453,26 @@ void Screen::reverse_gravity()
    gravity_reversed = !gravity_reversed;
 }
 
+std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> Screen::select_enemies(std::string on_map_name)
+{
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+
+   std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> result;
+   for (auto &entity : entity_pool)
+   {
+      if (!entity->exists("damages_player")) continue;
+      if (!entity->exists(ON_MAP_NAME, on_map_name)) continue;
+      
+      result.push_back(entity);
+   }
+   return result;
+}
+
 void Screen::update_enemy_collisions_with_damage_zones()
 {
    // HERE:
    // TODO: Implement this feature
+   std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> enemies = select_enemies();
    return;
 }
 

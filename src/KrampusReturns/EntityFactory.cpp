@@ -3,6 +3,7 @@
 #include <KrampusReturns/EntityFactory.hpp>
 
 #include <AllegroFlare/Prototypes/Platforming2D/EntityFlagNames.hpp>
+#include <KrampusReturns/Entities/Blob.hpp>
 #include <KrampusReturns/Entities/Krampus.hpp>
 #include <iostream>
 #include <sstream>
@@ -83,6 +84,22 @@ KrampusReturns::Entities::Krampus* EntityFactory::create_krampus(std::string on_
    if (init_entities_drawing_debug) result->set_draw_debug(true);
    //if (true) result->set_draw_debug(true);
 
+   return result;
+}
+
+KrampusReturns::Entities::Blob* EntityFactory::create_blob(std::string on_map, float x, float y)
+{
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+
+   KrampusReturns::Entities::Blob *result = new KrampusReturns::Entities::Blob();
+   result->set_animation_book(get_animation_book());
+   result->initialize();
+
+   result->get_place_ref().position = { x, y };
+   result->set(ON_MAP_NAME, on_map);
+
+   if (init_entities_drawing_debug) result->set_draw_debug(true);
+   //get_platforming_2d_ref().add_entity_to_pool(result);
    return result;
 }
 

@@ -88,11 +88,15 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
 
 
 
-      KrampusReturns::Entities::Krampus *krampus = entity_factory.create_krampus("map_a", 400/2, 240/2);
+      KrampusReturns::Entities::Krampus *krampus = entity_factory.create_krampus("map_a", 400/2 - 50, 240/2);
       platforming_2d.add_entity_to_pool(krampus);
 
       platforming_2d.set_player_controlled_entity(krampus);
       //platforming_2d.set_player_controlled_entity(created_entity);
+
+
+      KrampusReturns::Entities::Blob *blob = entity_factory.create_blob("map_a", 400/2+50, 240/2);
+      platforming_2d.add_entity_to_pool(blob);
 
 
       for (unsigned i=0; i<6; i++)

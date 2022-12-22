@@ -102,6 +102,9 @@ void Blob::initialize()
    set_bitmap_alignment_strategy("bottom_centered");
    set_animation("blob");
    set_preferred_direction();
+
+   set("damages_player");
+
    initialized = true;
    return;
 }

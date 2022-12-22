@@ -90,6 +90,7 @@ namespace KrampusReturns
          void initialize_backbuffer_sub_bitmap();
          void initialize();
          void reverse_gravity();
+         std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> select_enemies(std::string on_map_name="[on-map-name-not-set]");
          void update_enemy_collisions_with_damage_zones();
          void update_player_collisions_with_damage_zones();
          void update_entities();
