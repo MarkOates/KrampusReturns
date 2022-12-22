@@ -495,13 +495,14 @@ void Screen::update_enemy_collisions_with_damage_zones()
       select_enemies(currently_active_map_name);
 
    // NOTE: for now, one player controlled character evaluated:
-   KrampusReturns::Entities::Krampus* player_character =
+   KrampusReturns::Entities::Krampus* player_krampus =
       static_cast<KrampusReturns::Entities::Krampus*>(player_controlled_entity);
 
    for (auto &enemy : enemies)
    {
-      if (player_character->get_place_ref().collide(enemy->get_place_ref()))
+      if (player_krampus->get_place_ref().collide(enemy->get_place_ref()))
       {
+         player_krampus->take_hit(1);
          // HERE:
          // TODO: Implement collision reaction here
          // TODO: replace this camera_shake logic:
@@ -872,8 +873,8 @@ void Screen::draw_hud()
    heart_placement.start_transform();
       AllegroFlare::Elements::HealthBars::Hearts hearts(
          font_bin,
-         player_krampus->get_health(),
-         player_krampus->get_max_health()
+         player_krampus->get_max_health(),
+         player_krampus->get_health()
       );
       hearts.set_heart_size(48);
       hearts.set_heart_spacing(48+6);

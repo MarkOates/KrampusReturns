@@ -233,6 +233,10 @@ table td
   <td class="property">int</td>
 </tr>
 <tr>
+  <td class="property">stunned_from_damage_at</td>
+  <td class="property">float</td>
+</tr>
+<tr>
   <td class="property">initialized</td>
   <td class="property">bool</td>
 </tr>
@@ -250,6 +254,10 @@ table td
 </tr>
 <tr>
   <td class="property">STATE_WALKING</td>
+  <td class="property">uint32_t</td>
+</tr>
+<tr>
+  <td class="property">STATE_STUNNED_FROM_TAKING_DAMAGE</td>
   <td class="property">uint32_t</td>
 </tr>
 <tr>
@@ -302,6 +310,9 @@ table td
 </tr>
 <tr>
   <td class="method">attack()</td>
+</tr>
+<tr>
+  <td class="method">take_hit(1)</td>
 </tr>
 <tr>
   <td class="method">infer_state_age(1)</td>

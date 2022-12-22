@@ -24,6 +24,7 @@ Krampus::Krampus(AllegroFlare::EventEmitter* event_emitter)
    , attack_hit_activated(false)
    , health(5)
    , max_health(5)
+   , stunned_from_damage_at(0.0)
    , initialized(false)
 {
 }
@@ -89,6 +90,16 @@ bool Krampus::set_state(uint32_t state, float time_now)
          set_animation_playback_rate(1.7);
       break;
 
+      case STATE_STUNNED_FROM_TAKING_DAMAGE:
+         set_animation("take_damage");
+         set_animation_playback_rate(1.0);
+         get_velocity_ref().position.x = 0.0;
+         get_velocity_ref().position.y = 0.0;
+         state_is_busy = true;
+         //stunned_from_damage_at = time_now;
+         //invincible_because_of_damage_at = time_now;
+      break;
+
       case STATE_ATTACKING:
          set_animation("attack");
          set_animation_playback_rate(1.0);
@@ -125,6 +136,31 @@ void Krampus::update()
         // nothing
       break;
 
+      case STATE_WALKING: {
+            //float age = infer_state_age(time_now); 
+            //float bounce_amount = sin(age * 3.0);
+
+            float bounce_counter = sin(time_now*34)*0.5 + 0.5;
+            get_bitmap_placement_ref().anchor = { 0, bounce_counter * 3.0f };
+        
+            // TODO: bouncing effect
+      } break;
+
+      case STATE_STUNNED_FROM_TAKING_DAMAGE:
+         {
+            if (get_animation_finished())
+            {
+               set_animation("krampus");
+            }
+            float age = infer_state_age(time_now);
+            if (age > 0.5)
+            {
+               state_is_busy = false;
+               set_state(STATE_STANDING);
+            }
+         }
+      break;
+
       case STATE_ATTACKING:
          if (get_animation_finished())
          {
@@ -138,16 +174,6 @@ void Krampus::update()
             emit_smash_club_sound_effect();
             attack_hit_activated = true;
          }
-      break;
-
-      case STATE_WALKING:
-         float age = infer_state_age(time_now); 
-         //float bounce_amount = sin(age * 3.0);
-
-         float bounce_counter = sin(time_now*34)*0.5 + 0.5;
-         get_bitmap_placement_ref().anchor = { 0, bounce_counter * 3.0f };
-        
-         // TODO: bouncing effect
       break;
    }
 
@@ -261,6 +287,19 @@ void Krampus::face_right()
 void Krampus::attack()
 {
    if (state != STATE_ATTACKING) set_state(STATE_ATTACKING);
+   return;
+}
+
+void Krampus::take_hit(int damage)
+{
+   if (state == STATE_STUNNED_FROM_TAKING_DAMAGE) return; // TODO: replace this with more recovery time
+   health -= damage;
+   if (health > 0) set_state(STATE_STUNNED_FROM_TAKING_DAMAGE);
+   else
+   {
+      // TODO:
+      // set state: set state dying
+   }
    return;
 }
 

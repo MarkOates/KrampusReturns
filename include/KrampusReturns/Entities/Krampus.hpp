@@ -17,6 +17,7 @@ namespace KrampusReturns
          static constexpr uint32_t STATE_STANDING = 1;
          static constexpr uint32_t STATE_ATTACKING = 2;
          static constexpr uint32_t STATE_WALKING = 3;
+         static constexpr uint32_t STATE_STUNNED_FROM_TAKING_DAMAGE = 4;
          static constexpr char* TYPE = (char*)"Entities/Krampus";
 
       private:
@@ -27,6 +28,7 @@ namespace KrampusReturns
          bool attack_hit_activated;
          int health;
          int max_health;
+         float stunned_from_damage_at;
          bool initialized;
          bool set_state(uint32_t state=STATE_UNDEF, float time_now=al_get_time());
 
@@ -54,6 +56,7 @@ namespace KrampusReturns
          void face_left();
          void face_right();
          void attack();
+         void take_hit(int damage=1);
          float infer_state_age(float time_now=al_get_time());
       };
    }

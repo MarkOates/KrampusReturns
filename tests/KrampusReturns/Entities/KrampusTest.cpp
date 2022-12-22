@@ -53,6 +53,10 @@ TEST_F(KrampusReturns_Entities_KrampusGym, can_be_created_without_blowing_up)
    krampus.set(ON_MAP_NAME, "gym");
 
 
+   //KrampusReturns::Entities::Blob *blob = entity_factory.create_blob("map_a", 400/2+50, 240/2);
+   //platforming_2d.add_entity_to_pool(blob);
+
+
    get_platforming_2d_ref().add_entity_to_pool(&krampus);
    get_platforming_2d_ref().set_player_controlled_entity(&krampus);
 
