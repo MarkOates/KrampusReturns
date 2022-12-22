@@ -470,9 +470,23 @@ std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> Screen:
 
 void Screen::update_enemy_collisions_with_damage_zones()
 {
-   // HERE:
-   // TODO: Implement this feature
-   std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> enemies = select_enemies();
+   std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> enemies =
+      select_enemies(currently_active_map_name);
+
+   // NOTE: for now, one player controlled character evaluated:
+   KrampusReturns::Entities::Krampus* player_character =
+      static_cast<KrampusReturns::Entities::Krampus*>(player_controlled_entity);
+
+   for (auto &enemy : enemies)
+   {
+      if (player_character->get_place_ref().collide(enemy->get_place_ref()))
+      {
+         // HERE:
+         // TODO: Implement collision reaction here
+         // TODO: replace this camera_shake logic:
+         shake_camera();
+      }
+   }
    return;
 }
 
