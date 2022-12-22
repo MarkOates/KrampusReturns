@@ -6,6 +6,7 @@
 #include <AllegroFlare/CameraControlStrategies2D/Base.hpp>
 #include <AllegroFlare/Display.hpp>
 #include <AllegroFlare/EventEmitter.hpp>
+#include <AllegroFlare/FontBin.hpp>
 #include <AllegroFlare/GameEvent.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/TileMaps/Basic2D.hpp>
@@ -31,6 +32,7 @@ namespace KrampusReturns
       {
       private:
          AllegroFlare::BitmapBin* bitmap_bin;
+         AllegroFlare::FontBin* font_bin;
          AllegroFlare::Display* display;
          AllegroFlare::EventEmitter* event_emitter;
          int native_display_resolution_width;
@@ -62,7 +64,7 @@ namespace KrampusReturns
 
 
       public:
-         Screen(AllegroFlare::BitmapBin* bitmap_bin=nullptr, AllegroFlare::Display* display=nullptr, AllegroFlare::EventEmitter* event_emitter=nullptr);
+         Screen(AllegroFlare::BitmapBin* bitmap_bin=nullptr, AllegroFlare::FontBin* font_bin=nullptr, AllegroFlare::Display* display=nullptr, AllegroFlare::EventEmitter* event_emitter=nullptr);
          virtual ~Screen();
 
          void set_entity_pool(std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> entity_pool);
@@ -70,6 +72,7 @@ namespace KrampusReturns
          void set_show_tile_mesh(bool show_tile_mesh);
          void set_show_collision_tile_mesh(bool show_collision_tile_mesh);
          AllegroFlare::BitmapBin* get_bitmap_bin() const;
+         AllegroFlare::FontBin* get_font_bin() const;
          std::map<std::string, std::string> get_map_dictionary() const;
          AllegroFlare::Vec2D get_camera_baseline_zoom() const;
          AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* get_player_controlled_entity() const;
@@ -79,6 +82,7 @@ namespace KrampusReturns
          void set_display(AllegroFlare::Display* display=nullptr);
          void set_event_emitter(AllegroFlare::EventEmitter* event_emitter=nullptr);
          void set_bitmap_bin(AllegroFlare::BitmapBin* bitmap_bin=nullptr);
+         void set_font_bin(AllegroFlare::FontBin* font_bin=nullptr);
          void set_currently_active_map(std::string name="[unset-current-map-name-to-use]");
          void set_player_controlled_entity(KrampusReturns::Entities::Krampus* player_controlled_entity=nullptr);
          AllegroFlare::Prototypes::Platforming2D::Entities::TileMaps::Basic2D* find_map_by_name(std::string name="[unset-map-name]");
@@ -97,6 +101,7 @@ namespace KrampusReturns
          void draw_entities();
          void update();
          void draw();
+         void draw_hud();
          void toggle_show_collision_tile_mesh();
          void toggle_show_tile_mesh();
          virtual void primary_timer_func() override;

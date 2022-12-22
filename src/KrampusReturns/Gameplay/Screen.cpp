@@ -6,6 +6,7 @@
 #include <AllegroFlare/CameraControlStrategies2D/SmoothSnap.hpp>
 #include <AllegroFlare/CameraControlStrategies2D/SmoothSnapWithZoomEffect.hpp>
 #include <AllegroFlare/CameraControlStrategies2D/Snap.hpp>
+#include <AllegroFlare/Elements/HealthBars/Hearts.hpp>
 #include <AllegroFlare/EventNames.hpp>
 #include <AllegroFlare/Physics/AABB2D.hpp>
 #include <AllegroFlare/Physics/TileMapCollisionStepper.hpp>
@@ -29,9 +30,10 @@ namespace Gameplay
 {
 
 
-Screen::Screen(AllegroFlare::BitmapBin* bitmap_bin, AllegroFlare::Display* display, AllegroFlare::EventEmitter* event_emitter)
+Screen::Screen(AllegroFlare::BitmapBin* bitmap_bin, AllegroFlare::FontBin* font_bin, AllegroFlare::Display* display, AllegroFlare::EventEmitter* event_emitter)
    : AllegroFlare::Screens::Base("Prototypes::Platforming2D::Screen")
    , bitmap_bin(bitmap_bin)
+   , font_bin(font_bin)
    , display(display)
    , event_emitter(event_emitter)
    , native_display_resolution_width(1920)
@@ -88,6 +90,12 @@ void Screen::set_show_collision_tile_mesh(bool show_collision_tile_mesh)
 AllegroFlare::BitmapBin* Screen::get_bitmap_bin() const
 {
    return bitmap_bin;
+}
+
+
+AllegroFlare::FontBin* Screen::get_font_bin() const
+{
+   return font_bin;
 }
 
 
@@ -171,6 +179,19 @@ void Screen::set_bitmap_bin(AllegroFlare::BitmapBin* bitmap_bin)
       throw std::runtime_error("Screen::set_bitmap_bin: error: guard \"(!initialized)\" not met");
    }
    this->bitmap_bin = bitmap_bin;
+   return;
+}
+
+void Screen::set_font_bin(AllegroFlare::FontBin* font_bin)
+{
+   if (!((!initialized)))
+   {
+      std::stringstream error_message;
+      error_message << "[Screen::set_font_bin]: error: guard \"(!initialized)\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Screen::set_font_bin: error: guard \"(!initialized)\" not met");
+   }
+   this->font_bin = font_bin;
    return;
 }
 
@@ -819,6 +840,31 @@ void Screen::draw()
 
    camera.restore_transform();
    al_restore_state(&previous_target_bitmap);
+
+   // draw the hud
+
+   draw_hud();
+
+
+   return;
+}
+
+void Screen::draw_hud()
+{
+   if (!(font_bin))
+   {
+      std::stringstream error_message;
+      error_message << "[Screen::draw_hud]: error: guard \"font_bin\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Screen::draw_hud: error: guard \"font_bin\" not met");
+   }
+   // draw hearts
+   AllegroFlare::Placement2D heart_placement;
+   heart_placement.position = {80, 30} ;
+   heart_placement.start_transform();
+      AllegroFlare::Elements::HealthBars::Hearts hearts(font_bin, 5, 3);
+      hearts.render();
+   heart_placement.restore_transform();
 
    return;
 }

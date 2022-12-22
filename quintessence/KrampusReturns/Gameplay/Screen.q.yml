@@ -16,6 +16,13 @@ properties:
     getter: true
     setter: false
 
+  - name: font_bin
+    type: AllegroFlare::FontBin*
+    constructor_arg: true
+    init_with: nullptr
+    getter: true
+    setter: false
+
   - name: display
     type: AllegroFlare::Display*
     init_with: nullptr
@@ -157,6 +164,17 @@ functions:
     guards: [ (!initialized) ]
     body: |
       this->bitmap_bin = bitmap_bin;
+      return;
+
+
+  - name: set_font_bin
+    parameters:
+      - name: font_bin
+        type: AllegroFlare::FontBin*
+        default_argument: nullptr
+    guards: [ (!initialized) ]
+    body: |
+      this->font_bin = font_bin;
       return;
 
 
@@ -759,10 +777,31 @@ functions:
 
       camera.restore_transform();
       al_restore_state(&previous_target_bitmap);
+
+      // draw the hud
+
+      draw_hud();
+      
       
       return;
     body_dependency_symbols:
       - al_color_name
+
+
+  - name: draw_hud
+    guards: [ font_bin ]
+    body: |
+      // draw hearts
+      AllegroFlare::Placement2D heart_placement;
+      heart_placement.position = {80, 30} ;
+      heart_placement.start_transform();
+         AllegroFlare::Elements::HealthBars::Hearts hearts(font_bin, 5, 3);
+         hearts.render();
+      heart_placement.restore_transform();
+
+      return;
+    body_dependency_symbols:
+     - AllegroFlare::Elements::HealthBars::Hearts
 
 
   - name: toggle_show_collision_tile_mesh
@@ -1013,6 +1052,8 @@ dependencies:
 
   - symbol: AllegroFlare::BitmapBin
     headers: [ AllegroFlare/BitmapBin.hpp ]
+  - symbol: AllegroFlare::FontBin
+    headers: [ AllegroFlare/FontBin.hpp ]
   - symbol: al_color_name
     headers: [ allegro5/allegro_color.h ]
   - symbol: std::map<int, int>
@@ -1097,5 +1138,7 @@ dependencies:
     headers: [ KrampusReturns/Entities/Krampus.hpp ]
   - symbol: KrampusReturns::CameraControlStrategies2D::SmoothSnapWithFX
     headers: [ KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.hpp ]
+  - symbol: AllegroFlare::Elements::HealthBars::Hearts
+    headers: [ AllegroFlare/Elements/HealthBars/Hearts.hpp ]
 
 

@@ -32,8 +32,10 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
    framework.initialize();
 
    framework.get_bitmap_bin_ref().set_full_path(TEST_BASE_FOLDER "bitmaps/");
+   framework.get_font_bin_ref().set_full_path(TEST_BASE_FOLDER "fonts/");
 
    KrampusReturns::Gameplay::Screen platforming_2d;
+   platforming_2d.set_font_bin(&framework.get_font_bin_ref());
    platforming_2d.set_bitmap_bin(&framework.get_bitmap_bin_ref());
    platforming_2d.set_display(framework.get_primary_display());
    platforming_2d.set_event_emitter(&framework.get_event_emitter_ref());

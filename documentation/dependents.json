@@ -70,6 +70,11 @@
     "KrampusReturns/Shaders/Primary",
     "KrampusReturns/Testing/Gym"
   ],
+  "AllegroFlare/FontBin": [
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Shaders/Primary",
+    "KrampusReturns/Testing/Gym"
+  ],
   "al_color_name": [
     "KrampusReturns/Gameplay/Screen",
     "KrampusReturns/Gameplay/Screen",
@@ -186,6 +191,9 @@
   "KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX": [
     "KrampusReturns/Gameplay/Screen"
   ],
+  "AllegroFlare/Elements/HealthBars/Hearts": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
   "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [
     "KrampusReturns/Runner"
   ],
@@ -270,10 +278,6 @@
   ],
   "KrampusReturns/Gameplay/Screen": [
     "KrampusReturns/Runner",
-    "KrampusReturns/Testing/Gym"
-  ],
-  "AllegroFlare/FontBin": [
-    "KrampusReturns/Shaders/Primary",
     "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/Prototypes/FixedRoom2D/EntityCollectionHelper": [

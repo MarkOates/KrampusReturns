@@ -367,6 +367,10 @@ table td
   <td class="property">AllegroFlare::BitmapBin*</td>
 </tr>
 <tr>
+  <td class="property">font_bin</td>
+  <td class="property">AllegroFlare::FontBin*</td>
+</tr>
+<tr>
   <td class="property">display</td>
   <td class="property">AllegroFlare::Display*</td>
 </tr>
@@ -461,6 +465,9 @@ table td
   <td class="method">set_bitmap_bin(1)</td>
 </tr>
 <tr>
+  <td class="method">set_font_bin(1)</td>
+</tr>
+<tr>
   <td class="method">set_currently_active_map(1)</td>
 </tr>
 <tr>
@@ -533,6 +540,9 @@ table td
   <td class="method">draw()</td>
 </tr>
 <tr>
+  <td class="method">draw_hud()</td>
+</tr>
+<tr>
   <td class="method">toggle_show_collision_tile_mesh()</td>
 </tr>
 <tr>
@@ -581,6 +591,9 @@ table td
      <table>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::BitmapBin&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/BitmapBin.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::FontBin&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/FontBin.hpp&quot;]}</td>
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;al_color_name&quot;, &quot;headers&quot;=&gt;[&quot;allegro5/allegro_color.h&quot;]}</td>
@@ -707,6 +720,9 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::CameraControlStrategies2D::SmoothSnapWithFX&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Elements::HealthBars::Hearts&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Elements/HealthBars/Hearts.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -1326,6 +1342,11 @@ table td
     "KrampusReturns/Shaders/Primary",
     "KrampusReturns/Testing/Gym"
   ],
+  "AllegroFlare/FontBin": [
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Shaders/Primary",
+    "KrampusReturns/Testing/Gym"
+  ],
   "al_color_name": [
     "KrampusReturns/Gameplay/Screen",
     "KrampusReturns/Gameplay/Screen",
@@ -1442,6 +1463,9 @@ table td
   "KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX": [
     "KrampusReturns/Gameplay/Screen"
   ],
+  "AllegroFlare/Elements/HealthBars/Hearts": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
   "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [
     "KrampusReturns/Runner"
   ],
@@ -1526,10 +1550,6 @@ table td
   ],
   "KrampusReturns/Gameplay/Screen": [
     "KrampusReturns/Runner",
-    "KrampusReturns/Testing/Gym"
-  ],
-  "AllegroFlare/FontBin": [
-    "KrampusReturns/Shaders/Primary",
     "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/Prototypes/FixedRoom2D/EntityCollectionHelper": [
