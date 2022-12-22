@@ -89,6 +89,13 @@ KrampusReturns::Entities::Krampus* EntityFactory::create_krampus(std::string on_
 
 KrampusReturns::Entities::Blob* EntityFactory::create_blob(std::string on_map, float x, float y)
 {
+   if (!(get_animation_book()))
+   {
+      std::stringstream error_message;
+      error_message << "[EntityFactory::create_blob]: error: guard \"get_animation_book()\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("EntityFactory::create_blob: error: guard \"get_animation_book()\" not met");
+   }
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
 
    KrampusReturns::Entities::Blob *result = new KrampusReturns::Entities::Blob();

@@ -1,8 +1,10 @@
 #pragma once
 
 
+#include <AllegroFlare/FrameAnimation/Book.hpp>
 #include <AllegroFlare/Frameworks/Full.hpp>
 #include <AllegroFlare/Placement2D.hpp>
+#include <KrampusReturns/EntityFactory.hpp>
 #include <KrampusReturns/Gameplay/Screen.hpp>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
@@ -18,16 +20,19 @@ namespace KrampusReturns
       {
       private:
          AllegroFlare::Frameworks::Full framework;
+         KrampusReturns::EntityFactory entity_factory;
          KrampusReturns::Gameplay::Screen platforming_2d;
+         AllegroFlare::FrameAnimation::Book animation_book;
 
       protected:
 
 
       public:
-         Gym(KrampusReturns::Gameplay::Screen platforming_2d=nullptr);
+         Gym();
          virtual ~Gym();
 
          AllegroFlare::Frameworks::Full &get_framework_ref();
+         KrampusReturns::EntityFactory &get_entity_factory_ref();
          KrampusReturns::Gameplay::Screen &get_platforming_2d_ref();
          virtual void SetUp() override;
          void run_gym();

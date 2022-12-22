@@ -14,12 +14,19 @@ properties:
     init_with: '{}'
     getter_ref: true
 
-  - name: platforming_2d
-    type: KrampusReturns::Gameplay::Screen
-    constructor_arg: true
-    init_with: nullptr
+  - name: entity_factory
+    type: KrampusReturns::EntityFactory
+    init_with: ''
     getter_ref: true
 
+  - name: platforming_2d
+    type: KrampusReturns::Gameplay::Screen
+    init_with: ''
+    getter_ref: true
+
+  - name: animation_book
+    type: AllegroFlare::FrameAnimation::Book
+    init_with: ''
 
 functions:
 
@@ -59,6 +66,7 @@ functions:
       framework.get_font_bin_ref().set_full_path(TEST_FIXTURE_FONT_FOLDER);
       framework.get_sample_bin_ref().set_full_path(TEST_FIXTURE_SAMPLE_FOLDER);
 
+
       //KrampusReturns::Gameplay::Screen platforming_2d;
       platforming_2d.set_bitmap_bin(&framework.get_bitmap_bin_ref());
       platforming_2d.set_font_bin(&framework.get_font_bin_ref());
@@ -74,6 +82,23 @@ functions:
       //platforming_2d.initialize();
 
       framework.register_screen("platforming_2d", &platforming_2d);
+
+
+
+      animation_book.set_png_source_filename(
+         "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.png"
+      );
+      animation_book.set_json_source_filename(
+         "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.json"
+      );
+      animation_book.set_sprite_sheet_scale(2);
+      animation_book.initialize();
+
+
+      //KrampusReturns::EntityFactory entity_factory;
+      entity_factory.set_event_emitter(&framework.get_event_emitter_ref());
+      entity_factory.set_bitmap_bin(&framework.get_bitmap_bin_ref());
+      entity_factory.set_animation_book(&animation_book);
 
 
       return;
@@ -357,5 +382,9 @@ dependencies:
     headers: [ AllegroFlare/Frameworks/Full.hpp ]
   - symbol: KrampusReturns::Gameplay::Screen
     headers: [ KrampusReturns/Gameplay/Screen.hpp ]
+  - symbol: KrampusReturns::EntityFactory
+    headers: [ KrampusReturns/EntityFactory.hpp ]
+  - symbol: AllegroFlare::FrameAnimation::Book
+    headers: [ AllegroFlare/FrameAnimation/Book.hpp ]
 
 

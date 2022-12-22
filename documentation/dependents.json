@@ -317,5 +317,11 @@
   ],
   "AllegroFlare/TerminalColors": [
     "KrampusReturns/Testing/Gym"
+  ],
+  "KrampusReturns/EntityFactory": [
+    "KrampusReturns/Testing/Gym"
+  ],
+  "AllegroFlare/FrameAnimation/Book": [
+    "KrampusReturns/Testing/Gym"
   ]
 }

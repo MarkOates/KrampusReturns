@@ -29,6 +29,8 @@ namespace KrampusReturns
          int health;
          int max_health;
          float stunned_from_damage_at;
+         float invincible_from_taking_damage_at;
+         bool invincible_from_taking_damage;
          bool initialized;
          bool set_state(uint32_t state=STATE_UNDEF, float time_now=al_get_time());
 
@@ -46,6 +48,7 @@ namespace KrampusReturns
          virtual void update() override;
          void emit_bump_camera_shake_event();
          void emit_smash_club_sound_effect();
+         void emit_take_damage_sound_effect();
          void stand_still();
          void stand_still_x();
          void stand_still_y();
@@ -58,6 +61,7 @@ namespace KrampusReturns
          void attack();
          void take_hit(int damage=1);
          float infer_state_age(float time_now=al_get_time());
+         float infer_age_of(float event_at=0.0f, float time_now=al_get_time());
       };
    }
 }

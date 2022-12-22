@@ -22,10 +22,12 @@ namespace Testing
 {
 
 
-Gym::Gym(KrampusReturns::Gameplay::Screen platforming_2d)
+Gym::Gym()
    : ::testing::Test()
    , framework({})
-   , platforming_2d(platforming_2d)
+   , entity_factory()
+   , platforming_2d()
+   , animation_book()
 {
 }
 
@@ -38,6 +40,12 @@ Gym::~Gym()
 AllegroFlare::Frameworks::Full &Gym::get_framework_ref()
 {
    return framework;
+}
+
+
+KrampusReturns::EntityFactory &Gym::get_entity_factory_ref()
+{
+   return entity_factory;
 }
 
 
@@ -79,6 +87,7 @@ void Gym::SetUp()
    framework.get_font_bin_ref().set_full_path(TEST_FIXTURE_FONT_FOLDER);
    framework.get_sample_bin_ref().set_full_path(TEST_FIXTURE_SAMPLE_FOLDER);
 
+
    //KrampusReturns::Gameplay::Screen platforming_2d;
    platforming_2d.set_bitmap_bin(&framework.get_bitmap_bin_ref());
    platforming_2d.set_font_bin(&framework.get_font_bin_ref());
@@ -94,6 +103,23 @@ void Gym::SetUp()
    //platforming_2d.initialize();
 
    framework.register_screen("platforming_2d", &platforming_2d);
+
+
+
+   animation_book.set_png_source_filename(
+      "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.png"
+   );
+   animation_book.set_json_source_filename(
+      "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.json"
+   );
+   animation_book.set_sprite_sheet_scale(2);
+   animation_book.initialize();
+
+
+   //KrampusReturns::EntityFactory entity_factory;
+   entity_factory.set_event_emitter(&framework.get_event_emitter_ref());
+   entity_factory.set_bitmap_bin(&framework.get_bitmap_bin_ref());
+   entity_factory.set_animation_book(&animation_book);
 
 
    return;

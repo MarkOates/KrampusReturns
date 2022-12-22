@@ -70,11 +70,11 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
    entity_factory.set_animation_book(&animation_book);
 
 
-      AllegroFlare::Prototypes::Platforming2D::Entities::Basic2DFactory factory(
-         &framework.get_bitmap_bin_ref(),
-         &animation_book
-      );
-      factory.set_init_entities_drawing_debug(true);
+      //AllegroFlare::Prototypes::Platforming2D::Entities::Basic2DFactory factory(
+         //&framework.get_bitmap_bin_ref(),
+         //&animation_book
+      //);
+      //factory.set_init_entities_drawing_debug(true);
 
       //AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* created_entity =
          //factory.create_for_aabb2d("map_a", 16-1, 32-1);
@@ -117,17 +117,17 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
       }
 
       AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* collectable2 =
-         factory.create_collectable("map_a", 5*16, 20*16);
+         entity_factory.create_collectable("map_a", 5*16, 20*16);
       platforming_2d.add_entity_to_pool(collectable2);
 
-      platforming_2d.add_entity_to_pool(factory.create_collectable("map_a", 45*16, 2*16));
+      platforming_2d.add_entity_to_pool(entity_factory.create_collectable("map_a", 45*16, 2*16));
 
       // create the door
       platforming_2d.add_entity_to_pool(
-         factory.create_door("map_b", 4.5*16, 7*16, "map_a", 46*16, 26*16)
+         entity_factory.create_door("map_b", 4.5*16, 7*16, "map_a", 46*16, 26*16)
       );
       platforming_2d.add_entity_to_pool(
-         factory.create_door("map_a", 46*16, 26*16, "map_b", 4.5*16, 7*16)
+         entity_factory.create_door("map_a", 46*16, 26*16, "map_b", 4.5*16, 7*16)
       );
 
 

@@ -237,6 +237,14 @@ table td
   <td class="property">float</td>
 </tr>
 <tr>
+  <td class="property">invincible_from_taking_damage_at</td>
+  <td class="property">float</td>
+</tr>
+<tr>
+  <td class="property">invincible_from_taking_damage</td>
+  <td class="property">bool</td>
+</tr>
+<tr>
   <td class="property">initialized</td>
   <td class="property">bool</td>
 </tr>
@@ -282,6 +290,9 @@ table td
   <td class="method">emit_smash_club_sound_effect()</td>
 </tr>
 <tr>
+  <td class="method">emit_take_damage_sound_effect()</td>
+</tr>
+<tr>
   <td class="method">stand_still()</td>
 </tr>
 <tr>
@@ -316,6 +327,9 @@ table td
 </tr>
 <tr>
   <td class="method">infer_state_age(1)</td>
+</tr>
+<tr>
+  <td class="method">infer_age_of(2)</td>
 </tr>
     </table>
      <table>
@@ -1160,8 +1174,16 @@ table td
   <td class="property">AllegroFlare::Frameworks::Full</td>
 </tr>
 <tr>
+  <td class="property">entity_factory</td>
+  <td class="property">KrampusReturns::EntityFactory</td>
+</tr>
+<tr>
   <td class="property">platforming_2d</td>
   <td class="property">KrampusReturns::Gameplay::Screen</td>
+</tr>
+<tr>
+  <td class="property">animation_book</td>
+  <td class="property">AllegroFlare::FrameAnimation::Book</td>
 </tr>
     </table>
      <table>
@@ -1283,6 +1305,12 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Gameplay::Screen&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Gameplay/Screen.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::EntityFactory&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/EntityFactory.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::FrameAnimation::Book&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/FrameAnimation/Book.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -1607,6 +1635,12 @@ table td
     "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/TerminalColors": [
+    "KrampusReturns/Testing/Gym"
+  ],
+  "KrampusReturns/EntityFactory": [
+    "KrampusReturns/Testing/Gym"
+  ],
+  "AllegroFlare/FrameAnimation/Book": [
     "KrampusReturns/Testing/Gym"
   ]
 }

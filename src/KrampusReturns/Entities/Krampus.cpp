@@ -25,6 +25,8 @@ Krampus::Krampus(AllegroFlare::EventEmitter* event_emitter)
    , health(5)
    , max_health(5)
    , stunned_from_damage_at(0.0)
+   , invincible_from_taking_damage_at(0.0)
+   , invincible_from_taking_damage(false)
    , initialized(false)
 {
 }
@@ -96,8 +98,10 @@ bool Krampus::set_state(uint32_t state, float time_now)
          get_velocity_ref().position.x = 0.0;
          get_velocity_ref().position.y = 0.0;
          state_is_busy = true;
-         //stunned_from_damage_at = time_now;
-         //invincible_because_of_damage_at = time_now;
+         invincible_from_taking_damage = true;
+         invincible_from_taking_damage_at = time_now;
+         emit_bump_camera_shake_event();
+         emit_take_damage_sound_effect();
       break;
 
       case STATE_ATTACKING:
@@ -129,6 +133,10 @@ void Krampus::update()
    static int ANIMATION_FRAME_NUM_ON_HIT = 3;
    float time_now = al_get_time();
    AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D::update();
+   if (infer_age_of(invincible_from_taking_damage_at, time_now) > 2.5) // TODO: replace 2.5 with "AGE*"
+   {
+      invincible_from_taking_damage = false;
+   }
 
    switch (state)
    {
@@ -148,10 +156,10 @@ void Krampus::update()
 
       case STATE_STUNNED_FROM_TAKING_DAMAGE:
          {
-            if (get_animation_finished())
-            {
-               set_animation("krampus");
-            }
+            //if (get_animation_finished())
+            //{
+               //set_animation("krampus");
+            //}
             float age = infer_state_age(time_now);
             if (age > 0.5)
             {
@@ -202,6 +210,18 @@ void Krampus::emit_smash_club_sound_effect()
       throw std::runtime_error("Krampus::emit_smash_club_sound_effect: error: guard \"event_emitter\" not met");
    }
    event_emitter->emit_play_sound_effect_event("smash_club");
+}
+
+void Krampus::emit_take_damage_sound_effect()
+{
+   if (!(event_emitter))
+   {
+      std::stringstream error_message;
+      error_message << "[Krampus::emit_take_damage_sound_effect]: error: guard \"event_emitter\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Krampus::emit_take_damage_sound_effect: error: guard \"event_emitter\" not met");
+   }
+   event_emitter->emit_play_sound_effect_event("krampus_hit");
 }
 
 void Krampus::stand_still()
@@ -292,8 +312,11 @@ void Krampus::attack()
 
 void Krampus::take_hit(int damage)
 {
-   if (state == STATE_STUNNED_FROM_TAKING_DAMAGE) return; // TODO: replace this with more recovery time
+   if (invincible_from_taking_damage) return;
+   //if (state == STATE_STUNNED_FROM_TAKING_DAMAGE) return; // TODO: replace this with more recovery time
+
    health -= damage;
+
    if (health > 0) set_state(STATE_STUNNED_FROM_TAKING_DAMAGE);
    else
    {
@@ -306,6 +329,11 @@ void Krampus::take_hit(int damage)
 float Krampus::infer_state_age(float time_now)
 {
    return time_now - state_changed_at;
+}
+
+float Krampus::infer_age_of(float event_at, float time_now)
+{
+   return time_now - event_at;
 }
 
 

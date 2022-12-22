@@ -46,6 +46,14 @@ properties:
     type: float
     init_with: 0.0
 
+  - name: invincible_from_taking_damage_at
+    type: float
+    init_with: 0.0
+
+  - name: invincible_from_taking_damage
+    type: bool
+    init_with: false
+
   - name: initialized
     type: bool
     init_with: false
@@ -141,8 +149,10 @@ functions:
             get_velocity_ref().position.x = 0.0;
             get_velocity_ref().position.y = 0.0;
             state_is_busy = true;
-            //stunned_from_damage_at = time_now;
-            //invincible_because_of_damage_at = time_now;
+            invincible_from_taking_damage = true;
+            invincible_from_taking_damage_at = time_now;
+            emit_bump_camera_shake_event();
+            emit_take_damage_sound_effect();
          break;
 
          case STATE_ATTACKING:
@@ -172,6 +182,10 @@ functions:
       static int ANIMATION_FRAME_NUM_ON_HIT = 3;
       float time_now = al_get_time();
       AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D::update();
+      if (infer_age_of(invincible_from_taking_damage_at, time_now) > 2.5) // TODO: replace 2.5 with "AGE*"
+      {
+         invincible_from_taking_damage = false;
+      }
 
       switch (state)
       {
@@ -191,10 +205,10 @@ functions:
 
          case STATE_STUNNED_FROM_TAKING_DAMAGE:
             {
-               if (get_animation_finished())
-               {
-                  set_animation("krampus");
-               }
+               //if (get_animation_finished())
+               //{
+                  //set_animation("krampus");
+               //}
                float age = infer_state_age(time_now);
                if (age > 0.5)
                {
@@ -235,6 +249,12 @@ functions:
     guards: [ event_emitter ]
     body: |
       event_emitter->emit_play_sound_effect_event("smash_club");
+
+
+  - name: emit_take_damage_sound_effect
+    guards: [ event_emitter ]
+    body: |
+      event_emitter->emit_play_sound_effect_event("krampus_hit");
 
 
   - name: stand_still
@@ -329,8 +349,11 @@ functions:
         type: int
         default_argument: 1
     body: |
-      if (state == STATE_STUNNED_FROM_TAKING_DAMAGE) return; // TODO: replace this with more recovery time
+      if (invincible_from_taking_damage) return;
+      //if (state == STATE_STUNNED_FROM_TAKING_DAMAGE) return; // TODO: replace this with more recovery time
+
       health -= damage;
+
       if (health > 0) set_state(STATE_STUNNED_FROM_TAKING_DAMAGE);
       else
       {
@@ -348,6 +371,19 @@ functions:
         default_argument: al_get_time()
     body: |
       return time_now - state_changed_at;
+    
+
+  - name: infer_age_of
+    type: float
+    parameters:
+      - name: event_at
+        type: float
+        default_argument: 0.0f
+      - name: time_now
+        type: float
+        default_argument: al_get_time()
+    body: |
+      return time_now - event_at;
     
 
 dependencies:

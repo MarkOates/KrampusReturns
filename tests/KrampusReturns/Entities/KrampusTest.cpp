@@ -35,12 +35,8 @@ TEST_F(KrampusReturns_Entities_KrampusGym, can_be_created_without_blowing_up)
 
    AllegroFlare::AudioController &audio_controller = get_framework_ref().get_audio_controller_ref();
    audio_controller.set_and_load_sound_effect_elements({
-     //{ "menu-click-01.wav", { "menu-click-01.wav", false } },
-     //{ "door-locked-hall", { "door-locked-hall-03.ogg", false } },
-     //{ "doorbell", { "doorbell-02.ogg", false } },
-      //{ "intro_music", { "krampus-intro-1.ogg", false } },
-      //{ "smash_club", { "smash-club-01.ogg", false } },
       { "smash_club", { "smash-club-01.ogg", false, "restart" } },
+      { "krampus_hit", { "krampus_hit.ogg", false, "restart" } },
    });
 
 
@@ -49,16 +45,20 @@ TEST_F(KrampusReturns_Entities_KrampusGym, can_be_created_without_blowing_up)
    krampus.set_event_emitter(event_emitter);
    krampus.initialize();
    //krampus.set_draw_debug(true);
-   krampus.get_place_ref().position = { 400/2, 240/2 };
+   krampus.get_place_ref().position = { 400/2-50, 240/2 };
    krampus.set(ON_MAP_NAME, "gym");
-
-
-   //KrampusReturns::Entities::Blob *blob = entity_factory.create_blob("map_a", 400/2+50, 240/2);
-   //platforming_2d.add_entity_to_pool(blob);
 
 
    get_platforming_2d_ref().add_entity_to_pool(&krampus);
    get_platforming_2d_ref().set_player_controlled_entity(&krampus);
+
+
+   KrampusReturns::Entities::Blob *blob = get_entity_factory_ref().create_blob("gym", 400/2+50, 240/2);
+   get_platforming_2d_ref().add_entity_to_pool(blob);
+
+
+   //get_platforming_2d_ref().add_entity_to_pool(&krampus);
+   //get_platforming_2d_ref().set_player_controlled_entity(&krampus);
 
    run_gym();
 }

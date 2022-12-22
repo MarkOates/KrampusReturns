@@ -75,6 +75,7 @@ functions:
       - name: y
         type: float
         default_argument: 0.0f
+    guards: [ get_animation_book() ]
     parameters:
     body: |
       using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;

@@ -100,7 +100,8 @@ void Runner::initialize()
      //{ "door-locked-hall", { "door-locked-hall-03.ogg", false } },
      //{ "doorbell", { "doorbell-02.ogg", false } },
      //{ "intro_music", { "krampus-intro-1.ogg", false } },
-     { "smash_club", { "smash-club-01.ogg", false } },
+      { "smash_club", { "smash-club-01.ogg", false } },
+      { "krampus_hit", { "krampus_hit.ogg", false, "restart" } },
    });
 
 

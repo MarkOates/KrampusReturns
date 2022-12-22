@@ -503,10 +503,6 @@ void Screen::update_enemy_collisions_with_damage_zones()
       if (player_krampus->get_place_ref().collide(enemy->get_place_ref()))
       {
          player_krampus->take_hit(1);
-         // HERE:
-         // TODO: Implement collision reaction here
-         // TODO: replace this camera_shake logic:
-         shake_camera();
       }
    }
    return;
