@@ -453,6 +453,20 @@ void Screen::reverse_gravity()
    gravity_reversed = !gravity_reversed;
 }
 
+void Screen::update_enemy_collisions_with_damage_zones()
+{
+   // HERE:
+   // TODO: Implement this feature
+   return;
+}
+
+void Screen::update_player_collisions_with_damage_zones()
+{
+   // HERE:
+   // TODO: Implement this feature
+   return;
+}
+
 void Screen::update_entities()
 {
    if (!(initialized))
@@ -545,6 +559,13 @@ void Screen::update_entities()
    // update the player colliding on the goalposts
    // TODO: allow this function to run without being coupled with a "player_controlled_entity"
    if (player_controlled_entity) update_player_collisions_with_goalposts();
+
+
+   update_enemy_collisions_with_damage_zones();
+
+
+   update_player_collisions_with_damage_zones();
+
 
    // update the player colliding on the doors
    //check_player_collisions_with_doors(); // this is now done by pressing 'UP' when over a door
