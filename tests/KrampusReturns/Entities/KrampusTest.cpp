@@ -36,7 +36,7 @@ TEST_F(KrampusReturns_Entities_KrampusGym, can_be_created_without_blowing_up)
    AllegroFlare::AudioController &audio_controller = get_framework_ref().get_audio_controller_ref();
    audio_controller.set_and_load_sound_effect_elements({
       { "smash_club", { "smash-club-01.ogg", false, "restart" } },
-      { "krampus_hit", { "krampus_hit.ogg", false, "restart" } },
+      { "krampus_hit", { "player_hit.wav", false, "restart" } },
    });
 
 

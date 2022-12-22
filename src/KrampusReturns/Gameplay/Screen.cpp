@@ -865,7 +865,7 @@ void Screen::draw_hud()
 
    // draw hearts
    AllegroFlare::Placement2D heart_placement;
-   heart_placement.position = {80, 30};
+   heart_placement.position = {80, 40};
    heart_placement.start_transform();
       AllegroFlare::Elements::HealthBars::Hearts hearts(
          font_bin,

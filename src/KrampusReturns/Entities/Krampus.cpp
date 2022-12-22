@@ -236,7 +236,7 @@ void Krampus::stand_still()
 
 void Krampus::stand_still_x()
 {
-   if (state == STATE_STANDING || set_state(STATE_STANDING))
+   //if (state == STATE_STANDING || set_state(STATE_STANDING))
    {
       get_velocity_ref().position.x = 0.0;
       //get_velocity_ref().position.y = 0.0;
@@ -246,7 +246,7 @@ void Krampus::stand_still_x()
 
 void Krampus::stand_still_y()
 {
-   if (state == STATE_STANDING || set_state(STATE_STANDING))
+   //if (state == STATE_STANDING || set_state(STATE_STANDING))
    {
       //get_velocity_ref().position.x = 0.0;
       get_velocity_ref().position.y = 0.0;
@@ -320,6 +320,7 @@ void Krampus::take_hit(int damage)
    if (health > 0) set_state(STATE_STUNNED_FROM_TAKING_DAMAGE);
    else
    {
+      throw std::runtime_error("player died");
       // TODO:
       // set state: set state dying
    }
