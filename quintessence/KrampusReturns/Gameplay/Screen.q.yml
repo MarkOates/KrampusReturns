@@ -791,11 +791,23 @@ functions:
   - name: draw_hud
     guards: [ font_bin ]
     body: |
+
+      if (!player_controlled_entity) return;
+
+      // TODO: NOTE: here player_controlled_entity is assumed to be krampus
+      // WARNING: TESTING:
+      KrampusReturns::Entities::Krampus* player_krampus =
+         static_cast<KrampusReturns::Entities::Krampus*>(player_controlled_entity);
+
       // draw hearts
       AllegroFlare::Placement2D heart_placement;
-      heart_placement.position = {80, 30} ;
+      heart_placement.position = {80, 30};
       heart_placement.start_transform();
-         AllegroFlare::Elements::HealthBars::Hearts hearts(font_bin, 5, 3);
+         AllegroFlare::Elements::HealthBars::Hearts hearts(
+            font_bin,
+            player_krampus->get_health(),
+            player_krampus->get_max_health()
+         );
          hearts.set_heart_size(48);
          hearts.set_heart_spacing(48+6);
          hearts.render();

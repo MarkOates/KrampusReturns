@@ -38,6 +38,8 @@ namespace KrampusReturns
          virtual ~Krampus();
 
          void set_event_emitter(AllegroFlare::EventEmitter* event_emitter);
+         int get_health() const;
+         int get_max_health() const;
          void initialize();
          virtual void update() override;
          void emit_bump_camera_shake_event();

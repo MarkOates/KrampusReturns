@@ -858,11 +858,23 @@ void Screen::draw_hud()
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
       throw std::runtime_error("Screen::draw_hud: error: guard \"font_bin\" not met");
    }
+
+   if (!player_controlled_entity) return;
+
+   // TODO: NOTE: here player_controlled_entity is assumed to be krampus
+   // WARNING: TESTING:
+   KrampusReturns::Entities::Krampus* player_krampus =
+      static_cast<KrampusReturns::Entities::Krampus*>(player_controlled_entity);
+
    // draw hearts
    AllegroFlare::Placement2D heart_placement;
-   heart_placement.position = {80, 30} ;
+   heart_placement.position = {80, 30};
    heart_placement.start_transform();
-      AllegroFlare::Elements::HealthBars::Hearts hearts(font_bin, 5, 3);
+      AllegroFlare::Elements::HealthBars::Hearts hearts(
+         font_bin,
+         player_krampus->get_health(),
+         player_krampus->get_max_health()
+      );
       hearts.set_heart_size(48);
       hearts.set_heart_spacing(48+6);
       hearts.render();

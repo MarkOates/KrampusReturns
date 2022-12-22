@@ -35,10 +35,12 @@ properties:
   - name: health
     type: int
     init_with: 5
+    getter: true
 
   - name: max_health
     type: int
     init_with: 5
+    getter: true
 
   - name: initialized
     type: bool

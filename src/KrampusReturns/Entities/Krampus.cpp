@@ -40,6 +40,18 @@ void Krampus::set_event_emitter(AllegroFlare::EventEmitter* event_emitter)
 }
 
 
+int Krampus::get_health() const
+{
+   return health;
+}
+
+
+int Krampus::get_max_health() const
+{
+   return max_health;
+}
+
+
 void Krampus::initialize()
 {
    if (!((!initialized)))
