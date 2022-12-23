@@ -48,21 +48,21 @@ functions:
       // TODO: validate there is one and only "objectgroup" layer
 
       // get first j["layers"] that is a ["type"] == "objectgroup"
-      bool tilelayer_type_found = false;
-      nlohmann::json tilelayer;
+      bool object_layer_type_found = false;
+      nlohmann::json object_layer_json;
       for (auto &layer : source_json["layers"].items())
       {
          if (layer.value()["type"] == "objectgroup")
          {
-            tilelayer = layer.value();
-            tilelayer_type_found = true;
+            object_layer_json = layer.value();
+            object_layer_type_found = true;
             break;
          }
       }
-      if (!tilelayer_type_found)
+      if (!object_layer_type_found)
       {
          // TODO: Swap this error message with AllegroFlare::Errors
-         throw std::runtime_error("TMJObjectLoader: error: tilelayer type not found.");
+         throw std::runtime_error("TMJObjectLoader: error: layer of type \"objectgroup\" not found.");
       }
       
 
