@@ -85,6 +85,27 @@ void TMJObjectLoader::load()
    }
 
 
+   // load the objects one by one
+
+   if (!object_layer_json.contains("objects"))
+   {
+      std::stringstream error_message;
+      error_message << "Expecting [\"objects\"] to exist in the \"objectgoup\"-type layer, but it does not.";
+      AllegroFlare::Errors::throw_error("KrampusReturns::TMJObjectLoader", error_message.str());
+   }
+   for (auto &object_json : object_layer_json["objects"].items())
+   {
+      std::string class_property = object_json.value()["class"].get<std::string>();
+      float x_property = object_json.value()["x"].get<float>();
+      float y_property = object_json.value()["y"].get<float>();
+      float width_property = object_json.value()["width"].get<float>();
+      float height_property = object_json.value()["height"].get<float>();
+
+      // TODO: send object data to something
+   }
+
+
+
    return;
 }
 
