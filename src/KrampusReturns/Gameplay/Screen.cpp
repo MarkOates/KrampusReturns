@@ -489,8 +489,9 @@ void Screen::load_level_and_start(std::string level_name)
    #endif
 
    set_map_dictionary({
-      { "map_a", TEST_BASE_FOLDER "maps/krampus-returns-map01-0x.tmj" },
-      { "map_b", TEST_BASE_FOLDER "maps/krampus-returns-map02-0x.tmj" },
+      //{ "map_a", TEST_BASE_FOLDER "maps/krampus-returns-map01-0x.tmj" },
+      //{ "map_b", TEST_BASE_FOLDER "maps/krampus-returns-map02-0x.tmj" },
+      { "map_a", TEST_BASE_FOLDER "maps/krampus-returns-level-1-1-0x.tmj" },
    });
    initialize_maps();
 
