@@ -997,6 +997,33 @@ void Screen::draw_hud()
    }
 
 
+
+   if (state == STATE_PLAYING_IN_LEVEL)
+   {
+      // draw hud elements (hearts, etc.)
+
+      // TODO: NOTE: here player_controlled_entity is assumed to be krampus
+      // WARNING: TESTING:
+      KrampusReturns::Entities::Krampus* player_krampus =
+         static_cast<KrampusReturns::Entities::Krampus*>(player_controlled_entity);
+
+      // draw hearts
+      AllegroFlare::Placement2D heart_placement;
+      heart_placement.position = {80, 40};
+      heart_placement.start_transform();
+         AllegroFlare::Elements::HealthBars::Hearts hearts(
+            font_bin,
+            player_krampus->get_max_health(),
+            player_krampus->get_health()
+         );
+         hearts.set_heart_size(48);
+         hearts.set_heart_spacing(48+6);
+         hearts.render();
+      heart_placement.restore_transform();
+   }
+
+
+
    // draw some state overlay
 
    if (showing_banner_text)
@@ -1010,29 +1037,6 @@ void Screen::draw_hud()
       float thickness = 20;
       al_draw_rectangle(inset, inset, 1920-inset, 1080-inset, banner_text_color, thickness);
    }
-
-
-
-   // draw hud elements (hearts, etc.)
-
-   // TODO: NOTE: here player_controlled_entity is assumed to be krampus
-   // WARNING: TESTING:
-   KrampusReturns::Entities::Krampus* player_krampus =
-      static_cast<KrampusReturns::Entities::Krampus*>(player_controlled_entity);
-
-   // draw hearts
-   AllegroFlare::Placement2D heart_placement;
-   heart_placement.position = {80, 40};
-   heart_placement.start_transform();
-      AllegroFlare::Elements::HealthBars::Hearts hearts(
-         font_bin,
-         player_krampus->get_max_health(),
-         player_krampus->get_health()
-      );
-      hearts.set_heart_size(48);
-      hearts.set_heart_spacing(48+6);
-      hearts.render();
-   heart_placement.restore_transform();
 
 
 
