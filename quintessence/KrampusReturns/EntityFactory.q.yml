@@ -64,6 +64,7 @@ functions:
 
 
   - name: create_blob
+    const: true
     type: KrampusReturns::Entities::Blob*
     parameters:
       - name: on_map

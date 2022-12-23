@@ -529,12 +529,15 @@ void Screen::load_objects_from_map_files()
 
       KrampusReturns::TMJObjectLoader loader(map_filename);
       loader.set_object_parsed_callback(tmj_object_parse_callback_func);
+
+      //std::string *passing_map_name = new std::string(map_name);
       std::pair<KrampusReturns::Gameplay::Screen*, std::string> *user_data =
-         new std::pair<KrampusReturns::Gameplay::Screen*, std::string>(this, map_name);
+         new std::pair<KrampusReturns::Gameplay::Screen*, std::string>{this, map_name};
       
-      loader.set_object_parsed_callback_user_data(this);
+      loader.set_object_parsed_callback_user_data(user_data);
       loader.load();
 
+      //delete passing_map_name;
       delete user_data;
    }
 }
@@ -558,6 +561,7 @@ void Screen::tmj_object_parse_callback_func(std::string object_class, float x, f
       static_cast<std::pair<KrampusReturns::Gameplay::Screen*, std::string>*>(user_data);
 
    std::string map_name = as_custom_user_data->second;
+          //std::cout << "    ----- map_name: " << map_name << std::endl;
    KrampusReturns::Gameplay::Screen* gameplay_screen = as_custom_user_data->first;
 
    KrampusReturns::EntityFactory entity_factory;
@@ -568,18 +572,25 @@ void Screen::tmj_object_parse_callback_func(std::string object_class, float x, f
    // TODO: use factory to build objects
 
    std::map<std::string, std::function<void()>> object_map = {
-      { "goal", [x, y, w, h, map_name, entity_factory](){
-          std::cout << "----------- GOAL parsed" << std::endl;
+      { "goal", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
+          //std::cout << "----------- GOAL parsed" << std::endl;
           // TODO: here
       }},
-      { "boss", [x, y, w, h, map_name, entity_factory](){
+      { "boss", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
           // TODO: here
       }},
-      { "blob", [x, y, w, h, map_name, entity_factory](){
-          std::cout << "----------- BLOB parsed" << std::endl;
+      { "blob", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
+          //std::cout << "----------- BLOB parsed" << std::endl;
+          //std::cout << "     - map_name: " << map_name << std::endl;
+          //std::cout << "     - gameplay_screen: " << gameplay_screen << std::endl;
+          AllegroFlare::Vec2D center = center_of(x, y, w, h);
+          KrampusReturns::Entities::Blob *entity = entity_factory.create_blob("map_a", center.x, center.y);
+          //KrampusReturns::Entities::Blob *entity = entity_factory.create_blob(map_name, x, y);
+          gameplay_screen->add_entity_to_pool(entity);
+          
           // TODO: here
       }},
-      { "goal", [x, y, w, h, map_name, entity_factory](){
+      { "door", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
           // TODO: here
       }},
    };

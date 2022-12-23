@@ -88,7 +88,7 @@ KrampusReturns::Entities::Krampus* EntityFactory::create_krampus(std::string on_
    return result;
 }
 
-KrampusReturns::Entities::Blob* EntityFactory::create_blob(std::string on_map, float x, float y)
+KrampusReturns::Entities::Blob* EntityFactory::create_blob(std::string on_map, float x, float y) const
 {
    if (!(get_animation_book()))
    {
