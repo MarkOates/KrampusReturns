@@ -560,6 +560,13 @@ void Screen::tmj_object_parse_callback_func(std::string object_class, float x, f
    std::string map_name = as_custom_user_data->second;
    KrampusReturns::Gameplay::Screen* gameplay_screen = as_custom_user_data->first;
 
+   KrampusReturns::EntityFactory entity_factory;
+   entity_factory.set_event_emitter(gameplay_screen->event_emitter);
+   entity_factory.set_bitmap_bin(gameplay_screen->bitmap_bin);
+   entity_factory.set_animation_book(&gameplay_screen->animation_book);
+
+   // TODO: use factory to build objects
+
    std::map<std::string, std::function<void()>> object_map = {
       { "goal", [x, y, w, h, user_data](){
           std::cout << "----------- GOAL parsed" << std::endl;
