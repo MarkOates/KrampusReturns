@@ -575,9 +575,13 @@ functions:
 
          KrampusReturns::TMJObjectLoader loader(map_filename);
          loader.set_object_parsed_callback(tmj_object_parse_callback_func);
+         std::pair<KrampusReturns::Gameplay::Screen*, std::string> *user_data =
+            new std::pair<KrampusReturns::Gameplay::Screen*, std::string>(this, map_name);
+         
          loader.set_object_parsed_callback_user_data(this);
-
          loader.load();
+
+         delete user_data;
       }
     body_dependency_symbols:
      - KrampusReturns::TMJObjectLoader
@@ -624,7 +628,15 @@ functions:
       - name: user_data
         type: void*
         default_argument: nullptr
+    guards: [ user_data ]
     body: |
+      // TODO: pass in map name as part of user_data
+      std::pair<KrampusReturns::Gameplay::Screen*, std::string> *as_custom_user_data=
+         static_cast<std::pair<KrampusReturns::Gameplay::Screen*, std::string>*>(user_data);
+
+      std::string map_name = as_custom_user_data->second;
+      KrampusReturns::Gameplay::Screen* gameplay_screen = as_custom_user_data->first;
+
       std::map<std::string, std::function<void()>> object_map = {
          { "goal", [x, y, w, h, user_data](){
              std::cout << "----------- GOAL parsed" << std::endl;

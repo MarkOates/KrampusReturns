@@ -529,9 +529,13 @@ void Screen::load_objects_from_map_files()
 
       KrampusReturns::TMJObjectLoader loader(map_filename);
       loader.set_object_parsed_callback(tmj_object_parse_callback_func);
+      std::pair<KrampusReturns::Gameplay::Screen*, std::string> *user_data =
+         new std::pair<KrampusReturns::Gameplay::Screen*, std::string>(this, map_name);
+      
       loader.set_object_parsed_callback_user_data(this);
-
       loader.load();
+
+      delete user_data;
    }
 }
 
@@ -542,6 +546,20 @@ AllegroFlare::Vec2D Screen::center_of(float x, float y, float w, float h)
 
 void Screen::tmj_object_parse_callback_func(std::string object_class, float x, float y, float w, float h, void* user_data)
 {
+   if (!(user_data))
+   {
+      std::stringstream error_message;
+      error_message << "[Screen::tmj_object_parse_callback_func]: error: guard \"user_data\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Screen::tmj_object_parse_callback_func: error: guard \"user_data\" not met");
+   }
+   // TODO: pass in map name as part of user_data
+   std::pair<KrampusReturns::Gameplay::Screen*, std::string> *as_custom_user_data=
+      static_cast<std::pair<KrampusReturns::Gameplay::Screen*, std::string>*>(user_data);
+
+   std::string map_name = as_custom_user_data->second;
+   KrampusReturns::Gameplay::Screen* gameplay_screen = as_custom_user_data->first;
+
    std::map<std::string, std::function<void()>> object_map = {
       { "goal", [x, y, w, h, user_data](){
           std::cout << "----------- GOAL parsed" << std::endl;
