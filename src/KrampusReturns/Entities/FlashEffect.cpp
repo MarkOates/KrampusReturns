@@ -38,12 +38,9 @@ void FlashEffect::initialize()
    using namespace AllegroFlare::Prototypes::Platforming2D;
 
    get_place_ref().size = { 0, 0 };
-   //get_bitmap_placement_ref().align = { 0.5, 0.5 };
    get_bitmap_placement_ref().scale = { 0.65, 0.65 };
    set_bitmap_alignment_strategy("centered");
-   set_draw_debug(true);
    set_animation("flash_fx1"); // TODO: consider changing this, or setting it to a different default
-
 
    initialized = true;
    return;

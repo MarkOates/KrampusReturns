@@ -1275,12 +1275,13 @@ functions:
              if (!currently_active_map)
                 throw std::runtime_error("cannot \"spawn_flash_effect\", no currently_active_map");
 
-             float x, y = 200;
+             float x = 200, y = 200;
              KrampusReturns::EntityFactory entity_factory;
-             // TODO: set the animation book here:
-             //entity_factory.set_animation_book(&animation_book);
+             entity_factory.set_animation_book(&animation_book);
 
-             entity_factory.create_flash_fx1(currently_active_map_name, x, y);
+             KrampusReturns::Entities::FlashEffect *flash_effect =
+                entity_factory.create_flash_fx1(currently_active_map_name, x, y);
+             add_entity_to_pool(flash_effect);
              
              //set_state(STATE_FINISHED_LEVEL, time_now);
          }},
@@ -1318,6 +1319,10 @@ functions:
       {
       case ALLEGRO_KEY_W:
          set_state(STATE_FINISHED_LEVEL);
+         //toggle_show_collision_tile_mesh();
+         break;
+      case ALLEGRO_KEY_S:
+         event_emitter->emit_game_event(AllegroFlare::GameEvent("spawn_flash_effect"));
          //toggle_show_collision_tile_mesh();
          break;
       case ALLEGRO_KEY_1:
