@@ -123,7 +123,7 @@ namespace KrampusReturns
          void set_full_color_overlay(ALLEGRO_COLOR base_color=ALLEGRO_COLOR{0.0, 0.3, 0.8, 1.0}, float opacity=0.2f);
          void show_full_color_overlay();
          void hide_full_color_overlay();
-         void set_banner_text(ALLEGRO_COLOR base_color=ALLEGRO_COLOR{0.0, 0.3, 0.8, 1.0}, std::string text="[unset-text]");
+         void set_banner_text(std::string text="[unset-text]", ALLEGRO_COLOR base_color=ALLEGRO_COLOR{0.0, 0.3, 0.8, 1.0});
          void show_banner_text();
          void hide_banner_text();
          void draw_hud();

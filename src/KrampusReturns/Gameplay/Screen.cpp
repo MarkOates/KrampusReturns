@@ -197,14 +197,15 @@ void Screen::update_state(float time_now)
 
       case STATE_PLAYER_DIED:
          update_entities();
-         //if (state_age > 2.0)
-         //{
-            //show_player_died_banner();
-         //}
+         if (state_age > 2.0 && !showing_banner_text)
+         {
+            set_banner_text("YOU LOSE", ALLEGRO_COLOR{1, 0, 0, 1});
+            show_banner_text();
+         }
       break;
 
       default:
-         AllegroFlare::Errors::throw_error("KrampusReturns::Gameplay::Screen::set_state", "unhandled state");
+         AllegroFlare::Errors::throw_error("KrampusReturns::Gameplay::Screen::update_state", "unhandled state");
       break;
    }
    return;
@@ -949,9 +950,9 @@ void Screen::hide_full_color_overlay()
    return;
 }
 
-void Screen::set_banner_text(ALLEGRO_COLOR base_color, std::string text)
+void Screen::set_banner_text(std::string text, ALLEGRO_COLOR base_color)
 {
-   banner_text_color = ALLEGRO_COLOR{1.0, 0.0, 0.0, 1.0};
+   banner_text_color = base_color;
    banner_text = text;
    return;
 }
@@ -993,13 +994,26 @@ void Screen::draw_hud()
       };
 
       al_draw_filled_rectangle(0, 0, 1920, 1080, calced_full_color_overlay_color);
+   }
+
+
+   // draw some state overlay
+
+   if (showing_banner_text)
+   {
+      ALLEGRO_FONT *font = obtain_banner_font();
+      //std::string banner_text = "YOU LOSE";
+      al_draw_text(font, banner_text_color, 1920/2, 1080/2-100, ALLEGRO_ALIGN_CENTER, banner_text.c_str());
+
+      // draw the frame around the screen indicating the banner
       float inset = 80;
       float thickness = 20;
-      al_draw_rectangle(inset, inset, 1920-inset, 1080-inset, al_color_name("firebrick"), thickness);
+      al_draw_rectangle(inset, inset, 1920-inset, 1080-inset, banner_text_color, thickness);
    }
 
 
 
+   // draw hud elements (hearts, etc.)
 
    // TODO: NOTE: here player_controlled_entity is assumed to be krampus
    // WARNING: TESTING:
@@ -1021,15 +1035,6 @@ void Screen::draw_hud()
    heart_placement.restore_transform();
 
 
-
-   // draw some state overlay
-
-   if (showing_banner_text)
-   {
-      ALLEGRO_FONT *font = obtain_banner_font();
-      //std::string banner_text = "YOU LOSE";
-      al_draw_text(font, banner_text_color, 1920/2, 1080/2-100, ALLEGRO_ALIGN_CENTER, banner_text.c_str());
-   }
 
    return;
 }

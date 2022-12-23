@@ -157,6 +157,7 @@ functions:
             get_velocity_ref().position.x = 0.0;
             get_velocity_ref().position.y = 0.0;
             set_animation_playback_rate(1.0);
+            emit_player_died_event();
          break;
 
          case STATE_STUNNED_FROM_TAKING_DAMAGE:
