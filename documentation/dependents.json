@@ -326,6 +326,15 @@
   "AllegroFlare/Prototypes/FixedRoom2D/EntityCollectionHelper": [
     "KrampusReturns/Shaders/Primary"
   ],
+  "nlohmann/json": [
+    "KrampusReturns/TMJObjectLoader"
+  ],
+  "std/filesystem/exists": [
+    "KrampusReturns/TMJObjectLoader"
+  ],
+  "std/ifstream": [
+    "KrampusReturns/TMJObjectLoader"
+  ],
   "AllegroFlare/Testing/CustomComparison": [
     "KrampusReturns/Testing/Gym"
   ],

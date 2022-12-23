@@ -62,6 +62,7 @@ table td
   <li><a href="#quintessence/KrampusReturns/Runner.q.yml">quintessence/KrampusReturns/Runner.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Shaders/AllegroDefault.q.yml">quintessence/KrampusReturns/Shaders/AllegroDefault.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Shaders/Primary.q.yml">quintessence/KrampusReturns/Shaders/Primary.q.yml</a></li>
+  <li><a href="#quintessence/KrampusReturns/TMJObjectLoader.q.yml">quintessence/KrampusReturns/TMJObjectLoader.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Testing/Gym.q.yml">quintessence/KrampusReturns/Testing/Gym.q.yml</a></li>
 </ul>
 <h1>Components</h1>
@@ -1476,6 +1477,40 @@ table td
 </ul>
 <ul>
   <div class="component">
+    <h3 id="quintessence/KrampusReturns/TMJObjectLoader.q.yml">quintessence/KrampusReturns/TMJObjectLoader.q.yml</h3>
+     <table>
+<tr>
+  <td class="property">filename</td>
+  <td class="property">std::string</td>
+</tr>
+<tr>
+  <td class="property">loaded</td>
+  <td class="property">bool</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="method">load()</td>
+</tr>
+<tr>
+  <td class="private_method">file_exists(std::string filename=&quot;[unset-filename]&quot;)</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;nlohmann::json&quot;, &quot;headers&quot;=&gt;[&quot;lib/nlohmann/json.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;std::filesystem::exists&quot;, &quot;headers&quot;=&gt;[&quot;filesystem&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;std::ifstream&quot;, &quot;headers&quot;=&gt;[&quot;fstream&quot;]}</td>
+</tr>
+    </table>
+  </div>
+</ul>
+<ul>
+  <div class="component">
     <h3 id="quintessence/KrampusReturns/Testing/Gym.q.yml">quintessence/KrampusReturns/Testing/Gym.q.yml</h3>
      <table>
 <tr>
@@ -1949,6 +1984,15 @@ table td
   ],
   "AllegroFlare/Prototypes/FixedRoom2D/EntityCollectionHelper": [
     "KrampusReturns/Shaders/Primary"
+  ],
+  "nlohmann/json": [
+    "KrampusReturns/TMJObjectLoader"
+  ],
+  "std/filesystem/exists": [
+    "KrampusReturns/TMJObjectLoader"
+  ],
+  "std/ifstream": [
+    "KrampusReturns/TMJObjectLoader"
   ],
   "AllegroFlare/Testing/CustomComparison": [
     "KrampusReturns/Testing/Gym"
