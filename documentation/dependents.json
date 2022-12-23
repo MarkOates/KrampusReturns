@@ -25,6 +25,7 @@
   ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D": [
     "KrampusReturns/Entities/Blob",
+    "KrampusReturns/Entities/FlashEffect",
     "KrampusReturns/Entities/Goalpost",
     "KrampusReturns/Entities/Krampus"
   ],
@@ -34,6 +35,7 @@
   ],
   "AllegroFlare/Vec2D": [
     "KrampusReturns/Entities/Blob",
+    "KrampusReturns/Entities/FlashEffect",
     "KrampusReturns/Entities/Goalpost",
     "KrampusReturns/Gameplay/Screen"
   ],
@@ -41,6 +43,7 @@
     "KrampusReturns/Entities/Blob"
   ],
   "AllegroFlare/Prototypes/Platforming2D/EntityFlagNames": [
+    "KrampusReturns/Entities/FlashEffect",
     "KrampusReturns/Entities/Goalpost",
     "KrampusReturns/EntityFactory",
     "KrampusReturns/Gameplay/Screen",
@@ -72,6 +75,9 @@
     "KrampusReturns/Gameplay/Screen"
   ],
   "KrampusReturns/Entities/Goalpost": [
+    "KrampusReturns/EntityFactory"
+  ],
+  "KrampusReturns/Entities/FlashEffect": [
     "KrampusReturns/EntityFactory"
   ],
   "AllegroFlare/GameEventDatas/Base": [
@@ -229,6 +235,14 @@
   "KrampusReturns/GameEventDatas/GoalpostReached": [
     "KrampusReturns/Gameplay/Screen"
   ],
+  "KrampusReturns/EntityFactory": [
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Testing/Gym"
+  ],
+  "AllegroFlare/FrameAnimation/Book": [
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Testing/Gym"
+  ],
   "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [
     "KrampusReturns/Runner"
   ],
@@ -337,12 +351,6 @@
     "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/TerminalColors": [
-    "KrampusReturns/Testing/Gym"
-  ],
-  "KrampusReturns/EntityFactory": [
-    "KrampusReturns/Testing/Gym"
-  ],
-  "AllegroFlare/FrameAnimation/Book": [
     "KrampusReturns/Testing/Gym"
   ]
 }

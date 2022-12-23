@@ -4,6 +4,7 @@
 #include <AllegroFlare/EventEmitter.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory.hpp>
 #include <KrampusReturns/Entities/Blob.hpp>
+#include <KrampusReturns/Entities/FlashEffect.hpp>
 #include <KrampusReturns/Entities/Goalpost.hpp>
 #include <KrampusReturns/Entities/Krampus.hpp>
 #include <string>
@@ -31,6 +32,7 @@ namespace KrampusReturns
       KrampusReturns::Entities::Krampus* create_krampus(std::string on_map="[unset-on_map]", float x=0.0f, float y=0.0f);
       KrampusReturns::Entities::Blob* create_blob(std::string on_map="[unset-on_map]", float x=0.0f, float y=0.0f);
       KrampusReturns::Entities::Goalpost* create_goalpost(std::string on_map="[unset-on_map]", int goalpost_id=-1, float x=0.0f, float y=0.0f);
+      KrampusReturns::Entities::FlashEffect* create_flash_fx1(std::string on_map="[unset-on_map]", float x=0.0f, float y=0.0f);
    };
 }
 

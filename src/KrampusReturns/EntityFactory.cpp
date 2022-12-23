@@ -135,6 +135,33 @@ KrampusReturns::Entities::Goalpost* EntityFactory::create_goalpost(std::string o
    return result;
 }
 
+KrampusReturns::Entities::FlashEffect* EntityFactory::create_flash_fx1(std::string on_map, float x, float y)
+{
+   if (!(get_animation_book()))
+   {
+      std::stringstream error_message;
+      error_message << "[EntityFactory::create_flash_fx1]: error: guard \"get_animation_book()\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("EntityFactory::create_flash_fx1: error: guard \"get_animation_book()\" not met");
+   }
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+
+   KrampusReturns::Entities::FlashEffect *result = new KrampusReturns::Entities::FlashEffect();
+   result->set_animation_book(get_animation_book());
+   result->initialize();
+
+   // NOTE: for the time being FlashEffect sets the animation on initialization, so in this factory method
+   // it's set here to build the object:
+   result->set_animation("flash_fx1");
+
+   result->get_place_ref().position = { x, y };
+   result->set(ON_MAP_NAME, on_map);
+
+   if (init_entities_drawing_debug) result->set_draw_debug(true);
+   //get_platforming_2d_ref().add_entity_to_pool(result);
+   return result;
+}
+
 
 } // namespace KrampusReturns
 

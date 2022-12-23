@@ -1244,7 +1244,8 @@ functions:
 
              float x, y = 200;
              KrampusReturns::EntityFactory entity_factory;
-             entity_factory.set_animation_book(&animation_book);
+             // TODO: set the animation book here:
+             //entity_factory.set_animation_book(&animation_book);
 
              entity_factory.create_flash_fx1(currently_active_map_name, x, y);
              

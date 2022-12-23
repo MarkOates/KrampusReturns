@@ -18,6 +18,7 @@
 #include <AllegroFlare/Prototypes/Platforming2D/EntityFlagNames.hpp>
 #include <KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.hpp>
 #include <KrampusReturns/Entities/Blob.hpp>
+#include <KrampusReturns/EntityFactory.hpp>
 #include <KrampusReturns/GameEventDatas/GoalpostReached.hpp>
 #include <KrampusReturns/Shaders/AllegroDefault.hpp>
 #include <KrampusReturns/Shaders/Primary.hpp>
@@ -1230,6 +1231,19 @@ void Screen::game_event_func(AllegroFlare::GameEvent* ev)
       }},
       { "goalpost_reached", [this, time_now](){
           set_state(STATE_FINISHED_LEVEL, time_now);
+      }},
+      { "spawn_flash_effect", [this, time_now](){
+          if (!currently_active_map)
+             throw std::runtime_error("cannot \"spawn_flash_effect\", no currently_active_map");
+
+          float x, y = 200;
+          KrampusReturns::EntityFactory entity_factory;
+          // TODO: set the animation book here:
+          //entity_factory.set_animation_book(&animation_book);
+
+          entity_factory.create_flash_fx1(currently_active_map_name, x, y);
+          
+          //set_state(STATE_FINISHED_LEVEL, time_now);
       }},
    };
 

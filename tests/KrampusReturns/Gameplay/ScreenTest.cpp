@@ -48,23 +48,6 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
 
 
 
-   KrampusReturns::Gameplay::Screen platforming_2d;
-   platforming_2d.set_font_bin(&framework.get_font_bin_ref());
-   platforming_2d.set_bitmap_bin(&framework.get_bitmap_bin_ref());
-   platforming_2d.set_display(framework.get_primary_display());
-   platforming_2d.set_event_emitter(&framework.get_event_emitter_ref());
-   platforming_2d.set_map_dictionary({
-      { "map_a", TEST_BASE_FOLDER "maps/krampus-returns-map01-0x.tmj" },
-      { "map_b", TEST_BASE_FOLDER "maps/krampus-returns-map02-0x.tmj" },
-   });
-   platforming_2d.initialize_maps();
-   platforming_2d.set_currently_active_map("map_a");
-
-   // create some entities
-
-
-
-
    // create an animation book (to create an frame_animated type from the factory)
    // TODO: introduce this concept to the test
    AllegroFlare::FrameAnimation::Book animation_book(
@@ -78,9 +61,34 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
 
 
 
+
+   KrampusReturns::Gameplay::Screen platforming_2d;
+   platforming_2d.set_font_bin(&framework.get_font_bin_ref());
+   platforming_2d.set_bitmap_bin(&framework.get_bitmap_bin_ref());
+   //platforming_2d.set_animation_book(&animation_book);
+   platforming_2d.set_display(framework.get_primary_display());
+   platforming_2d.set_event_emitter(&framework.get_event_emitter_ref());
+   platforming_2d.set_map_dictionary({
+      { "map_a", TEST_BASE_FOLDER "maps/krampus-returns-map01-0x.tmj" },
+      { "map_b", TEST_BASE_FOLDER "maps/krampus-returns-map02-0x.tmj" },
+   });
+   //platforming_2d.set_currently_active_map("map_a");
+   platforming_2d.initialize_maps();
+   //platforming_2d.initialize();
+
+   platforming_2d.set_currently_active_map("map_a");
+   //platforming_2d.initialize();
+
+   // create some entities
+
+
+
+
+
    KrampusReturns::EntityFactory entity_factory;
    entity_factory.set_event_emitter(&framework.get_event_emitter_ref());
    entity_factory.set_bitmap_bin(&framework.get_bitmap_bin_ref());
+   //entity_factory.set_animation_book(&platforming_2d.get_animation_book_ref());
    entity_factory.set_animation_book(&animation_book);
 
 
@@ -151,6 +159,7 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
 
 
    platforming_2d.initialize();
+   //platforming_2d.set_currently_active_map("map_a");
    platforming_2d.start_level();
 
 

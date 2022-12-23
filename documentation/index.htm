@@ -51,6 +51,7 @@ table td
 <ul>
   <li><a href="#quintessence/KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.q.yml">quintessence/KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Entities/Blob.q.yml">quintessence/KrampusReturns/Entities/Blob.q.yml</a></li>
+  <li><a href="#quintessence/KrampusReturns/Entities/FlashEffect.q.yml">quintessence/KrampusReturns/Entities/FlashEffect.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Entities/Goalpost.q.yml">quintessence/KrampusReturns/Entities/Goalpost.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Entities/Krampus.q.yml">quintessence/KrampusReturns/Entities/Krampus.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/EntityFactory.q.yml">quintessence/KrampusReturns/EntityFactory.q.yml</a></li>
@@ -209,6 +210,40 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;std::rand&quot;, &quot;headers&quot;=&gt;[&quot;cstdlib&quot;]}</td>
+</tr>
+    </table>
+  </div>
+</ul>
+<ul>
+  <div class="component">
+    <h3 id="quintessence/KrampusReturns/Entities/FlashEffect.q.yml">quintessence/KrampusReturns/Entities/FlashEffect.q.yml</h3>
+     <table>
+<tr>
+  <td class="property">initialized</td>
+  <td class="property">bool</td>
+</tr>
+<tr>
+  <td class="property">TYPE</td>
+  <td class="property">char*</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="method">initialize()</td>
+</tr>
+<tr>
+  <td class="method">update()</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::Platforming2D::EntityFlagNames&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/Platforming2D/EntityFlagNames.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Vec2D&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Vec2D.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -428,6 +463,9 @@ table td
 <tr>
   <td class="method">create_goalpost()</td>
 </tr>
+<tr>
+  <td class="method">create_flash_fx1()</td>
+</tr>
     </table>
      <table>
 <tr>
@@ -450,6 +488,9 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Entities::Goalpost&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Entities/Goalpost.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Entities::FlashEffect&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Entities/FlashEffect.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -953,6 +994,12 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::GameEventDatas::GoalpostReached&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/GameEventDatas/GoalpostReached.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::EntityFactory&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/EntityFactory.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::FrameAnimation::Book&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/FrameAnimation/Book.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -1548,6 +1595,7 @@ table td
   ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D": [
     "KrampusReturns/Entities/Blob",
+    "KrampusReturns/Entities/FlashEffect",
     "KrampusReturns/Entities/Goalpost",
     "KrampusReturns/Entities/Krampus"
   ],
@@ -1557,6 +1605,7 @@ table td
   ],
   "AllegroFlare/Vec2D": [
     "KrampusReturns/Entities/Blob",
+    "KrampusReturns/Entities/FlashEffect",
     "KrampusReturns/Entities/Goalpost",
     "KrampusReturns/Gameplay/Screen"
   ],
@@ -1564,6 +1613,7 @@ table td
     "KrampusReturns/Entities/Blob"
   ],
   "AllegroFlare/Prototypes/Platforming2D/EntityFlagNames": [
+    "KrampusReturns/Entities/FlashEffect",
     "KrampusReturns/Entities/Goalpost",
     "KrampusReturns/EntityFactory",
     "KrampusReturns/Gameplay/Screen",
@@ -1595,6 +1645,9 @@ table td
     "KrampusReturns/Gameplay/Screen"
   ],
   "KrampusReturns/Entities/Goalpost": [
+    "KrampusReturns/EntityFactory"
+  ],
+  "KrampusReturns/Entities/FlashEffect": [
     "KrampusReturns/EntityFactory"
   ],
   "AllegroFlare/GameEventDatas/Base": [
@@ -1752,6 +1805,14 @@ table td
   "KrampusReturns/GameEventDatas/GoalpostReached": [
     "KrampusReturns/Gameplay/Screen"
   ],
+  "KrampusReturns/EntityFactory": [
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Testing/Gym"
+  ],
+  "AllegroFlare/FrameAnimation/Book": [
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Testing/Gym"
+  ],
   "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [
     "KrampusReturns/Runner"
   ],
@@ -1860,12 +1921,6 @@ table td
     "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/TerminalColors": [
-    "KrampusReturns/Testing/Gym"
-  ],
-  "KrampusReturns/EntityFactory": [
-    "KrampusReturns/Testing/Gym"
-  ],
-  "AllegroFlare/FrameAnimation/Book": [
     "KrampusReturns/Testing/Gym"
   ]
 }
