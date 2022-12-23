@@ -21,12 +21,26 @@ Blob::Blob()
    , preferred_direction(AllegroFlare::Vec2D(1, 0))
    , preferred_direction_started_at(0.0f)
    , preferred_direction_next_update_duration(0.0f)
+   , health(2)
+   , max_health(2)
 {
 }
 
 
 Blob::~Blob()
 {
+}
+
+
+int Blob::get_health() const
+{
+   return health;
+}
+
+
+int Blob::get_max_health() const
+{
+   return max_health;
 }
 
 
@@ -42,6 +56,7 @@ void Blob::initialize()
    get_place_ref().size = { 15, 7 };
    get_bitmap_placement_ref().scale = { 0.6, 0.6 };
    set_bitmap_alignment_strategy("bottom_centered");
+   set("type", "blob");
    set_animation("blob");
    set_preferred_direction();
 
@@ -91,6 +106,14 @@ void Blob::update()
 
    get_bitmap_placement_ref().rotation = (sin(counter*3) * sin(counter*2.3)) * 0.1;
 
+   return;
+}
+
+void Blob::take_damage(int amount)
+{
+   if (health <= 0) return;
+   health -= amount;
+   if (health < 0) health = 0;
    return;
 }
 

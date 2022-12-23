@@ -37,7 +37,7 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
 
 
       framework.get_audio_controller_ref().set_and_load_sound_effect_elements({
-         { "smash_club", { "smash-club-01.ogg", false } },
+         { "smash_club", { "smash-club-01.ogg", false, "restart" } },
          { "krampus_hit", { "krampus_hit.ogg", false, "restart" } },
       });
 

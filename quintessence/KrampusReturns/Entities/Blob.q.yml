@@ -25,6 +25,16 @@ properties:
     type: float
     init_with: 0.0f
 
+  - name: health
+    type: int
+    init_with: 2
+    getter: true
+
+  - name: max_health
+    type: int
+    init_with: 2
+    getter: true
+
   - name: TYPE
     type: char*
     init_with: '(char*)"Entities/Blob"'
@@ -41,6 +51,7 @@ functions:
       get_place_ref().size = { 15, 7 };
       get_bitmap_placement_ref().scale = { 0.6, 0.6 };
       set_bitmap_alignment_strategy("bottom_centered");
+      set("type", "blob");
       set_animation("blob");
       set_preferred_direction();
 
@@ -90,6 +101,18 @@ functions:
     body_dependency_symbols:
       - sin
       - std::rand
+
+
+  - name: take_damage
+    parameters:
+      - name: amount
+        type: int
+        default_argument: 1
+    body: |
+      if (health <= 0) return;
+      health -= amount;
+      if (health < 0) health = 0;
+      return;
 
 
   - name: set_preferred_direction

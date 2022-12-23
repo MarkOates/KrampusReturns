@@ -17,6 +17,7 @@
 #include <AllegroFlare/Prototypes/Platforming2D/EntityCollectionHelper.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/EntityFlagNames.hpp>
 #include <KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.hpp>
+#include <KrampusReturns/Entities/Blob.hpp>
 #include <KrampusReturns/Shaders/AllegroDefault.hpp>
 #include <KrampusReturns/Shaders/Primary.hpp>
 #include <algorithm>
@@ -662,6 +663,8 @@ std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> Screen:
 
 void Screen::update_enemy_collisions_with_damage_zones()
 {
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+
    std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> enemies =
       select_enemies(currently_active_map_name);
 
@@ -674,6 +677,16 @@ void Screen::update_enemy_collisions_with_damage_zones()
       if (player_krampus->get_place_ref().collide(enemy->get_place_ref()))
       {
          player_krampus->take_hit(1);
+         if (enemy->exists("type", "blob"))
+         {
+            // HERE:
+            // TODO: tweak this logic so that the blob is "stunned" and can't take damage
+            KrampusReturns::Entities::Blob* as_blob = static_cast<KrampusReturns::Entities::Blob*>(enemy);
+            as_blob->take_damage(1);
+
+            if (as_blob->get_health() == 0) as_blob->set(PLEASE_DELETE);
+         }
+         //enemy->take_hit(1);
       }
    }
    return;

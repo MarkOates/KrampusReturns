@@ -169,6 +169,14 @@ table td
   <td class="property">float</td>
 </tr>
 <tr>
+  <td class="property">health</td>
+  <td class="property">int</td>
+</tr>
+<tr>
+  <td class="property">max_health</td>
+  <td class="property">int</td>
+</tr>
+<tr>
   <td class="property">TYPE</td>
   <td class="property">char*</td>
 </tr>
@@ -179,6 +187,9 @@ table td
 </tr>
 <tr>
   <td class="method">update()</td>
+</tr>
+<tr>
+  <td class="method">take_damage(1)</td>
 </tr>
 <tr>
   <td class="method">set_preferred_direction()</td>
@@ -856,6 +867,9 @@ table td
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Entities::Krampus&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Entities/Krampus.hpp&quot;]}</td>
 </tr>
 <tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Entities::Blob&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Entities/Blob.hpp&quot;]}</td>
+</tr>
+<tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::CameraControlStrategies2D::SmoothSnapWithFX&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.hpp&quot;]}</td>
 </tr>
 <tr>
@@ -1493,7 +1507,8 @@ table td
     "KrampusReturns/KrampusController"
   ],
   "KrampusReturns/Entities/Blob": [
-    "KrampusReturns/EntityFactory"
+    "KrampusReturns/EntityFactory",
+    "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/BitmapBin": [
     "KrampusReturns/Gameplay/Screen",

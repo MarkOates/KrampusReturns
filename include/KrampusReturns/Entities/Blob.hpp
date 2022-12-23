@@ -19,6 +19,8 @@ namespace KrampusReturns
          AllegroFlare::Vec2D preferred_direction;
          float preferred_direction_started_at;
          float preferred_direction_next_update_duration;
+         int health;
+         int max_health;
 
       protected:
 
@@ -27,8 +29,11 @@ namespace KrampusReturns
          Blob();
          virtual ~Blob();
 
+         int get_health() const;
+         int get_max_health() const;
          void initialize();
          virtual void update() override;
+         void take_damage(int amount=1);
          void set_preferred_direction();
       };
    }
