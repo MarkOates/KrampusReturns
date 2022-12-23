@@ -572,7 +572,7 @@ functions:
       {
          // event not found
          std::stringstream warning_message;
-         warning_message << "[KrampusReturns::Runner]: INFO: Event not handled: \"" << event_name << "\".";
+         warning_message << "Event not handled: \"" << event_name << "\".";
          AllegroFlare::Errors::warn_from("KrampusReturns::Runner::game_event_func", warning_message.str());
       }
       else
