@@ -1,7 +1,6 @@
 #pragma once
 
 
-#include <AllegroFlare/FrameAnimation/Book.hpp>
 #include <AllegroFlare/Frameworks/Full.hpp>
 #include <AllegroFlare/Placement2D.hpp>
 #include <KrampusReturns/EntityFactory.hpp>
@@ -22,7 +21,6 @@ namespace KrampusReturns
          AllegroFlare::Frameworks::Full framework;
          KrampusReturns::EntityFactory entity_factory;
          KrampusReturns::Gameplay::Screen platforming_2d;
-         AllegroFlare::FrameAnimation::Book animation_book;
 
       protected:
 

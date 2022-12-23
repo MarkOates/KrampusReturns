@@ -27,7 +27,6 @@ Gym::Gym()
    , framework({})
    , entity_factory()
    , platforming_2d()
-   , animation_book()
 {
 }
 
@@ -99,27 +98,17 @@ void Gym::SetUp()
       //{ "map_b", TEST_BASE_FOLDER "maps/krampus-returns-map02-0x.tmj" },
    });
    platforming_2d.initialize_maps();
+   platforming_2d.initialize_animation_book();
    platforming_2d.set_currently_active_map("gym");
    //platforming_2d.initialize();
 
    framework.register_screen("platforming_2d", &platforming_2d);
 
 
-
-   animation_book.set_png_source_filename(
-      "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.png"
-   );
-   animation_book.set_json_source_filename(
-      "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.json"
-   );
-   animation_book.set_sprite_sheet_scale(2);
-   animation_book.initialize();
-
-
    //KrampusReturns::EntityFactory entity_factory;
    entity_factory.set_event_emitter(&framework.get_event_emitter_ref());
    entity_factory.set_bitmap_bin(&framework.get_bitmap_bin_ref());
-   entity_factory.set_animation_book(&animation_book);
+   entity_factory.set_animation_book(&platforming_2d.get_animation_book_ref());
 
 
    return;
