@@ -1,0 +1,56 @@
+parent_classes:
+
+
+  - class: AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D
+    scope: public
+    init_with: ''
+
+
+properties:
+
+
+  - name: initialized
+    type: bool
+    init_with: false
+
+  - name: TYPE
+    type: char*
+    init_with: '(char*)"Entities/Goalpost"'
+    static: true
+    constexpr: true
+
+
+functions:
+
+
+  - name: initialize
+    guards: [ (!initialized) ]
+    body: |
+      get_place_ref().size = { 15, 7 };
+      get_bitmap_placement_ref().scale = { 0.6, 0.6 };
+      set_bitmap_alignment_strategy("bottom_centered");
+      set("type", "goalpost");
+      set_animation("blob"); // TODO: change this type
+
+      initialized = true;
+      return;
+
+
+  - name: update
+    virtual: true
+    override: true
+    guards: [ initialized ]
+    body: |
+      FrameAnimated2D::update();
+      return;
+
+
+dependencies:
+
+
+  - symbol: AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D
+    headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D.hpp ]
+  - symbol: AllegroFlare::Vec2D
+    headers: [ AllegroFlare/Vec2D.hpp ]
+
+
