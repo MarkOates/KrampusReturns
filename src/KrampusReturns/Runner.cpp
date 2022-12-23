@@ -364,6 +364,7 @@ void Runner::game_event_func(AllegroFlare::GameEvent* ev)
       { "finish_new_game_intro_storyboard_screen", [this](){
          // TODO: replace this with an event EVENT_ACTIVATE_PLATFORMING_2D_SCREEN
          framework->activate_screen("platforming_2d_screen");
+         platforming_2d_screen.load_level_and_start();
       }},
       //{ EVENT_ACTIVATE_TILE_DRIVE_SCREEN, [this](){
          //framework->activate_screen("tile_drive_screen");

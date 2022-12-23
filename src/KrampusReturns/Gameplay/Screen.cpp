@@ -458,6 +458,13 @@ void Screen::load_level_and_start(std::string level_name)
    set_state(STATE_PRELOADING_LEVEL);
 
 
+   // NOTE: This line is an artifiact due to initialization not being simple in this current design.
+   // HACK:
+   // TODO: fix initialization so that animation book is included with Gameplay::Screen::initialize().  As a
+   // precursor, allow Gameplay::Screen::initialize before setting maps, currently_active_level, etc.
+   if (!animation_book_initialized) initialize_animation_book();
+
+
    // cleanup
    flag_all_entities_for_deletion();
    cleanup_entities_flagged_for_deletion();
