@@ -849,8 +849,9 @@ void Screen::check_player_collisions_with_doors()
    std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> _entities = get_current_map_entities();
    AllegroFlare::Prototypes::Platforming2D::EntityCollectionHelper collection_helper(&_entities);
 
+   // NOTE: collisions here occcur with the origin of the player character (bottom center of the sprite)
    float player_x = player_controlled_entity->get_place_ref().position.x;
-   float player_y = player_controlled_entity->get_place_ref().position.y + 16;
+   float player_y = player_controlled_entity->get_place_ref().position.y;
 
    for (auto &entity : collection_helper.select_doors())
    {
@@ -904,8 +905,10 @@ void Screen::update_player_collisions_with_collectables()
 
    std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> _entities = get_current_map_entities();
    AllegroFlare::Prototypes::Platforming2D::EntityCollectionHelper collection_helper(&_entities);
+
+   // NOTE: collisions here occcur with the origin of the player character (bottom center of the sprite)
    float player_x = player_controlled_entity->get_place_ref().position.x;
-   float player_y = player_controlled_entity->get_place_ref().position.y + 16;
+   float player_y = player_controlled_entity->get_place_ref().position.y;
 
    for (auto &entity : collection_helper.select_collectable_by_player())
    {
@@ -931,8 +934,9 @@ void Screen::update_player_collisions_with_goalposts()
    std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> _entities = get_current_map_entities();
    AllegroFlare::Prototypes::Platforming2D::EntityCollectionHelper collection_helper(&_entities);
 
+   // NOTE: collisions here occcur with the origin of the player character (bottom center of the sprite)
    float player_x = player_controlled_entity->get_place_ref().position.x;
-   float player_y = player_controlled_entity->get_place_ref().position.y + 16;
+   float player_y = player_controlled_entity->get_place_ref().position.y;
 
    for (auto &entity : collection_helper.select_goalposts())
    {
@@ -1206,7 +1210,10 @@ void Screen::game_event_func(AllegroFlare::GameEvent* ev)
           shake_camera(3, 0.5, time_now);
       }},
       { "player_died", [this, time_now](){
-          set_state(STATE_PLAYER_DIED);
+          set_state(STATE_PLAYER_DIED, time_now);
+      }},
+      { "goalpost_reached", [this, time_now](){
+          set_state(STATE_FINISHED_LEVEL, time_now);
       }},
    };
 
