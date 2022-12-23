@@ -1,0 +1,78 @@
+properties:
+
+
+  - name: filename
+    type: std::string
+    init_with: '"filename-not-set.tmj"'
+    constructor_arg: true
+
+  - name: loaded
+    type: bool
+    init_with: false
+
+
+functions:
+
+
+  - name: load
+    guards: [ (!loaded) ]
+    body: |
+      if (!file_exists(filename))
+      {
+         std::stringstream error_message;
+         error_message << "[KrampusReturns::TMJObjectLoader::load()]: error: The file "
+                       << "\"" << filename << "\" does not exist.";
+         throw std::runtime_error(error_message.str());
+      }
+
+
+      // load and validate the json data to variables
+      std::ifstream i(filename);
+      nlohmann::json j;
+      try
+      {
+         i >> j;
+      }
+      catch (const std::exception& e)
+      {
+         i.close();
+         std::stringstream error_message;
+         error_message << "[Platforming2D::TMJDataLoader::load()]: error: The file "
+                       << "\"" << filename << "\" appears to have"
+                       << " malformed JSON. The following error was thrown by nlohmann::json: \""
+                       << e.what() << "\"";
+         throw std::runtime_error(error_message.str());
+      }
+      i.close();
+
+      return;
+    body_dependency_symbols:
+      - nlohmann::json
+      - std::ifstream
+
+
+  - name: file_exists
+    type: bool
+    static: true
+    private: true
+    parameters:
+      - name: filename
+        type: std::string
+        default_argument: '"[unset-filename]"'
+    body: |
+      return std::filesystem::exists(filename);
+    body_dependency_symbols:
+      - std::filesystem::exists
+
+
+dependencies:
+
+
+  - symbol: nlohmann::json
+    headers: [ lib/nlohmann/json.hpp ]
+  - symbol: std::filesystem::exists
+    headers: [ filesystem ]
+  - symbol: std::ifstream
+    headers: [ fstream ]
+
+

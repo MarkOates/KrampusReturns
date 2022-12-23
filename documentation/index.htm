@@ -115,16 +115,16 @@ table td
   <td class="method">initialize()</td>
 </tr>
 <tr>
-  <td class="method">start_impact_shake(3)</td>
+  <td class="method">start_impact_shake(float intensity=5.0, float duration=1.0, float time_now=al_get_time())</td>
 </tr>
 <tr>
   <td class="method">update()</td>
 </tr>
 <tr>
-  <td class="method">calc_impact_shake_age(1)</td>
+  <td class="method">calc_impact_shake_age(float time_now=al_get_time())</td>
 </tr>
 <tr>
-  <td class="method">normalized_impact_shake_age(2)</td>
+  <td class="method">normalized_impact_shake_age(float duration=1.0f, float time_now=al_get_time())</td>
 </tr>
     </table>
      <table>
@@ -193,7 +193,7 @@ table td
   <td class="method">update()</td>
 </tr>
 <tr>
-  <td class="method">take_damage(1)</td>
+  <td class="method">take_damage(int amount=1)</td>
 </tr>
 <tr>
   <td class="method">set_preferred_direction()</td>
@@ -368,7 +368,7 @@ table td
   <td class="method">initialize()</td>
 </tr>
 <tr>
-  <td class="private_method">set_state(2)</td>
+  <td class="private_method">set_state(uint32_t state=STATE_UNDEF, float time_now=al_get_time())</td>
 </tr>
 <tr>
   <td class="method">update()</td>
@@ -416,13 +416,13 @@ table td
   <td class="method">attack()</td>
 </tr>
 <tr>
-  <td class="method">take_hit(1)</td>
+  <td class="method">take_hit(int damage=1)</td>
 </tr>
 <tr>
-  <td class="method">infer_state_age(1)</td>
+  <td class="method">infer_state_age(float time_now=al_get_time())</td>
 </tr>
 <tr>
-  <td class="method">infer_age_of(2)</td>
+  <td class="method">infer_age_of(float event_at=0.0f, float time_now=al_get_time())</td>
 </tr>
     </table>
      <table>
@@ -456,7 +456,7 @@ table td
     </table>
      <table>
 <tr>
-  <td class="method">create_krampus(3)</td>
+  <td class="method">create_krampus(std::string on_map=&quot;[unset-on_map]&quot;, float x=0.0f, float y=0.0f)</td>
 </tr>
 <tr>
   <td class="method">create_blob()</td>
@@ -707,40 +707,40 @@ table td
     </table>
      <table>
 <tr>
-  <td class="method">set_state(2)</td>
+  <td class="method">set_state(uint32_t state=STATE_UNDEF, float time_now=al_get_time())</td>
 </tr>
 <tr>
   <td class="method">get_sparkle_win_color()</td>
 </tr>
 <tr>
-  <td class="method">update_state(1)</td>
+  <td class="method">update_state(float time_now=al_get_time())</td>
 </tr>
 <tr>
   <td class="method">play_win_music()</td>
 </tr>
 <tr>
-  <td class="method">set_map_dictionary(1)</td>
+  <td class="method">set_map_dictionary(std::map&lt;std::string, std::string&gt; map_dictionary={})</td>
 </tr>
 <tr>
-  <td class="method">set_display(1)</td>
+  <td class="method">set_display(AllegroFlare::Display* display=nullptr)</td>
 </tr>
 <tr>
-  <td class="method">set_event_emitter(1)</td>
+  <td class="method">set_event_emitter(AllegroFlare::EventEmitter* event_emitter=nullptr)</td>
 </tr>
 <tr>
-  <td class="method">set_bitmap_bin(1)</td>
+  <td class="method">set_bitmap_bin(AllegroFlare::BitmapBin* bitmap_bin=nullptr)</td>
 </tr>
 <tr>
-  <td class="method">set_font_bin(1)</td>
+  <td class="method">set_font_bin(AllegroFlare::FontBin* font_bin=nullptr)</td>
 </tr>
 <tr>
-  <td class="method">set_currently_active_map(1)</td>
+  <td class="method">set_currently_active_map(std::string name=&quot;[unset-current-map-name-to-use]&quot;)</td>
 </tr>
 <tr>
-  <td class="method">set_player_controlled_entity(1)</td>
+  <td class="method">set_player_controlled_entity(KrampusReturns::Entities::Krampus* player_controlled_entity=nullptr)</td>
 </tr>
 <tr>
-  <td class="method">find_map_by_name(1)</td>
+  <td class="method">find_map_by_name(std::string name=&quot;[unset-map-name]&quot;)</td>
 </tr>
 <tr>
   <td class="method">on_activate()</td>
@@ -749,16 +749,16 @@ table td
   <td class="method">on_deactivate()</td>
 </tr>
 <tr>
-  <td class="method">load_level_and_start(1)</td>
+  <td class="method">load_level_and_start(std::string level_name=&quot;[unset-level_name]&quot;)</td>
 </tr>
 <tr>
   <td class="method">initialize_maps()</td>
 </tr>
 <tr>
-  <td class="method">add_entity_to_pool(1)</td>
+  <td class="method">add_entity_to_pool(AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* entity=nullptr)</td>
 </tr>
 <tr>
-  <td class="method">reset_camera_control(1)</td>
+  <td class="method">reset_camera_control(AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* entity_to_follow=nullptr)</td>
 </tr>
 <tr>
   <td class="method">initialize_backbuffer_sub_bitmap()</td>
@@ -782,7 +782,7 @@ table td
   <td class="method">reverse_gravity()</td>
 </tr>
 <tr>
-  <td class="method">select_enemies(1)</td>
+  <td class="method">select_enemies(std::string on_map_name=&quot;[unset-on_map_name]&quot;)</td>
 </tr>
 <tr>
   <td class="method">update_enemy_collisions_with_damage_zones()</td>
@@ -821,7 +821,7 @@ table td
   <td class="method">draw()</td>
 </tr>
 <tr>
-  <td class="method">set_full_color_overlay(2)</td>
+  <td class="method">set_full_color_overlay(ALLEGRO_COLOR base_color=ALLEGRO_COLOR{0.0, 0.3, 0.8, 1.0}, float opacity=0.2f)</td>
 </tr>
 <tr>
   <td class="method">show_full_color_overlay()</td>
@@ -830,7 +830,7 @@ table td
   <td class="method">hide_full_color_overlay()</td>
 </tr>
 <tr>
-  <td class="method">set_banner_text(2)</td>
+  <td class="method">set_banner_text(std::string text=&quot;[unset-text]&quot;, ALLEGRO_COLOR base_color=ALLEGRO_COLOR{0.0, 0.3, 0.8, 1.0})</td>
 </tr>
 <tr>
   <td class="method">show_banner_text()</td>
@@ -851,25 +851,25 @@ table td
   <td class="method">primary_timer_func()</td>
 </tr>
 <tr>
-  <td class="method">shake_camera(3)</td>
+  <td class="method">shake_camera(float intensity=1.0, float duration=2.0, float time_now=al_get_time())</td>
 </tr>
 <tr>
-  <td class="method">spawn_flash_effect(3)</td>
+  <td class="method">spawn_flash_effect(std::string type_str=&quot;[unset-type_str]&quot;, float x=0.0f, float y=0.0f)</td>
 </tr>
 <tr>
-  <td class="method">game_event_func(1)</td>
+  <td class="method">game_event_func(AllegroFlare::GameEvent* ev=nullptr)</td>
 </tr>
 <tr>
-  <td class="method">key_char_func(1)</td>
+  <td class="method">key_char_func(ALLEGRO_EVENT* event=nullptr)</td>
 </tr>
 <tr>
-  <td class="method">key_up_func(1)</td>
+  <td class="method">key_up_func(ALLEGRO_EVENT* event=nullptr)</td>
 </tr>
 <tr>
-  <td class="method">key_down_func(1)</td>
+  <td class="method">key_down_func(ALLEGRO_EVENT* event=nullptr)</td>
 </tr>
 <tr>
-  <td class="method">user_event_func(1)</td>
+  <td class="method">user_event_func(ALLEGRO_EVENT* event=nullptr)</td>
 </tr>
 <tr>
   <td class="method">render_collision_tile_mesh()</td>
@@ -1080,10 +1080,10 @@ table td
   <td class="method">reset()</td>
 </tr>
 <tr>
-  <td class="method">key_up_func(2)</td>
+  <td class="method">key_up_func(int al_key_num=0, bool is_repeat=false)</td>
 </tr>
 <tr>
-  <td class="method">key_down_func(2)</td>
+  <td class="method">key_down_func(int al_key_num=0, bool is_repeat=false)</td>
 </tr>
 <tr>
   <td class="method">update()</td>
@@ -1234,7 +1234,7 @@ table td
   <td class="method">setup_platforming_2d_screen()</td>
 </tr>
 <tr>
-  <td class="method">unlock_achievement(1)</td>
+  <td class="method">unlock_achievement(std::string achievement_name=&quot;[unset-achievement_name]&quot;)</td>
 </tr>
 <tr>
   <td class="method">push_screen()</td>
@@ -1243,25 +1243,25 @@ table td
   <td class="method">pop_screen()</td>
 </tr>
 <tr>
-  <td class="method">reactivate_prior_screen(1)</td>
+  <td class="method">reactivate_prior_screen(std::string fallback_if_stack_is_empty=&quot;tile_drive_screen&quot;)</td>
 </tr>
 <tr>
   <td class="method">prior_screen_is_in_stack()</td>
 </tr>
 <tr>
-  <td class="method">game_event_func(1)</td>
+  <td class="method">game_event_func(AllegroFlare::GameEvent* ev=nullptr)</td>
 </tr>
 <tr>
-  <td class="method">run(1)</td>
+  <td class="method">run(std::string mode=&quot;production&quot;)</td>
 </tr>
 <tr>
-  <td class="method">is_test_mode(1)</td>
+  <td class="method">is_test_mode(std::string mode=&quot;[unset-mode]&quot;)</td>
 </tr>
 <tr>
-  <td class="method">is_development_mode(1)</td>
+  <td class="method">is_development_mode(std::string mode=&quot;[unset-mode]&quot;)</td>
 </tr>
 <tr>
-  <td class="method">is_production_mode(1)</td>
+  <td class="method">is_production_mode(std::string mode=&quot;[unset-mode]&quot;)</td>
 </tr>
 <tr>
   <td class="method">in_development_mode()</td>
@@ -1511,7 +1511,7 @@ table td
   <td class="method">sleep_for_frame()</td>
 </tr>
 <tr>
-  <td class="method">sleep_for(1)</td>
+  <td class="method">sleep_for(float length_in_seconds=0.0f)</td>
 </tr>
 <tr>
   <td class="method">get_test_name()</td>
@@ -1523,16 +1523,16 @@ table td
   <td class="method">build_full_test_name_str()</td>
 </tr>
 <tr>
-  <td class="method">build_centered_placement(2)</td>
+  <td class="method">build_centered_placement(float width=0.0f, float height=0.0f)</td>
 </tr>
 <tr>
   <td class="method">draw_rulers()</td>
 </tr>
 <tr>
-  <td class="method">draw_crosshair(4)</td>
+  <td class="method">draw_crosshair(float x=0.0f, float y=0.0f, ALLEGRO_COLOR color=ALLEGRO_COLOR{1, 0, 0, 1}, float size=200.0f)</td>
 </tr>
 <tr>
-  <td class="method">draw_horizontal_crosshair(5)</td>
+  <td class="method">draw_horizontal_crosshair(float x=0.0f, float y=0.0f, ALLEGRO_COLOR color=ALLEGRO_COLOR{1, 1, 0, 1}, float size_v=30.0f, float size_h=500.0f)</td>
 </tr>
 <tr>
   <td class="method">test_name_indicates_it_wants_a_screenshot()</td>
@@ -1544,7 +1544,7 @@ table td
   <td class="method">clear()</td>
 </tr>
 <tr>
-  <td class="method">capture_screenshot(1)</td>
+  <td class="method">capture_screenshot(std::string base_filename=&quot;Gym-screenshot.png&quot;)</td>
 </tr>
     </table>
      <table>
