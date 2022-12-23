@@ -10,6 +10,18 @@ properties:
     type: bool
     init_with: false
 
+  - name: object_parsed_callback
+    type: std::function<void(std::string, float, float, float, float, void*)>
+    init_with: '{}'
+    getter: true
+    setter: true
+
+  - name: object_parsed_callback_user_data
+    type: void*
+    init_with: nullptr
+    getter: true
+    setter: true
+
 
 functions:
 
@@ -82,7 +94,18 @@ functions:
          float width_property = object_json.value()["width"].get<float>();
          float height_property = object_json.value()["height"].get<float>();
 
-         // TODO: send object data to something
+         // call the callback (if present)
+         if (object_parsed_callback)
+         {
+            object_parsed_callback(
+               class_property,
+               x_property,
+               y_property,
+               width_property,
+               height_property,
+               object_parsed_callback_user_data
+            );
+         }
       }
       
       
@@ -119,5 +142,7 @@ dependencies:
     headers: [ fstream ]
   - symbol: AllegroFlare::Errors
     headers: [ AllegroFlare/Errors.hpp ]
+  - symbol: std::function
+    headers: [ functional ]
 
 

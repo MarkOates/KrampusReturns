@@ -1487,6 +1487,14 @@ table td
   <td class="property">loaded</td>
   <td class="property">bool</td>
 </tr>
+<tr>
+  <td class="property">object_parsed_callback</td>
+  <td class="property">std::function&lt;void(std::string, float, float, float, float, void*)&gt;</td>
+</tr>
+<tr>
+  <td class="property">object_parsed_callback_user_data</td>
+  <td class="property">void*</td>
+</tr>
     </table>
      <table>
 <tr>
@@ -1508,6 +1516,9 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Errors&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Errors.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;std::function&quot;, &quot;headers&quot;=&gt;[&quot;functional&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -1996,6 +2007,9 @@ table td
     "KrampusReturns/TMJObjectLoader"
   ],
   "std/ifstream": [
+    "KrampusReturns/TMJObjectLoader"
+  ],
+  "std/function": [
     "KrampusReturns/TMJObjectLoader"
   ],
   "AllegroFlare/Testing/CustomComparison": [

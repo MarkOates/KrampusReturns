@@ -18,12 +18,38 @@ namespace KrampusReturns
 TMJObjectLoader::TMJObjectLoader(std::string filename)
    : filename(filename)
    , loaded(false)
+   , object_parsed_callback({})
+   , object_parsed_callback_user_data(nullptr)
 {
 }
 
 
 TMJObjectLoader::~TMJObjectLoader()
 {
+}
+
+
+void TMJObjectLoader::set_object_parsed_callback(std::function<void(std::string, float, float, float, float, void*)> object_parsed_callback)
+{
+   this->object_parsed_callback = object_parsed_callback;
+}
+
+
+void TMJObjectLoader::set_object_parsed_callback_user_data(void* object_parsed_callback_user_data)
+{
+   this->object_parsed_callback_user_data = object_parsed_callback_user_data;
+}
+
+
+std::function<void(std::string, float, float, float, float, void*)> TMJObjectLoader::get_object_parsed_callback() const
+{
+   return object_parsed_callback;
+}
+
+
+void* TMJObjectLoader::get_object_parsed_callback_user_data() const
+{
+   return object_parsed_callback_user_data;
 }
 
 
@@ -101,7 +127,18 @@ void TMJObjectLoader::load()
       float width_property = object_json.value()["width"].get<float>();
       float height_property = object_json.value()["height"].get<float>();
 
-      // TODO: send object data to something
+      // call the callback (if present)
+      if (object_parsed_callback)
+      {
+         object_parsed_callback(
+            class_property,
+            x_property,
+            y_property,
+            width_property,
+            height_property,
+            object_parsed_callback_user_data
+         );
+      }
    }
 
 

@@ -336,6 +336,9 @@
   "std/ifstream": [
     "KrampusReturns/TMJObjectLoader"
   ],
+  "std/function": [
+    "KrampusReturns/TMJObjectLoader"
+  ],
   "AllegroFlare/Testing/CustomComparison": [
     "KrampusReturns/Testing/Gym"
   ],
