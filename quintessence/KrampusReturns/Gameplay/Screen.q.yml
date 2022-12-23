@@ -541,6 +541,7 @@ functions:
          { "map_a", TEST_BASE_FOLDER "maps/krampus-returns-level-1-1-0x.tmj" },
       });
       initialize_maps();
+      load_objects_from_map_files();
 
 
       // flag all entities for deletion
@@ -563,6 +564,23 @@ functions:
       // HERE:
       // TODO: implement here
       return;
+
+
+  - name: load_objects_from_map_files
+    body: |
+      for (auto &map_dictionary_listing : map_dictionary)
+      {
+         std::string map_name = map_dictionary_listing.first;
+         std::string map_filename = map_dictionary_listing.second;
+
+         KrampusReturns::TMJObjectLoader loader(map_filename);
+         loader.set_object_parsed_callback(tmj_object_parse_callback_func);
+         loader.set_object_parsed_callback_user_data(this);
+
+         loader.load();
+      }
+    body_dependency_symbols:
+     - KrampusReturns::TMJObjectLoader
 
 
   - name: center_of
@@ -609,12 +627,14 @@ functions:
     body: |
       std::map<std::string, std::function<void()>> object_map = {
          { "goal", [x, y, w, h, user_data](){
+             std::cout << "----------- GOAL parsed" << std::endl;
              // TODO: here
          }},
          { "boss", [x, y, w, h, user_data](){
              // TODO: here
          }},
          { "blob", [x, y, w, h, user_data](){
+             std::cout << "----------- BLOB parsed" << std::endl;
              // TODO: here
          }},
          { "goal", [x, y, w, h, user_data](){
@@ -639,8 +659,6 @@ functions:
       }
 
       return;
-    body_dependency_symbols:
-      - KrampusReturns::TMJObjectLoader
 
 
   - name: initialize_maps
@@ -710,6 +728,7 @@ functions:
 
          entity_pool.push_back(created_map);
       }
+
 
       //set_currently_active_map("map_a");
 

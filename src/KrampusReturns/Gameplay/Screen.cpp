@@ -495,6 +495,7 @@ void Screen::load_level_and_start(std::string level_name)
       { "map_a", TEST_BASE_FOLDER "maps/krampus-returns-level-1-1-0x.tmj" },
    });
    initialize_maps();
+   load_objects_from_map_files();
 
 
    // flag all entities for deletion
@@ -519,6 +520,21 @@ void Screen::load_level_and_start(std::string level_name)
    return;
 }
 
+void Screen::load_objects_from_map_files()
+{
+   for (auto &map_dictionary_listing : map_dictionary)
+   {
+      std::string map_name = map_dictionary_listing.first;
+      std::string map_filename = map_dictionary_listing.second;
+
+      KrampusReturns::TMJObjectLoader loader(map_filename);
+      loader.set_object_parsed_callback(tmj_object_parse_callback_func);
+      loader.set_object_parsed_callback_user_data(this);
+
+      loader.load();
+   }
+}
+
 AllegroFlare::Vec2D Screen::center_of(float x, float y, float w, float h)
 {
    return AllegroFlare::Vec2D(x + w*0.5, y + h*0.5);
@@ -528,12 +544,14 @@ void Screen::tmj_object_parse_callback_func(std::string object_class, float x, f
 {
    std::map<std::string, std::function<void()>> object_map = {
       { "goal", [x, y, w, h, user_data](){
+          std::cout << "----------- GOAL parsed" << std::endl;
           // TODO: here
       }},
       { "boss", [x, y, w, h, user_data](){
           // TODO: here
       }},
       { "blob", [x, y, w, h, user_data](){
+          std::cout << "----------- BLOB parsed" << std::endl;
           // TODO: here
       }},
       { "goal", [x, y, w, h, user_data](){
@@ -627,6 +645,7 @@ void Screen::initialize_maps()
 
       entity_pool.push_back(created_map);
    }
+
 
    //set_currently_active_map("map_a");
 
