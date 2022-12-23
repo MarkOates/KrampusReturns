@@ -2,6 +2,7 @@
 
 #include <KrampusReturns/TMJObjectLoader.hpp>
 
+#include <AllegroFlare/Errors.hpp>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -43,7 +44,6 @@ void TMJObjectLoader::load()
       throw std::runtime_error(error_message.str());
    }
 
-
    // load and validate the json data to variables
    std::ifstream i(filename);
    nlohmann::json j;
@@ -55,13 +55,36 @@ void TMJObjectLoader::load()
    {
       i.close();
       std::stringstream error_message;
-      error_message << "[Platforming2D::TMJDataLoader::load()]: error: The file "
+      error_message << "The file "
                     << "\"" << filename << "\" appears to have"
                     << " malformed JSON. The following error was thrown by nlohmann::json: \""
                     << e.what() << "\"";
-      throw std::runtime_error(error_message.str());
+      //throw std::runtime_error(error_message.str());
+      AllegroFlare::Errors::throw_error("KrampusReturns::TMJObjectLoader", error_message.str());
    }
    i.close();
+
+
+   // TODO: validate there is one and only "objectgroup" layer
+
+   // get first j["layers"] that is a ["type"] == "objectgroup"
+   bool tilelayer_type_found = false;
+   nlohmann::json tilelayer;
+   for (auto &layer : j["layers"].items())
+   {
+      if (layer.value()["type"] == "objectgroup")
+      {
+         tilelayer = layer.value();
+         tilelayer_type_found = true;
+         break;
+      }
+   }
+   if (!tilelayer_type_found)
+   {
+      // TODO: Swap this error message with AllegroFlare::Errors
+      throw std::runtime_error("TMJObjectLoader: error: tilelayer type not found.");
+   }
+
 
    return;
 }
