@@ -68,6 +68,10 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
    //platforming_2d.set_animation_book(&animation_book);
    platforming_2d.set_display(framework.get_primary_display());
    platforming_2d.set_event_emitter(&framework.get_event_emitter_ref());
+
+   //platforming_2d.initialize();
+
+
    platforming_2d.set_map_dictionary({
       { "map_a", TEST_BASE_FOLDER "maps/krampus-returns-map01-0x.tmj" },
       { "map_b", TEST_BASE_FOLDER "maps/krampus-returns-map02-0x.tmj" },
@@ -75,7 +79,6 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
    //platforming_2d.set_currently_active_map("map_a");
    platforming_2d.initialize_maps();
    platforming_2d.initialize_animation_book();
-   //platforming_2d.initialize();
 
    platforming_2d.set_currently_active_map("map_a");
    //platforming_2d.initialize();

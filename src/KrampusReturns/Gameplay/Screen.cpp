@@ -387,6 +387,8 @@ void Screen::set_player_controlled_entity(KrampusReturns::Entities::Krampus* pla
    this->player_controlled_entity = player_controlled_entity;
    krampus_controller.set_krampus(player_controlled_entity);
    krampus_controller.reset();
+
+   reset_camera_control(player_controlled_entity);
    return;
 }
 
@@ -511,19 +513,21 @@ void Screen::add_entity_to_pool(AllegroFlare::Prototypes::Platforming2D::Entitie
    return;
 }
 
-void Screen::initialize_camera_control()
+void Screen::reset_camera_control(AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* entity_to_follow)
 {
    float assumed_tile_width = 16.0f;
    float assumed_tile_height = 16.0f;
    float room_width = assumed_tile_width * 25; // tile_mesh->get_real_width();
    float room_height = assumed_tile_height * 15; //tile_mesh->get_real_height();
 
+   if (camera_control_strategy) delete camera_control_strategy;
+
    KrampusReturns::CameraControlStrategies2D::SmoothSnapWithFX *camera_control =
       new KrampusReturns::CameraControlStrategies2D::SmoothSnapWithFX(room_width, room_height);
    //Wicked::CameraControlStrategies2D::HorizontalRail *camera_control =
       //new Wicked::CameraControlStrategies2D::HorizontalRail; //(room_width, room_height);
    camera_control->set_camera(&camera);
-   camera_control->set_entity_to_follow(player_controlled_entity);
+   camera_control->set_entity_to_follow(entity_to_follow);
    camera_control->initialize();
 
    camera_control_strategy = camera_control;
@@ -589,7 +593,7 @@ void Screen::initialize()
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
       throw std::runtime_error("Screen::initialize: error: guard \"al_get_current_display()\" not met");
    }
-   initialize_camera_control();
+   //initialize_camera_control();
    initialize_backbuffer_sub_bitmap();
    initialize_camera();
    initialize_shader();

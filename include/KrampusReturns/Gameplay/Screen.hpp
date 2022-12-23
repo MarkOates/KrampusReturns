@@ -115,7 +115,7 @@ namespace KrampusReturns
          virtual void on_deactivate() override;
          void initialize_maps();
          void add_entity_to_pool(AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* entity=nullptr);
-         void initialize_camera_control();
+         void reset_camera_control(AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* entity_to_follow=nullptr);
          void initialize_backbuffer_sub_bitmap();
          void initialize_animation_book();
          void initialize();
