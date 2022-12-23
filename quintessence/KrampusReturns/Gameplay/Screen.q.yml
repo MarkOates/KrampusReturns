@@ -1238,6 +1238,18 @@ functions:
          { "goalpost_reached", [this, time_now](){
              set_state(STATE_FINISHED_LEVEL, time_now);
          }},
+         { "spawn_flash_effect", [this, time_now](){
+             if (!currently_active_map)
+                throw std::runtime_error("cannot \"spawn_flash_effect\", no currently_active_map");
+
+             float x, y = 200;
+             KrampusReturns::EntityFactory entity_factory;
+             entity_factory.set_animation_book(&animation_book);
+
+             entity_factory.create_flash_fx1(currently_active_map_name, x, y);
+             
+             //set_state(STATE_FINISHED_LEVEL, time_now);
+         }},
       };
 
       // locate and call the function to handle the event 
@@ -1253,6 +1265,8 @@ functions:
       }
 
       return;
+    body_dependency_symbols:
+      - KrampusReturns::EntityFactory
 
 
   - name: key_char_func
@@ -1534,5 +1548,9 @@ dependencies:
     headers: [ AllegroFlare/Color.hpp ]
   - symbol: KrampusReturns::GameEventDatas::GoalpostReached
     headers: [ KrampusReturns/GameEventDatas/GoalpostReached.hpp ]
+  - symbol: KrampusReturns::EntityFactory
+    headers: [ KrampusReturns/EntityFactory.hpp ]
+  - symbol: AllegroFlare::FrameAnimation::Book
+    headers: [ AllegroFlare/FrameAnimation/Book.hpp ]
 
 
