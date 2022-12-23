@@ -297,6 +297,9 @@ table td
   <td class="method">emit_take_damage_sound_effect()</td>
 </tr>
 <tr>
+  <td class="method">emit_player_died_event()</td>
+</tr>
+<tr>
   <td class="method">stand_still()</td>
 </tr>
 <tr>
@@ -487,8 +490,62 @@ table td
   <td class="property">backbuffer_sub_bitmap</td>
   <td class="property">ALLEGRO_BITMAP*</td>
 </tr>
+<tr>
+  <td class="property">showing_full_color_overlay</td>
+  <td class="property">bool</td>
+</tr>
+<tr>
+  <td class="property">full_color_overlay_color</td>
+  <td class="property">ALLEGRO_COLOR</td>
+</tr>
+<tr>
+  <td class="property">full_color_overlay_opacity</td>
+  <td class="property">float</td>
+</tr>
+<tr>
+  <td class="property">showing_banner_text</td>
+  <td class="property">bool</td>
+</tr>
+<tr>
+  <td class="property">banner_text_color</td>
+  <td class="property">ALLEGRO_COLOR</td>
+</tr>
+<tr>
+  <td class="property">banner_text</td>
+  <td class="property">std::string</td>
+</tr>
+<tr>
+  <td class="property">state</td>
+  <td class="property">uint32_t</td>
+</tr>
+<tr>
+  <td class="property">state_changed_at</td>
+  <td class="property">float</td>
+</tr>
+<tr>
+  <td class="property">state_is_busy</td>
+  <td class="property">bool</td>
+</tr>
+<tr>
+  <td class="property">STATE_UNDEF</td>
+  <td class="property">uint32_t</td>
+</tr>
+<tr>
+  <td class="property">STATE_PLAYING_IN_LEVEL</td>
+  <td class="property">uint32_t</td>
+</tr>
+<tr>
+  <td class="property">STATE_PLAYER_DIED</td>
+  <td class="property">uint32_t</td>
+</tr>
     </table>
      <table>
+<tr>
+  <td class="method">set_state(2)</td>
+</tr>
+<tr>
+  <td class="method">update_state(1)</td>
+</tr>
 <tr>
   <td class="method">set_map_dictionary(1)</td>
 </tr>
@@ -541,6 +598,9 @@ table td
   <td class="private_method">initialize_camera()</td>
 </tr>
 <tr>
+  <td class="method">start_level()</td>
+</tr>
+<tr>
   <td class="method">reverse_gravity()</td>
 </tr>
 <tr>
@@ -575,6 +635,24 @@ table td
 </tr>
 <tr>
   <td class="method">draw()</td>
+</tr>
+<tr>
+  <td class="method">set_full_color_overlay(2)</td>
+</tr>
+<tr>
+  <td class="method">show_full_color_overlay()</td>
+</tr>
+<tr>
+  <td class="method">hide_full_color_overlay()</td>
+</tr>
+<tr>
+  <td class="method">set_banner_text(2)</td>
+</tr>
+<tr>
+  <td class="method">show_banner_text()</td>
+</tr>
+<tr>
+  <td class="method">hide_banner_text()</td>
 </tr>
 <tr>
   <td class="method">draw_hud()</td>
@@ -623,6 +701,9 @@ table td
 </tr>
 <tr>
   <td class="method">get_current_map_entities_y_sorted()</td>
+</tr>
+<tr>
+  <td class="method">obtain_banner_font()</td>
 </tr>
     </table>
      <table>
@@ -738,6 +819,15 @@ table td
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;ALLEGRO_BITMAP&quot;, &quot;headers&quot;=&gt;[&quot;allegro5/allegro.h&quot;]}</td>
 </tr>
 <tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;ALLEGRO_FONT&quot;, &quot;headers&quot;=&gt;[&quot;allegro5/allegro_font.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;ALLEGRO_COLOR&quot;, &quot;headers&quot;=&gt;[&quot;allegro5/allegro.h&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;al_draw_text&quot;, &quot;headers&quot;=&gt;[&quot;allegro5/allegro_font.h&quot;]}</td>
+</tr>
+<tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Vec2D&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Vec2D.hpp&quot;]}</td>
 </tr>
 <tr>
@@ -760,6 +850,9 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Elements::HealthBars::Hearts&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Elements/HealthBars/Hearts.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Errors&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Errors.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -1369,7 +1462,8 @@ table td
     "KrampusReturns/Shaders/Primary"
   ],
   "AllegroFlare/Errors": [
-    "KrampusReturns/Entities/Krampus"
+    "KrampusReturns/Entities/Krampus",
+    "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory": [
     "KrampusReturns/EntityFactory",
@@ -1496,6 +1590,21 @@ table td
     "KrampusReturns/Runner",
     "KrampusReturns/Testing/Gym"
   ],
+  "ALLEGRO_FONT": [
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Testing/Gym",
+    "KrampusReturns/Testing/Gym"
+  ],
+  "ALLEGRO_COLOR": [
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Runner",
+    "KrampusReturns/Shaders/AllegroDefault",
+    "KrampusReturns/Shaders/Primary",
+    "KrampusReturns/Testing/Gym"
+  ],
+  "al_draw_text": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
   "KrampusReturns/Shaders/Primary": [
     "KrampusReturns/Gameplay/Screen"
   ],
@@ -1547,12 +1656,6 @@ table td
   ],
   "AllegroFlare/Prototypes/FixedRoom2D/Configuration": [
     "KrampusReturns/Runner"
-  ],
-  "ALLEGRO_COLOR": [
-    "KrampusReturns/Runner",
-    "KrampusReturns/Shaders/AllegroDefault",
-    "KrampusReturns/Shaders/Primary",
-    "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/Screens/Achievements": [
     "KrampusReturns/Runner"
@@ -1622,10 +1725,6 @@ table td
     "KrampusReturns/Testing/Gym"
   ],
   "ALLEGRO_DISPLAY": [
-    "KrampusReturns/Testing/Gym",
-    "KrampusReturns/Testing/Gym"
-  ],
-  "ALLEGRO_FONT": [
     "KrampusReturns/Testing/Gym",
     "KrampusReturns/Testing/Gym"
   ],

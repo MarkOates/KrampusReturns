@@ -46,7 +46,8 @@
     "KrampusReturns/Shaders/Primary"
   ],
   "AllegroFlare/Errors": [
-    "KrampusReturns/Entities/Krampus"
+    "KrampusReturns/Entities/Krampus",
+    "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory": [
     "KrampusReturns/EntityFactory",
@@ -173,6 +174,21 @@
     "KrampusReturns/Runner",
     "KrampusReturns/Testing/Gym"
   ],
+  "ALLEGRO_FONT": [
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Testing/Gym",
+    "KrampusReturns/Testing/Gym"
+  ],
+  "ALLEGRO_COLOR": [
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Runner",
+    "KrampusReturns/Shaders/AllegroDefault",
+    "KrampusReturns/Shaders/Primary",
+    "KrampusReturns/Testing/Gym"
+  ],
+  "al_draw_text": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
   "KrampusReturns/Shaders/Primary": [
     "KrampusReturns/Gameplay/Screen"
   ],
@@ -224,12 +240,6 @@
   ],
   "AllegroFlare/Prototypes/FixedRoom2D/Configuration": [
     "KrampusReturns/Runner"
-  ],
-  "ALLEGRO_COLOR": [
-    "KrampusReturns/Runner",
-    "KrampusReturns/Shaders/AllegroDefault",
-    "KrampusReturns/Shaders/Primary",
-    "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/Screens/Achievements": [
     "KrampusReturns/Runner"
@@ -299,10 +309,6 @@
     "KrampusReturns/Testing/Gym"
   ],
   "ALLEGRO_DISPLAY": [
-    "KrampusReturns/Testing/Gym",
-    "KrampusReturns/Testing/Gym"
-  ],
-  "ALLEGRO_FONT": [
     "KrampusReturns/Testing/Gym",
     "KrampusReturns/Testing/Gym"
   ],

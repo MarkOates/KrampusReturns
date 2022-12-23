@@ -237,6 +237,18 @@ void Krampus::emit_take_damage_sound_effect()
    event_emitter->emit_play_sound_effect_event("krampus_hit");
 }
 
+void Krampus::emit_player_died_event()
+{
+   if (!(event_emitter))
+   {
+      std::stringstream error_message;
+      error_message << "[Krampus::emit_player_died_event]: error: guard \"event_emitter\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Krampus::emit_player_died_event: error: guard \"event_emitter\" not met");
+   }
+   event_emitter->emit_game_event(AllegroFlare::GameEvent("player_died"));
+}
+
 void Krampus::stand_still()
 {
    if (state == STATE_STANDING || set_state(STATE_STANDING))

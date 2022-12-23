@@ -118,8 +118,138 @@ properties:
     type: ALLEGRO_BITMAP*
     init_with: nullptr
 
+  - name: showing_full_color_overlay
+    type: bool
+    init_with: false
+
+  - name: full_color_overlay_color
+    type: ALLEGRO_COLOR
+    init_with: ALLEGRO_COLOR{1.0, 0.0, 0.0, 1.0}
+
+  - name: full_color_overlay_opacity
+    type: float
+    init_with: 0.2
+
+  - name: showing_banner_text
+    type: bool
+    init_with: false
+
+  - name: banner_text_color
+    type: ALLEGRO_COLOR
+    init_with: ALLEGRO_COLOR{1.0, 0.0, 0.0, 1.0}
+
+  - name: banner_text
+    type: std::string
+    init_with: '"[unnset-banner_text]"'
+
+  - name: state
+    type: uint32_t
+    init_with: 0
+
+  - name: state_changed_at
+    type: float
+    init_with: 0.0f
+    
+  - name: state_is_busy
+    type: bool
+    init_with: false
+
+  - name: STATE_UNDEF
+    type: uint32_t
+    init_with: 0
+    static: true
+    const: true
+    constexpr: true
+
+  - name: STATE_PLAYING_IN_LEVEL
+    type: uint32_t
+    init_with: 1
+    static: true
+    const: true
+    constexpr: true
+
+  - name: STATE_PLAYER_DIED
+    type: uint32_t
+    init_with: 2
+    static: true
+    const: true
+    constexpr: true
+
 
 functions:
+
+
+  - name: set_state
+    parameters:
+      - name: state
+        type: uint32_t
+        default_argument: STATE_UNDEF
+      - name: time_now
+        type: float
+        default_argument: al_get_time()
+    guards: [ (state != STATE_UNDEF) ]
+    body: |
+      if (state_is_busy) return;
+      if (this->state == state) throw std::runtime_error("Gameplay::Screen: error: duplicate state");
+      this->state = state;
+      state_changed_at = time_now;
+
+      // HERE:
+      // TODO: Flesh out this logic:
+      switch(state)
+      {
+         case STATE_PLAYING_IN_LEVEL:
+            hide_full_color_overlay();
+         break;
+
+         case STATE_PLAYER_DIED:
+            set_full_color_overlay(al_color_name("firebrick"), 0.2);
+            show_full_color_overlay();
+            shake_camera(4, 1.0, time_now);
+         break;
+
+         default:
+            AllegroFlare::Errors::throw_error("KrampusReturns::Gameplay::Screen::set_state", "unhandled state");
+         break;
+      }
+      return;
+    body_dependency_symbols:
+      - AllegroFlare::Errors
+
+
+  - name: update_state
+    parameters:
+      - name: time_now
+        type: float
+        default_argument: al_get_time()
+    guards: [ (state != STATE_UNDEF) ]
+    body: |
+      float state_age = time_now - state_changed_at;
+
+      // HERE:
+      // TODO: Flesh out this logic:
+      switch(state)
+      {
+         case STATE_PLAYING_IN_LEVEL:
+            if (player_controlled_entity) krampus_controller.update();
+            update_entities();
+         break;
+
+         case STATE_PLAYER_DIED:
+            update_entities();
+            //if (state_age > 2.0)
+            //{
+               //show_player_died_banner();
+            //}
+         break;
+
+         default:
+            AllegroFlare::Errors::throw_error("KrampusReturns::Gameplay::Screen::set_state", "unhandled state");
+         break;
+      }
+      return;
+    body_dependency_symbols:
+      - AllegroFlare::Errors
 
 
   - name: set_map_dictionary
@@ -440,6 +570,12 @@ functions:
       return;
 
 
+  - name: start_level
+    body: |
+      set_state(STATE_PLAYING_IN_LEVEL);
+      return;
+
+
   - name: reverse_gravity
     body: |
       gravity_reversed = !gravity_reversed;
@@ -488,8 +624,7 @@ functions:
 
   - name: update_player_collisions_with_damage_zones
     body: |
-      // HERE:
-      // TODO: Implement this feature
+      // NOTE: This does not appear to need to be implemented for the time being
       return;
 
 
@@ -738,10 +873,8 @@ functions:
   - name: update
     guards: [ initialized ]
     body: |
-      //return;
-      if (player_controlled_entity) krampus_controller.update();
-      //return;
-      update_entities();
+      float time_now = al_get_time();
+      update_state(time_now);
       return;
 
 
@@ -785,11 +918,84 @@ functions:
       - al_color_name
 
 
+  - name: set_full_color_overlay
+    parameters:
+      - name: base_color
+        type: ALLEGRO_COLOR
+        default_argument: ALLEGRO_COLOR{0.0, 0.3, 0.8, 1.0}
+      - name: opacity
+        type: float
+        default_argument: 0.2f
+    body: |
+      full_color_overlay_color = ALLEGRO_COLOR{1.0, 0.0, 0.0, 1.0};
+      full_color_overlay_opacity = 0.2;
+      return;
+
+
+  - name: show_full_color_overlay
+    body: |
+      showing_full_color_overlay = true;
+      return;
+
+
+  - name: hide_full_color_overlay
+    body: |
+      showing_full_color_overlay = false;
+      return;
+
+
+  - name: set_banner_text
+    parameters:
+      - name: base_color
+        type: ALLEGRO_COLOR
+        default_argument: ALLEGRO_COLOR{0.0, 0.3, 0.8, 1.0}
+      - name: text
+        type: std::string
+        default_argument: '"[unset-text]"'
+    body: |
+      banner_text_color = ALLEGRO_COLOR{1.0, 0.0, 0.0, 1.0};
+      banner_text = text;
+      return;
+
+
+  - name: show_banner_text
+    body: |
+      showing_banner_text = true;
+      return;
+
+
+  - name: hide_banner_text
+    body: |
+      showing_banner_text = false;
+      return;
+
+
   - name: draw_hud
     guards: [ font_bin ]
     body: |
 
       if (!player_controlled_entity) return;
+
+
+      // draw full color overlay
+
+      if (showing_full_color_overlay)
+      {
+         ALLEGRO_COLOR calced_full_color_overlay_color = ALLEGRO_COLOR{
+            full_color_overlay_color.r * full_color_overlay_opacity,
+            full_color_overlay_color.g * full_color_overlay_opacity,
+            full_color_overlay_color.b * full_color_overlay_opacity,
+            full_color_overlay_color.a * full_color_overlay_opacity,
+         };
+ 
+         al_draw_filled_rectangle(0, 0, 1920, 1080, calced_full_color_overlay_color);
+         float inset = 80;
+         float thickness = 20;
+         al_draw_rectangle(inset, inset, 1920-inset, 1080-inset, al_color_name("firebrick"), thickness);
+      }
+
+
+
 
       // TODO: NOTE: here player_controlled_entity is assumed to be krampus
       // WARNING: TESTING:
@@ -810,9 +1016,21 @@ functions:
          hearts.render();
       heart_placement.restore_transform();
 
+
+
+      // draw some state overlay
+
+      if (showing_banner_text)
+      {
+         ALLEGRO_FONT *font = obtain_banner_font();
+         //std::string banner_text = "YOU LOSE";
+         al_draw_text(font, banner_text_color, 1920/2, 1080/2-100, ALLEGRO_ALIGN_CENTER, banner_text.c_str());
+      }
+
       return;
     body_dependency_symbols:
      - AllegroFlare::Elements::HealthBars::Hearts
+     - al_draw_text
 
 
   - name: toggle_show_collision_tile_mesh
@@ -878,6 +1096,9 @@ functions:
       std::map<std::string, std::function<void()>> event_map = {
          { "camera_shake_bump", [this, time_now](){
              shake_camera(3, 0.5, time_now);
+         }},
+         { "player_died", [this, time_now](){
+             set_state(STATE_PLAYER_DIED);
          }},
       };
 
@@ -1058,6 +1279,12 @@ functions:
       - AllegroFlare::Prototypes::Platforming2D::EntityCollectionHelper
 
 
+  - name: obtain_banner_font
+    type: ALLEGRO_FONT*
+    body: |
+      return font_bin->auto_get("ChronoTrigger.ttf -200");
+
+
 dependencies:
 
 
@@ -1135,6 +1362,12 @@ dependencies:
     headers: [ AllegroFlare/Camera2D.hpp ]
   - symbol: ALLEGRO_BITMAP
     headers: [ allegro5/allegro.h ]
+  - symbol: ALLEGRO_FONT
+    headers: [ allegro5/allegro_font.h ]
+  - symbol: ALLEGRO_COLOR
+    headers: [ allegro5/allegro.h ]
+  - symbol: al_draw_text
+    headers: [ allegro5/allegro_font.h ]
   - symbol: AllegroFlare::Vec2D
     headers: [ AllegroFlare/Vec2D.hpp ]
   - symbol: KrampusReturns::Shaders::Primary
@@ -1151,5 +1384,7 @@ dependencies:
     headers: [ KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.hpp ]
   - symbol: AllegroFlare::Elements::HealthBars::Hearts
     headers: [ AllegroFlare/Elements/HealthBars/Hearts.hpp ]
+  - symbol: AllegroFlare::Errors
+    headers: [ AllegroFlare/Errors.hpp ]
 
 

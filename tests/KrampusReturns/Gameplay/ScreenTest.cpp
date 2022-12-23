@@ -132,6 +132,7 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
 
 
    platforming_2d.initialize();
+   platforming_2d.start_level();
 
 
    framework.register_screen("platforming_2d", &platforming_2d);

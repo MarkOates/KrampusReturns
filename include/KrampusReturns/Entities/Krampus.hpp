@@ -50,6 +50,7 @@ namespace KrampusReturns
          void emit_bump_camera_shake_event();
          void emit_smash_club_sound_effect();
          void emit_take_damage_sound_effect();
+         void emit_player_died_event();
          void stand_still();
          void stand_still_x();
          void stand_still_y();

@@ -7,6 +7,7 @@
 #include <AllegroFlare/CameraControlStrategies2D/SmoothSnapWithZoomEffect.hpp>
 #include <AllegroFlare/CameraControlStrategies2D/Snap.hpp>
 #include <AllegroFlare/Elements/HealthBars/Hearts.hpp>
+#include <AllegroFlare/Errors.hpp>
 #include <AllegroFlare/EventNames.hpp>
 #include <AllegroFlare/Physics/AABB2D.hpp>
 #include <AllegroFlare/Physics/TileMapCollisionStepper.hpp>
@@ -19,6 +20,7 @@
 #include <KrampusReturns/Shaders/Primary.hpp>
 #include <algorithm>
 #include <allegro5/allegro_color.h>
+#include <allegro5/allegro_font.h>
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
@@ -54,6 +56,15 @@ Screen::Screen(AllegroFlare::BitmapBin* bitmap_bin, AllegroFlare::FontBin* font_
    , show_collision_tile_mesh(false)
    , camera_control_strategy(nullptr)
    , backbuffer_sub_bitmap(nullptr)
+   , showing_full_color_overlay(false)
+   , full_color_overlay_color(ALLEGRO_COLOR{1.0, 0.0, 0.0, 1.0})
+   , full_color_overlay_opacity(0.2)
+   , showing_banner_text(false)
+   , banner_text_color(ALLEGRO_COLOR{1.0, 0.0, 0.0, 1.0})
+   , banner_text("[unnset-banner_text]")
+   , state(0)
+   , state_changed_at(0.0f)
+   , state_is_busy(false)
 {
 }
 
@@ -128,6 +139,76 @@ bool Screen::get_show_collision_tile_mesh() const
    return show_collision_tile_mesh;
 }
 
+
+void Screen::set_state(uint32_t state, float time_now)
+{
+   if (!((state != STATE_UNDEF)))
+   {
+      std::stringstream error_message;
+      error_message << "[Screen::set_state]: error: guard \"(state != STATE_UNDEF)\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Screen::set_state: error: guard \"(state != STATE_UNDEF)\" not met");
+   }
+   if (state_is_busy) return;
+   if (this->state == state) throw std::runtime_error("Gameplay::Screen: error: duplicate state");
+   this->state = state;
+   state_changed_at = time_now;
+
+   // HERE:
+   // TODO: Flesh out this logic:
+   switch(state)
+   {
+      case STATE_PLAYING_IN_LEVEL:
+         hide_full_color_overlay();
+      break;
+
+      case STATE_PLAYER_DIED:
+         set_full_color_overlay(al_color_name("firebrick"), 0.2);
+         show_full_color_overlay();
+         shake_camera(4, 1.0, time_now);
+      break;
+
+      default:
+         AllegroFlare::Errors::throw_error("KrampusReturns::Gameplay::Screen::set_state", "unhandled state");
+      break;
+   }
+   return;
+}
+
+void Screen::update_state(float time_now)
+{
+   if (!((state != STATE_UNDEF)))
+   {
+      std::stringstream error_message;
+      error_message << "[Screen::update_state]: error: guard \"(state != STATE_UNDEF)\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Screen::update_state: error: guard \"(state != STATE_UNDEF)\" not met");
+   }
+   float state_age = time_now - state_changed_at;
+
+   // HERE:
+   // TODO: Flesh out this logic:
+   switch(state)
+   {
+      case STATE_PLAYING_IN_LEVEL:
+         if (player_controlled_entity) krampus_controller.update();
+         update_entities();
+      break;
+
+      case STATE_PLAYER_DIED:
+         update_entities();
+         //if (state_age > 2.0)
+         //{
+            //show_player_died_banner();
+         //}
+      break;
+
+      default:
+         AllegroFlare::Errors::throw_error("KrampusReturns::Gameplay::Screen::set_state", "unhandled state");
+      break;
+   }
+   return;
+}
 
 void Screen::set_map_dictionary(std::map<std::string, std::string> map_dictionary)
 {
@@ -469,6 +550,12 @@ void Screen::initialize_camera()
    return;
 }
 
+void Screen::start_level()
+{
+   set_state(STATE_PLAYING_IN_LEVEL);
+   return;
+}
+
 void Screen::reverse_gravity()
 {
    gravity_reversed = !gravity_reversed;
@@ -510,8 +597,7 @@ void Screen::update_enemy_collisions_with_damage_zones()
 
 void Screen::update_player_collisions_with_damage_zones()
 {
-   // HERE:
-   // TODO: Implement this feature
+   // NOTE: This does not appear to need to be implemented for the time being
    return;
 }
 
@@ -781,10 +867,8 @@ void Screen::update()
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
       throw std::runtime_error("Screen::update: error: guard \"initialized\" not met");
    }
-   //return;
-   if (player_controlled_entity) krampus_controller.update();
-   //return;
-   update_entities();
+   float time_now = al_get_time();
+   update_state(time_now);
    return;
 }
 
@@ -846,6 +930,44 @@ void Screen::draw()
    return;
 }
 
+void Screen::set_full_color_overlay(ALLEGRO_COLOR base_color, float opacity)
+{
+   full_color_overlay_color = ALLEGRO_COLOR{1.0, 0.0, 0.0, 1.0};
+   full_color_overlay_opacity = 0.2;
+   return;
+}
+
+void Screen::show_full_color_overlay()
+{
+   showing_full_color_overlay = true;
+   return;
+}
+
+void Screen::hide_full_color_overlay()
+{
+   showing_full_color_overlay = false;
+   return;
+}
+
+void Screen::set_banner_text(ALLEGRO_COLOR base_color, std::string text)
+{
+   banner_text_color = ALLEGRO_COLOR{1.0, 0.0, 0.0, 1.0};
+   banner_text = text;
+   return;
+}
+
+void Screen::show_banner_text()
+{
+   showing_banner_text = true;
+   return;
+}
+
+void Screen::hide_banner_text()
+{
+   showing_banner_text = false;
+   return;
+}
+
 void Screen::draw_hud()
 {
    if (!(font_bin))
@@ -857,6 +979,27 @@ void Screen::draw_hud()
    }
 
    if (!player_controlled_entity) return;
+
+
+   // draw full color overlay
+
+   if (showing_full_color_overlay)
+   {
+      ALLEGRO_COLOR calced_full_color_overlay_color = ALLEGRO_COLOR{
+         full_color_overlay_color.r * full_color_overlay_opacity,
+         full_color_overlay_color.g * full_color_overlay_opacity,
+         full_color_overlay_color.b * full_color_overlay_opacity,
+         full_color_overlay_color.a * full_color_overlay_opacity,
+      };
+
+      al_draw_filled_rectangle(0, 0, 1920, 1080, calced_full_color_overlay_color);
+      float inset = 80;
+      float thickness = 20;
+      al_draw_rectangle(inset, inset, 1920-inset, 1080-inset, al_color_name("firebrick"), thickness);
+   }
+
+
+
 
    // TODO: NOTE: here player_controlled_entity is assumed to be krampus
    // WARNING: TESTING:
@@ -876,6 +1019,17 @@ void Screen::draw_hud()
       hearts.set_heart_spacing(48+6);
       hearts.render();
    heart_placement.restore_transform();
+
+
+
+   // draw some state overlay
+
+   if (showing_banner_text)
+   {
+      ALLEGRO_FONT *font = obtain_banner_font();
+      //std::string banner_text = "YOU LOSE";
+      al_draw_text(font, banner_text_color, 1920/2, 1080/2-100, ALLEGRO_ALIGN_CENTER, banner_text.c_str());
+   }
 
    return;
 }
@@ -938,6 +1092,9 @@ void Screen::game_event_func(AllegroFlare::GameEvent* ev)
    std::map<std::string, std::function<void()>> event_map = {
       { "camera_shake_bump", [this, time_now](){
           shake_camera(3, 0.5, time_now);
+      }},
+      { "player_died", [this, time_now](){
+          set_state(STATE_PLAYER_DIED);
       }},
    };
 
@@ -1144,6 +1301,11 @@ std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> Screen:
    AllegroFlare::Prototypes::Platforming2D::EntityCollectionHelper collection_helper(&entity_pool);
    std::string on_map_name = currently_active_map_name;
    return collection_helper.select_on_map_y_sorted(on_map_name);
+}
+
+ALLEGRO_FONT* Screen::obtain_banner_font()
+{
+   return font_bin->auto_get("ChronoTrigger.ttf -200");
 }
 
 

@@ -277,6 +277,12 @@ functions:
       event_emitter->emit_play_sound_effect_event("krampus_hit");
 
 
+  - name: emit_player_died_event
+    guards: [ event_emitter ]
+    body: |
+      event_emitter->emit_game_event(AllegroFlare::GameEvent("player_died"));
+
+
   - name: stand_still
     body: |
       if (state == STATE_STANDING || set_state(STATE_STANDING))
