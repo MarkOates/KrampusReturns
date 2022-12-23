@@ -168,6 +168,12 @@ void Screen::set_state(uint32_t state, float time_now)
          shake_camera(4, 1.0, time_now);
       break;
 
+      case STATE_FINISHED_LEVEL:
+         set_full_color_overlay(al_color_name("white"), 0.1);
+         show_full_color_overlay();
+         play_win_music();
+      break;
+
       default:
          AllegroFlare::Errors::throw_error("KrampusReturns::Gameplay::Screen::set_state", "unhandled state");
       break;
@@ -204,11 +210,29 @@ void Screen::update_state(float time_now)
          }
       break;
 
+      case STATE_FINISHED_LEVEL:
+         //set_full_color_overlay(al_color_name("white"), 0.1);
+         //show_full_color_overlay();
+         //play_win_music();
+      break;
+
       default:
          AllegroFlare::Errors::throw_error("KrampusReturns::Gameplay::Screen::update_state", "unhandled state");
       break;
    }
    return;
+}
+
+void Screen::play_win_music()
+{
+   if (!(event_emitter))
+   {
+      std::stringstream error_message;
+      error_message << "[Screen::play_win_music]: error: guard \"event_emitter\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Screen::play_win_music: error: guard \"event_emitter\" not met");
+   }
+   event_emitter->emit_play_music_track_event("win_music");
 }
 
 void Screen::set_map_dictionary(std::map<std::string, std::string> map_dictionary)
@@ -933,7 +957,7 @@ void Screen::draw()
 
 void Screen::set_full_color_overlay(ALLEGRO_COLOR base_color, float opacity)
 {
-   full_color_overlay_color = ALLEGRO_COLOR{1.0, 0.0, 0.0, 1.0};
+   full_color_overlay_color = base_color; //ALLEGRO_COLOR{1.0, 0.0, 0.0, 1.0};
    full_color_overlay_opacity = 0.2;
    return;
 }
@@ -1142,6 +1166,10 @@ void Screen::key_char_func(ALLEGRO_EVENT* event)
    // this function should remain in place so that the keyboard could be used for debugging control.
    switch (event->keyboard.keycode)
    {
+   case ALLEGRO_KEY_W:
+      set_state(STATE_FINISHED_LEVEL);
+      //toggle_show_collision_tile_mesh();
+      break;
    case ALLEGRO_KEY_1:
       //toggle_show_collision_tile_mesh();
       break;

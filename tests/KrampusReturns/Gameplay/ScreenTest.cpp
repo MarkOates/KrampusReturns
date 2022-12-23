@@ -33,6 +33,20 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
 
    framework.get_bitmap_bin_ref().set_full_path(TEST_BASE_FOLDER "bitmaps/");
    framework.get_font_bin_ref().set_full_path(TEST_BASE_FOLDER "fonts/");
+   framework.get_sample_bin_ref().set_full_path(TEST_BASE_FOLDER "samples/");
+
+
+      framework.get_audio_controller_ref().set_and_load_sound_effect_elements({
+         { "smash_club", { "smash-club-01.ogg", false } },
+         { "krampus_hit", { "krampus_hit.ogg", false, "restart" } },
+      });
+
+      framework.get_audio_controller_ref().set_and_load_music_track_elements({
+        { "intro_music", { "krampus-intro-1.wav", false } },
+        { "win_music", { "win-music-01.ogg", false, "restart" } },
+      });
+
+
 
    KrampusReturns::Gameplay::Screen platforming_2d;
    platforming_2d.set_font_bin(&framework.get_font_bin_ref());

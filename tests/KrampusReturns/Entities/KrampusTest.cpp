@@ -38,6 +38,9 @@ TEST_F(KrampusReturns_Entities_KrampusGym, can_be_created_without_blowing_up)
       { "smash_club", { "smash-club-01.ogg", false, "restart" } },
       { "krampus_hit", { "player_hit.wav", false, "restart" } },
    });
+   audio_controller.set_and_load_music_track_elements({
+      { "win_music", { "win-music-01.ogg", false, "restart" } },
+   });
 
 
    KrampusReturns::Entities::Krampus krampus;

@@ -36,6 +36,7 @@ namespace KrampusReturns
          static constexpr uint32_t STATE_UNDEF = 0;
          static constexpr uint32_t STATE_PLAYING_IN_LEVEL = 1;
          static constexpr uint32_t STATE_PLAYER_DIED = 2;
+         static constexpr uint32_t STATE_FINISHED_LEVEL = 3;
 
       private:
          AllegroFlare::BitmapBin* bitmap_bin;
@@ -96,6 +97,7 @@ namespace KrampusReturns
          bool get_show_collision_tile_mesh() const;
          void set_state(uint32_t state=STATE_UNDEF, float time_now=al_get_time());
          void update_state(float time_now=al_get_time());
+         void play_win_music();
          void set_map_dictionary(std::map<std::string, std::string> map_dictionary={});
          void set_display(AllegroFlare::Display* display=nullptr);
          void set_event_emitter(AllegroFlare::EventEmitter* event_emitter=nullptr);

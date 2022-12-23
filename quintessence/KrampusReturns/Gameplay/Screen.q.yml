@@ -175,6 +175,13 @@ properties:
     const: true
     constexpr: true
 
+  - name: STATE_FINISHED_LEVEL
+    type: uint32_t
+    init_with: 3
+    static: true
+    const: true
+    constexpr: true
+
 
 functions:
 
@@ -206,6 +213,12 @@ functions:
             set_full_color_overlay(al_color_name("firebrick"), 0.2);
             show_full_color_overlay();
             shake_camera(4, 1.0, time_now);
+         break;
+
+         case STATE_FINISHED_LEVEL:
+            set_full_color_overlay(al_color_name("white"), 0.1);
+            show_full_color_overlay();
+            play_win_music();
          break;
 
          default:
@@ -244,6 +257,12 @@ functions:
             }
          break;
 
+         case STATE_FINISHED_LEVEL:
+            //set_full_color_overlay(al_color_name("white"), 0.1);
+            //show_full_color_overlay();
+            //play_win_music();
+         break;
+
          default:
             AllegroFlare::Errors::throw_error("KrampusReturns::Gameplay::Screen::update_state", "unhandled state");
          break;
@@ -251,6 +270,12 @@ functions:
       return;
     body_dependency_symbols:
       - AllegroFlare::Errors
+
+
+  - name: play_win_music
+    guards: [ event_emitter ]
+    body: |
+      event_emitter->emit_play_music_track_event("win_music");
 
 
   - name: set_map_dictionary
@@ -928,7 +953,7 @@ functions:
         type: float
         default_argument: 0.2f
     body: |
-      full_color_overlay_color = ALLEGRO_COLOR{1.0, 0.0, 0.0, 1.0};
+      full_color_overlay_color = base_color; //ALLEGRO_COLOR{1.0, 0.0, 0.0, 1.0};
       full_color_overlay_opacity = 0.2;
       return;
 
@@ -1139,6 +1164,10 @@ functions:
       // this function should remain in place so that the keyboard could be used for debugging control.
       switch (event->keyboard.keycode)
       {
+      case ALLEGRO_KEY_W:
+         set_state(STATE_FINISHED_LEVEL);
+         //toggle_show_collision_tile_mesh();
+         break;
       case ALLEGRO_KEY_1:
          //toggle_show_collision_tile_mesh();
          break;
