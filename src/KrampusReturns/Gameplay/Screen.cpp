@@ -921,6 +921,24 @@ void Screen::update_player_collisions_with_collectables()
    return;
 }
 
+void Screen::dump_entity_data()
+{
+   std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> _entities = get_current_map_entities();
+   AllegroFlare::Prototypes::Platforming2D::EntityCollectionHelper collection_helper(&_entities);
+
+   std::cout << "entities:" << std::endl;
+   for (auto &entity : _entities)
+   {
+      std::map<std::string, std::string> attributes_copy = entity->Attributes::get_copy();
+      std::cout << "  - [entity]" << std::endl;
+      for (auto &attribute : attributes_copy)
+      {
+         std::cout << "    " << attribute.first << ": " << attribute.second << std::endl;
+      }
+   }
+   return;
+}
+
 void Screen::update_player_collisions_with_goalposts()
 {
    if (!(player_controlled_entity))
@@ -934,19 +952,17 @@ void Screen::update_player_collisions_with_goalposts()
    std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> _entities = get_current_map_entities();
    AllegroFlare::Prototypes::Platforming2D::EntityCollectionHelper collection_helper(&_entities);
 
-   // NOTE: collisions here occcur with the origin of the player character (bottom center of the sprite)
-   float player_x = player_controlled_entity->get_place_ref().position.x;
-   float player_y = player_controlled_entity->get_place_ref().position.y;
+   KrampusReturns::Entities::Krampus* player_krampus =
+      static_cast<KrampusReturns::Entities::Krampus*>(player_controlled_entity);
 
    for (auto &entity : collection_helper.select_goalposts())
    {
-      if (entity->get_place_ref().collide(player_x, player_y, 8, 8, 8, 8))
+      if (player_krampus->get_place_ref().collide(entity->get_place_ref()))
       {
          int goalpost_id = entity->exists("goalpost_id") ? entity->get_as_int("goalpost_id") : -1;
-         //emit_player_reached_goalpost_event(goalpost_num);
          event_emitter->emit_game_event(
             AllegroFlare::GameEvent(
-               "goalpost_reahed",
+               "goalpost_reached",
                new KrampusReturns::GameEventDatas::GoalpostReached(goalpost_id)
             )
          );

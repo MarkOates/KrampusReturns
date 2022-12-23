@@ -120,6 +120,7 @@ namespace KrampusReturns
          void update_enemy_collisions_with_damage_zones();
          void update_player_collisions_with_damage_zones();
          void update_entities();
+         void dump_entity_data();
          void draw_entities();
          void update();
          void draw();

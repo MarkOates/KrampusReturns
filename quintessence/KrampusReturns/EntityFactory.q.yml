@@ -95,6 +95,42 @@ functions:
       - AllegroFlare::Prototypes::Platforming2D::EntityFlagNames
 
 
+  - name: create_goalpost
+    type: KrampusReturns::Entities::Goalpost*
+    parameters:
+      - name: on_map
+        type: std::string
+        default_argument: '"[unset-on_map]"'
+      - name: goalpost_id
+        type: int
+        default_argument: -1
+      - name: x
+        type: float
+        default_argument: 0.0f
+      - name: y
+        type: float
+        default_argument: 0.0f
+    guards: [ get_animation_book() ]
+    parameters:
+    body: |
+      using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+
+      KrampusReturns::Entities::Goalpost *result = new KrampusReturns::Entities::Goalpost();
+      result->set_animation_book(get_animation_book());
+      result->set("goalpost_id", goalpost_id);
+      result->initialize();
+
+      result->get_place_ref().position = { x, y };
+      result->set(ON_MAP_NAME, on_map);
+
+      if (init_entities_drawing_debug) result->set_draw_debug(true);
+      //get_platforming_2d_ref().add_entity_to_pool(result);
+      return result;
+    body_dependency_symbols:
+      - KrampusReturns::Entities::Goalpost
+      - AllegroFlare::Prototypes::Platforming2D::EntityFlagNames
+
+
 dependencies:
 
 
@@ -110,5 +146,7 @@ dependencies:
     headers: [ KrampusReturns/Entities/Blob.hpp ]
   - symbol: AllegroFlare::EventEmitter
     headers: [ AllegroFlare/EventEmitter.hpp ]
+  - symbol: KrampusReturns::Entities::Goalpost
+    headers: [ KrampusReturns/Entities/Goalpost.hpp ]
 
 

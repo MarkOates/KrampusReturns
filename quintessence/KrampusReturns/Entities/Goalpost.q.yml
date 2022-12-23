@@ -26,14 +26,19 @@ functions:
   - name: initialize
     guards: [ (!initialized) ]
     body: |
-      get_place_ref().size = { 15, 7 };
+      using namespace AllegroFlare::Prototypes::Platforming2D;
+
+      get_place_ref().size = { 100, 100 };
       get_bitmap_placement_ref().scale = { 0.6, 0.6 };
       set_bitmap_alignment_strategy("bottom_centered");
-      set("type", "goalpost");
+      set_draw_debug(true);
+      set(EntityFlagNames::TYPE, EntityFlagNames::GOALPOST);
       set_animation("blob"); // TODO: change this type
 
       initialized = true;
       return;
+    body_dependency_symbols:
+      - AllegroFlare::Prototypes::Platforming2D::EntityFlagNames
 
 
   - name: update
@@ -45,11 +50,22 @@ functions:
       return;
 
 
+  - name: draw
+    virtual: true
+    override: true
+    guards: [ initialized ]
+    body: |
+      FrameAnimated2D::draw();
+      return;
+
+
 dependencies:
 
 
   - symbol: AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D
     headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D.hpp ]
+  - symbol: AllegroFlare::Prototypes::Platforming2D::EntityFlagNames
+    headers: [ AllegroFlare/Prototypes/Platforming2D/EntityFlagNames.hpp ]
   - symbol: AllegroFlare::Vec2D
     headers: [ AllegroFlare/Vec2D.hpp ]
 

@@ -114,6 +114,11 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
       KrampusReturns::Entities::Blob *blob = entity_factory.create_blob("map_a", 400/2+50, 240/2);
       platforming_2d.add_entity_to_pool(blob);
 
+      KrampusReturns::Entities::Goalpost *goalpost = entity_factory.create_goalpost(
+         "map_a", 1, 400/2+50 + 100, 240/2
+      );
+      platforming_2d.add_entity_to_pool(goalpost);
+
 
       for (unsigned i=0; i<6; i++)
       {

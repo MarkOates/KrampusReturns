@@ -51,6 +51,7 @@ table td
 <ul>
   <li><a href="#quintessence/KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.q.yml">quintessence/KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Entities/Blob.q.yml">quintessence/KrampusReturns/Entities/Blob.q.yml</a></li>
+  <li><a href="#quintessence/KrampusReturns/Entities/Goalpost.q.yml">quintessence/KrampusReturns/Entities/Goalpost.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Entities/Krampus.q.yml">quintessence/KrampusReturns/Entities/Krampus.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/EntityFactory.q.yml">quintessence/KrampusReturns/EntityFactory.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/GameEventDatas/GoalpostReached.q.yml">quintessence/KrampusReturns/GameEventDatas/GoalpostReached.q.yml</a></li>
@@ -208,6 +209,43 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;std::rand&quot;, &quot;headers&quot;=&gt;[&quot;cstdlib&quot;]}</td>
+</tr>
+    </table>
+  </div>
+</ul>
+<ul>
+  <div class="component">
+    <h3 id="quintessence/KrampusReturns/Entities/Goalpost.q.yml">quintessence/KrampusReturns/Entities/Goalpost.q.yml</h3>
+     <table>
+<tr>
+  <td class="property">initialized</td>
+  <td class="property">bool</td>
+</tr>
+<tr>
+  <td class="property">TYPE</td>
+  <td class="property">char*</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="method">initialize()</td>
+</tr>
+<tr>
+  <td class="method">update()</td>
+</tr>
+<tr>
+  <td class="method">draw()</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::Platforming2D::EntityFlagNames&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/Platforming2D/EntityFlagNames.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Vec2D&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Vec2D.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -387,6 +425,9 @@ table td
 <tr>
   <td class="method">create_blob()</td>
 </tr>
+<tr>
+  <td class="method">create_goalpost()</td>
+</tr>
     </table>
      <table>
 <tr>
@@ -406,6 +447,9 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::EventEmitter&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/EventEmitter.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Entities::Goalpost&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Entities/Goalpost.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -667,6 +711,9 @@ table td
 </tr>
 <tr>
   <td class="private_method">update_player_collisions_with_collectables()</td>
+</tr>
+<tr>
+  <td class="method">dump_entity_data()</td>
 </tr>
 <tr>
   <td class="private_method">update_player_collisions_with_goalposts()</td>
@@ -1501,6 +1548,7 @@ table td
   ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D": [
     "KrampusReturns/Entities/Blob",
+    "KrampusReturns/Entities/Goalpost",
     "KrampusReturns/Entities/Krampus"
   ],
   "sin": [
@@ -1509,10 +1557,17 @@ table td
   ],
   "AllegroFlare/Vec2D": [
     "KrampusReturns/Entities/Blob",
+    "KrampusReturns/Entities/Goalpost",
     "KrampusReturns/Gameplay/Screen"
   ],
   "std/rand": [
     "KrampusReturns/Entities/Blob"
+  ],
+  "AllegroFlare/Prototypes/Platforming2D/EntityFlagNames": [
+    "KrampusReturns/Entities/Goalpost",
+    "KrampusReturns/EntityFactory",
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/KrampusController"
   ],
   "AllegroFlare/EventEmitter": [
     "KrampusReturns/Entities/Krampus",
@@ -1530,11 +1585,6 @@ table td
     "KrampusReturns/EntityFactory",
     "KrampusReturns/Gameplay/Screen"
   ],
-  "AllegroFlare/Prototypes/Platforming2D/EntityFlagNames": [
-    "KrampusReturns/EntityFactory",
-    "KrampusReturns/Gameplay/Screen",
-    "KrampusReturns/KrampusController"
-  ],
   "KrampusReturns/Entities/Krampus": [
     "KrampusReturns/EntityFactory",
     "KrampusReturns/Gameplay/Screen",
@@ -1543,6 +1593,9 @@ table td
   "KrampusReturns/Entities/Blob": [
     "KrampusReturns/EntityFactory",
     "KrampusReturns/Gameplay/Screen"
+  ],
+  "KrampusReturns/Entities/Goalpost": [
+    "KrampusReturns/EntityFactory"
   ],
   "AllegroFlare/GameEventDatas/Base": [
     "KrampusReturns/GameEventDatas/GoalpostReached"
