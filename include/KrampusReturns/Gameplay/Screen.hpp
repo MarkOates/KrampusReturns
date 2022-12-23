@@ -35,9 +35,10 @@ namespace KrampusReturns
       {
       public:
          static constexpr uint32_t STATE_UNDEF = 0;
-         static constexpr uint32_t STATE_PLAYING_IN_LEVEL = 1;
-         static constexpr uint32_t STATE_PLAYER_DIED = 2;
-         static constexpr uint32_t STATE_FINISHED_LEVEL = 3;
+         static constexpr uint32_t STATE_PRELOADING_LEVEL = 1;
+         static constexpr uint32_t STATE_PLAYING_IN_LEVEL = 2;
+         static constexpr uint32_t STATE_PLAYER_DIED = 3;
+         static constexpr uint32_t STATE_FINISHED_LEVEL = 4;
 
       private:
          AllegroFlare::BitmapBin* bitmap_bin;
@@ -76,6 +77,7 @@ namespace KrampusReturns
          void initialize_shader();
          void initialize_camera();
          void cleanup_entities_flagged_for_deletion();
+         void flag_all_entities_for_deletion();
          void check_player_collisions_with_doors();
          void update_player_collisions_with_collectables();
          void update_player_collisions_with_goalposts();
@@ -113,6 +115,7 @@ namespace KrampusReturns
          AllegroFlare::Prototypes::Platforming2D::Entities::TileMaps::Basic2D* find_map_by_name(std::string name="[unset-map-name]");
          virtual void on_activate() override;
          virtual void on_deactivate() override;
+         void load_level_and_start(std::string level_name="[unset-level_name]");
          void initialize_maps();
          void add_entity_to_pool(AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* entity=nullptr);
          void reset_camera_control(AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* entity_to_follow=nullptr);

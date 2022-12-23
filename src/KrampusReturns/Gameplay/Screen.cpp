@@ -171,6 +171,10 @@ void Screen::set_state(uint32_t state, float time_now)
    // TODO: Flesh out this logic:
    switch(state)
    {
+      case STATE_PRELOADING_LEVEL:
+         //hide_full_color_overlay();
+      break;
+
       case STATE_PLAYING_IN_LEVEL:
          hide_full_color_overlay();
       break;
@@ -242,6 +246,10 @@ void Screen::update_state(float time_now)
    // TODO: Flesh out this logic:
    switch(state)
    {
+      case STATE_PRELOADING_LEVEL:
+         //hide_full_color_overlay();
+      break;
+
       case STATE_PLAYING_IN_LEVEL:
          if (player_controlled_entity) krampus_controller.update();
          update_entities();
@@ -308,13 +316,7 @@ void Screen::play_win_music()
 
 void Screen::set_map_dictionary(std::map<std::string, std::string> map_dictionary)
 {
-   if (!((!initialized)))
-   {
-      std::stringstream error_message;
-      error_message << "[Screen::set_map_dictionary]: error: guard \"(!initialized)\" not met.";
-      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
-      throw std::runtime_error("Screen::set_map_dictionary: error: guard \"(!initialized)\" not met");
-   }
+   // WARNING: this was previously set with "guards: [ (!initialized) ]", Unsure of its removal
    this->map_dictionary = map_dictionary;
    // TODO: allow this to be set after initialization
    return;
@@ -386,10 +388,18 @@ void Screen::set_player_controlled_entity(KrampusReturns::Entities::Krampus* pla
 
    // NOTE: for now, this "player_controlled_entity" is a Krampus type. This will likely change eventually.
    this->player_controlled_entity = player_controlled_entity;
-   krampus_controller.set_krampus(player_controlled_entity);
-   krampus_controller.reset();
 
-   reset_camera_control(player_controlled_entity);
+   if (player_controlled_entity)
+   {
+      krampus_controller.set_krampus(player_controlled_entity);
+      krampus_controller.reset();
+      reset_camera_control(player_controlled_entity);
+   }
+   else
+   {
+      AllegroFlare::Errors::throw_error("KrampusReturns::Gameplay::Screen::set_player_controlled_entity",
+         "Currently there is no support for setting this value to nullptr.");
+   }
    return;
 }
 
@@ -418,6 +428,7 @@ void Screen::on_activate()
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
       throw std::runtime_error("Screen::on_activate: error: guard \"initialized\" not met");
    }
+   //load_level_and_start();
    // nothing here
    return;
 }
@@ -432,6 +443,70 @@ void Screen::on_deactivate()
       throw std::runtime_error("Screen::on_deactivate: error: guard \"initialized\" not met");
    }
    // nothing here
+   return;
+}
+
+void Screen::load_level_and_start(std::string level_name)
+{
+   if (!(initialized))
+   {
+      std::stringstream error_message;
+      error_message << "[Screen::load_level_and_start]: error: guard \"initialized\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Screen::load_level_and_start: error: guard \"initialized\" not met");
+   }
+   set_state(STATE_PRELOADING_LEVEL);
+
+
+   // cleanup
+   flag_all_entities_for_deletion();
+   cleanup_entities_flagged_for_deletion();
+
+   if (!entity_pool.empty())
+   {
+      AllegroFlare::Errors::throw_error(
+         "KrampusReturns::Gameplay::Screen::load_level_and_start",
+         "While cleaning/deleting all existing entities, some entities unexpectedly remained in the pool."
+      );
+   }
+
+   //set_player_controlled_entity(nullptr);
+
+
+
+   // TODO: CRITICAL: fix this folder
+   #if defined(_WIN32) || defined(_WIN64)
+   #define TEST_BASE_FOLDER "/msys64/home/Mark/Repos/KrampusReturns/bin/programs/data/"
+   #else
+   #define TEST_BASE_FOLDER "/Users/markoates/Repos/KrampusReturns/bin/programs/data/"
+   #endif
+
+   set_map_dictionary({
+      { "map_a", TEST_BASE_FOLDER "maps/krampus-returns-map01-0x.tmj" },
+      { "map_b", TEST_BASE_FOLDER "maps/krampus-returns-map02-0x.tmj" },
+   });
+   initialize_maps();
+
+
+   // flag all entities for deletion
+
+
+   KrampusReturns::EntityFactory entity_factory;
+   entity_factory.set_event_emitter(event_emitter);
+   entity_factory.set_bitmap_bin(bitmap_bin);
+   entity_factory.set_animation_book(&animation_book);
+
+
+   KrampusReturns::Entities::Krampus *krampus = entity_factory.create_krampus("map_a", 400/2 - 50, 240/2);
+   add_entity_to_pool(krampus);
+
+   set_player_controlled_entity(krampus);
+
+   set_currently_active_map("map_a");
+   start_level();
+   //platforming_2d.set_player_controlled_entity(krampus);
+   // HERE:
+   // TODO: implement here
    return;
 }
 
@@ -860,6 +935,17 @@ void Screen::cleanup_entities_flagged_for_deletion()
          entity_pool.erase(entity_pool.begin() + i);
          i--;
       }
+   }
+   return;
+}
+
+void Screen::flag_all_entities_for_deletion()
+{
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+
+   for (int i=0; i<entity_pool.size(); i++)
+   {
+      entity_pool[i]->set(PLEASE_DELETE);
    }
    return;
 }
@@ -1346,7 +1432,12 @@ void Screen::key_char_func(ALLEGRO_EVENT* event)
       set_state(STATE_FINISHED_LEVEL);
       //toggle_show_collision_tile_mesh();
       break;
+   case ALLEGRO_KEY_L:
+      // DEBUG: // TESTING:
+      load_level_and_start();
+      break;
    case ALLEGRO_KEY_S:
+      // DEBUG: // TESTING:
       event_emitter->emit_game_event(
          AllegroFlare::GameEvent(
             "spawn_flash_effect", 

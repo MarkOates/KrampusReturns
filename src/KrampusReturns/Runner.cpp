@@ -97,7 +97,7 @@ void Runner::initialize()
 
    // pre-load the audio controller (TODO)
    audio_controller.set_and_load_sound_effect_elements({
-      { "smash_club", { "smash-club-01.ogg", false } },
+      { "smash_club", { "smash-club-01.ogg", false, "restart" } },
       { "krampus_hit", { "krampus_hit.ogg", false, "restart" } },
    });
 

@@ -56,6 +56,7 @@ table td
   <li><a href="#quintessence/KrampusReturns/Entities/Krampus.q.yml">quintessence/KrampusReturns/Entities/Krampus.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/EntityFactory.q.yml">quintessence/KrampusReturns/EntityFactory.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/GameEventDatas/GoalpostReached.q.yml">quintessence/KrampusReturns/GameEventDatas/GoalpostReached.q.yml</a></li>
+  <li><a href="#quintessence/KrampusReturns/GameEventDatas/SpawnFlashFX.q.yml">quintessence/KrampusReturns/GameEventDatas/SpawnFlashFX.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Gameplay/Screen.q.yml">quintessence/KrampusReturns/Gameplay/Screen.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/KrampusController.q.yml">quintessence/KrampusReturns/KrampusController.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Runner.q.yml">quintessence/KrampusReturns/Runner.q.yml</a></li>
@@ -519,6 +520,36 @@ table td
 </ul>
 <ul>
   <div class="component">
+    <h3 id="quintessence/KrampusReturns/GameEventDatas/SpawnFlashFX.q.yml">quintessence/KrampusReturns/GameEventDatas/SpawnFlashFX.q.yml</h3>
+     <table>
+<tr>
+  <td class="property">animation_name</td>
+  <td class="property">std::string</td>
+</tr>
+<tr>
+  <td class="property">x</td>
+  <td class="property">float</td>
+</tr>
+<tr>
+  <td class="property">y</td>
+  <td class="property">float</td>
+</tr>
+<tr>
+  <td class="property">TYPE</td>
+  <td class="property">char*</td>
+</tr>
+    </table>
+     <table>
+    </table>
+     <table>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::GameEventDatas::Base&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/GameEventDatas/Base.hpp&quot;]}</td>
+</tr>
+    </table>
+  </div>
+</ul>
+<ul>
+  <div class="component">
     <h3 id="quintessence/KrampusReturns/Gameplay/Screen.q.yml">quintessence/KrampusReturns/Gameplay/Screen.q.yml</h3>
      <table>
 <tr>
@@ -658,6 +689,10 @@ table td
   <td class="property">uint32_t</td>
 </tr>
 <tr>
+  <td class="property">STATE_PRELOADING_LEVEL</td>
+  <td class="property">uint32_t</td>
+</tr>
+<tr>
   <td class="property">STATE_PLAYING_IN_LEVEL</td>
   <td class="property">uint32_t</td>
 </tr>
@@ -714,6 +749,9 @@ table td
   <td class="method">on_deactivate()</td>
 </tr>
 <tr>
+  <td class="method">load_level_and_start(1)</td>
+</tr>
+<tr>
   <td class="method">initialize_maps()</td>
 </tr>
 <tr>
@@ -757,6 +795,9 @@ table td
 </tr>
 <tr>
   <td class="private_method">cleanup_entities_flagged_for_deletion()</td>
+</tr>
+<tr>
+  <td class="private_method">flag_all_entities_for_deletion()</td>
 </tr>
 <tr>
   <td class="private_method">check_player_collisions_with_doors()</td>
@@ -1664,7 +1705,8 @@ table td
     "KrampusReturns/EntityFactory"
   ],
   "AllegroFlare/GameEventDatas/Base": [
-    "KrampusReturns/GameEventDatas/GoalpostReached"
+    "KrampusReturns/GameEventDatas/GoalpostReached",
+    "KrampusReturns/GameEventDatas/SpawnFlashFX"
   ],
   "AllegroFlare/BitmapBin": [
     "KrampusReturns/Gameplay/Screen",

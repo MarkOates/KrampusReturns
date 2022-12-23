@@ -81,7 +81,8 @@
     "KrampusReturns/EntityFactory"
   ],
   "AllegroFlare/GameEventDatas/Base": [
-    "KrampusReturns/GameEventDatas/GoalpostReached"
+    "KrampusReturns/GameEventDatas/GoalpostReached",
+    "KrampusReturns/GameEventDatas/SpawnFlashFX"
   ],
   "AllegroFlare/BitmapBin": [
     "KrampusReturns/Gameplay/Screen",
