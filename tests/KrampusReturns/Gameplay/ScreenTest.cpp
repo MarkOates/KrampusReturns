@@ -98,7 +98,7 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
    });
    platforming_2d.initialize_maps();
 
-   platforming_2d.set_currently_active_map("map_a");
+   //platforming_2d.set_currently_active_map("map_a");
 
 
       //AllegroFlare::Prototypes::Platforming2D::Entities::Basic2DFactory factory(
@@ -123,9 +123,6 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
 
       KrampusReturns::Entities::Krampus *krampus = entity_factory.create_krampus("map_a", 400/2 - 50, 240/2);
       platforming_2d.add_entity_to_pool(krampus);
-
-      platforming_2d.set_player_controlled_entity(krampus);
-      //platforming_2d.set_player_controlled_entity(created_entity);
 
 
       KrampusReturns::Entities::Blob *blob = entity_factory.create_blob("map_a", 400/2+50, 240/2);
@@ -167,8 +164,11 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
       );
 
 
+
+   platforming_2d.set_currently_active_map("map_a");
+   platforming_2d.set_player_controlled_entity(krampus);
+   // NOTE: initialization here should be moved up closer to platforming_2d instanciation
    platforming_2d.initialize();
-   //platforming_2d.set_currently_active_map("map_a");
    platforming_2d.start_level();
 
 
