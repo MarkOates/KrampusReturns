@@ -32,6 +32,7 @@ namespace KrampusReturns
       static constexpr char* EVENT_EXIT_GAME = "exit_game";
       static constexpr char* EVENT_PAUSE_GAME = "pause_game";
       static constexpr char* EVENT_UNPAUSE_GAME = "unpause_game";
+      static constexpr char* THIS_CLASS = (char*)"KrampusReturns::Runner";
 
    private:
       std::string mode;

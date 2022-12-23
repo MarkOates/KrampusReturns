@@ -47,7 +47,8 @@
   ],
   "AllegroFlare/Errors": [
     "KrampusReturns/Entities/Krampus",
-    "KrampusReturns/Gameplay/Screen"
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Runner"
   ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory": [
     "KrampusReturns/EntityFactory",
@@ -66,6 +67,9 @@
   "KrampusReturns/Entities/Blob": [
     "KrampusReturns/EntityFactory",
     "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/GameEventDatas/Base": [
+    "KrampusReturns/GameEventDatas/GoalpostReached"
   ],
   "AllegroFlare/BitmapBin": [
     "KrampusReturns/Gameplay/Screen",
@@ -215,6 +219,9 @@
     "KrampusReturns/Gameplay/Screen",
     "KrampusReturns/Runner",
     "KrampusReturns/Runner"
+  ],
+  "KrampusReturns/GameEventDatas/GoalpostReached": [
+    "KrampusReturns/Gameplay/Screen"
   ],
   "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [
     "KrampusReturns/Runner"

@@ -3,6 +3,7 @@
 #include <KrampusReturns/Runner.hpp>
 
 #include <AllegroFlare/Color.hpp>
+#include <AllegroFlare/Errors.hpp>
 #include <AllegroFlare/EventNames.hpp>
 #include <AllegroFlare/Prototypes/FixedRoom2D/EventNames.hpp>
 #include <AllegroFlare/Prototypes/FixedRoom2D/ScriptEventDatas/CollectEvidence.hpp>
@@ -469,7 +470,9 @@ void Runner::game_event_func(AllegroFlare::GameEvent* ev)
    if (event_map.count(event_name) == 0)
    {
       // event not found
-      std::cout << "ERROR: event not found: \"" << event_name << "\"" << std::endl;
+      std::stringstream warning_message;
+      warning_message << "[KrampusReturns::Runner]: INFO: Event not handled: \"" << event_name << "\".";
+      AllegroFlare::Errors::warn_from("KrampusReturns::Runner::game_event_func", warning_message.str());
    }
    else
    {

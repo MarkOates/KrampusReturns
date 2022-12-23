@@ -18,6 +18,7 @@
 #include <AllegroFlare/Prototypes/Platforming2D/EntityFlagNames.hpp>
 #include <KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.hpp>
 #include <KrampusReturns/Entities/Blob.hpp>
+#include <KrampusReturns/GameEventDatas/GoalpostReached.hpp>
 #include <KrampusReturns/Shaders/AllegroDefault.hpp>
 #include <KrampusReturns/Shaders/Primary.hpp>
 #include <algorithm>
@@ -937,8 +938,14 @@ void Screen::update_player_collisions_with_goalposts()
    {
       if (entity->get_place_ref().collide(player_x, player_y, 8, 8, 8, 8))
       {
-         // TODO: this logic requires injection of the event emitter
-         //framework->shutdown_program = true;
+         int goalpost_id = entity->exists("goalpost_id") ? entity->get_as_int("goalpost_id") : -1;
+         //emit_player_reached_goalpost_event(goalpost_num);
+         event_emitter->emit_game_event(
+            AllegroFlare::GameEvent(
+               "goalpost_reahed",
+               new KrampusReturns::GameEventDatas::GoalpostReached(goalpost_id)
+            )
+         );
       }
    }
    return;

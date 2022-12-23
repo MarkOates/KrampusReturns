@@ -1,0 +1,32 @@
+parent_classes:
+
+
+  - class: AllegroFlare::GameEventDatas::Base
+    scope: public
+    init_with: KrampusReturns::GameEventDatas::GoalpostReached::TYPE
+
+
+properties:
+
+
+  - name: goalpost_id
+    type: int
+    init_with: -1
+    constructor_arg: true
+    getter: true
+    setter: true
+
+  - name: TYPE
+    type: char*
+    init_with: '(char*)"GameEventDatas/GoalpostReached"'
+    static: true
+    constexpr: true
+
+
+dependencies:
+
+
+  - symbol: AllegroFlare::GameEventDatas::Base
+    headers: [ AllegroFlare/GameEventDatas/Base.hpp ]
+
+

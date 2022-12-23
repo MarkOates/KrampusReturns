@@ -53,6 +53,7 @@ table td
   <li><a href="#quintessence/KrampusReturns/Entities/Blob.q.yml">quintessence/KrampusReturns/Entities/Blob.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Entities/Krampus.q.yml">quintessence/KrampusReturns/Entities/Krampus.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/EntityFactory.q.yml">quintessence/KrampusReturns/EntityFactory.q.yml</a></li>
+  <li><a href="#quintessence/KrampusReturns/GameEventDatas/GoalpostReached.q.yml">quintessence/KrampusReturns/GameEventDatas/GoalpostReached.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Gameplay/Screen.q.yml">quintessence/KrampusReturns/Gameplay/Screen.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/KrampusController.q.yml">quintessence/KrampusReturns/KrampusController.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Runner.q.yml">quintessence/KrampusReturns/Runner.q.yml</a></li>
@@ -405,6 +406,28 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::EventEmitter&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/EventEmitter.hpp&quot;]}</td>
+</tr>
+    </table>
+  </div>
+</ul>
+<ul>
+  <div class="component">
+    <h3 id="quintessence/KrampusReturns/GameEventDatas/GoalpostReached.q.yml">quintessence/KrampusReturns/GameEventDatas/GoalpostReached.q.yml</h3>
+     <table>
+<tr>
+  <td class="property">goalpost_id</td>
+  <td class="property">int</td>
+</tr>
+<tr>
+  <td class="property">TYPE</td>
+  <td class="property">char*</td>
+</tr>
+    </table>
+     <table>
+    </table>
+     <table>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::GameEventDatas::Base&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/GameEventDatas/Base.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -881,6 +904,9 @@ table td
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Color&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Color.hpp&quot;]}</td>
 </tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::GameEventDatas::GoalpostReached&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/GameEventDatas/GoalpostReached.hpp&quot;]}</td>
+</tr>
     </table>
   </div>
 </ul>
@@ -1029,6 +1055,10 @@ table td
 </tr>
 <tr>
   <td class="property">EVENT_UNPAUSE_GAME</td>
+  <td class="property">char*</td>
+</tr>
+<tr>
+  <td class="property">THIS_CLASS</td>
   <td class="property">char*</td>
 </tr>
     </table>
@@ -1196,6 +1226,9 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Gameplay::Screen&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Gameplay/Screen.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Errors&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Errors.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -1490,7 +1523,8 @@ table td
   ],
   "AllegroFlare/Errors": [
     "KrampusReturns/Entities/Krampus",
-    "KrampusReturns/Gameplay/Screen"
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Runner"
   ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory": [
     "KrampusReturns/EntityFactory",
@@ -1509,6 +1543,9 @@ table td
   "KrampusReturns/Entities/Blob": [
     "KrampusReturns/EntityFactory",
     "KrampusReturns/Gameplay/Screen"
+  ],
+  "AllegroFlare/GameEventDatas/Base": [
+    "KrampusReturns/GameEventDatas/GoalpostReached"
   ],
   "AllegroFlare/BitmapBin": [
     "KrampusReturns/Gameplay/Screen",
@@ -1658,6 +1695,9 @@ table td
     "KrampusReturns/Gameplay/Screen",
     "KrampusReturns/Runner",
     "KrampusReturns/Runner"
+  ],
+  "KrampusReturns/GameEventDatas/GoalpostReached": [
+    "KrampusReturns/Gameplay/Screen"
   ],
   "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [
     "KrampusReturns/Runner"
