@@ -140,6 +140,7 @@ namespace KrampusReturns
          void toggle_show_tile_mesh();
          virtual void primary_timer_func() override;
          void shake_camera(float intensity=1.0, float duration=2.0, float time_now=al_get_time());
+         void spawn_flash_effect(std::string type_str="[unset-type_str]", float x=0.0f, float y=0.0f);
          virtual void game_event_func(AllegroFlare::GameEvent* ev=nullptr) override;
          virtual void key_char_func(ALLEGRO_EVENT* event=nullptr) override;
          virtual void key_up_func(ALLEGRO_EVENT* event=nullptr) override;

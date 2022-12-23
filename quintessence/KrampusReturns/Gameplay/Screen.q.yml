@@ -1248,6 +1248,31 @@ functions:
       return;
 
 
+  - name: spawn_flash_effect
+    parameters:
+      - name: type_str
+        type: std::string
+        default_argument: '"[unset-type_str]"'
+      - name: x
+        type: float
+        default_argument: 0.0f
+      - name: y
+        type: float
+        default_argument: 0.0f
+    guards: [ currently_active_map ]
+    body: |
+      KrampusReturns::EntityFactory entity_factory;
+         entity_factory.set_animation_book(&animation_book);
+
+      KrampusReturns::Entities::FlashEffect *flash_effect =
+         entity_factory.create_flash_fx1(currently_active_map_name, x, y);
+
+
+      add_entity_to_pool(flash_effect);
+
+      return;
+
+
   - name: game_event_func
     virtual: true
     override: true
@@ -1271,19 +1296,22 @@ functions:
          { "goalpost_reached", [this, time_now](){
              set_state(STATE_FINISHED_LEVEL, time_now);
          }},
-         { "spawn_flash_effect", [this, time_now](){
-             if (!currently_active_map)
-                throw std::runtime_error("cannot \"spawn_flash_effect\", no currently_active_map");
-
-             float x = 200, y = 200;
-             KrampusReturns::EntityFactory entity_factory;
-             entity_factory.set_animation_book(&animation_book);
-
-             KrampusReturns::Entities::FlashEffect *flash_effect =
-                entity_factory.create_flash_fx1(currently_active_map_name, x, y);
-             add_entity_to_pool(flash_effect);
-             
-             //set_state(STATE_FINISHED_LEVEL, time_now);
+         { "spawn_flash_effect", [this, ev, time_now](){
+             if (!ev->get_data())
+             {
+                throw std::runtime_error("Gameplay::Screen::game_event_func on spawn_flash_effect: ERROR: no ev->data");
+             }
+             else
+             {
+                if (!ev->get_data()->is_type(KrampusReturns::GameEventDatas::SpawnFlashFX::TYPE))
+                {
+                   throw std::runtime_error("Gameplay::Screen::game_event_func on spawn_flash_effect: "
+                                            "ERROR: not of expected type");
+                }
+                KrampusReturns::GameEventDatas::SpawnFlashFX *as_spawn_flash_fx =
+                   static_cast<KrampusReturns::GameEventDatas::SpawnFlashFX*>(ev->get_data());
+                spawn_flash_effect("flash_fx1", 200, 200);
+             }
          }},
       };
 
@@ -1302,6 +1330,7 @@ functions:
       return;
     body_dependency_symbols:
       - KrampusReturns::EntityFactory
+      - KrampusReturns::GameEventDatas::SpawnFlashFX
 
 
   - name: key_char_func
@@ -1322,7 +1351,12 @@ functions:
          //toggle_show_collision_tile_mesh();
          break;
       case ALLEGRO_KEY_S:
-         event_emitter->emit_game_event(AllegroFlare::GameEvent("spawn_flash_effect"));
+         event_emitter->emit_game_event(
+            AllegroFlare::GameEvent(
+               "spawn_flash_effect", 
+               new KrampusReturns::GameEventDatas::SpawnFlashFX("flash_fx1", 200, 200)
+            )
+         );
          //toggle_show_collision_tile_mesh();
          break;
       case ALLEGRO_KEY_1:
@@ -1591,5 +1625,7 @@ dependencies:
     headers: [ KrampusReturns/EntityFactory.hpp ]
   - symbol: AllegroFlare::FrameAnimation::Book
     headers: [ AllegroFlare/FrameAnimation/Book.hpp ]
+  - symbol: KrampusReturns::GameEventDatas::SpawnFlashFX
+    headers: [ KrampusReturns/GameEventDatas/SpawnFlashFX.hpp ]
 
 

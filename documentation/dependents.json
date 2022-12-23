@@ -243,6 +243,9 @@
     "KrampusReturns/Gameplay/Screen",
     "KrampusReturns/Testing/Gym"
   ],
+  "KrampusReturns/GameEventDatas/SpawnFlashFX": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
   "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [
     "KrampusReturns/Runner"
   ],

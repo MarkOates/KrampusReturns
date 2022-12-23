@@ -20,6 +20,7 @@
 #include <KrampusReturns/Entities/Blob.hpp>
 #include <KrampusReturns/EntityFactory.hpp>
 #include <KrampusReturns/GameEventDatas/GoalpostReached.hpp>
+#include <KrampusReturns/GameEventDatas/SpawnFlashFX.hpp>
 #include <KrampusReturns/Shaders/AllegroDefault.hpp>
 #include <KrampusReturns/Shaders/Primary.hpp>
 #include <algorithm>
@@ -1236,6 +1237,27 @@ void Screen::shake_camera(float intensity, float duration, float time_now)
    return;
 }
 
+void Screen::spawn_flash_effect(std::string type_str, float x, float y)
+{
+   if (!(currently_active_map))
+   {
+      std::stringstream error_message;
+      error_message << "[Screen::spawn_flash_effect]: error: guard \"currently_active_map\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Screen::spawn_flash_effect: error: guard \"currently_active_map\" not met");
+   }
+   KrampusReturns::EntityFactory entity_factory;
+      entity_factory.set_animation_book(&animation_book);
+
+   KrampusReturns::Entities::FlashEffect *flash_effect =
+      entity_factory.create_flash_fx1(currently_active_map_name, x, y);
+
+
+   add_entity_to_pool(flash_effect);
+
+   return;
+}
+
 void Screen::game_event_func(AllegroFlare::GameEvent* ev)
 {
    if (!(ev))
@@ -1266,19 +1288,22 @@ void Screen::game_event_func(AllegroFlare::GameEvent* ev)
       { "goalpost_reached", [this, time_now](){
           set_state(STATE_FINISHED_LEVEL, time_now);
       }},
-      { "spawn_flash_effect", [this, time_now](){
-          if (!currently_active_map)
-             throw std::runtime_error("cannot \"spawn_flash_effect\", no currently_active_map");
-
-          float x = 200, y = 200;
-          KrampusReturns::EntityFactory entity_factory;
-          entity_factory.set_animation_book(&animation_book);
-
-          KrampusReturns::Entities::FlashEffect *flash_effect =
-             entity_factory.create_flash_fx1(currently_active_map_name, x, y);
-          add_entity_to_pool(flash_effect);
-          
-          //set_state(STATE_FINISHED_LEVEL, time_now);
+      { "spawn_flash_effect", [this, ev, time_now](){
+          if (!ev->get_data())
+          {
+             throw std::runtime_error("Gameplay::Screen::game_event_func on spawn_flash_effect: ERROR: no ev->data");
+          }
+          else
+          {
+             if (!ev->get_data()->is_type(KrampusReturns::GameEventDatas::SpawnFlashFX::TYPE))
+             {
+                throw std::runtime_error("Gameplay::Screen::game_event_func on spawn_flash_effect: "
+                                         "ERROR: not of expected type");
+             }
+             KrampusReturns::GameEventDatas::SpawnFlashFX *as_spawn_flash_fx =
+                static_cast<KrampusReturns::GameEventDatas::SpawnFlashFX*>(ev->get_data());
+             spawn_flash_effect("flash_fx1", 200, 200);
+          }
       }},
    };
 
@@ -1322,7 +1347,12 @@ void Screen::key_char_func(ALLEGRO_EVENT* event)
       //toggle_show_collision_tile_mesh();
       break;
    case ALLEGRO_KEY_S:
-      event_emitter->emit_game_event(AllegroFlare::GameEvent("spawn_flash_effect"));
+      event_emitter->emit_game_event(
+         AllegroFlare::GameEvent(
+            "spawn_flash_effect", 
+            new KrampusReturns::GameEventDatas::SpawnFlashFX("flash_fx1", 200, 200)
+         )
+      );
       //toggle_show_collision_tile_mesh();
       break;
    case ALLEGRO_KEY_1:

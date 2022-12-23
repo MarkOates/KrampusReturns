@@ -1,0 +1,46 @@
+parent_classes:
+
+
+  - class: AllegroFlare::GameEventDatas::Base
+    scope: public
+    init_with: KrampusReturns::GameEventDatas::SpawnFlashFX::TYPE
+
+
+properties:
+
+
+  - name: animation_name
+    type: std::string
+    init_with: '"[unset-animation_name]"'
+    constructor_arg: true
+    getter: true
+    setter: true
+
+  - name: x
+    type: float
+    init_with: 0.0f
+    constructor_arg: true
+    getter: true
+    setter: true
+
+  - name: y
+    type: float
+    init_with: 0.0f
+    constructor_arg: true
+    getter: true
+    setter: true
+
+  - name: TYPE
+    type: char*
+    init_with: '(char*)"GameEventDatas/SpawnFlashFX"'
+    static: true
+    constexpr: true
+
+
+dependencies:
+
+
+  - symbol: AllegroFlare::GameEventDatas::Base
+    headers: [ AllegroFlare/GameEventDatas/Base.hpp ]
+
+
