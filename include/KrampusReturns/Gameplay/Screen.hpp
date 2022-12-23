@@ -116,6 +116,8 @@ namespace KrampusReturns
          virtual void on_activate() override;
          virtual void on_deactivate() override;
          void load_level_and_start(std::string level_name="[unset-level_name]");
+         static AllegroFlare::Vec2D center_of(float x=0.0f, float y=0.0f, float w=0.0f, float h=0.0f);
+         static void tmj_object_parse_callback_func(std::string object_class="[unset-object_class]", float x=0.0f, float y=0.0f, float w=0.0f, float h=0.0f, void* user_data=nullptr);
          void initialize_maps();
          void add_entity_to_pool(AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* entity=nullptr);
          void reset_camera_control(AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* entity_to_follow=nullptr);

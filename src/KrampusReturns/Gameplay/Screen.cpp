@@ -23,6 +23,7 @@
 #include <KrampusReturns/GameEventDatas/SpawnFlashFX.hpp>
 #include <KrampusReturns/Shaders/AllegroDefault.hpp>
 #include <KrampusReturns/Shaders/Primary.hpp>
+#include <KrampusReturns/TMJObjectLoader.hpp>
 #include <algorithm>
 #include <allegro5/allegro_color.h>
 #include <allegro5/allegro_font.h>
@@ -515,6 +516,47 @@ void Screen::load_level_and_start(std::string level_name)
    //platforming_2d.set_player_controlled_entity(krampus);
    // HERE:
    // TODO: implement here
+   return;
+}
+
+AllegroFlare::Vec2D Screen::center_of(float x, float y, float w, float h)
+{
+   return AllegroFlare::Vec2D(x + w*0.5, y + h*0.5);
+}
+
+void Screen::tmj_object_parse_callback_func(std::string object_class, float x, float y, float w, float h, void* user_data)
+{
+   std::map<std::string, std::function<void()>> object_map = {
+      { "goal", [x, y, w, h, user_data](){
+          // TODO: here
+      }},
+      { "boss", [x, y, w, h, user_data](){
+          // TODO: here
+      }},
+      { "blob", [x, y, w, h, user_data](){
+          // TODO: here
+      }},
+      { "goal", [x, y, w, h, user_data](){
+          // TODO: here
+      }},
+   };
+
+   // locate and call the function to handle the object
+   if (object_map.count(object_class) == 0)
+   {
+      std::stringstream message;
+      message << "Object not handled for object of class \"" << object_class << "\"";
+      AllegroFlare::Errors::warn_from(
+         "KrampusReturns::Gameplay::Screen::tmj_object_parse_callback_func",
+         message.str()
+      );
+   }
+   else
+   {
+      // call the object handling function
+      object_map[object_class]();
+   }
+
    return;
 }
 

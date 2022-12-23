@@ -753,6 +753,12 @@ table td
   <td class="method">load_level_and_start(std::string level_name=&quot;[unset-level_name]&quot;)</td>
 </tr>
 <tr>
+  <td class="method">center_of(float x=0.0f, float y=0.0f, float w=0.0f, float h=0.0f)</td>
+</tr>
+<tr>
+  <td class="method">tmj_object_parse_callback_func(std::string object_class=&quot;[unset-object_class]&quot;, float x=0.0f, float y=0.0f, float w=0.0f, float h=0.0f, void* user_data=nullptr)</td>
+</tr>
+<tr>
   <td class="method">initialize_maps()</td>
 </tr>
 <tr>
@@ -1059,6 +1065,9 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::GameEventDatas::SpawnFlashFX&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/GameEventDatas/SpawnFlashFX.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::TMJObjectLoader&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/TMJObjectLoader.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -1919,6 +1928,9 @@ table td
     "KrampusReturns/Testing/Gym"
   ],
   "KrampusReturns/GameEventDatas/SpawnFlashFX": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "KrampusReturns/TMJObjectLoader": [
     "KrampusReturns/Gameplay/Screen"
   ],
   "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [

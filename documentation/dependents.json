@@ -248,6 +248,9 @@
   "KrampusReturns/GameEventDatas/SpawnFlashFX": [
     "KrampusReturns/Gameplay/Screen"
   ],
+  "KrampusReturns/TMJObjectLoader": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
   "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [
     "KrampusReturns/Runner"
   ],

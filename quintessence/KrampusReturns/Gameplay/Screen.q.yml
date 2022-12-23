@@ -565,6 +565,84 @@ functions:
       return;
 
 
+  - name: center_of
+    type: AllegroFlare::Vec2D
+    static: true
+    parameters:
+      - name: x
+        type: float
+        default_argument: 0.0f
+      - name: y
+        type: float
+        default_argument: 0.0f
+      - name: w
+        type: float
+        default_argument: 0.0f
+      - name: h
+        type: float
+        default_argument: 0.0f
+    body: |
+      return AllegroFlare::Vec2D(x + w*0.5, y + h*0.5);
+
+
+  - name: tmj_object_parse_callback_func
+    static: true
+    parameters:
+      - name: object_class
+        type: std::string
+        default_argument: '"[unset-object_class]"'
+      - name: x
+        type: float
+        default_argument: 0.0f
+      - name: y
+        type: float
+        default_argument: 0.0f
+      - name: w
+        type: float
+        default_argument: 0.0f
+      - name: h
+        type: float
+        default_argument: 0.0f
+      - name: user_data
+        type: void*
+        default_argument: nullptr
+    body: |
+      std::map<std::string, std::function<void()>> object_map = {
+         { "goal", [x, y, w, h, user_data](){
+             // TODO: here
+         }},
+         { "boss", [x, y, w, h, user_data](){
+             // TODO: here
+         }},
+         { "blob", [x, y, w, h, user_data](){
+             // TODO: here
+         }},
+         { "goal", [x, y, w, h, user_data](){
+             // TODO: here
+         }},
+      };
+      
+      // locate and call the function to handle the object
+      if (object_map.count(object_class) == 0)
+      {
+         std::stringstream message;
+         message << "Object not handled for object of class \"" << object_class << "\"";
+         AllegroFlare::Errors::warn_from(
+            "KrampusReturns::Gameplay::Screen::tmj_object_parse_callback_func",
+            message.str()
+         );
+      }
+      else
+      {
+         // call the object handling function
+         object_map[object_class]();
+      }
+
+      return;
+    body_dependency_symbols:
+      - KrampusReturns::TMJObjectLoader
+
+
   - name: initialize_maps
     body: |
       AllegroFlare::Prototypes::Platforming2D::Entities::Basic2DFactory factory(bitmap_bin);
@@ -1740,5 +1818,7 @@ dependencies:
     headers: [ AllegroFlare/FrameAnimation/Book.hpp ]
   - symbol: KrampusReturns::GameEventDatas::SpawnFlashFX
     headers: [ KrampusReturns/GameEventDatas/SpawnFlashFX.hpp ]
+  - symbol: KrampusReturns::TMJObjectLoader
+    headers: [ KrampusReturns/TMJObjectLoader.hpp ]
 
 
