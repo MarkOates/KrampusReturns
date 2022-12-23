@@ -568,18 +568,18 @@ void Screen::tmj_object_parse_callback_func(std::string object_class, float x, f
    // TODO: use factory to build objects
 
    std::map<std::string, std::function<void()>> object_map = {
-      { "goal", [x, y, w, h, user_data](){
+      { "goal", [x, y, w, h, map_name, entity_factory](){
           std::cout << "----------- GOAL parsed" << std::endl;
           // TODO: here
       }},
-      { "boss", [x, y, w, h, user_data](){
+      { "boss", [x, y, w, h, map_name, entity_factory](){
           // TODO: here
       }},
-      { "blob", [x, y, w, h, user_data](){
+      { "blob", [x, y, w, h, map_name, entity_factory](){
           std::cout << "----------- BLOB parsed" << std::endl;
           // TODO: here
       }},
-      { "goal", [x, y, w, h, user_data](){
+      { "goal", [x, y, w, h, map_name, entity_factory](){
           // TODO: here
       }},
    };
