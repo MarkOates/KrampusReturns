@@ -35,6 +35,15 @@ properties:
     constructor_arg: true
     setter: false
 
+  - name: animation_book
+    type: AllegroFlare::FrameAnimation::Book
+    init_with: ''
+    getter_ref: true
+
+  - name: animation_book_initialized
+    type: bool 
+    init_with: false
+
   - name: native_display_resolution_width
     type: int
     init_with: 1920
@@ -590,6 +599,22 @@ functions:
                        << "could not create backbuffer_sub_bitmap";
          throw std::runtime_error(error_message.str());
       }
+      return;
+
+
+  - name: initialize_animation_book
+    guards: [ (!animation_book_initialized) ]
+    body: |
+      // TODO: CRITICAL: fix this path
+      animation_book.set_png_source_filename(
+         "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.png"
+      );
+      animation_book.set_json_source_filename(
+         "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.json"
+      );
+      animation_book.set_sprite_sheet_scale(2);
+      animation_book.initialize();
+      animation_book_initialized = true;
       return;
 
 

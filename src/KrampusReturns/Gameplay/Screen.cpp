@@ -42,6 +42,8 @@ Screen::Screen(AllegroFlare::BitmapBin* bitmap_bin, AllegroFlare::FontBin* font_
    , font_bin(font_bin)
    , display(display)
    , event_emitter(event_emitter)
+   , animation_book()
+   , animation_book_initialized(false)
    , native_display_resolution_width(1920)
    , native_display_resolution_height(1080)
    , initialized(false)
@@ -141,6 +143,12 @@ bool Screen::get_show_tile_mesh() const
 bool Screen::get_show_collision_tile_mesh() const
 {
    return show_collision_tile_mesh;
+}
+
+
+AllegroFlare::FrameAnimation::Book &Screen::get_animation_book_ref()
+{
+   return animation_book;
 }
 
 
@@ -540,6 +548,28 @@ void Screen::initialize_backbuffer_sub_bitmap()
                     << "could not create backbuffer_sub_bitmap";
       throw std::runtime_error(error_message.str());
    }
+   return;
+}
+
+void Screen::initialize_animation_book()
+{
+   if (!((!animation_book_initialized)))
+   {
+      std::stringstream error_message;
+      error_message << "[Screen::initialize_animation_book]: error: guard \"(!animation_book_initialized)\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Screen::initialize_animation_book: error: guard \"(!animation_book_initialized)\" not met");
+   }
+   // TODO: CRITICAL: fix this path
+   animation_book.set_png_source_filename(
+      "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.png"
+   );
+   animation_book.set_json_source_filename(
+      "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.json"
+   );
+   animation_book.set_sprite_sheet_scale(2);
+   animation_book.initialize();
+   animation_book_initialized = true;
    return;
 }
 

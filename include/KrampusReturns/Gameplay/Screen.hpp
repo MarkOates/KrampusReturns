@@ -7,6 +7,7 @@
 #include <AllegroFlare/Display.hpp>
 #include <AllegroFlare/EventEmitter.hpp>
 #include <AllegroFlare/FontBin.hpp>
+#include <AllegroFlare/FrameAnimation/Book.hpp>
 #include <AllegroFlare/GameEvent.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/TileMaps/Basic2D.hpp>
@@ -43,6 +44,8 @@ namespace KrampusReturns
          AllegroFlare::FontBin* font_bin;
          AllegroFlare::Display* display;
          AllegroFlare::EventEmitter* event_emitter;
+         AllegroFlare::FrameAnimation::Book animation_book;
+         bool animation_book_initialized;
          int native_display_resolution_width;
          int native_display_resolution_height;
          bool initialized;
@@ -95,6 +98,7 @@ namespace KrampusReturns
          AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* get_player_controlled_entity() const;
          bool get_show_tile_mesh() const;
          bool get_show_collision_tile_mesh() const;
+         AllegroFlare::FrameAnimation::Book &get_animation_book_ref();
          void set_state(uint32_t state=STATE_UNDEF, float time_now=al_get_time());
          ALLEGRO_COLOR get_sparkle_win_color();
          void update_state(float time_now=al_get_time());
@@ -113,6 +117,7 @@ namespace KrampusReturns
          void add_entity_to_pool(AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* entity=nullptr);
          void initialize_camera_control();
          void initialize_backbuffer_sub_bitmap();
+         void initialize_animation_book();
          void initialize();
          void start_level();
          void reverse_gravity();

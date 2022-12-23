@@ -50,12 +50,12 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
 
    // create an animation book (to create an frame_animated type from the factory)
    // TODO: introduce this concept to the test
-   AllegroFlare::FrameAnimation::Book animation_book(
-      "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.png",
-      "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.json",
-      2
-   );
-   animation_book.initialize();
+   //AllegroFlare::FrameAnimation::Book animation_book(
+      //"/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.png",
+      //"/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.json",
+      //2
+   //);
+   //animation_book.initialize();
 
 
 
@@ -74,6 +74,7 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
    });
    //platforming_2d.set_currently_active_map("map_a");
    platforming_2d.initialize_maps();
+   platforming_2d.initialize_animation_book();
    //platforming_2d.initialize();
 
    platforming_2d.set_currently_active_map("map_a");
@@ -88,8 +89,8 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
    KrampusReturns::EntityFactory entity_factory;
    entity_factory.set_event_emitter(&framework.get_event_emitter_ref());
    entity_factory.set_bitmap_bin(&framework.get_bitmap_bin_ref());
-   //entity_factory.set_animation_book(&platforming_2d.get_animation_book_ref());
-   entity_factory.set_animation_book(&animation_book);
+   entity_factory.set_animation_book(&platforming_2d.get_animation_book_ref());
+   //entity_factory.set_animation_book(&animation_book);
 
 
       //AllegroFlare::Prototypes::Platforming2D::Entities::Basic2DFactory factory(
