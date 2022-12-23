@@ -92,6 +92,15 @@ bool Krampus::set_state(uint32_t state, float time_now)
          set_animation_playback_rate(1.7);
       break;
 
+      case STATE_DYING:
+         state_is_busy = true;
+         set_animation("dying");
+         invincible_from_taking_damage = true;
+         get_velocity_ref().position.x = 0.0;
+         get_velocity_ref().position.y = 0.0;
+         set_animation_playback_rate(1.0);
+      break;
+
       case STATE_STUNNED_FROM_TAKING_DAMAGE:
          set_animation("take_damage");
          set_animation_playback_rate(1.0);
@@ -144,10 +153,19 @@ void Krampus::update()
         // nothing
       break;
 
-      case STATE_WALKING: {
+      case STATE_WALKING:
+         {
             float bounce_counter = sin(time_now*34)*0.5 + 0.5;
             get_bitmap_placement_ref().anchor = { 0, bounce_counter * 3.0f };
-      } break;
+         }
+      break;
+
+      case STATE_DYING:
+         {
+            //float bounce_counter = sin(time_now*34)*0.5 + 0.5;
+            //get_bitmap_placement_ref().anchor = { 0, bounce_counter * 3.0f };
+         }
+      break;
 
       case STATE_STUNNED_FROM_TAKING_DAMAGE:
          {
@@ -312,12 +330,13 @@ void Krampus::take_hit(int damage)
 
    health -= damage;
 
-   if (health > 0) set_state(STATE_STUNNED_FROM_TAKING_DAMAGE);
+   if (health > 0)
+   {
+      set_state(STATE_STUNNED_FROM_TAKING_DAMAGE);
+   }
    else
    {
-      throw std::runtime_error("player died");
-      // TODO:
-      // set state: set state dying
+      set_state(STATE_DYING);
    }
    return;
 }

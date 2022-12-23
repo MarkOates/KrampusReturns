@@ -18,6 +18,7 @@ namespace KrampusReturns
          static constexpr uint32_t STATE_ATTACKING = 2;
          static constexpr uint32_t STATE_WALKING = 3;
          static constexpr uint32_t STATE_STUNNED_FROM_TAKING_DAMAGE = 4;
+         static constexpr uint32_t STATE_DYING = 5;
          static constexpr char* TYPE = (char*)"Entities/Krampus";
 
       private:
