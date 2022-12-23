@@ -59,7 +59,6 @@ void TMJObjectLoader::load()
                     << "\"" << filename << "\" appears to have"
                     << " malformed JSON. The following error was thrown by nlohmann::json: \""
                     << e.what() << "\"";
-      //throw std::runtime_error(error_message.str());
       AllegroFlare::Errors::throw_error("KrampusReturns::TMJObjectLoader", error_message.str());
    }
    i.close();
