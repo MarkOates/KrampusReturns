@@ -172,7 +172,7 @@ void Screen::set_state(uint32_t state, float time_now)
       case STATE_FINISHED_LEVEL:
          set_full_color_overlay(al_color_name("white"), 0.1);
          show_full_color_overlay();
-         //play_win_music();
+         play_win_music();
       break;
 
       default:
@@ -239,7 +239,7 @@ void Screen::update_state(float time_now)
          update_entities();
          if (state_age > 2.0 && !showing_banner_text)
          {
-            set_banner_text("YOU LOSE", ALLEGRO_COLOR{1, 0, 0, 1});
+            set_banner_text("YOU LOSE", al_color_name("firebrick"));
             show_banner_text();
          }
       break;
