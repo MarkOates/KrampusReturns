@@ -46,10 +46,10 @@ void TMJObjectLoader::load()
 
    // load and validate the json data to variables
    std::ifstream i(filename);
-   nlohmann::json j;
+   nlohmann::json source_json;
    try
    {
-      i >> j;
+      i >> source_json;
    }
    catch (const std::exception& e)
    {
@@ -69,7 +69,7 @@ void TMJObjectLoader::load()
    // get first j["layers"] that is a ["type"] == "objectgroup"
    bool tilelayer_type_found = false;
    nlohmann::json tilelayer;
-   for (auto &layer : j["layers"].items())
+   for (auto &layer : source_json["layers"].items())
    {
       if (layer.value()["type"] == "objectgroup")
       {
