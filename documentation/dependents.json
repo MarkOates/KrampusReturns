@@ -210,6 +210,11 @@
   "AllegroFlare/Elements/HealthBars/Hearts": [
     "KrampusReturns/Gameplay/Screen"
   ],
+  "AllegroFlare/Color": [
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Runner",
+    "KrampusReturns/Runner"
+  ],
   "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [
     "KrampusReturns/Runner"
   ],
@@ -232,10 +237,6 @@
     "KrampusReturns/Runner"
   ],
   "AllegroFlare/Prototypes/TileDrive/Screen": [
-    "KrampusReturns/Runner"
-  ],
-  "AllegroFlare/Color": [
-    "KrampusReturns/Runner",
     "KrampusReturns/Runner"
   ],
   "AllegroFlare/Prototypes/FixedRoom2D/Configuration": [

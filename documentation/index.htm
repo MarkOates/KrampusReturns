@@ -548,6 +548,9 @@ table td
   <td class="method">set_state(2)</td>
 </tr>
 <tr>
+  <td class="method">get_sparkle_win_color()</td>
+</tr>
+<tr>
   <td class="method">update_state(1)</td>
 </tr>
 <tr>
@@ -860,6 +863,9 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Errors&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Errors.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Color&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Color.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -1633,6 +1639,11 @@ table td
   "AllegroFlare/Elements/HealthBars/Hearts": [
     "KrampusReturns/Gameplay/Screen"
   ],
+  "AllegroFlare/Color": [
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Runner",
+    "KrampusReturns/Runner"
+  ],
   "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [
     "KrampusReturns/Runner"
   ],
@@ -1655,10 +1666,6 @@ table td
     "KrampusReturns/Runner"
   ],
   "AllegroFlare/Prototypes/TileDrive/Screen": [
-    "KrampusReturns/Runner"
-  ],
-  "AllegroFlare/Color": [
-    "KrampusReturns/Runner",
     "KrampusReturns/Runner"
   ],
   "AllegroFlare/Prototypes/FixedRoom2D/Configuration": [

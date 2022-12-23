@@ -96,6 +96,7 @@ namespace KrampusReturns
          bool get_show_tile_mesh() const;
          bool get_show_collision_tile_mesh() const;
          void set_state(uint32_t state=STATE_UNDEF, float time_now=al_get_time());
+         ALLEGRO_COLOR get_sparkle_win_color();
          void update_state(float time_now=al_get_time());
          void play_win_music();
          void set_map_dictionary(std::map<std::string, std::string> map_dictionary={});

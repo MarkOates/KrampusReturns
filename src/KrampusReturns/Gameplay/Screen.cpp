@@ -6,6 +6,7 @@
 #include <AllegroFlare/CameraControlStrategies2D/SmoothSnap.hpp>
 #include <AllegroFlare/CameraControlStrategies2D/SmoothSnapWithZoomEffect.hpp>
 #include <AllegroFlare/CameraControlStrategies2D/Snap.hpp>
+#include <AllegroFlare/Color.hpp>
 #include <AllegroFlare/Elements/HealthBars/Hearts.hpp>
 #include <AllegroFlare/Errors.hpp>
 #include <AllegroFlare/EventNames.hpp>
@@ -181,6 +182,32 @@ void Screen::set_state(uint32_t state, float time_now)
    return;
 }
 
+ALLEGRO_COLOR Screen::get_sparkle_win_color()
+{
+   static int strobe = 0;
+   strobe++;
+   if (strobe > 6) { strobe = 0;}
+
+   ALLEGRO_COLOR result;
+
+   static const char *COLOR_RED = "#ea3377";
+   static const char *COLOR_YELLOW = "#fef653";
+   static const char *COLOR_BLUE = "#5eccfa";
+   static const char *COLOR_WHITE = "#ffffff";
+   static const char *COLOR_GREEN = "#96fc4d";
+   static const char *COLOR_BLACK = "#000000";
+   static const char *LIGHT_OFF = "#404846";
+
+   if (strobe == 1) result = al_color_html(COLOR_WHITE);
+   if (strobe == 2) result = al_color_html(COLOR_YELLOW);
+   if (strobe == 3) result = al_color_html(COLOR_WHITE);
+   if (strobe == 4) result = al_color_html(COLOR_BLUE);
+   if (strobe == 5) result = al_color_html(COLOR_WHITE);
+   if (strobe == 6) result = al_color_html(COLOR_GREEN);
+
+   return result;
+}
+
 void Screen::update_state(float time_now)
 {
    if (!((state != STATE_UNDEF)))
@@ -211,9 +238,28 @@ void Screen::update_state(float time_now)
       break;
 
       case STATE_FINISHED_LEVEL:
-         //set_full_color_overlay(al_color_name("white"), 0.1);
-         //show_full_color_overlay();
-         //play_win_music();
+         if (state_age > 1.62 && !showing_banner_text)
+         {
+            show_banner_text();
+         }
+         if (showing_banner_text)
+         {
+            float fade_out_to_white_text_counter = 0.0;
+            float fade_out_starts_at_age = 3.0;
+            if (state_age > fade_out_starts_at_age)
+            {
+               float fade_duration = 3.0;
+               fade_out_to_white_text_counter =
+                  std::min(1.0f, std::max(0.0f, (state_age - fade_out_starts_at_age) / fade_duration));
+            }
+            ALLEGRO_COLOR final_level_clear_color = AllegroFlare::color::mix(
+               get_sparkle_win_color(),
+               al_color_name("aquamarine"),
+               //al_color_name("aquamarine"),
+               fade_out_to_white_text_counter
+            );
+            set_banner_text("LEVEL CLEAR", final_level_clear_color);
+         }
       break;
 
       default:
