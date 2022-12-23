@@ -72,15 +72,9 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
    //platforming_2d.initialize();
 
 
-   platforming_2d.set_map_dictionary({
-      { "map_a", TEST_BASE_FOLDER "maps/krampus-returns-map01-0x.tmj" },
-      { "map_b", TEST_BASE_FOLDER "maps/krampus-returns-map02-0x.tmj" },
-   });
-   //platforming_2d.set_currently_active_map("map_a");
-   platforming_2d.initialize_maps();
    platforming_2d.initialize_animation_book();
 
-   platforming_2d.set_currently_active_map("map_a");
+   //platforming_2d.set_currently_active_map("map_a");
    //platforming_2d.initialize();
 
    // create some entities
@@ -94,6 +88,17 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
    entity_factory.set_bitmap_bin(&framework.get_bitmap_bin_ref());
    entity_factory.set_animation_book(&platforming_2d.get_animation_book_ref());
    //entity_factory.set_animation_book(&animation_book);
+
+
+
+   // NOTE: TODO: move this code should be in the factory:
+   platforming_2d.set_map_dictionary({
+      { "map_a", TEST_BASE_FOLDER "maps/krampus-returns-map01-0x.tmj" },
+      { "map_b", TEST_BASE_FOLDER "maps/krampus-returns-map02-0x.tmj" },
+   });
+   platforming_2d.initialize_maps();
+
+   platforming_2d.set_currently_active_map("map_a");
 
 
       //AllegroFlare::Prototypes::Platforming2D::Entities::Basic2DFactory factory(
