@@ -71,6 +71,10 @@ namespace KrampusReturns
          bool showing_banner_text;
          ALLEGRO_COLOR banner_text_color;
          std::string banner_text;
+         bool showing_banner_subtext;
+         ALLEGRO_COLOR banner_subtext_color;
+         std::string banner_subtext;
+         float banner_subtext_shown_at;
          uint32_t state;
          float state_changed_at;
          bool state_is_busy;
@@ -141,6 +145,9 @@ namespace KrampusReturns
          void set_banner_text(std::string text="[unset-text]", ALLEGRO_COLOR base_color=ALLEGRO_COLOR{0.0, 0.3, 0.8, 1.0});
          void show_banner_text();
          void hide_banner_text();
+         void set_banner_subtext(std::string text="[unset-text]", ALLEGRO_COLOR base_color=ALLEGRO_COLOR{0.0, 0.3, 0.8, 1.0});
+         void show_banner_subtext();
+         void hide_banner_subtext();
          void draw_hud();
          void toggle_show_collision_tile_mesh();
          void toggle_show_tile_mesh();

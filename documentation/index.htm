@@ -674,6 +674,22 @@ table td
   <td class="property">std::string</td>
 </tr>
 <tr>
+  <td class="property">showing_banner_subtext</td>
+  <td class="property">bool</td>
+</tr>
+<tr>
+  <td class="property">banner_subtext_color</td>
+  <td class="property">ALLEGRO_COLOR</td>
+</tr>
+<tr>
+  <td class="property">banner_subtext</td>
+  <td class="property">std::string</td>
+</tr>
+<tr>
+  <td class="property">banner_subtext_shown_at</td>
+  <td class="property">float</td>
+</tr>
+<tr>
   <td class="property">state</td>
   <td class="property">uint32_t</td>
 </tr>
@@ -847,6 +863,15 @@ table td
 </tr>
 <tr>
   <td class="method">hide_banner_text()</td>
+</tr>
+<tr>
+  <td class="method">set_banner_subtext(std::string text=&quot;[unset-text]&quot;, ALLEGRO_COLOR base_color=ALLEGRO_COLOR{0.0, 0.3, 0.8, 1.0})</td>
+</tr>
+<tr>
+  <td class="method">show_banner_subtext()</td>
+</tr>
+<tr>
+  <td class="method">hide_banner_subtext()</td>
 </tr>
 <tr>
   <td class="method">draw_hud()</td>

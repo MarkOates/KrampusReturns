@@ -70,6 +70,10 @@ Screen::Screen(AllegroFlare::BitmapBin* bitmap_bin, AllegroFlare::FontBin* font_
    , showing_banner_text(false)
    , banner_text_color(ALLEGRO_COLOR{1.0, 0.0, 0.0, 1.0})
    , banner_text("[unnset-banner_text]")
+   , showing_banner_subtext(false)
+   , banner_subtext_color(ALLEGRO_COLOR{1.0, 0.0, 0.0, 1.0})
+   , banner_subtext("[unnset-banner_subtext]")
+   , banner_subtext_shown_at(0.0)
    , state(0)
    , state_changed_at(0.0f)
    , state_is_busy(false)
@@ -1281,6 +1285,26 @@ void Screen::show_banner_text()
 }
 
 void Screen::hide_banner_text()
+{
+   showing_banner_text = false;
+   return;
+}
+
+void Screen::set_banner_subtext(std::string text, ALLEGRO_COLOR base_color)
+{
+   banner_subtext = text;
+   banner_subtext_color = base_color;
+   return;
+}
+
+void Screen::show_banner_subtext()
+{
+   showing_banner_subtext = true;
+   banner_subtext_shown_at = al_get_time();
+   return;
+}
+
+void Screen::hide_banner_subtext()
 {
    showing_banner_text = false;
    return;

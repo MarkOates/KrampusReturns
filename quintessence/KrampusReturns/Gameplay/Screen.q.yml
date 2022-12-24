@@ -151,6 +151,22 @@ properties:
     type: std::string
     init_with: '"[unnset-banner_text]"'
 
+  - name: showing_banner_subtext
+    type: bool
+    init_with: false
+
+  - name: banner_subtext_color
+    type: ALLEGRO_COLOR
+    init_with: ALLEGRO_COLOR{1.0, 0.0, 0.0, 1.0}
+
+  - name: banner_subtext
+    type: std::string
+    init_with: '"[unnset-banner_subtext]"'
+
+  - name: banner_subtext_shown_at
+    type: float
+    init_with: 0.0
+
   - name: state
     type: uint32_t
     init_with: 0
@@ -1327,6 +1343,33 @@ functions:
 
 
   - name: hide_banner_text
+    body: |
+      showing_banner_text = false;
+      return;
+
+
+  - name: set_banner_subtext
+    parameters:
+      - name: text
+        type: std::string
+        default_argument: '"[unset-text]"'
+      - name: base_color
+        type: ALLEGRO_COLOR
+        default_argument: ALLEGRO_COLOR{0.0, 0.3, 0.8, 1.0}
+    body: |
+      banner_subtext = text;
+      banner_subtext_color = base_color;
+      return;
+
+
+  - name: show_banner_subtext
+    body: |
+      showing_banner_subtext = true;
+      banner_subtext_shown_at = al_get_time();
+      return;
+
+
+  - name: hide_banner_subtext
     body: |
       showing_banner_text = false;
       return;
