@@ -199,33 +199,6 @@ void Screen::set_state(uint32_t state, float time_now)
    return;
 }
 
-ALLEGRO_COLOR Screen::get_sparkle_win_color()
-{
-   static int strobe = 0;
-   strobe++;
-   if (strobe > 6) { strobe = 0; }
-
-   ALLEGRO_COLOR result;
-
-   static const char *COLOR_RED =   "ea3377";
-   static const char *COLOR_YELLOW ="fef653";
-   static const char *COLOR_BLUE =  "5eccfa";
-   static const char *COLOR_WHITE = "ffffff";
-   static const char *COLOR_GREEN = "96fc4d";
-   static const char *COLOR_BLACK = "000000";
-   static const char *LIGHT_OFF =   "404846";
-
-   if (strobe == 0) result = al_color_name("orange");
-   if (strobe == 1) result = al_color_html(COLOR_WHITE);
-   if (strobe == 2) result = al_color_html(COLOR_YELLOW);
-   if (strobe == 3) result = al_color_html(COLOR_WHITE);
-   if (strobe == 4) result = al_color_html(COLOR_BLUE);
-   if (strobe == 5) result = al_color_html(COLOR_WHITE);
-   if (strobe == 6) result = al_color_html(COLOR_GREEN);
-
-   return result;
-}
-
 void Screen::update_state(float time_now)
 {
    if (!((state != STATE_UNDEF)))
@@ -301,6 +274,33 @@ void Screen::update_state(float time_now)
       break;
    }
    return;
+}
+
+ALLEGRO_COLOR Screen::get_sparkle_win_color()
+{
+   static int strobe = 0;
+   strobe++;
+   if (strobe > 6) { strobe = 0; }
+
+   ALLEGRO_COLOR result;
+
+   static const char *COLOR_RED =   "ea3377";
+   static const char *COLOR_YELLOW ="fef653";
+   static const char *COLOR_BLUE =  "5eccfa";
+   static const char *COLOR_WHITE = "ffffff";
+   static const char *COLOR_GREEN = "96fc4d";
+   static const char *COLOR_BLACK = "000000";
+   static const char *LIGHT_OFF =   "404846";
+
+   if (strobe == 0) result = al_color_name("orange");
+   if (strobe == 1) result = al_color_html(COLOR_WHITE);
+   if (strobe == 2) result = al_color_html(COLOR_YELLOW);
+   if (strobe == 3) result = al_color_html(COLOR_WHITE);
+   if (strobe == 4) result = al_color_html(COLOR_BLUE);
+   if (strobe == 5) result = al_color_html(COLOR_WHITE);
+   if (strobe == 6) result = al_color_html(COLOR_GREEN);
+
+   return result;
 }
 
 void Screen::play_win_music()
