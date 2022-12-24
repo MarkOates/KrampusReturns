@@ -6,6 +6,7 @@
 #include <KrampusReturns/Entities/Blob.hpp>
 #include <KrampusReturns/Entities/Goalpost.hpp>
 #include <KrampusReturns/Entities/Krampus.hpp>
+#include <KrampusReturns/Entities/SpawnPoint.hpp>
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
@@ -52,7 +53,7 @@ bool EntityFactory::get_init_entities_drawing_debug() const
 }
 
 
-KrampusReturns::Entities::Krampus* EntityFactory::create_krampus(std::string on_map, float x, float y)
+KrampusReturns::Entities::Krampus* EntityFactory::create_krampus(std::string on_map, float x, float y) const
 {
    if (!(get_animation_book()))
    {
@@ -111,7 +112,7 @@ KrampusReturns::Entities::Blob* EntityFactory::create_blob(std::string on_map, f
    return result;
 }
 
-KrampusReturns::Entities::Goalpost* EntityFactory::create_goalpost(std::string on_map, int goalpost_id, float x, float y)
+KrampusReturns::Entities::Goalpost* EntityFactory::create_goalpost(std::string on_map, int goalpost_id, float x, float y) const
 {
    if (!(get_animation_book()))
    {
@@ -135,7 +136,31 @@ KrampusReturns::Entities::Goalpost* EntityFactory::create_goalpost(std::string o
    return result;
 }
 
-KrampusReturns::Entities::FlashEffect* EntityFactory::create_flash_fx1(std::string on_map, float x, float y)
+KrampusReturns::Entities::SpawnPoint* EntityFactory::create_spawn_point(std::string on_map, float x, float y) const
+{
+   if (!(get_animation_book()))
+   {
+      std::stringstream error_message;
+      error_message << "[EntityFactory::create_spawn_point]: error: guard \"get_animation_book()\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("EntityFactory::create_spawn_point: error: guard \"get_animation_book()\" not met");
+   }
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+
+   KrampusReturns::Entities::SpawnPoint *result = new KrampusReturns::Entities::SpawnPoint();
+   result->set_animation_book(get_animation_book());
+   //result->set("goalpost_id", goalpost_id);
+   result->initialize();
+
+   result->get_place_ref().position = { x, y };
+   result->set(ON_MAP_NAME, on_map);
+
+   if (init_entities_drawing_debug) result->set_draw_debug(true);
+   //get_platforming_2d_ref().add_entity_to_pool(result);
+   return result;
+}
+
+KrampusReturns::Entities::FlashEffect* EntityFactory::create_flash_fx1(std::string on_map, float x, float y) const
 {
    if (!(get_animation_book()))
    {

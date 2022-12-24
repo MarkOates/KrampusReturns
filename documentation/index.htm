@@ -466,6 +466,9 @@ table td
   <td class="method">create_goalpost()</td>
 </tr>
 <tr>
+  <td class="method">create_spawn_point()</td>
+</tr>
+<tr>
   <td class="method">create_flash_fx1()</td>
 </tr>
     </table>
@@ -493,6 +496,9 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Entities::FlashEffect&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Entities/FlashEffect.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Entities::SpawnPoint&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Entities/SpawnPoint.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -800,6 +806,12 @@ table td
   <td class="method">load_level_and_start(std::string level_name=&quot;[unset-level_name]&quot;)</td>
 </tr>
 <tr>
+  <td class="method">start_level()</td>
+</tr>
+<tr>
+  <td class="private_method">move_krampus_to_first_spawn_point_or_default(KrampusReturns::Entities::Krampus* krampus=nullptr)</td>
+</tr>
+<tr>
   <td class="method">load_objects_from_map_files()</td>
 </tr>
 <tr>
@@ -831,9 +843,6 @@ table td
 </tr>
 <tr>
   <td class="private_method">initialize_camera()</td>
-</tr>
-<tr>
-  <td class="method">start_level()</td>
 </tr>
 <tr>
   <td class="method">reverse_gravity()</td>
@@ -1823,6 +1832,9 @@ table td
     "KrampusReturns/EntityFactory"
   ],
   "KrampusReturns/Entities/FlashEffect": [
+    "KrampusReturns/EntityFactory"
+  ],
+  "KrampusReturns/Entities/SpawnPoint": [
     "KrampusReturns/EntityFactory"
   ],
   "AllegroFlare/GameEventDatas/Base": [

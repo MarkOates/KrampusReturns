@@ -28,6 +28,7 @@ functions:
 
   - name: create_krampus
     type: KrampusReturns::Entities::Krampus*
+    const: true
     parameters:
       - name: on_map
         type: std::string
@@ -98,6 +99,7 @@ functions:
 
   - name: create_goalpost
     type: KrampusReturns::Entities::Goalpost*
+    const: true
     parameters:
       - name: on_map
         type: std::string
@@ -132,8 +134,43 @@ functions:
       - AllegroFlare::Prototypes::Platforming2D::EntityFlagNames
 
 
+  - name: create_spawn_point
+    type: KrampusReturns::Entities::SpawnPoint*
+    const: true
+    parameters:
+      - name: on_map
+        type: std::string
+        default_argument: '"[unset-on_map]"'
+      - name: x
+        type: float
+        default_argument: 0.0f
+      - name: y
+        type: float
+        default_argument: 0.0f
+    guards: [ get_animation_book() ]
+    parameters:
+    body: |
+      using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+
+      KrampusReturns::Entities::SpawnPoint *result = new KrampusReturns::Entities::SpawnPoint();
+      result->set_animation_book(get_animation_book());
+      //result->set("goalpost_id", goalpost_id);
+      result->initialize();
+
+      result->get_place_ref().position = { x, y };
+      result->set(ON_MAP_NAME, on_map);
+
+      if (init_entities_drawing_debug) result->set_draw_debug(true);
+      //get_platforming_2d_ref().add_entity_to_pool(result);
+      return result;
+    body_dependency_symbols:
+      - KrampusReturns::Entities::SpawnPoint
+      - AllegroFlare::Prototypes::Platforming2D::EntityFlagNames
+
+
   - name: create_flash_fx1
     type: KrampusReturns::Entities::FlashEffect*
+    const: true
     parameters:
       - name: on_map
         type: std::string
@@ -187,5 +224,7 @@ dependencies:
     headers: [ KrampusReturns/Entities/Goalpost.hpp ]
   - symbol: KrampusReturns::Entities::FlashEffect
     headers: [ KrampusReturns/Entities/FlashEffect.hpp ]
+  - symbol: KrampusReturns::Entities::SpawnPoint
+    headers: [ KrampusReturns/Entities/SpawnPoint.hpp ]
 
 

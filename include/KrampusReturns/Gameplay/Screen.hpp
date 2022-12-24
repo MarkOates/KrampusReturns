@@ -85,6 +85,7 @@ namespace KrampusReturns
          uint32_t state;
          float state_changed_at;
          bool state_is_busy;
+         void move_krampus_to_first_spawn_point_or_default(KrampusReturns::Entities::Krampus* krampus=nullptr);
          void initialize_shader();
          void initialize_camera();
          void cleanup_entities_flagged_for_deletion();
@@ -128,6 +129,7 @@ namespace KrampusReturns
          virtual void on_deactivate() override;
          void destroy_all();
          void load_level_and_start(std::string level_name="[unset-level_name]");
+         void start_level();
          void load_objects_from_map_files();
          static AllegroFlare::Vec2D center_of(float x=0.0f, float y=0.0f, float w=0.0f, float h=0.0f);
          static void tmj_object_parse_callback_func(std::string object_class="[unset-object_class]", float x=0.0f, float y=0.0f, float w=0.0f, float h=0.0f, void* user_data=nullptr);
@@ -137,7 +139,6 @@ namespace KrampusReturns
          void initialize_backbuffer_sub_bitmap();
          void initialize_animation_book();
          void initialize();
-         void start_level();
          void reverse_gravity();
          std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> select_enemies(std::string on_map_name="[unset-on_map_name]");
          void update_enemy_collisions_with_damage_zones();

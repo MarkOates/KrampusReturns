@@ -605,25 +605,41 @@ void Screen::load_level_and_start(std::string level_name)
    load_objects_from_map_files();
 
 
-   // flag all entities for deletion
-
-
    KrampusReturns::EntityFactory entity_factory;
    entity_factory.set_event_emitter(event_emitter);
    entity_factory.set_bitmap_bin(bitmap_bin);
    entity_factory.set_animation_book(&animation_book);
 
 
+   // create the player character
+
    KrampusReturns::Entities::Krampus *krampus = entity_factory.create_krampus("map_a", 400/2 - 50, 240/2);
    add_entity_to_pool(krampus);
+
+
+   move_krampus_to_first_spawn_point_or_default(krampus);
+
 
    set_player_controlled_entity(krampus);
 
    set_currently_active_map("map_a");
+
+
    start_level();
-   //platforming_2d.set_player_controlled_entity(krampus);
-   // HERE:
-   // TODO: implement here
+   return;
+}
+
+void Screen::start_level()
+{
+   set_state(STATE_PLAYING_IN_LEVEL);
+   return;
+}
+
+void Screen::move_krampus_to_first_spawn_point_or_default(KrampusReturns::Entities::Krampus* krampus)
+{
+   // TODO: HERE: select spawn points
+   AllegroFlare::Vec2D default_spawn_location = AllegroFlare::Vec2D(400/2 + 50, 240/2);
+   krampus->get_place_ref().position = default_spawn_location;
    return;
 }
 
@@ -670,7 +686,7 @@ void Screen::tmj_object_parse_callback_func(std::string object_class, float x, f
    KrampusReturns::Gameplay::Screen* gameplay_screen = as_custom_user_data->first;
 
    KrampusReturns::EntityFactory entity_factory;
-   entity_factory.set_init_entities_drawing_debug(true); // <--- DEBUGGING: TESTING:
+   //entity_factory.set_init_entities_drawing_debug(true); // <--- DEBUGGING: TESTING:
    entity_factory.set_event_emitter(gameplay_screen->event_emitter);
    entity_factory.set_bitmap_bin(gameplay_screen->bitmap_bin);
    entity_factory.set_animation_book(&gameplay_screen->animation_book);
@@ -684,13 +700,18 @@ void Screen::tmj_object_parse_callback_func(std::string object_class, float x, f
       }},
       { "blob", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
           AllegroFlare::Vec2D center = center_of(x, y, w, h);
-          KrampusReturns::Entities::Blob *entity = entity_factory.create_blob("map_a", center.x, center.y);
+          auto entity = entity_factory.create_blob("map_a", center.x, center.y);
           gameplay_screen->add_entity_to_pool(entity);
       }},
       { "door", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
           // TODO: here
           AllegroFlare::Vec2D center = center_of(x, y, w, h);
           auto entity = entity_factory.create_door("map_a", center.x, center.y);
+          gameplay_screen->add_entity_to_pool(entity);
+      }},
+      { "spawn_point", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
+          AllegroFlare::Vec2D center = center_of(x, y, w, h);
+          auto entity = entity_factory.create_spawn_point("map_a", center.x, center.y);
           gameplay_screen->add_entity_to_pool(entity);
       }},
    };
@@ -937,12 +958,6 @@ void Screen::initialize_camera()
    //AllegroFlare::vec2d(1.0 / 4.8, 1.0 / 4.5);
    camera.position = {room_width/2, room_height/2};
 
-   return;
-}
-
-void Screen::start_level()
-{
-   set_state(STATE_PLAYING_IN_LEVEL);
    return;
 }
 

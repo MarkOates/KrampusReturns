@@ -1,0 +1,74 @@
+parent_classes:
+
+
+  - class: AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D
+    scope: public
+    init_with: ''
+
+
+properties:
+
+
+  - name: initialized
+    type: bool
+    init_with: false
+
+  - name: TYPE
+    type: char*
+    init_with: '(char*)"Entities/SpawnPoint"'
+    static: true
+    constexpr: true
+
+
+functions:
+
+
+  - name: initialize
+    guards: [ (!initialized) ]
+    body: |
+      using namespace AllegroFlare::Prototypes::Platforming2D;
+
+      get_place_ref().size = { 16, 16 };
+      get_bitmap_placement_ref().scale = { 0.6, 0.6 };
+      set_bitmap_alignment_strategy("centered");
+      //set_draw_debug(true);
+      set(EntityFlagNames::TYPE, "spawn_point"); // TODO: make EntityFlagNames::SPAWN_POINT
+      //set(EntityFlagNames::TYPE, EntityFlagNames::SPAWN_POINT);
+      set_animation("spawn_point"); // TODO: change this type
+
+
+      initialized = true;
+      return;
+    body_dependency_symbols:
+      - AllegroFlare::Prototypes::Platforming2D::EntityFlagNames
+
+
+  - name: update
+    virtual: true
+    override: true
+    guards: [ initialized ]
+    body: |
+      FrameAnimated2D::update();
+      get_bitmap_placement_ref().rotation += 0.1;
+      return;
+
+
+  - name: draw
+    virtual: true
+    override: true
+    guards: [ initialized ]
+    body: |
+      FrameAnimated2D::draw();
+      return;
+
+
+dependencies:
+
+
+  - symbol: AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D
+    headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D.hpp ]
+  - symbol: AllegroFlare::Prototypes::Platforming2D::EntityFlagNames
+    headers: [ AllegroFlare/Prototypes/Platforming2D/EntityFlagNames.hpp ]
+  - symbol: AllegroFlare::Vec2D
+    headers: [ AllegroFlare/Vec2D.hpp ]
+

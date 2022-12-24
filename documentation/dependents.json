@@ -81,6 +81,9 @@
   "KrampusReturns/Entities/FlashEffect": [
     "KrampusReturns/EntityFactory"
   ],
+  "KrampusReturns/Entities/SpawnPoint": [
+    "KrampusReturns/EntityFactory"
+  ],
   "AllegroFlare/GameEventDatas/Base": [
     "KrampusReturns/GameEventDatas/GoalpostReached",
     "KrampusReturns/GameEventDatas/SpawnFlashFX"
