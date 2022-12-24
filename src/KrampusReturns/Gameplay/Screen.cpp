@@ -509,6 +509,14 @@ void Screen::load_level_and_start(std::string level_name)
 
 
 
+   // hide all the banners
+   hide_full_color_overlay();
+   hide_banner_text();
+   hide_banner_subtext();
+
+
+
+
    // TODO: CRITICAL: fix this folder
    #if defined(_WIN32) || defined(_WIN64)
    #define TEST_BASE_FOLDER "/msys64/home/Mark/Repos/KrampusReturns/bin/programs/data/"
@@ -1340,7 +1348,7 @@ void Screen::show_banner_subtext()
 
 void Screen::hide_banner_subtext()
 {
-   showing_banner_text = false;
+   showing_banner_subtext = false;
    return;
 }
 

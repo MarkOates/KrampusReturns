@@ -584,6 +584,14 @@ functions:
       }
 
       //set_player_controlled_entity(nullptr);
+
+
+
+      // hide all the banners
+      hide_full_color_overlay();
+      hide_banner_text();
+      hide_banner_subtext();
+
      
 
 
@@ -1431,7 +1439,7 @@ functions:
 
   - name: hide_banner_subtext
     body: |
-      showing_banner_text = false;
+      showing_banner_subtext = false;
       return;
 
 
