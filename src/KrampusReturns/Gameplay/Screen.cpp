@@ -191,7 +191,6 @@ void Screen::set_state(uint32_t state, float time_now)
          event_emitter->emit_play_music_track_event(main_background_music_identifier);
       break;
 
-      case STATE_WAITING_KEYPRESS_TO_RETRY_LEVEL:
       case STATE_PLAYER_DIED:
          set_full_color_overlay(al_color_name("firebrick"), 0.2);
          show_full_color_overlay();
@@ -200,11 +199,16 @@ void Screen::set_state(uint32_t state, float time_now)
          shake_camera(4, 1.0, time_now);
       break;
 
-      case STATE_WAITING_KEYPRESS_TO_FINISH_LEVEL:
       case STATE_FINISHED_LEVEL:
          set_full_color_overlay(al_color_name("white"), 0.1);
          show_full_color_overlay();
          play_win_music();
+      break;
+
+      case STATE_WAITING_KEYPRESS_TO_FINISH_LEVEL:
+      break;
+
+      case STATE_WAITING_KEYPRESS_TO_RETRY_LEVEL:
       break;
 
       default:
