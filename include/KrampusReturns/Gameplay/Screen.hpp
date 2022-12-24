@@ -39,6 +39,8 @@ namespace KrampusReturns
          static constexpr uint32_t STATE_PLAYING_IN_LEVEL = 2;
          static constexpr uint32_t STATE_PLAYER_DIED = 3;
          static constexpr uint32_t STATE_FINISHED_LEVEL = 4;
+         static constexpr uint32_t STATE_WAITING_KEYPRESS_TO_RETRY_LEVEL = 5;
+         static constexpr uint32_t STATE_WAITING_KEYPRESS_TO_FINISH_LEVEL = 6;
 
       private:
          AllegroFlare::BitmapBin* bitmap_bin;

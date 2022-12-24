@@ -222,6 +222,20 @@ properties:
     const: true
     constexpr: true
 
+  - name: STATE_WAITING_KEYPRESS_TO_RETRY_LEVEL
+    type: uint32_t
+    init_with: 5
+    static: true
+    const: true
+    constexpr: true
+
+  - name: STATE_WAITING_KEYPRESS_TO_FINISH_LEVEL
+    type: uint32_t
+    init_with: 6
+    static: true
+    const: true
+    constexpr: true
+
 
 functions:
 
@@ -253,12 +267,14 @@ functions:
             hide_full_color_overlay();
          break;
 
+         case STATE_WAITING_KEYPRESS_TO_RETRY_LEVEL:
          case STATE_PLAYER_DIED:
             set_full_color_overlay(al_color_name("firebrick"), 0.2);
             show_full_color_overlay();
             shake_camera(4, 1.0, time_now);
          break;
 
+         case STATE_WAITING_KEYPRESS_TO_FINISH_LEVEL:
          case STATE_FINISHED_LEVEL:
             set_full_color_overlay(al_color_name("white"), 0.1);
             show_full_color_overlay();
@@ -294,6 +310,7 @@ functions:
             update_entities();
          break;
 
+         case STATE_WAITING_KEYPRESS_TO_RETRY_LEVEL:
          case STATE_PLAYER_DIED:
             {
                update_entities();
@@ -317,6 +334,7 @@ functions:
             }
          break;
 
+         case STATE_WAITING_KEYPRESS_TO_FINISH_LEVEL:
          case STATE_FINISHED_LEVEL:
             if (state_age > 1.62 && !showing_banner_text)
             {
@@ -1706,6 +1724,20 @@ functions:
         default_argument: nullptr
     guards: [ initialized, event ]
     body: |
+      // TODO: implement here
+      // HERE
+      if (state == STATE_WAITING_KEYPRESS_TO_RETRY_LEVEL)
+      {
+         event_emitter->emit_game_event(AllegroFlare::GameEvent("retry_level"));
+         return;
+      }
+      else if (state == STATE_WAITING_KEYPRESS_TO_FINISH_LEVEL)
+      {
+         event_emitter->emit_game_event(AllegroFlare::GameEvent("finished_level_successfully"));
+         return;
+      }
+
+
       // TODO: move this to a virtual input func rather than an explicit "key_down_func"
       krampus_controller.key_down_func(event->keyboard.keycode, false);
       return;

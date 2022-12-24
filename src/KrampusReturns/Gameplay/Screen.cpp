@@ -186,12 +186,14 @@ void Screen::set_state(uint32_t state, float time_now)
          hide_full_color_overlay();
       break;
 
+      case STATE_WAITING_KEYPRESS_TO_RETRY_LEVEL:
       case STATE_PLAYER_DIED:
          set_full_color_overlay(al_color_name("firebrick"), 0.2);
          show_full_color_overlay();
          shake_camera(4, 1.0, time_now);
       break;
 
+      case STATE_WAITING_KEYPRESS_TO_FINISH_LEVEL:
       case STATE_FINISHED_LEVEL:
          set_full_color_overlay(al_color_name("white"), 0.1);
          show_full_color_overlay();
@@ -227,6 +229,7 @@ void Screen::update_state(float time_now)
          update_entities();
       break;
 
+      case STATE_WAITING_KEYPRESS_TO_RETRY_LEVEL:
       case STATE_PLAYER_DIED:
          {
             update_entities();
@@ -250,6 +253,7 @@ void Screen::update_state(float time_now)
          }
       break;
 
+      case STATE_WAITING_KEYPRESS_TO_FINISH_LEVEL:
       case STATE_FINISHED_LEVEL:
          if (state_age > 1.62 && !showing_banner_text)
          {
@@ -1641,6 +1645,20 @@ void Screen::key_down_func(ALLEGRO_EVENT* event)
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
       throw std::runtime_error("Screen::key_down_func: error: guard \"event\" not met");
    }
+   // TODO: implement here
+   // HERE
+   if (state == STATE_WAITING_KEYPRESS_TO_RETRY_LEVEL)
+   {
+      event_emitter->emit_game_event(AllegroFlare::GameEvent("retry_level"));
+      return;
+   }
+   else if (state == STATE_WAITING_KEYPRESS_TO_FINISH_LEVEL)
+   {
+      event_emitter->emit_game_event(AllegroFlare::GameEvent("finished_level_successfully"));
+      return;
+   }
+
+
    // TODO: move this to a virtual input func rather than an explicit "key_down_func"
    krampus_controller.key_down_func(event->keyboard.keycode, false);
    return;
