@@ -30,6 +30,7 @@ Runner::Runner(std::string mode, AllegroFlare::Frameworks::Full* framework, Alle
    , new_game_intro_storyboard_screen(nullptr)
    , platforming_2d_screen()
    , platforming_2d_world()
+   , finished_up_to_level(0)
    , achievements_screen()
    , credits_screen(nullptr)
    , blurry_background_screen_capture(nullptr)
@@ -391,6 +392,7 @@ void Runner::game_event_func(AllegroFlare::GameEvent* ev)
          framework->activate_screen("title_screen");
       }},
       { EVENT_START_NEW_GAME, [this](){
+         finished_up_to_level = 0;
          event_emitter->emit_play_music_track_event("intro_music");
          //framework->activate_screen("opening_logos_storyboard_screen");
          framework->activate_screen("new_game_intro_storyboard_screen");
@@ -398,6 +400,12 @@ void Runner::game_event_func(AllegroFlare::GameEvent* ev)
       { "finish_new_game_intro_storyboard_screen", [this](){
          // TODO: replace this with an event EVENT_ACTIVATE_PLATFORMING_2D_SCREEN
          framework->activate_screen("platforming_2d_screen");
+         // WARNING: TODO: fix this so that it will not crash when there are no levels
+         if (platforming_2d_world.get_levels_ref().size() == 0)
+         {
+            AllegroFlare::Errors::throw_error("KrampusReturns::Runner::game_event_func",
+                                             "Starting gameplay but there are zero levels. Aborting");
+         }
          platforming_2d_screen.load_level_and_start(&platforming_2d_world.get_levels_ref()[0]);
       }},
       //{ EVENT_ACTIVATE_TILE_DRIVE_SCREEN, [this](){

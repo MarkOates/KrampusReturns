@@ -48,6 +48,10 @@ properties:
     type: KrampusReturns::World
     init_with: ''
 
+  - name: finished_up_to_level
+    type: int
+    init_with: 0
+
   - name: achievements_screen
     type: AllegroFlare::Screens::Achievements
     init_with: ''
@@ -494,6 +498,7 @@ functions:
             framework->activate_screen("title_screen");
          }},
          { EVENT_START_NEW_GAME, [this](){
+            finished_up_to_level = 0;
             event_emitter->emit_play_music_track_event("intro_music");
             //framework->activate_screen("opening_logos_storyboard_screen");
             framework->activate_screen("new_game_intro_storyboard_screen");
@@ -501,6 +506,12 @@ functions:
          { "finish_new_game_intro_storyboard_screen", [this](){
             // TODO: replace this with an event EVENT_ACTIVATE_PLATFORMING_2D_SCREEN
             framework->activate_screen("platforming_2d_screen");
+            // WARNING: TODO: fix this so that it will not crash when there are no levels
+            if (platforming_2d_world.get_levels_ref().size() == 0)
+            {
+               AllegroFlare::Errors::throw_error("KrampusReturns::Runner::game_event_func",
+                                                "Starting gameplay but there are zero levels. Aborting");
+            }
             platforming_2d_screen.load_level_and_start(&platforming_2d_world.get_levels_ref()[0]);
          }},
          //{ EVENT_ACTIVATE_TILE_DRIVE_SCREEN, [this](){
