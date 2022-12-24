@@ -209,15 +209,7 @@ void Screen::update_state(float time_now)
       throw std::runtime_error("Screen::update_state: error: guard \"(state != STATE_UNDEF)\" not met");
    }
    float state_age = time_now - state_changed_at;
-   //float fade_out_to_white_text_counter = 0.0f;
-   //float fade_out_starts_at_age = 3.0;
-   //float fade_out_to_white_duration = 3.0;
-   //ALLEGRO_COLOR sparkle_win_color;
-   //ALLEGRO_COLOR win_color_final = al_color_name("aquamarine");
-   //ALLEGRO_COLOR final_level_clear_color;
 
-   // HERE:
-   // TODO: Flesh out this logic:
    switch(state)
    {
       case STATE_PRELOADING_LEVEL:
@@ -254,7 +246,6 @@ void Screen::update_state(float time_now)
 
             if (state_age > fade_out_starts_at_age)
             {
-               //float fade_duration = 3.0;
                fade_out_to_white_text_counter =
                   std::min(1.0f, std::max(0.0f, (state_age - fade_out_starts_at_age) / fade_out_to_white_duration));
             }
@@ -606,7 +597,7 @@ void Screen::tmj_object_parse_callback_func(std::string object_class, float x, f
 void Screen::initialize_maps()
 {
    AllegroFlare::Prototypes::Platforming2D::Entities::Basic2DFactory factory(bitmap_bin);
-   AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D *created_map = nullptr;
+   AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D *created_map_ = nullptr;
 
    // TODO: clean this up
    for (auto &map_dictionary_entry : map_dictionary)
@@ -614,7 +605,9 @@ void Screen::initialize_maps()
       std::string map_name = std::get<0>(map_dictionary_entry);
       std::string map_filename = std::get<1>(map_dictionary_entry);
 
-      created_map = factory.create_tile_map(map_filename, map_name);
+      created_map_ = factory.create_tile_map(map_filename, map_name);
+      AllegroFlare::Prototypes::Platforming2D::Entities::TileMaps::Basic2D* created_map =
+         static_cast<AllegroFlare::Prototypes::Platforming2D::Entities::TileMaps::Basic2D*>(created_map_);
 
       if (!created_map)
       {
@@ -625,10 +618,7 @@ void Screen::initialize_maps()
          std::cout << "NOTE: TMJ Tile map file \"" << map_filename << "\" loaded successfully." << std::endl;
       }
 
-      AllegroFlare::Prototypes::Platforming2D::Entities::TileMaps::Basic2D* __created_map =
-         static_cast<AllegroFlare::Prototypes::Platforming2D::Entities::TileMaps::Basic2D*>(created_map);
-
-      if (!__created_map->get_tile_mesh())
+      if (!created_map->get_tile_mesh())
       {
          std::cout << "ERROR: could not create tile mesh on \"" << map_filename << "\"" << std::endl;
       }
@@ -637,8 +627,7 @@ void Screen::initialize_maps()
          std::cout << "NOTE: TMJ Tile loaded tile mesh \"" << map_filename << "\" loaded successfully." << std::endl;
       }
 
-
-      if (!__created_map->get_tile_mesh()->get_initialized())
+      if (!created_map->get_tile_mesh()->get_initialized())
       {
          std::cout << "ERROR: prim mesh not initialized on \"" << map_filename << "\"" << std::endl;
       }
@@ -647,18 +636,7 @@ void Screen::initialize_maps()
          std::cout << "NOTE: prim mesh initialized on \"" << map_filename << "\" loaded successfully." << std::endl;
       }
 
-
-      if (!__created_map->get_collision_tile_mesh())
-      {
-         std::cout << "ERROR: collision tile map not loaded on \"" << map_filename << "\"" << std::endl;
-      }
-      else
-      {
-         std::cout << "NOTE: collision tile map loaded on \"" << map_filename << "\" loaded successfully." << std::endl;
-      }
-
-
-      if (!__created_map->get_collision_tile_mesh())
+      if (!created_map->get_collision_tile_mesh())
       {
          std::cout << "ERROR: collision tile map not loaded on \"" << map_filename << "\"" << std::endl;
       }
