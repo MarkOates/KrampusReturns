@@ -576,10 +576,10 @@ functions:
       return;
 
 
-  - name: destroy
+  - name: destroy_all
     guards: [ initialized, (!destroyed) ]
     body: |
-      std::cout << "Performing shutdown... " << std::endl;
+      std::cout << "Destroying everything in Gameplay::Screen... " << std::endl;
       set_state(STATE_DOING_SHUTDOWN);
 
       // flag all entities for deletion
@@ -628,7 +628,7 @@ functions:
       - name: level_name
         type: std::string
         default_argument: '"[unset-level_name]"'
-    guards: [ initialized ]
+    guards: [ initialized, (!destroyed) ]
     body: |
       set_state(STATE_PRELOADING_LEVEL);
 
@@ -776,6 +776,7 @@ functions:
       KrampusReturns::Gameplay::Screen* gameplay_screen = as_custom_user_data->first;
 
       KrampusReturns::EntityFactory entity_factory;
+      entity_factory.set_init_entities_drawing_debug(true); // <--- DEBUGGING: TESTING:
       entity_factory.set_event_emitter(gameplay_screen->event_emitter);
       entity_factory.set_bitmap_bin(gameplay_screen->bitmap_bin);
       entity_factory.set_animation_book(&gameplay_screen->animation_book);
@@ -794,6 +795,9 @@ functions:
          }},
          { "door", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
              // TODO: here
+             AllegroFlare::Vec2D center = center_of(x, y, w, h);
+             auto entity = entity_factory.create_door("map_a", center.x, center.y);
+             gameplay_screen->add_entity_to_pool(entity);
          }},
       };
       
@@ -970,6 +974,7 @@ functions:
       initialize_camera();
       initialize_shader();
       initialized = true;
+      destroyed = false;
       return;
 
 

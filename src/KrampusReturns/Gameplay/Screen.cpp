@@ -479,23 +479,23 @@ void Screen::on_deactivate()
    return;
 }
 
-void Screen::destroy()
+void Screen::destroy_all()
 {
    if (!(initialized))
    {
       std::stringstream error_message;
-      error_message << "[Screen::destroy]: error: guard \"initialized\" not met.";
+      error_message << "[Screen::destroy_all]: error: guard \"initialized\" not met.";
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
-      throw std::runtime_error("Screen::destroy: error: guard \"initialized\" not met");
+      throw std::runtime_error("Screen::destroy_all: error: guard \"initialized\" not met");
    }
    if (!((!destroyed)))
    {
       std::stringstream error_message;
-      error_message << "[Screen::destroy]: error: guard \"(!destroyed)\" not met.";
+      error_message << "[Screen::destroy_all]: error: guard \"(!destroyed)\" not met.";
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
-      throw std::runtime_error("Screen::destroy: error: guard \"(!destroyed)\" not met");
+      throw std::runtime_error("Screen::destroy_all: error: guard \"(!destroyed)\" not met");
    }
-   std::cout << "Performing shutdown... " << std::endl;
+   std::cout << "Destroying everything in Gameplay::Screen... " << std::endl;
    set_state(STATE_DOING_SHUTDOWN);
 
    // flag all entities for deletion
@@ -547,6 +547,13 @@ void Screen::load_level_and_start(std::string level_name)
       error_message << "[Screen::load_level_and_start]: error: guard \"initialized\" not met.";
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
       throw std::runtime_error("Screen::load_level_and_start: error: guard \"initialized\" not met");
+   }
+   if (!((!destroyed)))
+   {
+      std::stringstream error_message;
+      error_message << "[Screen::load_level_and_start]: error: guard \"(!destroyed)\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Screen::load_level_and_start: error: guard \"(!destroyed)\" not met");
    }
    set_state(STATE_PRELOADING_LEVEL);
 
@@ -663,6 +670,7 @@ void Screen::tmj_object_parse_callback_func(std::string object_class, float x, f
    KrampusReturns::Gameplay::Screen* gameplay_screen = as_custom_user_data->first;
 
    KrampusReturns::EntityFactory entity_factory;
+   entity_factory.set_init_entities_drawing_debug(true); // <--- DEBUGGING: TESTING:
    entity_factory.set_event_emitter(gameplay_screen->event_emitter);
    entity_factory.set_bitmap_bin(gameplay_screen->bitmap_bin);
    entity_factory.set_animation_book(&gameplay_screen->animation_book);
@@ -681,6 +689,9 @@ void Screen::tmj_object_parse_callback_func(std::string object_class, float x, f
       }},
       { "door", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
           // TODO: here
+          AllegroFlare::Vec2D center = center_of(x, y, w, h);
+          auto entity = entity_factory.create_door("map_a", center.x, center.y);
+          gameplay_screen->add_entity_to_pool(entity);
       }},
    };
 
@@ -855,6 +866,7 @@ void Screen::initialize()
    initialize_camera();
    initialize_shader();
    initialized = true;
+   destroyed = false;
    return;
 }
 
