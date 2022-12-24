@@ -23,6 +23,16 @@ TEST(KrampusReturns_Gameplay_ScreenTest, can_be_created_without_blowing_up)
 }
 
 
+TEST(KrampusReturns_Gameplay_ScreenTest, destroy__will_not_crash)
+{
+   // TODO: this test
+   //AllegroFlare::Frameworks::Full framework;
+   //framework.disable_fullscreen();
+   //framework.initialize();
+   //platforming2d.initialize();
+}
+
+
 TEST(KrampusReturns_Gameplay_ScreenTest,
    INTERACTIVE__in_an_AllegroFlare_Frameworks_Full_context__will_run_as_expected)
    //DISABLED__INTERACTIVE__in_an_AllegroFlare_Frameworks_Full_context__will_run_as_expected)

@@ -41,6 +41,8 @@ namespace KrampusReturns
          static constexpr uint32_t STATE_FINISHED_LEVEL = 4;
          static constexpr uint32_t STATE_WAITING_KEYPRESS_TO_RETRY_LEVEL = 5;
          static constexpr uint32_t STATE_WAITING_KEYPRESS_TO_FINISH_LEVEL = 6;
+         static constexpr uint32_t STATE_DOING_SHUTDOWN = 7;
+         static constexpr uint32_t STATE_SHUTDOWN = 8;
 
       private:
          AllegroFlare::BitmapBin* bitmap_bin;
@@ -52,6 +54,7 @@ namespace KrampusReturns
          int native_display_resolution_width;
          int native_display_resolution_height;
          bool initialized;
+         bool destroyed;
          AllegroFlare::Prototypes::Platforming2D::Entities::TileMaps::Basic2D* currently_active_map;
          std::string currently_active_map_name;
          std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> entity_pool;
@@ -123,6 +126,7 @@ namespace KrampusReturns
          AllegroFlare::Prototypes::Platforming2D::Entities::TileMaps::Basic2D* find_map_by_name(std::string name="[unset-map-name]");
          virtual void on_activate() override;
          virtual void on_deactivate() override;
+         void destroy();
          void load_level_and_start(std::string level_name="[unset-level_name]");
          void load_objects_from_map_files();
          static AllegroFlare::Vec2D center_of(float x=0.0f, float y=0.0f, float w=0.0f, float h=0.0f);

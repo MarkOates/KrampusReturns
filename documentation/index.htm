@@ -590,6 +590,10 @@ table td
   <td class="property">bool</td>
 </tr>
 <tr>
+  <td class="property">destroyed</td>
+  <td class="property">bool</td>
+</tr>
+<tr>
   <td class="property">currently_active_map</td>
   <td class="property">AllegroFlare::Prototypes::Platforming2D::Entities::TileMaps::Basic2D*</td>
 </tr>
@@ -737,6 +741,14 @@ table td
   <td class="property">STATE_WAITING_KEYPRESS_TO_FINISH_LEVEL</td>
   <td class="property">uint32_t</td>
 </tr>
+<tr>
+  <td class="property">STATE_DOING_SHUTDOWN</td>
+  <td class="property">uint32_t</td>
+</tr>
+<tr>
+  <td class="property">STATE_SHUTDOWN</td>
+  <td class="property">uint32_t</td>
+</tr>
     </table>
      <table>
 <tr>
@@ -780,6 +792,9 @@ table td
 </tr>
 <tr>
   <td class="method">on_deactivate()</td>
+</tr>
+<tr>
+  <td class="method">destroy()</td>
 </tr>
 <tr>
   <td class="method">load_level_and_start(std::string level_name=&quot;[unset-level_name]&quot;)</td>

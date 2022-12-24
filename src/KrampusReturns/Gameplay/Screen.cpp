@@ -49,6 +49,7 @@ Screen::Screen(AllegroFlare::BitmapBin* bitmap_bin, AllegroFlare::FontBin* font_
    , native_display_resolution_width(1920)
    , native_display_resolution_height(1080)
    , initialized(false)
+   , destroyed(false)
    , currently_active_map(nullptr)
    , currently_active_map_name("[currently-active-map-name-unset]")
    , entity_pool({})
@@ -178,8 +179,10 @@ void Screen::set_state(uint32_t state, float time_now)
    // TODO: Flesh out this logic:
    switch(state)
    {
+      case STATE_SHUTDOWN:
+      case STATE_DOING_SHUTDOWN:
       case STATE_PRELOADING_LEVEL:
-         //hide_full_color_overlay();
+         // shutdown handled at call
       break;
 
       case STATE_PLAYING_IN_LEVEL:
@@ -220,8 +223,10 @@ void Screen::update_state(float time_now)
 
    switch(state)
    {
+      case STATE_SHUTDOWN:
+      case STATE_DOING_SHUTDOWN:
       case STATE_PRELOADING_LEVEL:
-         //hide_full_color_overlay();
+         // nothing
       break;
 
       case STATE_PLAYING_IN_LEVEL:
@@ -471,6 +476,66 @@ void Screen::on_deactivate()
       throw std::runtime_error("Screen::on_deactivate: error: guard \"initialized\" not met");
    }
    // nothing here
+   return;
+}
+
+void Screen::destroy()
+{
+   if (!(initialized))
+   {
+      std::stringstream error_message;
+      error_message << "[Screen::destroy]: error: guard \"initialized\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Screen::destroy: error: guard \"initialized\" not met");
+   }
+   if (!((!destroyed)))
+   {
+      std::stringstream error_message;
+      error_message << "[Screen::destroy]: error: guard \"(!destroyed)\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Screen::destroy: error: guard \"(!destroyed)\" not met");
+   }
+   std::cout << "Performing shutdown... " << std::endl;
+   set_state(STATE_DOING_SHUTDOWN);
+
+   // flag all entities for deletion
+   flag_all_entities_for_deletion();
+
+   // delete all the entities
+   cleanup_entities_flagged_for_deletion();
+
+   if (!entity_pool.empty())
+   {
+      AllegroFlare::Errors::throw_error(
+         "KrampusReturns::Gameplay::Screen::load_level_and_start",
+         "While cleaning/deleting all existing entities, some entities unexpectedly remained in the pool."
+      );
+   }
+
+   // clear/reset the cached elements
+   currently_active_map = nullptr;
+   currently_active_map_name = "[unset-currently_active_map";
+   player_controlled_entity = nullptr;
+
+   map_dictionary.clear();
+
+   krampus_controller.set_krampus(nullptr);
+   krampus_controller.reset();
+
+   delete shader;
+   delete camera_control_strategy;
+   al_destroy_bitmap(backbuffer_sub_bitmap);
+
+   // hide all the banners
+   hide_banner_text();
+   hide_banner_subtext();
+   hide_full_color_overlay();
+
+   initialized = false;
+   destroyed = true;
+
+   set_state(STATE_SHUTDOWN);
+
    return;
 }
 
