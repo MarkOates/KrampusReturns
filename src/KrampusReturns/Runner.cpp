@@ -29,6 +29,7 @@ Runner::Runner(std::string mode, AllegroFlare::Frameworks::Full* framework, Alle
    , pause_screen()
    , new_game_intro_storyboard_screen(nullptr)
    , platforming_2d_screen()
+   , platforming_2d_world()
    , achievements_screen()
    , credits_screen(nullptr)
    , blurry_background_screen_capture(nullptr)
@@ -198,6 +199,9 @@ void Runner::initialize()
 
    setup_platforming_2d_screen();
 
+   initialize_world();
+
+
 
    // setup the credits screen
    credits_screen = storyboard_factory.create_advancing_text_storyboard_screen({
@@ -250,6 +254,31 @@ void Runner::build_item_dictionary()
    // TODO:
    //item_dictionary.push_back("letter", ...);
    return;
+}
+
+void Runner::initialize_world()
+{
+   // TODO: CRITICAL: fix this TEST_BASE_FOLDER path
+   // TODO: Load up actual data for the remaining levels of the game
+   static std::string TEST_BASE_FOLDER = "/Users/markoates/Repos/KrampusReturns/bin/programs/data/";
+   platforming_2d_world.set_levels({
+      KrampusReturns::Level(
+         "level_1",
+         "The First Rescue",
+         {
+            { "map_a", TEST_BASE_FOLDER + "maps/krampus-returns-level-1-1-0x.tmj" }
+         },
+         "level_1_music"
+      ),
+      KrampusReturns::Level(
+         "level_2",
+         "The Second Rescue",
+         {
+            { "map_a", TEST_BASE_FOLDER + "maps/krampus-returns-level-2-1-0x.tmj" }
+         },
+         "level_1_music"
+      ),
+   });
 }
 
 void Runner::setup_platforming_2d_screen()
@@ -364,7 +393,7 @@ void Runner::game_event_func(AllegroFlare::GameEvent* ev)
       { "finish_new_game_intro_storyboard_screen", [this](){
          // TODO: replace this with an event EVENT_ACTIVATE_PLATFORMING_2D_SCREEN
          framework->activate_screen("platforming_2d_screen");
-         platforming_2d_screen.load_level_and_start();
+         platforming_2d_screen.load_level_and_start(&platforming_2d_world.get_levels_ref()[0]);
       }},
       //{ EVENT_ACTIVATE_TILE_DRIVE_SCREEN, [this](){
          //framework->activate_screen("tile_drive_screen");

@@ -337,6 +337,9 @@
     "KrampusReturns/Runner",
     "KrampusReturns/Testing/Gym"
   ],
+  "KrampusReturns/World": [
+    "KrampusReturns/Runner"
+  ],
   "AllegroFlare/Prototypes/FixedRoom2D/EntityCollectionHelper": [
     "KrampusReturns/Shaders/Primary"
   ],

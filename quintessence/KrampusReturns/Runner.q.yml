@@ -44,6 +44,10 @@ properties:
     type: KrampusReturns::Gameplay::Screen
     init_with: ''
 
+  - name: platforming_2d_world
+    type: KrampusReturns::World
+    init_with: ''
+
   - name: achievements_screen
     type: AllegroFlare::Screens::Achievements
     init_with: ''
@@ -288,6 +292,9 @@ functions:
 
       setup_platforming_2d_screen();
 
+      initialize_world();
+
+
 
       // setup the credits screen
       credits_screen = storyboard_factory.create_advancing_text_storyboard_screen({
@@ -345,6 +352,31 @@ functions:
       // TODO:
       //item_dictionary.push_back("letter", ...);
       return;
+
+
+  - name: initialize_world
+    body: |
+      // TODO: CRITICAL: fix this TEST_BASE_FOLDER path
+      // TODO: Load up actual data for the remaining levels of the game
+      static std::string TEST_BASE_FOLDER = "/Users/markoates/Repos/KrampusReturns/bin/programs/data/";
+      platforming_2d_world.set_levels({
+         KrampusReturns::Level(
+            "level_1",
+            "The First Rescue",
+            {
+               { "map_a", TEST_BASE_FOLDER + "maps/krampus-returns-level-1-1-0x.tmj" }
+            },
+            "level_1_music"
+         ),
+         KrampusReturns::Level(
+            "level_2",
+            "The Second Rescue",
+            {
+               { "map_a", TEST_BASE_FOLDER + "maps/krampus-returns-level-2-1-0x.tmj" }
+            },
+            "level_1_music"
+         ),
+      });
 
 
   - name: setup_platforming_2d_screen
@@ -464,7 +496,7 @@ functions:
          { "finish_new_game_intro_storyboard_screen", [this](){
             // TODO: replace this with an event EVENT_ACTIVATE_PLATFORMING_2D_SCREEN
             framework->activate_screen("platforming_2d_screen");
-            platforming_2d_screen.load_level_and_start();
+            platforming_2d_screen.load_level_and_start(&platforming_2d_world.get_levels_ref()[0]);
          }},
          //{ EVENT_ACTIVATE_TILE_DRIVE_SCREEN, [this](){
             //framework->activate_screen("tile_drive_screen");
@@ -755,5 +787,7 @@ dependencies:
     headers: [ KrampusReturns/Gameplay/Screen.hpp ]
   - symbol: AllegroFlare::Errors
     headers: [ AllegroFlare/Errors.hpp ]
+  - symbol: KrampusReturns::World
+    headers: [ KrampusReturns/World.hpp ]
 
 

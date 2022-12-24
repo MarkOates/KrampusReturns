@@ -4,24 +4,28 @@ properties:
   - name: identifier
     type: std::string
     init_with: '"[unset-identifier]"'
+    constructor_arg: true
     getter: true
     setter: true
 
   - name: title
     type: std::string
     init_with: '"[unset-name]"'
+    constructor_arg: true
     getter: true
     setter: true
 
   - name: map_dictionary
     type: std::map<std::string, std::string>
     init_with: '{}'
+    constructor_arg: true
     getter: true
     setter: false
 
   - name: music_identifier
     type: std::string
     init_with: '"[unset-music_identifier]"'
+    constructor_arg: true
     getter: true
     setter: false
 

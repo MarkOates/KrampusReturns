@@ -10,6 +10,7 @@
 #include <AllegroFlare/Screens/Storyboard.hpp>
 #include <AllegroFlare/Screens/TitleScreen.hpp>
 #include <KrampusReturns/Gameplay/Screen.hpp>
+#include <KrampusReturns/World.hpp>
 #include <allegro5/allegro.h>
 #include <string>
 #include <vector>
@@ -43,6 +44,7 @@ namespace KrampusReturns
       AllegroFlare::Screens::PauseScreen pause_screen;
       AllegroFlare::Screens::Storyboard* new_game_intro_storyboard_screen;
       KrampusReturns::Gameplay::Screen platforming_2d_screen;
+      KrampusReturns::World platforming_2d_world;
       AllegroFlare::Screens::Achievements achievements_screen;
       AllegroFlare::Screens::Storyboard* credits_screen;
       ALLEGRO_BITMAP* blurry_background_screen_capture;
@@ -61,6 +63,7 @@ namespace KrampusReturns
       void load_development_data();
       void load_test_data();
       void build_item_dictionary();
+      void initialize_world();
       void setup_platforming_2d_screen();
       void unlock_achievement(std::string achievement_name="[unset-achievement_name]");
       void push_screen();

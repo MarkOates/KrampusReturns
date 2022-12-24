@@ -1296,6 +1296,10 @@ table td
   <td class="property">KrampusReturns::Gameplay::Screen</td>
 </tr>
 <tr>
+  <td class="property">platforming_2d_world</td>
+  <td class="property">KrampusReturns::World</td>
+</tr>
+<tr>
   <td class="property">achievements_screen</td>
   <td class="property">AllegroFlare::Screens::Achievements</td>
 </tr>
@@ -1383,6 +1387,9 @@ table td
 </tr>
 <tr>
   <td class="method">build_item_dictionary()</td>
+</tr>
+<tr>
+  <td class="method">initialize_world()</td>
 </tr>
 <tr>
   <td class="method">setup_platforming_2d_screen()</td>
@@ -1535,6 +1542,9 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Errors&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Errors.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::World&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/World.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -2180,6 +2190,9 @@ table td
   "KrampusReturns/Gameplay/Screen": [
     "KrampusReturns/Runner",
     "KrampusReturns/Testing/Gym"
+  ],
+  "KrampusReturns/World": [
+    "KrampusReturns/Runner"
   ],
   "AllegroFlare/Prototypes/FixedRoom2D/EntityCollectionHelper": [
     "KrampusReturns/Shaders/Primary"

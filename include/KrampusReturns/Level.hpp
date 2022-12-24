@@ -19,7 +19,7 @@ namespace KrampusReturns
 
 
    public:
-      Level();
+      Level(std::string identifier="[unset-identifier]", std::string title="[unset-name]", std::map<std::string, std::string> map_dictionary={}, std::string music_identifier="[unset-music_identifier]");
       ~Level();
 
       void set_identifier(std::string identifier);

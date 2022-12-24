@@ -9,11 +9,11 @@ namespace KrampusReturns
 {
 
 
-Level::Level()
-   : identifier("[unset-identifier]")
-   , title("[unset-name]")
-   , map_dictionary({})
-   , music_identifier("[unset-music_identifier]")
+Level::Level(std::string identifier, std::string title, std::map<std::string, std::string> map_dictionary, std::string music_identifier)
+   : identifier(identifier)
+   , title(title)
+   , map_dictionary(map_dictionary)
+   , music_identifier(music_identifier)
 {
 }
 
