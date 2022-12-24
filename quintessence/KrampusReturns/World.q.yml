@@ -1,0 +1,19 @@
+properties:
+
+
+  - name: levels
+    type: std::vector<KrampusReturns::Level>
+    constructor_arg: true
+    init_with: '{}'
+    getter_ref: true
+    getter: true
+    setter: true
+
+
+dependencies:
+
+
+  - symbol: KrampusReturns::Level
+    headers: [ KrampusReturns/Level.hpp ]
+
+
