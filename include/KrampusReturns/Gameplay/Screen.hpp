@@ -165,7 +165,8 @@ namespace KrampusReturns
          AllegroFlare::TileMaps::TileMap<int>* get_collision_tile_mesh();
          std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> get_current_map_entities();
          std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> get_current_map_entities_y_sorted();
-         ALLEGRO_FONT* obtain_banner_font();
+         ALLEGRO_FONT* obtain_banner_text_font();
+         ALLEGRO_FONT* obtain_banner_subtext_font();
       };
    }
 }

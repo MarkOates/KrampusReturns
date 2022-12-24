@@ -261,6 +261,13 @@ void Screen::update_state(float time_now)
                fade_out_to_white_text_counter
             );
             set_banner_text("LEVEL CLEAR", final_level_clear_color);
+
+            float subtext_starts_at_age = 6.25f;
+            if (state_age > subtext_starts_at_age)
+            {
+               set_banner_subtext("Press any key to continue", al_color_name("turquoise"));
+               show_banner_subtext();
+            }
          }
       break;
 
@@ -1369,7 +1376,7 @@ void Screen::draw_hud()
 
    if (showing_banner_text)
    {
-      ALLEGRO_FONT *font = obtain_banner_font();
+      ALLEGRO_FONT *font = obtain_banner_text_font();
       //std::string banner_text = "YOU LOSE";
       al_draw_text(font, banner_text_color, 1920/2, 1080/2-100, ALLEGRO_ALIGN_CENTER, banner_text.c_str());
 
@@ -1377,6 +1384,14 @@ void Screen::draw_hud()
       float inset = 80;
       float thickness = 20;
       al_draw_rectangle(inset, inset, 1920-inset, 1080-inset, banner_text_color, thickness);
+   }
+
+   if (showing_banner_subtext)
+   {
+      float pulse = sin(al_get_time()*8) * 0.5 + 0.5;
+      ALLEGRO_COLOR final_color = AllegroFlare::color::mix(banner_subtext_color, al_color_name("white"), pulse);
+      ALLEGRO_FONT *font = obtain_banner_subtext_font();
+      al_draw_text(font, final_color, 1920/2, 1080/2+100, ALLEGRO_ALIGN_CENTER, banner_subtext.c_str());
    }
 
 
@@ -1712,9 +1727,14 @@ std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> Screen:
    return collection_helper.select_on_map_y_sorted(on_map_name);
 }
 
-ALLEGRO_FONT* Screen::obtain_banner_font()
+ALLEGRO_FONT* Screen::obtain_banner_text_font()
 {
    return font_bin->auto_get("ChronoTrigger.ttf -200");
+}
+
+ALLEGRO_FONT* Screen::obtain_banner_subtext_font()
+{
+   return font_bin->auto_get("ChronoTrigger.ttf -68");
 }
 
 
