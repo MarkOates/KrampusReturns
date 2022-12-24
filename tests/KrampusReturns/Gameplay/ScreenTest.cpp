@@ -49,11 +49,14 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
       framework.get_audio_controller_ref().set_and_load_sound_effect_elements({
          { "smash_club", { "smash-club-01.ogg", false, "restart" } },
          { "krampus_hit", { "krampus_hit.ogg", false, "restart" } },
+         //{ "win_cheer", { "win_cheer.ogg", false, "restart" } },
       });
 
       framework.get_audio_controller_ref().set_and_load_music_track_elements({
         { "intro_music", { "krampus-intro-1.wav", false } },
+        { "level_1_music", { "8bit-dungeon-level-kevin-macleod-80kbps.ogg", true, "restart", 0.5 } },
         { "win_music", { "win-music-01.ogg", false, "restart" } },
+        //{ "fail_music", { "fail_moan.ogg", false} },
       });
 
 

@@ -193,6 +193,8 @@ void Screen::set_state(uint32_t state, float time_now)
       case STATE_PLAYER_DIED:
          set_full_color_overlay(al_color_name("firebrick"), 0.2);
          show_full_color_overlay();
+         // TODO: add one-time fail crash sound
+         //event_emitter->emit_play_sound_effect_event("fail_music");
          shake_camera(4, 1.0, time_now);
       break;
 
@@ -240,6 +242,8 @@ void Screen::update_state(float time_now)
             update_entities();
             if (state_age > 2.0 && !showing_banner_text)
             {
+               event_emitter->emit_play_music_track_event("fail_music");
+               // TODO: add fail music
                set_banner_text("YOU LOSE", al_color_name("firebrick"));
                show_banner_text();
             }
@@ -636,6 +640,8 @@ void Screen::load_level_and_start(std::string level_name)
 void Screen::start_level()
 {
    set_state(STATE_PLAYING_IN_LEVEL);
+   event_emitter->emit_play_music_track_event("level_1_music");
+
    return;
 }
 
@@ -1037,6 +1043,7 @@ void Screen::update_enemy_collisions_with_damage_zones()
             KrampusReturns::Entities::Blob* as_blob = static_cast<KrampusReturns::Entities::Blob*>(enemy);
             as_blob->take_damage(1);
 
+            // NOTE: this should be in the blob itself
             if (as_blob->get_health() <= 0) as_blob->set(PLEASE_DELETE);
          }
          //enemy->take_hit(1);
@@ -1642,6 +1649,10 @@ void Screen::game_event_func(AllegroFlare::GameEvent* ev)
    //std::cout << "--- Gameplay/Screen --- EVENT RECEIVED: \"" << event_name << "\"" << std::endl;
 
    std::map<std::string, std::function<void()>> event_map = {
+      { "retry_level", [this, time_now](){
+          load_level_and_start();
+          //shake_camera(3, 0.5, time_now);
+      }},
       { "camera_shake_bump", [this, time_now](){
           shake_camera(3, 0.5, time_now);
       }},
@@ -1787,7 +1798,7 @@ void Screen::key_down_func(ALLEGRO_EVENT* event)
    }
    else if (state == STATE_WAITING_KEYPRESS_TO_FINISH_LEVEL)
    {
-      event_emitter->emit_game_event(AllegroFlare::GameEvent("finished_level_successfully"));
+      event_emitter->emit_game_event(AllegroFlare::GameEvent("finish_level_successfully"));
       return;
    }
 
