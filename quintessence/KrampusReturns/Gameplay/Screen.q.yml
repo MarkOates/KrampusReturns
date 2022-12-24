@@ -679,11 +679,22 @@ functions:
       #define TEST_BASE_FOLDER "/Users/markoates/Repos/KrampusReturns/bin/programs/data/"
       #endif
 
-      set_map_dictionary({
-         //{ "map_a", TEST_BASE_FOLDER "maps/krampus-returns-map01-0x.tmj" },
-         //{ "map_b", TEST_BASE_FOLDER "maps/krampus-returns-map02-0x.tmj" },
-         { "map_a", TEST_BASE_FOLDER "maps/krampus-returns-level-1-1-0x.tmj" },
-      });
+
+      if (!level)
+      {
+         set_map_dictionary({
+            //{ "map_a", TEST_BASE_FOLDER "maps/krampus-returns-map01-0x.tmj" },
+            //{ "map_b", TEST_BASE_FOLDER "maps/krampus-returns-map02-0x.tmj" },
+            { "map_a", TEST_BASE_FOLDER "maps/krampus-returns-level-1-1-0x.tmj" },
+         });
+      }
+      else
+      {
+         set_map_dictionary(level->get_map_dictionary());
+      }
+
+
+
       initialize_maps();
       load_objects_from_map_files();
 
