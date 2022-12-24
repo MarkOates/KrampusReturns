@@ -80,6 +80,7 @@ Screen::Screen(AllegroFlare::BitmapBin* bitmap_bin, AllegroFlare::FontBin* font_
    , state(0)
    , state_changed_at(0.0f)
    , state_is_busy(false)
+   , main_background_music_identifier("[unnset-main_background_music_identifier]")
 {
 }
 
@@ -186,7 +187,7 @@ void Screen::set_state(uint32_t state, float time_now)
       break;
 
       case STATE_PLAYING_IN_LEVEL:
-         hide_full_color_overlay();
+         event_emitter->emit_play_music_track_event(main_background_music_identifier);
       break;
 
       case STATE_WAITING_KEYPRESS_TO_RETRY_LEVEL:
@@ -586,6 +587,14 @@ void Screen::load_level_and_start(KrampusReturns::Level* level)
 
    //set_player_controlled_entity(nullptr);
 
+
+   // reset the music to defaults
+    //type: std::string
+    //init_with: '"[unnset-banner_subtext]"'
+   main_background_music_identifier = "level_1_music";
+
+
+
    // hide all the banners
    hide_full_color_overlay();
    hide_banner_text();
@@ -615,7 +624,15 @@ void Screen::load_level_and_start(KrampusReturns::Level* level)
    }
    else
    {
+      std::cout << " ." << std::endl;
+      std::cout << "/i\  Loading data from level" << std::endl;
+      std::cout << "---" << std::endl;
+
+      // load the map dictionary
       set_map_dictionary(level->get_map_dictionary());
+
+      // set the main background music
+      main_background_music_identifier = level->get_music_identifier();
    }
 
 
@@ -634,6 +651,23 @@ void Screen::load_level_and_start(KrampusReturns::Level* level)
    //      select_spawn_points_on_map_name ...
    //      use the first one
 
+   int num_spawn_points = count_num_spawn_points_in_all_maps();
+   AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D *spawn_point = find_first_spawn_point_on_any_map();
+   if (num_spawn_points == 0)
+   {
+      AllegroFlare::Errors::warn_from("Krampus::Gameplay::Screen::load_level_and_start",
+                                      "Expecting a spawn points to be present in this level, but there is not one."
+                                      );
+   }
+   if (num_spawn_points > 1)
+   {
+      AllegroFlare::Errors::warn_from("Krampus::Gameplay::Screen::load_level_and_start",
+                                      "Expecting only one spawn point to be present in this level, but there are "
+                                      "multiple ones. Proceeding to use the first one found."
+                                      );
+   }
+
+
 
 
    ///////////
@@ -645,8 +679,8 @@ void Screen::load_level_and_start(KrampusReturns::Level* level)
    entity_factory.set_bitmap_bin(bitmap_bin);
    entity_factory.set_animation_book(&animation_book);
 
-
-   std::string MAP_NAME_TO_START_ON = "map_a";
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+   std::string MAP_NAME_TO_START_ON = spawn_point->get(ON_MAP_NAME);
 
    KrampusReturns::Entities::Krampus *krampus = entity_factory.create_krampus(
       MAP_NAME_TO_START_ON, 400/2 - 50, 240/2);
@@ -679,8 +713,6 @@ void Screen::load_level_and_start(KrampusReturns::Level* level)
 void Screen::start_level()
 {
    set_state(STATE_PLAYING_IN_LEVEL);
-   event_emitter->emit_play_music_track_event("level_1_music");
-
    return;
 }
 
@@ -1970,6 +2002,27 @@ std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> Screen:
       result.push_back(entity);
    }
    return result;
+}
+
+int Screen::count_num_spawn_points_in_all_maps()
+{
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+   int result = 0;
+   for (auto &entity : entity_pool)
+   {
+      if (entity->exists(TYPE, "spawn_point")) result++;
+   }
+   return result;
+}
+
+AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* Screen::find_first_spawn_point_on_any_map()
+{
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+   for (auto &entity : entity_pool)
+   {
+      if (entity->exists(TYPE, "spawn_point")) return entity;
+   }
+   return nullptr;
 }
 
 ALLEGRO_FONT* Screen::obtain_banner_text_font()

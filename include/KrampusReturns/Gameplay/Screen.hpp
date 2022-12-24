@@ -86,6 +86,7 @@ namespace KrampusReturns
          uint32_t state;
          float state_changed_at;
          bool state_is_busy;
+         std::string main_background_music_identifier;
          void move_krampus_to_first_spawn_point_or_default(KrampusReturns::Entities::Krampus* krampus=nullptr, std::string map_name="[unset-map_name]");
          void initialize_shader();
          void initialize_camera();
@@ -176,6 +177,8 @@ namespace KrampusReturns
          std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> get_current_map_entities();
          std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> get_current_map_entities_y_sorted();
          std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> select_spawn_points_on_map_name(std::string map_name="[unset-map_name]");
+         int count_num_spawn_points_in_all_maps();
+         AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* find_first_spawn_point_on_any_map();
          ALLEGRO_FONT* obtain_banner_text_font();
          ALLEGRO_FONT* obtain_banner_subtext_font();
       };
