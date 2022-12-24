@@ -80,6 +80,7 @@ Screen::Screen(AllegroFlare::BitmapBin* bitmap_bin, AllegroFlare::FontBin* font_
    , state(0)
    , state_changed_at(0.0f)
    , state_is_busy(false)
+   , current_level_data()
    , main_background_music_identifier("[unnset-main_background_music_identifier]")
 {
 }
@@ -633,6 +634,9 @@ void Screen::load_level_and_start(KrampusReturns::Level* level)
 
       // set the main background music
       main_background_music_identifier = level->get_music_identifier();
+
+      // set our own copy of the "current_level_data" from the passed in level
+      current_level_data = *level;
    }
 
 
@@ -1721,7 +1725,7 @@ void Screen::game_event_func(AllegroFlare::GameEvent* ev)
 
    std::map<std::string, std::function<void()>> event_map = {
       { "retry_level", [this, time_now](){
-          load_level_and_start();
+          load_level_and_start(&current_level_data);
           //shake_camera(3, 0.5, time_now);
       }},
       { "camera_shake_bump", [this, time_now](){

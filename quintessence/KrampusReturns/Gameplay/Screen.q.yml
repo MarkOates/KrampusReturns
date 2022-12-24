@@ -191,6 +191,10 @@ properties:
     type: bool
     init_with: false
 
+  - name: current_level_data
+    type: KrampusReturns::Level
+    init_with: ''
+
   - name: main_background_music_identifier
     type: std::string
     init_with: '"[unnset-main_background_music_identifier]"'
@@ -711,6 +715,9 @@ functions:
 
          // set the main background music
          main_background_music_identifier = level->get_music_identifier();
+
+         // set our own copy of the "current_level_data" from the passed in level
+         current_level_data = *level;
       }
 
 
@@ -1826,7 +1833,7 @@ functions:
 
       std::map<std::string, std::function<void()>> event_map = {
          { "retry_level", [this, time_now](){
-             load_level_and_start();
+             load_level_and_start(&current_level_data);
              //shake_camera(3, 0.5, time_now);
          }},
          { "camera_shake_bump", [this, time_now](){
