@@ -260,6 +260,7 @@ void Screen::update_state(float time_now)
                   3.0
                );
                show_banner_subtext();
+               set_state(STATE_WAITING_KEYPRESS_TO_RETRY_LEVEL);
             }
          }
       break;
@@ -303,6 +304,7 @@ void Screen::update_state(float time_now)
                   8.0
                );
                show_banner_subtext();
+               set_state(STATE_WAITING_KEYPRESS_TO_FINISH_LEVEL);
             }
          }
       break;
@@ -747,6 +749,8 @@ void Screen::move_krampus_to_first_spawn_point_or_default(KrampusReturns::Entiti
    spawn_location = spawn_points[0]->get_place_ref().position;
 
    krampus->get_place_ref().position = spawn_location;
+   //krampus->set(ON_MAP_NAME, map_name);
+   //krampus->get_place_ref().position = { x, y };
    return;
 }
 
@@ -1792,12 +1796,12 @@ void Screen::key_char_func(ALLEGRO_EVENT* event)
    switch (event->keyboard.keycode)
    {
    case ALLEGRO_KEY_W:
-      set_state(STATE_FINISHED_LEVEL);
+      //set_state(STATE_FINISHED_LEVEL);
       //toggle_show_collision_tile_mesh();
       break;
    case ALLEGRO_KEY_L:
       // DEBUG: // TESTING:
-      load_level_and_start();
+      //load_level_and_start();
       break;
    case ALLEGRO_KEY_S:
       // DEBUG: // TESTING:
@@ -1816,10 +1820,10 @@ void Screen::key_char_func(ALLEGRO_EVENT* event)
       //toggle_show_tile_mesh();
       break;
    case ALLEGRO_KEY_PAD_PLUS:
-      camera.set_zoom(camera.get_zoom() + AllegroFlare::Vec2D({0.1, 0.1}));
+      //camera.set_zoom(camera.get_zoom() + AllegroFlare::Vec2D({0.1, 0.1}));
       break;
    case ALLEGRO_KEY_PAD_MINUS:
-      camera.set_zoom(camera.get_zoom() - AllegroFlare::Vec2D({0.1, 0.1}));
+      //camera.set_zoom(camera.get_zoom() - AllegroFlare::Vec2D({0.1, 0.1}));
       break;
    default:
       break;

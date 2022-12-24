@@ -514,6 +514,24 @@ functions:
             }
             platforming_2d_screen.load_level_and_start(&platforming_2d_world.get_levels_ref()[0]);
          }},
+         { "finish_level_successfully", [this](){
+            // TODO: replace this with an event EVENT_ACTIVATE_PLATFORMING_2D_SCREEN
+            finished_up_to_level++;
+            int next_level_to_do = finished_up_to_level;
+
+            framework->activate_screen("platforming_2d_screen");
+            // WARNING: TODO: fix this so that it will not crash when there are no levels
+            bool done_with_all_levels = (next_level_to_do >= platforming_2d_world.get_levels_ref().size());
+            if (done_with_all_levels)
+            {
+               // TODO actiavate game credits you win screen
+               event_emitter->emit_game_event(AllegroFlare::GameEvent(EVENT_ACTIVATE_CREDITS_SCREEN));
+            }
+            else
+            {
+               platforming_2d_screen.load_level_and_start(&platforming_2d_world.get_levels_ref()[next_level_to_do]);
+            }
+         }},
          //{ EVENT_ACTIVATE_TILE_DRIVE_SCREEN, [this](){
             //framework->activate_screen("tile_drive_screen");
          //}},
