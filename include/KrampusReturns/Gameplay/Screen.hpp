@@ -72,8 +72,10 @@ namespace KrampusReturns
          ALLEGRO_COLOR banner_text_color;
          std::string banner_text;
          bool showing_banner_subtext;
-         ALLEGRO_COLOR banner_subtext_color;
+         ALLEGRO_COLOR banner_subtext_color_a;
+         ALLEGRO_COLOR banner_subtext_color_b;
          std::string banner_subtext;
+         float banner_subtext_pulse_rate_per_sec;
          float banner_subtext_shown_at;
          uint32_t state;
          float state_changed_at;
@@ -145,7 +147,7 @@ namespace KrampusReturns
          void set_banner_text(std::string text="[unset-text]", ALLEGRO_COLOR base_color=ALLEGRO_COLOR{0.0, 0.3, 0.8, 1.0});
          void show_banner_text();
          void hide_banner_text();
-         void set_banner_subtext(std::string text="[unset-text]", ALLEGRO_COLOR base_color=ALLEGRO_COLOR{0.0, 0.3, 0.8, 1.0});
+         void set_banner_subtext(std::string text="[unset-text]", ALLEGRO_COLOR base_color_a=ALLEGRO_COLOR{0.0, 0.3, 0.8, 1.0}, ALLEGRO_COLOR base_color_b=ALLEGRO_COLOR{0.0, 0.3, 0.8, 1.0}, float pulse_rate_per_sec=8.0f);
          void show_banner_subtext();
          void hide_banner_subtext();
          void draw_hud();

@@ -155,13 +155,21 @@ properties:
     type: bool
     init_with: false
 
-  - name: banner_subtext_color
+  - name: banner_subtext_color_a
+    type: ALLEGRO_COLOR
+    init_with: ALLEGRO_COLOR{1.0, 0.0, 0.0, 1.0}
+
+  - name: banner_subtext_color_b
     type: ALLEGRO_COLOR
     init_with: ALLEGRO_COLOR{1.0, 0.0, 0.0, 1.0}
 
   - name: banner_subtext
     type: std::string
     init_with: '"[unnset-banner_subtext]"'
+
+  - name: banner_subtext_pulse_rate_per_sec
+    type: float
+    init_with: 8.0
 
   - name: banner_subtext_shown_at
     type: float
@@ -287,11 +295,25 @@ functions:
          break;
 
          case STATE_PLAYER_DIED:
-            update_entities();
-            if (state_age > 2.0 && !showing_banner_text)
             {
-               set_banner_text("YOU LOSE", al_color_name("firebrick"));
-               show_banner_text();
+               update_entities();
+               if (state_age > 2.0 && !showing_banner_text)
+               {
+                  set_banner_text("YOU LOSE", al_color_name("firebrick"));
+                  show_banner_text();
+               }
+
+               float subtext_starts_at_age = 6.25f;
+               if (!showing_banner_subtext && state_age > subtext_starts_at_age)
+               {
+                  set_banner_subtext(
+                     "Press any key to continue",
+                     al_color_name("darkorange"),
+                     al_color_name("firebrick"),
+                     3.0
+                  );
+                  show_banner_subtext();
+               }
             }
          break;
 
@@ -324,9 +346,14 @@ functions:
                set_banner_text("LEVEL CLEAR", final_level_clear_color);
 
                float subtext_starts_at_age = 6.25f;
-               if (state_age > subtext_starts_at_age)
+               if (!showing_banner_subtext && state_age > subtext_starts_at_age)
                {
-                  set_banner_subtext("Press any key to continue", al_color_name("turquoise"));
+                  set_banner_subtext(
+                     "Press any key to continue",
+                     al_color_name("turquoise"),
+                     al_color_name("white"),
+                     8.0
+                  );
                   show_banner_subtext();
                }
             }
@@ -1360,12 +1387,20 @@ functions:
       - name: text
         type: std::string
         default_argument: '"[unset-text]"'
-      - name: base_color
+      - name: base_color_a
         type: ALLEGRO_COLOR
         default_argument: ALLEGRO_COLOR{0.0, 0.3, 0.8, 1.0}
+      - name: base_color_b
+        type: ALLEGRO_COLOR
+        default_argument: ALLEGRO_COLOR{0.0, 0.3, 0.8, 1.0}
+      - name: pulse_rate_per_sec
+        type: float
+        default_argument: 8.0f
     body: |
       banner_subtext = text;
-      banner_subtext_color = base_color;
+      banner_subtext_color_a = base_color_a;
+      banner_subtext_color_b = base_color_b;
+      banner_subtext_pulse_rate_per_sec = pulse_rate_per_sec;
       return;
 
 
@@ -1447,8 +1482,14 @@ functions:
 
       if (showing_banner_subtext)
       {
-         float pulse = sin(al_get_time()*8) * 0.5 + 0.5;
-         ALLEGRO_COLOR final_color = AllegroFlare::color::mix(banner_subtext_color, al_color_name("white"), pulse);
+         float time_now = al_get_time();
+         float banner_age = time_now - banner_subtext_shown_at;
+         float pulse = sin(banner_age*banner_subtext_pulse_rate_per_sec) * 0.5 + 0.5;
+         ALLEGRO_COLOR final_color = AllegroFlare::color::mix(
+            banner_subtext_color_a,
+            banner_subtext_color_b,
+            pulse
+         );
          ALLEGRO_FONT *font = obtain_banner_subtext_font();
          al_draw_text(font, final_color, 1920/2, 1080/2+100, ALLEGRO_ALIGN_CENTER, banner_subtext.c_str());
       }

@@ -678,12 +678,20 @@ table td
   <td class="property">bool</td>
 </tr>
 <tr>
-  <td class="property">banner_subtext_color</td>
+  <td class="property">banner_subtext_color_a</td>
+  <td class="property">ALLEGRO_COLOR</td>
+</tr>
+<tr>
+  <td class="property">banner_subtext_color_b</td>
   <td class="property">ALLEGRO_COLOR</td>
 </tr>
 <tr>
   <td class="property">banner_subtext</td>
   <td class="property">std::string</td>
+</tr>
+<tr>
+  <td class="property">banner_subtext_pulse_rate_per_sec</td>
+  <td class="property">float</td>
 </tr>
 <tr>
   <td class="property">banner_subtext_shown_at</td>
@@ -865,7 +873,7 @@ table td
   <td class="method">hide_banner_text()</td>
 </tr>
 <tr>
-  <td class="method">set_banner_subtext(std::string text=&quot;[unset-text]&quot;, ALLEGRO_COLOR base_color=ALLEGRO_COLOR{0.0, 0.3, 0.8, 1.0})</td>
+  <td class="method">set_banner_subtext(std::string text=&quot;[unset-text]&quot;, ALLEGRO_COLOR base_color_a=ALLEGRO_COLOR{0.0, 0.3, 0.8, 1.0}, ALLEGRO_COLOR base_color_b=ALLEGRO_COLOR{0.0, 0.3, 0.8, 1.0}, float pulse_rate_per_sec=8.0f)</td>
 </tr>
 <tr>
   <td class="method">show_banner_subtext()</td>

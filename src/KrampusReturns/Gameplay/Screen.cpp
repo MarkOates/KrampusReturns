@@ -71,8 +71,10 @@ Screen::Screen(AllegroFlare::BitmapBin* bitmap_bin, AllegroFlare::FontBin* font_
    , banner_text_color(ALLEGRO_COLOR{1.0, 0.0, 0.0, 1.0})
    , banner_text("[unnset-banner_text]")
    , showing_banner_subtext(false)
-   , banner_subtext_color(ALLEGRO_COLOR{1.0, 0.0, 0.0, 1.0})
+   , banner_subtext_color_a(ALLEGRO_COLOR{1.0, 0.0, 0.0, 1.0})
+   , banner_subtext_color_b(ALLEGRO_COLOR{1.0, 0.0, 0.0, 1.0})
    , banner_subtext("[unnset-banner_subtext]")
+   , banner_subtext_pulse_rate_per_sec(8.0)
    , banner_subtext_shown_at(0.0)
    , state(0)
    , state_changed_at(0.0f)
@@ -226,11 +228,25 @@ void Screen::update_state(float time_now)
       break;
 
       case STATE_PLAYER_DIED:
-         update_entities();
-         if (state_age > 2.0 && !showing_banner_text)
          {
-            set_banner_text("YOU LOSE", al_color_name("firebrick"));
-            show_banner_text();
+            update_entities();
+            if (state_age > 2.0 && !showing_banner_text)
+            {
+               set_banner_text("YOU LOSE", al_color_name("firebrick"));
+               show_banner_text();
+            }
+
+            float subtext_starts_at_age = 6.25f;
+            if (!showing_banner_subtext && state_age > subtext_starts_at_age)
+            {
+               set_banner_subtext(
+                  "Press any key to continue",
+                  al_color_name("darkorange"),
+                  al_color_name("firebrick"),
+                  3.0
+               );
+               show_banner_subtext();
+            }
          }
       break;
 
@@ -263,9 +279,14 @@ void Screen::update_state(float time_now)
             set_banner_text("LEVEL CLEAR", final_level_clear_color);
 
             float subtext_starts_at_age = 6.25f;
-            if (state_age > subtext_starts_at_age)
+            if (!showing_banner_subtext && state_age > subtext_starts_at_age)
             {
-               set_banner_subtext("Press any key to continue", al_color_name("turquoise"));
+               set_banner_subtext(
+                  "Press any key to continue",
+                  al_color_name("turquoise"),
+                  al_color_name("white"),
+                  8.0
+               );
                show_banner_subtext();
             }
          }
@@ -1297,10 +1318,12 @@ void Screen::hide_banner_text()
    return;
 }
 
-void Screen::set_banner_subtext(std::string text, ALLEGRO_COLOR base_color)
+void Screen::set_banner_subtext(std::string text, ALLEGRO_COLOR base_color_a, ALLEGRO_COLOR base_color_b, float pulse_rate_per_sec)
 {
    banner_subtext = text;
-   banner_subtext_color = base_color;
+   banner_subtext_color_a = base_color_a;
+   banner_subtext_color_b = base_color_b;
+   banner_subtext_pulse_rate_per_sec = pulse_rate_per_sec;
    return;
 }
 
@@ -1388,8 +1411,14 @@ void Screen::draw_hud()
 
    if (showing_banner_subtext)
    {
-      float pulse = sin(al_get_time()*8) * 0.5 + 0.5;
-      ALLEGRO_COLOR final_color = AllegroFlare::color::mix(banner_subtext_color, al_color_name("white"), pulse);
+      float time_now = al_get_time();
+      float banner_age = time_now - banner_subtext_shown_at;
+      float pulse = sin(banner_age*banner_subtext_pulse_rate_per_sec) * 0.5 + 0.5;
+      ALLEGRO_COLOR final_color = AllegroFlare::color::mix(
+         banner_subtext_color_a,
+         banner_subtext_color_b,
+         pulse
+      );
       ALLEGRO_FONT *font = obtain_banner_subtext_font();
       al_draw_text(font, final_color, 1920/2, 1080/2+100, ALLEGRO_ALIGN_CENTER, banner_subtext.c_str());
    }
