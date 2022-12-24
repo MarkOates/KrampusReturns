@@ -178,7 +178,7 @@ void Runner::initialize()
          "Santa and his elves were unable to stop the aliens",
          //"[image showing santa's losing battle]",
 
-         "With all options gone, Santa must no do the unthinkable",
+         "With all options gone, Santa must now do the unthinkable",
          //"[image showing krampus with his back to the screen]",
          "Santa has no choice. He must face his biggest fear...",
 
