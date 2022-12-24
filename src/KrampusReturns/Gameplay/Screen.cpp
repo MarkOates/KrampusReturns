@@ -613,16 +613,20 @@ void Screen::load_level_and_start(std::string level_name)
 
    // create the player character
 
-   KrampusReturns::Entities::Krampus *krampus = entity_factory.create_krampus("map_a", 400/2 - 50, 240/2);
+   std::string MAP_NAME_TO_START_ON = "map_a";
+
+   KrampusReturns::Entities::Krampus *krampus = entity_factory.create_krampus(
+      MAP_NAME_TO_START_ON, 400/2 - 50, 240/2);
    add_entity_to_pool(krampus);
 
 
-   move_krampus_to_first_spawn_point_or_default(krampus);
+   //
+   move_krampus_to_first_spawn_point_or_default(krampus, MAP_NAME_TO_START_ON);
 
 
    set_player_controlled_entity(krampus);
 
-   set_currently_active_map("map_a");
+   set_currently_active_map(MAP_NAME_TO_START_ON);
 
 
    start_level();
@@ -635,11 +639,33 @@ void Screen::start_level()
    return;
 }
 
-void Screen::move_krampus_to_first_spawn_point_or_default(KrampusReturns::Entities::Krampus* krampus)
+void Screen::move_krampus_to_first_spawn_point_or_default(KrampusReturns::Entities::Krampus* krampus, std::string map_name)
 {
-   // TODO: HERE: select spawn points
-   AllegroFlare::Vec2D default_spawn_location = AllegroFlare::Vec2D(400/2 + 50, 240/2);
-   krampus->get_place_ref().position = default_spawn_location;
+   std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> spawn_points =
+      select_spawn_points_on_map_name(map_name);
+
+   static AllegroFlare::Vec2D DEFAULT_SPAWN_LOCATION = AllegroFlare::Vec2D(400/2 + 50, 240/2);
+   AllegroFlare::Vec2D spawn_location;
+
+   if (spawn_points.empty())
+   {
+      AllegroFlare::Errors::warn_from("Krampus::Gameplay::Screen::move_krampus_to_first_spawn_point_or_default",
+                                      "Expecting spawn points to be present on this map, but there are none. Will "
+                                      "proceed using a DEFAULT_SPAWN_LOCATION."
+                                      );
+      spawn_location = DEFAULT_SPAWN_LOCATION;
+   }
+   if (spawn_points.size() > 1)
+   {
+      AllegroFlare::Errors::warn_from("Krampus::Gameplay::Screen::move_krampus_to_first_spawn_point_or_default",
+                                      "Note there are multiple spawn points on this map. Will proceed by using "
+                                      "the first that was loaded when the map was loaded from the file."
+                                      );
+   }
+
+   spawn_location = spawn_points[0]->get_place_ref().position;
+
+   krampus->get_place_ref().position = spawn_location;
    return;
 }
 
@@ -1872,6 +1898,21 @@ std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> Screen:
    AllegroFlare::Prototypes::Platforming2D::EntityCollectionHelper collection_helper(&entity_pool);
    std::string on_map_name = currently_active_map_name;
    return collection_helper.select_on_map_y_sorted(on_map_name);
+}
+
+std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> Screen::select_spawn_points_on_map_name(std::string map_name)
+{
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+   std::string on_map_name = map_name;
+
+   std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> result;
+   for (auto &entity : entity_pool)
+   {
+      if (!entity->exists(TYPE, "spawn_point")) continue;
+      if (!entity->exists(ON_MAP_NAME, on_map_name)) continue;
+      result.push_back(entity);
+   }
+   return result;
 }
 
 ALLEGRO_FONT* Screen::obtain_banner_text_font()

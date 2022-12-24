@@ -54,6 +54,7 @@ table td
   <li><a href="#quintessence/KrampusReturns/Entities/FlashEffect.q.yml">quintessence/KrampusReturns/Entities/FlashEffect.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Entities/Goalpost.q.yml">quintessence/KrampusReturns/Entities/Goalpost.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Entities/Krampus.q.yml">quintessence/KrampusReturns/Entities/Krampus.q.yml</a></li>
+  <li><a href="#quintessence/KrampusReturns/Entities/SpawnPoint.q.yml">quintessence/KrampusReturns/Entities/SpawnPoint.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/EntityFactory.q.yml">quintessence/KrampusReturns/EntityFactory.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/GameEventDatas/GoalpostReached.q.yml">quintessence/KrampusReturns/GameEventDatas/GoalpostReached.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/GameEventDatas/SpawnFlashFX.q.yml">quintessence/KrampusReturns/GameEventDatas/SpawnFlashFX.q.yml</a></li>
@@ -444,6 +445,43 @@ table td
 </ul>
 <ul>
   <div class="component">
+    <h3 id="quintessence/KrampusReturns/Entities/SpawnPoint.q.yml">quintessence/KrampusReturns/Entities/SpawnPoint.q.yml</h3>
+     <table>
+<tr>
+  <td class="property">initialized</td>
+  <td class="property">bool</td>
+</tr>
+<tr>
+  <td class="property">TYPE</td>
+  <td class="property">char*</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="method">initialize()</td>
+</tr>
+<tr>
+  <td class="method">update()</td>
+</tr>
+<tr>
+  <td class="method">draw()</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::Platforming2D::EntityFlagNames&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/Platforming2D/EntityFlagNames.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Vec2D&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Vec2D.hpp&quot;]}</td>
+</tr>
+    </table>
+  </div>
+</ul>
+<ul>
+  <div class="component">
     <h3 id="quintessence/KrampusReturns/EntityFactory.q.yml">quintessence/KrampusReturns/EntityFactory.q.yml</h3>
      <table>
 <tr>
@@ -809,7 +847,7 @@ table td
   <td class="method">start_level()</td>
 </tr>
 <tr>
-  <td class="private_method">move_krampus_to_first_spawn_point_or_default(KrampusReturns::Entities::Krampus* krampus=nullptr)</td>
+  <td class="private_method">move_krampus_to_first_spawn_point_or_default(KrampusReturns::Entities::Krampus* krampus=nullptr, std::string map_name=&quot;[unset-map_name]&quot;)</td>
 </tr>
 <tr>
   <td class="method">load_objects_from_map_files()</td>
@@ -963,6 +1001,9 @@ table td
 </tr>
 <tr>
   <td class="method">get_current_map_entities_y_sorted()</td>
+</tr>
+<tr>
+  <td class="method">select_spawn_points_on_map_name(std::string map_name=&quot;[unset-map_name]&quot;)</td>
 </tr>
 <tr>
   <td class="method">obtain_banner_text_font()</td>
@@ -1780,7 +1821,8 @@ table td
     "KrampusReturns/Entities/Blob",
     "KrampusReturns/Entities/FlashEffect",
     "KrampusReturns/Entities/Goalpost",
-    "KrampusReturns/Entities/Krampus"
+    "KrampusReturns/Entities/Krampus",
+    "KrampusReturns/Entities/SpawnPoint"
   ],
   "sin": [
     "KrampusReturns/Entities/Blob",
@@ -1790,6 +1832,7 @@ table td
     "KrampusReturns/Entities/Blob",
     "KrampusReturns/Entities/FlashEffect",
     "KrampusReturns/Entities/Goalpost",
+    "KrampusReturns/Entities/SpawnPoint",
     "KrampusReturns/Gameplay/Screen"
   ],
   "std/rand": [
@@ -1798,6 +1841,7 @@ table td
   "AllegroFlare/Prototypes/Platforming2D/EntityFlagNames": [
     "KrampusReturns/Entities/FlashEffect",
     "KrampusReturns/Entities/Goalpost",
+    "KrampusReturns/Entities/SpawnPoint",
     "KrampusReturns/EntityFactory",
     "KrampusReturns/Gameplay/Screen",
     "KrampusReturns/KrampusController"

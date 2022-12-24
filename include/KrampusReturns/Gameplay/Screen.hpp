@@ -85,7 +85,7 @@ namespace KrampusReturns
          uint32_t state;
          float state_changed_at;
          bool state_is_busy;
-         void move_krampus_to_first_spawn_point_or_default(KrampusReturns::Entities::Krampus* krampus=nullptr);
+         void move_krampus_to_first_spawn_point_or_default(KrampusReturns::Entities::Krampus* krampus=nullptr, std::string map_name="[unset-map_name]");
          void initialize_shader();
          void initialize_camera();
          void cleanup_entities_flagged_for_deletion();
@@ -174,6 +174,7 @@ namespace KrampusReturns
          AllegroFlare::TileMaps::TileMap<int>* get_collision_tile_mesh();
          std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> get_current_map_entities();
          std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> get_current_map_entities_y_sorted();
+         std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> select_spawn_points_on_map_name(std::string map_name="[unset-map_name]");
          ALLEGRO_FONT* obtain_banner_text_font();
          ALLEGRO_FONT* obtain_banner_subtext_font();
       };

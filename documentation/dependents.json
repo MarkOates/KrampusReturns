@@ -27,7 +27,8 @@
     "KrampusReturns/Entities/Blob",
     "KrampusReturns/Entities/FlashEffect",
     "KrampusReturns/Entities/Goalpost",
-    "KrampusReturns/Entities/Krampus"
+    "KrampusReturns/Entities/Krampus",
+    "KrampusReturns/Entities/SpawnPoint"
   ],
   "sin": [
     "KrampusReturns/Entities/Blob",
@@ -37,6 +38,7 @@
     "KrampusReturns/Entities/Blob",
     "KrampusReturns/Entities/FlashEffect",
     "KrampusReturns/Entities/Goalpost",
+    "KrampusReturns/Entities/SpawnPoint",
     "KrampusReturns/Gameplay/Screen"
   ],
   "std/rand": [
@@ -45,6 +47,7 @@
   "AllegroFlare/Prototypes/Platforming2D/EntityFlagNames": [
     "KrampusReturns/Entities/FlashEffect",
     "KrampusReturns/Entities/Goalpost",
+    "KrampusReturns/Entities/SpawnPoint",
     "KrampusReturns/EntityFactory",
     "KrampusReturns/Gameplay/Screen",
     "KrampusReturns/KrampusController"
