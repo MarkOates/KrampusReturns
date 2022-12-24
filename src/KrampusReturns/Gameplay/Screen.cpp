@@ -556,12 +556,10 @@ void Screen::tmj_object_parse_callback_func(std::string object_class, float x, f
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
       throw std::runtime_error("Screen::tmj_object_parse_callback_func: error: guard \"user_data\" not met");
    }
-   // TODO: pass in map name as part of user_data
    std::pair<KrampusReturns::Gameplay::Screen*, std::string> *as_custom_user_data=
       static_cast<std::pair<KrampusReturns::Gameplay::Screen*, std::string>*>(user_data);
 
    std::string map_name = as_custom_user_data->second;
-          //std::cout << "    ----- map_name: " << map_name << std::endl;
    KrampusReturns::Gameplay::Screen* gameplay_screen = as_custom_user_data->first;
 
    KrampusReturns::EntityFactory entity_factory;
@@ -569,26 +567,17 @@ void Screen::tmj_object_parse_callback_func(std::string object_class, float x, f
    entity_factory.set_bitmap_bin(gameplay_screen->bitmap_bin);
    entity_factory.set_animation_book(&gameplay_screen->animation_book);
 
-   // TODO: use factory to build objects
-
    std::map<std::string, std::function<void()>> object_map = {
       { "goal", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
-          //std::cout << "----------- GOAL parsed" << std::endl;
           // TODO: here
       }},
       { "boss", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
           // TODO: here
       }},
       { "blob", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
-          //std::cout << "----------- BLOB parsed" << std::endl;
-          //std::cout << "     - map_name: " << map_name << std::endl;
-          //std::cout << "     - gameplay_screen: " << gameplay_screen << std::endl;
           AllegroFlare::Vec2D center = center_of(x, y, w, h);
           KrampusReturns::Entities::Blob *entity = entity_factory.create_blob("map_a", center.x, center.y);
-          //KrampusReturns::Entities::Blob *entity = entity_factory.create_blob(map_name, x, y);
           gameplay_screen->add_entity_to_pool(entity);
-          
-          // TODO: here
       }},
       { "door", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
           // TODO: here
