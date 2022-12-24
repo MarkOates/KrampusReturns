@@ -66,6 +66,7 @@ table td
   <li><a href="#quintessence/KrampusReturns/Shaders/Primary.q.yml">quintessence/KrampusReturns/Shaders/Primary.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/TMJObjectLoader.q.yml">quintessence/KrampusReturns/TMJObjectLoader.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Testing/Gym.q.yml">quintessence/KrampusReturns/Testing/Gym.q.yml</a></li>
+  <li><a href="#quintessence/KrampusReturns/World.q.yml">quintessence/KrampusReturns/World.q.yml</a></li>
 </ul>
 <h1>Components</h1>
 <ul>
@@ -842,7 +843,7 @@ table td
   <td class="method">destroy_all()</td>
 </tr>
 <tr>
-  <td class="method">load_level_and_start(std::string level_name=&quot;[unset-level_name]&quot;)</td>
+  <td class="method">load_level_and_start(KrampusReturns::Level* level=nullptr)</td>
 </tr>
 <tr>
   <td class="method">start_level()</td>
@@ -1181,6 +1182,9 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::TMJObjectLoader&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/TMJObjectLoader.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Level&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Level.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -1818,6 +1822,24 @@ table td
     </table>
   </div>
 </ul>
+<ul>
+  <div class="component">
+    <h3 id="quintessence/KrampusReturns/World.q.yml">quintessence/KrampusReturns/World.q.yml</h3>
+     <table>
+<tr>
+  <td class="property">levels</td>
+  <td class="property">std::vector&lt;KrampusReturns::Level&gt;</td>
+</tr>
+    </table>
+     <table>
+    </table>
+     <table>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Level&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Level.hpp&quot;]}</td>
+</tr>
+    </table>
+  </div>
+</ul>
 <h1>Dependents</h1>
 <pre>
 {
@@ -2078,6 +2100,10 @@ table td
   ],
   "KrampusReturns/TMJObjectLoader": [
     "KrampusReturns/Gameplay/Screen"
+  ],
+  "KrampusReturns/Level": [
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/World"
   ],
   "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [
     "KrampusReturns/Runner"

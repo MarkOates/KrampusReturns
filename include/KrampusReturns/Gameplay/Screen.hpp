@@ -19,6 +19,7 @@
 #include <AllegroFlare/Vec2D.hpp>
 #include <KrampusReturns/Entities/Krampus.hpp>
 #include <KrampusReturns/KrampusController.hpp>
+#include <KrampusReturns/Level.hpp>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
 #include <cstdint>
@@ -128,7 +129,7 @@ namespace KrampusReturns
          virtual void on_activate() override;
          virtual void on_deactivate() override;
          void destroy_all();
-         void load_level_and_start(std::string level_name="[unset-level_name]");
+         void load_level_and_start(KrampusReturns::Level* level=nullptr);
          void start_level();
          void load_objects_from_map_files();
          static AllegroFlare::Vec2D center_of(float x=0.0f, float y=0.0f, float w=0.0f, float h=0.0f);

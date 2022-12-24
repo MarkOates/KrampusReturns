@@ -257,6 +257,10 @@
   "KrampusReturns/TMJObjectLoader": [
     "KrampusReturns/Gameplay/Screen"
   ],
+  "KrampusReturns/Level": [
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/World"
+  ],
   "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [
     "KrampusReturns/Runner"
   ],

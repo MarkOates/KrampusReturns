@@ -543,7 +543,7 @@ void Screen::destroy_all()
    return;
 }
 
-void Screen::load_level_and_start(std::string level_name)
+void Screen::load_level_and_start(KrampusReturns::Level* level)
 {
    if (!(initialized))
    {
@@ -562,12 +562,15 @@ void Screen::load_level_and_start(std::string level_name)
    set_state(STATE_PRELOADING_LEVEL);
 
 
+   ///////////
+   // cleanup contents from any previously loaded level
+   ///////////
+
    // NOTE: This line is an artifiact due to initialization not being simple in this current design.
    // HACK:
    // TODO: fix initialization so that animation book is included with Gameplay::Screen::initialize().  As a
    // precursor, allow Gameplay::Screen::initialize before setting maps, currently_active_level, etc.
    if (!animation_book_initialized) initialize_animation_book();
-
 
    // cleanup
    flag_all_entities_for_deletion();
@@ -583,8 +586,6 @@ void Screen::load_level_and_start(std::string level_name)
 
    //set_player_controlled_entity(nullptr);
 
-
-
    // hide all the banners
    hide_full_color_overlay();
    hide_banner_text();
@@ -592,6 +593,9 @@ void Screen::load_level_and_start(std::string level_name)
 
 
 
+   ///////////
+   // grab the map dictionary from this level (if present)
+   ///////////
 
    // TODO: CRITICAL: fix this folder
    #if defined(_WIN32) || defined(_WIN64)
@@ -609,13 +613,27 @@ void Screen::load_level_and_start(std::string level_name)
    load_objects_from_map_files();
 
 
+
+   ///////////
+   // locate the spawn point for this level
+   ///////////
+
+   // TODO: find first spawn point and use
+   // for each map in map dictionary...
+   //      select_spawn_points_on_map_name ...
+   //      use the first one
+
+
+
+   ///////////
+   // create the player character
+   ///////////
+
    KrampusReturns::EntityFactory entity_factory;
    entity_factory.set_event_emitter(event_emitter);
    entity_factory.set_bitmap_bin(bitmap_bin);
    entity_factory.set_animation_book(&animation_book);
 
-
-   // create the player character
 
    std::string MAP_NAME_TO_START_ON = "map_a";
 
@@ -630,8 +648,18 @@ void Screen::load_level_and_start(std::string level_name)
 
    set_player_controlled_entity(krampus);
 
+
+
+   ///////////
+   // set the start map
+   ///////////
+
    set_currently_active_map(MAP_NAME_TO_START_ON);
 
+
+   ///////////
+   // start it up!
+   ///////////
 
    start_level();
    return;
