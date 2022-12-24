@@ -1037,7 +1037,7 @@ void Screen::update_enemy_collisions_with_damage_zones()
             KrampusReturns::Entities::Blob* as_blob = static_cast<KrampusReturns::Entities::Blob*>(enemy);
             as_blob->take_damage(1);
 
-            if (as_blob->get_health() == 0) as_blob->set(PLEASE_DELETE);
+            if (as_blob->get_health() <= 0) as_blob->set(PLEASE_DELETE);
          }
          //enemy->take_hit(1);
       }
