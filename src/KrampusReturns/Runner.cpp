@@ -102,9 +102,8 @@ void Runner::initialize()
    audio_controller.set_and_load_sound_effect_elements({
       { "smash_club", { "smash-club-01.ogg", false, "restart", 0.9 } },
       { "krampus_hit", { "krampus_hit.ogg", false, "restart" } },
-      { "menu_move", { "menu-move-01.ogg", false, "restart", 0.7 } },
+      { "menu_move", { "menu-move-01.ogg", false, "restart", 0.5 } },
       { "menu_select", { "menu-select-big-01.ogg", false, "restart", 0.95 } },
-
       //{ "win_cheer", { "win_cheer.ogg", false, "restart" } },
    });
 
@@ -125,7 +124,7 @@ void Runner::initialize()
    title_screen.set_title_text("KRAMPUS RETURNS");
    title_screen.set_title_text_color(AllegroFlare::Color(AllegroFlare::Color::AliceBlue, 1.0).to_al());
    title_screen.set_title_font_size(-130);
-   title_screen.set_font_name("ChronoTrigger.ttf");
+   title_screen.set_title_font_name("ChronoTrigger.ttf");
    //title_screen.set_title_text_color(AllegroFlare::Color(0x000000, 1.0).to_al());
    //title_screen.set_background_bitmap_name("placeholder-title-background.jpg");
    title_screen.set_event_emitter(&event_emitter);
@@ -134,6 +133,7 @@ void Runner::initialize()
    title_screen.set_copyright_text("Copyright 2022 - Mark Oates - CLUBCATT Games - www.clubcatt.com\n");
    title_screen.set_copyright_text_color(AllegroFlare::Color(0x72aedd, 0.8).to_al());
    title_screen.set_menu_option_selection_activation_delay(2.0);
+   //title_screen.set_copyright_font_name(");
    title_screen.set_copyright_font_size(-26);
    title_screen.set_menu_options({
       //{ "Investigate", "start_new_game" },
