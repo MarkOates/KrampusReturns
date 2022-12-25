@@ -2,6 +2,7 @@
 
 #include <KrampusReturns/EntityFactory.hpp>
 
+#include <AllegroFlare/Prototypes/Platforming2D/Entities/MovementStrategies2D/ReflectOffWalls.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/EntityFlagNames.hpp>
 #include <KrampusReturns/Entities/Blob.hpp>
 #include <KrampusReturns/Entities/Goalpost.hpp>
@@ -184,6 +185,30 @@ KrampusReturns::Entities::FlashEffect* EntityFactory::create_flash_fx1(std::stri
 
    if (init_entities_drawing_debug) result->set_draw_debug(true);
    //get_platforming_2d_ref().add_entity_to_pool(result);
+   return result;
+}
+
+ChatGPT::Enemy* EntityFactory::create_generic_enemy(std::string on_map, float x, float y, std::string animation) const
+{
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+   //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::Base
+   //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls
+   //headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/MovementStrategies2D/ReflectOffWalls.hpp ]
+
+   int health = 1;
+   int attack = 1;
+   ChatGPT::Enemy* result = new ChatGPT::Enemy(health, attack);
+   result->set_animation_book(get_animation_book());
+   result->set_animation(animation);
+   result->set_bitmap_alignment_strategy("bottom_centered");
+
+   // NOTE: this class now needs a proper destruct property
+   result->set_movement_strategy(
+      new AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls(result)
+   );
+
+   result->get_place_ref().position = { x, y };
+   result->set(ON_MAP_NAME, on_map);
    return result;
 }
 

@@ -205,6 +205,48 @@ functions:
       - AllegroFlare::Prototypes::Platforming2D::EntityFlagNames
 
 
+  - name: create_generic_enemy
+    type: ChatGPT::Enemy*
+    const: true
+    parameters:
+      - name: on_map
+        type: std::string
+        default_argument: '"[unset-on_map]"'
+      - name: x
+        type: float
+        default_argument: 0.0f
+      - name: y
+        type: float
+        default_argument: 0.0f
+      - name: animation
+        type: std::string
+        default_argument: '"[unset-animation]"'
+    body: |
+      using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+      //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::Base
+      //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls
+      //headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/MovementStrategies2D/ReflectOffWalls.hpp ]
+
+      int health = 1;
+      int attack = 1;
+      ChatGPT::Enemy* result = new ChatGPT::Enemy(health, attack);
+      result->set_animation_book(get_animation_book());
+      result->set_animation(animation);
+      result->set_bitmap_alignment_strategy("bottom_centered");
+
+      // NOTE: this class now needs a proper destruct property
+      result->set_movement_strategy(
+         new AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls(result)
+      );
+
+      result->get_place_ref().position = { x, y };
+      result->set(ON_MAP_NAME, on_map);
+      return result;
+    body_dependency_symbols:
+      - AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls
+
+
+
 dependencies:
 
 
@@ -226,5 +268,11 @@ dependencies:
     headers: [ KrampusReturns/Entities/FlashEffect.hpp ]
   - symbol: KrampusReturns::Entities::SpawnPoint
     headers: [ KrampusReturns/Entities/SpawnPoint.hpp ]
+  - symbol: KrampusReturns::EntityFactory
+    headers: [ KrampusReturns/EntityFactory.hpp ]
+  - symbol: ChatGPT::Enemy
+    headers: [ ChatGPT/Enemy.hpp ]
+  - symbol: AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls
+    headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/MovementStrategies2D/ReflectOffWalls.hpp ]
 
 

@@ -3,6 +3,7 @@
 
 #include <AllegroFlare/EventEmitter.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory.hpp>
+#include <ChatGPT/Enemy.hpp>
 #include <KrampusReturns/Entities/Blob.hpp>
 #include <KrampusReturns/Entities/FlashEffect.hpp>
 #include <KrampusReturns/Entities/Goalpost.hpp>
@@ -35,6 +36,7 @@ namespace KrampusReturns
       KrampusReturns::Entities::Goalpost* create_goalpost(std::string on_map="[unset-on_map]", int goalpost_id=-1, float x=0.0f, float y=0.0f) const;
       KrampusReturns::Entities::SpawnPoint* create_spawn_point(std::string on_map="[unset-on_map]", float x=0.0f, float y=0.0f) const;
       KrampusReturns::Entities::FlashEffect* create_flash_fx1(std::string on_map="[unset-on_map]", float x=0.0f, float y=0.0f) const;
+      ChatGPT::Enemy* create_generic_enemy(std::string on_map="[unset-on_map]", float x=0.0f, float y=0.0f, std::string animation="[unset-animation]") const;
    };
 }
 

@@ -511,6 +511,9 @@ table td
 <tr>
   <td class="method">create_flash_fx1()</td>
 </tr>
+<tr>
+  <td class="method">create_generic_enemy(std::string on_map=&quot;[unset-on_map]&quot;, float x=0.0f, float y=0.0f, std::string animation=&quot;[unset-animation]&quot;)</td>
+</tr>
     </table>
      <table>
 <tr>
@@ -539,6 +542,15 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Entities::SpawnPoint&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Entities/SpawnPoint.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::EntityFactory&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/EntityFactory.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;ChatGPT::Enemy&quot;, &quot;headers&quot;=&gt;[&quot;ChatGPT/Enemy.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/Platforming2D/Entities/MovementStrategies2D/ReflectOffWalls.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -1959,6 +1971,17 @@ table td
   "KrampusReturns/Entities/SpawnPoint": [
     "KrampusReturns/EntityFactory"
   ],
+  "KrampusReturns/EntityFactory": [
+    "KrampusReturns/EntityFactory",
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Testing/Gym"
+  ],
+  "ChatGPT/Enemy": [
+    "KrampusReturns/EntityFactory"
+  ],
+  "AllegroFlare/Prototypes/Platforming2D/Entities/MovementStrategies2D/ReflectOffWalls": [
+    "KrampusReturns/EntityFactory"
+  ],
   "AllegroFlare/GameEventDatas/Base": [
     "KrampusReturns/GameEventDatas/GoalpostReached",
     "KrampusReturns/GameEventDatas/SpawnFlashFX"
@@ -2114,10 +2137,6 @@ table td
   ],
   "KrampusReturns/GameEventDatas/GoalpostReached": [
     "KrampusReturns/Gameplay/Screen"
-  ],
-  "KrampusReturns/EntityFactory": [
-    "KrampusReturns/Gameplay/Screen",
-    "KrampusReturns/Testing/Gym"
   ],
   "AllegroFlare/FrameAnimation/Book": [
     "KrampusReturns/Gameplay/Screen",
