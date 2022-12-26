@@ -1180,6 +1180,7 @@ void Screen::update_entities()
 
 
    // update targets on "seeker" types
+   // TODO: add a better selection mechanism for seeker targets
    if (player_controlled_entity)
    {
       for (auto &entity : select_seekers_on_map_name(currently_active_map_name))
