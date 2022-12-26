@@ -4,6 +4,8 @@
 
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/MovementStrategies2D/ReflectOffWalls.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/EntityFlagNames.hpp>
+#include <ChatGPT/RandomWanderer.hpp>
+#include <ChatGPT/Seeker.hpp>
 #include <KrampusReturns/Entities/Blob.hpp>
 #include <KrampusReturns/Entities/Goalpost.hpp>
 #include <KrampusReturns/Entities/Krampus.hpp>
@@ -204,11 +206,40 @@ ChatGPT::Enemy* EntityFactory::create_generic_enemy(std::string on_map, float x,
 
    // NOTE: this class now needs a proper destruct property
    result->set_movement_strategy(
-      new AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls(result)
+      //new AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls(result)
+      new ChatGPT::RandomWanderer(result, 1)
+      //new ChatGPT::Seeker(result, 0.01)
    );
 
    result->get_place_ref().position = { x, y };
    result->set(ON_MAP_NAME, on_map);
+   return result;
+}
+
+ChatGPT::Enemy* EntityFactory::create_seeker_enemy(std::string on_map, float x, float y, std::string animation, AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target) const
+{
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+   //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::Base
+   //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls
+   //headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/MovementStrategies2D/ReflectOffWalls.hpp ]
+
+   int health = 1;
+   int attack = 1;
+   ChatGPT::Enemy* result = new ChatGPT::Enemy(health, attack);
+   result->set_animation_book(get_animation_book());
+   result->set_animation(animation);
+   result->set_bitmap_alignment_strategy("bottom_centered");
+
+   // NOTE: this class now needs a proper destruct property
+   result->set_movement_strategy(
+      //new AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls(result)
+      //new ChatGPT::RandomWanderer(result, 1)
+      new ChatGPT::Seeker(result, target, 1.0)
+   );
+
+   result->get_place_ref().position = { x, y };
+   result->set(ON_MAP_NAME, on_map);
+   result->set("seeker");
    return result;
 }
 

@@ -1,8 +1,11 @@
-// Enemy.hpp
 #pragma once
 
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/MovementStrategies2D/Base.hpp>
+
+//* Enemy::get_movement_strategy() const { return movement_strategy_; }
+
+//#include "ChatGPT/Base.hpp"
 
 namespace ChatGPT {
 
@@ -23,7 +26,7 @@ public:
     int get_health() const;
     int get_attack() const;
     state_t get_state() const;
-    AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::Base* get_movement_strategy() const;
+    AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::Base *get_movement_strategy() const;
 
     void set_state(state_t state);
     void set_movement_strategy(AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::Base* movement_strategy);
@@ -38,5 +41,3 @@ private:
 };
 
 } // namespace ChatGPT
-
-

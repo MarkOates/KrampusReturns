@@ -17,6 +17,7 @@
 #include <AllegroFlare/TileMaps/PrimMeshAtlas.hpp>
 #include <AllegroFlare/TileMaps/TileMap.hpp>
 #include <AllegroFlare/Vec2D.hpp>
+#include <ChatGPT/Enemy.hpp>
 #include <KrampusReturns/Entities/Krampus.hpp>
 #include <KrampusReturns/KrampusController.hpp>
 #include <KrampusReturns/Level.hpp>
@@ -178,6 +179,7 @@ namespace KrampusReturns
          std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> get_current_map_entities();
          std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> get_current_map_entities_y_sorted();
          std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> select_spawn_points_on_map_name(std::string map_name="[unset-map_name]");
+         std::vector<ChatGPT::Enemy*> select_seekers_on_map_name(std::string map_name="[unset-map_name]");
          int count_num_spawn_points_in_all_maps();
          AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* find_first_spawn_point_on_any_map();
          ALLEGRO_FONT* obtain_banner_text_font();

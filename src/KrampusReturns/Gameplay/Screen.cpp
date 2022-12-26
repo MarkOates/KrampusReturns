@@ -16,6 +16,7 @@
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/Doors/Basic2D.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/EntityCollectionHelper.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/EntityFlagNames.hpp>
+#include <ChatGPT/Seeker.hpp>
 #include <KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.hpp>
 #include <KrampusReturns/Entities/Blob.hpp>
 #include <KrampusReturns/EntityFactory.hpp>
@@ -696,7 +697,6 @@ void Screen::load_level_and_start(KrampusReturns::Level* level)
       MAP_NAME_TO_START_ON, 400/2 - 50, 240/2);
    add_entity_to_pool(krampus);
 
-
    //
    move_krampus_to_first_spawn_point_or_default(krampus, MAP_NAME_TO_START_ON);
 
@@ -828,6 +828,12 @@ void Screen::tmj_object_parse_callback_func(std::string object_class, float x, f
       { "skeleton", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
           AllegroFlare::Vec2D center = center_of(x, y, w, h);
           auto entity = entity_factory.create_generic_enemy("map_a", center.x, center.y, "skeleton");
+          gameplay_screen->add_entity_to_pool(entity);
+      }},
+      { "skull_head", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
+          AllegroFlare::Vec2D center = center_of(x, y, w, h);
+          //gameplay_screen->player_controlled_entity;
+          auto entity = entity_factory.create_seeker_enemy("map_a", center.x, center.y, "fly", nullptr);
           gameplay_screen->add_entity_to_pool(entity);
       }},
       { "door", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
@@ -1172,11 +1178,35 @@ void Screen::update_entities()
       velocity.position.y += (gravity_reversed ? -gravity : gravity);
    }
 
+
+   // update targets on "seeker" types
+   if (player_controlled_entity)
+   {
+      for (auto &entity : select_seekers_on_map_name(currently_active_map_name))
+      {
+         //std::cout << "seekers!" << std::endl;
+         ChatGPT::Seeker* seeker_movement_strategy = static_cast<ChatGPT::Seeker*>(entity->get_movement_strategy());
+         if (seeker_movement_strategy->get_target() == nullptr)
+         {
+            AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D *thing =
+               static_cast<AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D*>(
+                  player_controlled_entity
+               );
+            ChatGPT::Seeker* seeker_movement_strategy = static_cast<ChatGPT::Seeker*>(entity->get_movement_strategy());
+            
+            seeker_movement_strategy->set_target(thing);
+         }
+      }
+   }
+
+
+
    // update the entities (typically includes movement strategies)
    for (auto &entity : get_current_map_entities())
    {
       entity->update();
    }
+
 
    // step each entity
    for (auto &entity : get_current_map_entities())
@@ -2031,6 +2061,21 @@ std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> Screen:
       if (!entity->exists(TYPE, "spawn_point")) continue;
       if (!entity->exists(ON_MAP_NAME, on_map_name)) continue;
       result.push_back(entity);
+   }
+   return result;
+}
+
+std::vector<ChatGPT::Enemy*> Screen::select_seekers_on_map_name(std::string map_name)
+{
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+   std::string on_map_name = map_name;
+
+   std::vector<ChatGPT::Enemy*> result;
+   for (auto &entity : entity_pool)
+   {
+      if (!entity->exists("seeker")) continue;
+      if (!entity->exists(ON_MAP_NAME, on_map_name)) continue;
+      result.push_back(static_cast<ChatGPT::Enemy*>(entity));
    }
    return result;
 }

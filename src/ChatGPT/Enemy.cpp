@@ -45,10 +45,7 @@ void Enemy::set_state(state_t state) {
     state_ = state;
 }
 
-void Enemy::set_movement_strategy(AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::Base* movement_strategy)
-{
-   movement_strategy_ = movement_strategy;
-}
+void Enemy::set_movement_strategy(AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::Base* strategy) { movement_strategy_ = strategy; }
 
 void Enemy::update() {
     if (movement_strategy_) movement_strategy_->update();
@@ -76,5 +73,3 @@ void Enemy::update() {
 }
 
 } // namespace ChatGPT
-
-

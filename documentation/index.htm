@@ -514,6 +514,9 @@ table td
 <tr>
   <td class="method">create_generic_enemy(std::string on_map=&quot;[unset-on_map]&quot;, float x=0.0f, float y=0.0f, std::string animation=&quot;[unset-animation]&quot;)</td>
 </tr>
+<tr>
+  <td class="method">create_seeker_enemy(std::string on_map=&quot;[unset-on_map]&quot;, float x=0.0f, float y=0.0f, std::string animation=&quot;[unset-animation]&quot;, AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target=nullptr)</td>
+</tr>
     </table>
      <table>
 <tr>
@@ -551,6 +554,15 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/Platforming2D/Entities/MovementStrategies2D/ReflectOffWalls.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;ChatGPT::RandomWanderer&quot;, &quot;headers&quot;=&gt;[&quot;ChatGPT/RandomWanderer.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;ChatGPT::Seeker&quot;, &quot;headers&quot;=&gt;[&quot;ChatGPT/Seeker.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -1028,6 +1040,9 @@ table td
   <td class="method">select_spawn_points_on_map_name(std::string map_name=&quot;[unset-map_name]&quot;)</td>
 </tr>
 <tr>
+  <td class="method">select_seekers_on_map_name(std::string map_name=&quot;[unset-map_name]&quot;)</td>
+</tr>
+<tr>
   <td class="method">count_num_spawn_points_in_all_maps()</td>
 </tr>
 <tr>
@@ -1211,6 +1226,12 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Level&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Level.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;ChatGPT::Enemy&quot;, &quot;headers&quot;=&gt;[&quot;ChatGPT/Enemy.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;ChatGPT::Seeker&quot;, &quot;headers&quot;=&gt;[&quot;ChatGPT/Seeker.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -1912,7 +1933,8 @@ table td
     "KrampusReturns/Entities/FlashEffect",
     "KrampusReturns/Entities/Goalpost",
     "KrampusReturns/Entities/Krampus",
-    "KrampusReturns/Entities/SpawnPoint"
+    "KrampusReturns/Entities/SpawnPoint",
+    "KrampusReturns/EntityFactory"
   ],
   "sin": [
     "KrampusReturns/Entities/Blob",
@@ -1977,10 +1999,18 @@ table td
     "KrampusReturns/Testing/Gym"
   ],
   "ChatGPT/Enemy": [
-    "KrampusReturns/EntityFactory"
+    "KrampusReturns/EntityFactory",
+    "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/MovementStrategies2D/ReflectOffWalls": [
     "KrampusReturns/EntityFactory"
+  ],
+  "ChatGPT/RandomWanderer": [
+    "KrampusReturns/EntityFactory"
+  ],
+  "ChatGPT/Seeker": [
+    "KrampusReturns/EntityFactory",
+    "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/GameEventDatas/Base": [
     "KrampusReturns/GameEventDatas/GoalpostReached",

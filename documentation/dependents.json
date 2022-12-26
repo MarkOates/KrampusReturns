@@ -28,7 +28,8 @@
     "KrampusReturns/Entities/FlashEffect",
     "KrampusReturns/Entities/Goalpost",
     "KrampusReturns/Entities/Krampus",
-    "KrampusReturns/Entities/SpawnPoint"
+    "KrampusReturns/Entities/SpawnPoint",
+    "KrampusReturns/EntityFactory"
   ],
   "sin": [
     "KrampusReturns/Entities/Blob",
@@ -93,10 +94,18 @@
     "KrampusReturns/Testing/Gym"
   ],
   "ChatGPT/Enemy": [
-    "KrampusReturns/EntityFactory"
+    "KrampusReturns/EntityFactory",
+    "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/MovementStrategies2D/ReflectOffWalls": [
     "KrampusReturns/EntityFactory"
+  ],
+  "ChatGPT/RandomWanderer": [
+    "KrampusReturns/EntityFactory"
+  ],
+  "ChatGPT/Seeker": [
+    "KrampusReturns/EntityFactory",
+    "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/GameEventDatas/Base": [
     "KrampusReturns/GameEventDatas/GoalpostReached",
