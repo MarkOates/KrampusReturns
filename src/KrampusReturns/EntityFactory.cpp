@@ -204,10 +204,10 @@ ChatGPT::Enemy* EntityFactory::create_generic_enemy(std::string on_map, float x,
    result->set_animation(animation);
    result->set_bitmap_alignment_strategy("bottom_centered");
 
-   // NOTE: this class now needs a proper destruct property
+   // NOTE: this class now needs a proper destruct process
    result->set_movement_strategy(
       //new AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls(result)
-      new ChatGPT::RandomWanderer(result, 1)
+      new ChatGPT::RandomWanderer(result, 0.1)
       //new ChatGPT::Seeker(result, 0.01)
    );
 

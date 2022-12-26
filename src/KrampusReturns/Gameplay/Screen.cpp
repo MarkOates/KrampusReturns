@@ -1180,7 +1180,6 @@ void Screen::update_entities()
    {
       for (auto &entity : select_seekers_on_map_name(currently_active_map_name))
       {
-         //std::cout << "seekers!" << std::endl;
          ChatGPT::Seeker* seeker_movement_strategy = static_cast<ChatGPT::Seeker*>(entity->get_movement_strategy());
          if (seeker_movement_strategy->get_target() == nullptr)
          {
