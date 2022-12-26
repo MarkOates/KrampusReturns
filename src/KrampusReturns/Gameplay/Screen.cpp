@@ -179,7 +179,6 @@ void Screen::set_state(uint32_t state, float time_now)
    state_changed_at = time_now;
 
    // HERE:
-   // TODO: Flesh out this logic:
    switch(state)
    {
       case STATE_SHUTDOWN:
@@ -632,10 +631,6 @@ void Screen::load_level_and_start(KrampusReturns::Level* level)
    }
    else
    {
-      std::cout << " ." << std::endl;
-      std::cout << "/i\  Loading data from level" << std::endl;
-      std::cout << "---" << std::endl;
-
       // load the map dictionary
       set_map_dictionary(level->get_map_dictionary());
 
@@ -1835,11 +1830,12 @@ void Screen::key_char_func(ALLEGRO_EVENT* event)
    // this function should remain in place so that the keyboard could be used for debugging control.
    switch (event->keyboard.keycode)
    {
-   case ALLEGRO_KEY_W:
+      case ALLEGRO_KEY_W:
       //set_state(STATE_FINISHED_LEVEL);
       //toggle_show_collision_tile_mesh();
       break;
-   case ALLEGRO_KEY_L:
+
+      case ALLEGRO_KEY_1:
       {
          // TODO: CRITICAL: remove this hard-coded base folder
          static std::string _TEST_BASE_FOLDER = "/Users/markoates/Repos/KrampusReturns/bin/programs/data/";
@@ -1855,31 +1851,21 @@ void Screen::key_char_func(ALLEGRO_EVENT* event)
          // DEBUG: // TESTING:
          load_level_and_start(&level);
 
-      break;
+         break;
       }
-   case ALLEGRO_KEY_S:
-      // DEBUG: // TESTING:
-      event_emitter->emit_game_event(
-         AllegroFlare::GameEvent(
-            "spawn_flash_effect", 
-            new KrampusReturns::GameEventDatas::SpawnFlashFX("flash_fx1", 200, 200)
-         )
-      );
-      //toggle_show_collision_tile_mesh();
+
+      case ALLEGRO_KEY_S:
+         // DEBUG: // TESTING:
+         event_emitter->emit_game_event(
+            AllegroFlare::GameEvent(
+               "spawn_flash_effect", 
+               new KrampusReturns::GameEventDatas::SpawnFlashFX("flash_fx1", 200, 200)
+            )
+         );
+         //toggle_show_collision_tile_mesh();
       break;
-   case ALLEGRO_KEY_1:
-      //toggle_show_collision_tile_mesh();
-      break;
-   case ALLEGRO_KEY_2:
-      //toggle_show_tile_mesh();
-      break;
-   case ALLEGRO_KEY_PAD_PLUS:
-      //camera.set_zoom(camera.get_zoom() + AllegroFlare::Vec2D({0.1, 0.1}));
-      break;
-   case ALLEGRO_KEY_PAD_MINUS:
-      //camera.set_zoom(camera.get_zoom() - AllegroFlare::Vec2D({0.1, 0.1}));
-      break;
-   default:
+
+      default:
       break;
    }
    return;
