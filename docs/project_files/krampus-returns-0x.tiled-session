@@ -1,10 +1,18 @@
 {
-    "activeFile": "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-2-1-0x.tmj",
+    "activeFile": "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-1-1-0x.tmj",
     "expandedProjectPaths": [
         "/Users/markoates/Repos/KrampusReturns/bin/programs/data"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-1-1-0x.tmj": {
+            "scale": 2.5467,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 235.79534299289278,
+                "y": 322.7706443632937
+            }
+        },
         "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-2-1-0x.tmj": {
             "scale": 1.3317,
             "selectedLayer": 0,
@@ -22,13 +30,15 @@
     "map.lastUsedFormat": "json",
     "openFiles": [
         "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-2-1-0x.tmj",
-        "/Users/markoates/tiles_dungeon_v1.1.tsx"
+        "/Users/markoates/tiles_dungeon_v1.1.tsx",
+        "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-1-1-0x.tmj"
     ],
     "project": "krampus-returns-0x.tiled-project",
     "property.type": "float",
     "recentFiles": [
+        "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-2-1-0x.tmj",
         "/Users/markoates/tiles_dungeon_v1.1.tsx",
-        "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-2-1-0x.tmj"
+        "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-1-1-0x.tmj"
     ],
     "tileset.tileSize": {
         "height": 10,
