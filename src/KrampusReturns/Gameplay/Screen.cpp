@@ -1838,14 +1838,33 @@ void Screen::key_char_func(ALLEGRO_EVENT* event)
       {
          // TODO: CRITICAL: remove this hard-coded base folder
          static std::string _TEST_BASE_FOLDER = "/Users/markoates/Repos/KrampusReturns/bin/programs/data/";
-            KrampusReturns::Level level(
-               "level_1",
-               "The First Rescue",
-               {
-                  { "map_a", _TEST_BASE_FOLDER + "maps/krampus-returns-level-1-1-0x.tmj" }
-               },
-               "level_1_music"
-            );
+         KrampusReturns::Level level(
+            "level_1",
+            "The First Rescue",
+            {
+               { "map_a", _TEST_BASE_FOLDER + "maps/krampus-returns-level-1-1-0x.tmj" }
+            },
+            "level_1_music"
+         );
+
+         // DEBUG: // TESTING:
+         load_level_and_start(&level);
+
+         break;
+      }
+
+      case ALLEGRO_KEY_2:
+      {
+         // TODO: CRITICAL: remove this hard-coded base folder
+         static std::string _TEST_BASE_FOLDER = "/Users/markoates/Repos/KrampusReturns/bin/programs/data/";
+         KrampusReturns::Level level(
+            "level_2",
+            "The Second Rescue",
+            {
+               { "map_a", _TEST_BASE_FOLDER + "maps/krampus-returns-level-2-1-0x.tmj" }
+            },
+            "level_1_music"
+         );
 
          // DEBUG: // TESTING:
          load_level_and_start(&level);
