@@ -17,6 +17,10 @@ private:
     AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* entity_;
     AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target_;
     float speed_;
+    bool is_tracking;
+    //float tracking_at_distance_;
+    //bool tracking;
+    //float stop_following_range_;
 };
 
 } // namespace ChatGPT
