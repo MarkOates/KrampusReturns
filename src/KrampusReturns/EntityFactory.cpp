@@ -207,7 +207,7 @@ ChatGPT::Enemy* EntityFactory::create_generic_enemy(std::string on_map, float x,
    // NOTE: this class now needs a proper destruct process
    result->set_movement_strategy(
       //new AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls(result)
-      new ChatGPT::RandomWanderer(result, 0.1)
+      new ChatGPT::RandomWanderer(result, 0.5)
       //new ChatGPT::Seeker(result, 0.01)
    );
 
