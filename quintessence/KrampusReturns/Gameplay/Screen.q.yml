@@ -1183,6 +1183,7 @@ functions:
     body: |
       //initialize_camera_control();
       initialize_backbuffer_sub_bitmap();
+      //if (!animation_book_initialized) initialize_animation_book();
       initialize_camera();
       initialize_shader();
       initialized = true;
@@ -1420,9 +1421,6 @@ functions:
          std::pair<int, int> boss_room_coords = calc_room_coords(boss);
          bool in_same_room_coords = (player_room_coords == boss_room_coords);
 
-         std::cout << "player_room_coords: " << player_room_coords.first << " " << player_room_coords.second << std::endl;
-         std::cout << "boss_room_coords: " << boss_room_coords.first << " " << boss_room_coords.second << std::endl;
-
          if (!boss_fight_triggered)
          {
             if (in_same_room_coords)
@@ -1636,9 +1634,51 @@ functions:
     body: |
       using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
 
+      // HACK: ok this next line is embarrasing. It's needed because apparently "draw_entities" is 
+      // potentially being called before init?  And the animation book is not initialized. Oh well.
+      //if (!animation_book_initialized) initialize_animation_book();
+
+      //std::cout << "HHHHHHHHHHHEREE" << std::endl; // DEBUGGING
+      ALLEGRO_BITMAP *little_shadow_bitmap = nullptr;
+      //if (animation_book_initialized) little_shadow_bitmap = animation_book.get_still_frame("shadow_small");
+      //ALLEGRO_BITMAP *little_shadow_bitmap = nullptr;
+      if (little_shadow_bitmap)
+      {
+         int little_shadow_bitmap_width = al_get_bitmap_width(little_shadow_bitmap);
+         int little_shadow_bitmap_height = al_get_bitmap_height(little_shadow_bitmap);
+         for (auto &entity : get_current_map_entities_y_sorted())
+         {
+            if (!entity->exists(INVISIBLE))
+            {
+               int x = entity->get_place_ref().position.x; // - little_shadow_bitmap_width / 2;
+               int y = entity->get_place_ref().position.y; // - little_shadow_bitmap_height / 2;
+               //int hw = 
+
+               al_draw_scaled_bitmap(
+                  little_shadow_bitmap,
+                  0,
+                  0,
+                  little_shadow_bitmap_width,
+                  little_shadow_bitmap_height,
+                  x,
+                  y,
+                  little_shadow_bitmap_width,
+                  little_shadow_bitmap_height,
+                  0
+               );
+            }
+            //entity->get_place_ref().start_transform();
+            //if (al_draw_scaled_bitmap(
+            //entity->get_place_ref().restore_transform();
+         }
+      }
+
       for (auto &entity : get_current_map_entities_y_sorted())
       {
-         if (!entity->exists(INVISIBLE)) entity->draw();
+         if (!entity->exists(INVISIBLE))
+         {
+            entity->draw();
+         }
       }
       return;
     body_dependency_symbols:
