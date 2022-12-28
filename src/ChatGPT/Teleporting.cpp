@@ -1,60 +1,36 @@
-#include "ChatGPT/Teleporting.hpp"
-#include <AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D.hpp>
-#include <cstdlib>
-#include <ctime>
+#include <ChatGPT/Teleporting.hpp>
+
+#include <algorithm>
+#include <random>
 
 namespace ChatGPT
 {
-    // Constructor
-    Teleporting::Teleporting(AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* entity)
-        : entity_(entity)
-    {
-        // Initialize teleport locations
-        teleport_locations_ = {
-            std::pair<int, int>{50, 50},
-            std::pair<int, int>{25, 75},
-            std::pair<int, int>{75, 75},
-            std::pair<int, int>{50, 25},
-            std::pair<int, int>{25, 25},
-            std::pair<int, int>{75, 25}
-        };
+   Teleporting::Teleporting(AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* entity)
+      : entity(entity)
+      , time_since_last_teleport(0)
+      , random_engine(std::random_device()())
+      , uniform_distribution(0, 5)
+   {
+      for (int i=0; i<6; i++)
+      {
+         float angle = i * (3.1415f * 2.0f / 6.0f);
+         teleport_locations.emplace_back(std::make_pair(std::cos(angle) * 100, std::sin(angle) * 100));
+      }
+   }
 
-        // Seed the random number generator
-        srand(time(NULL));
+   Teleporting::~Teleporting()
+   {}
 
-        // Initialize timer
-        timer_ = 0;
-        interval_ = 5.0f; // Teleport every 5 seconds
-    }
-
-    // Teleport the enemy to a random location from the predetermined list of teleport locations
-    void Teleporting::teleport()
-    {
-        int index = rand() % NUM_TELEPORT_LOCATIONS;
-        entity_->get_place_ref().position.x = teleport_locations_[index].first;
-        entity_->get_place_ref().position.y = teleport_locations_[index].second;
-    }
-
-    // Update the enemy's position based on its speed
-    void Teleporting::update()
-    {
-        // Update timer
-        timer_ += 1.0f / 60.0f;
-
-        // Check if it's time to teleport
-        if (timer_ >= interval_)
-        {
-            // Reset timer
-            timer_ = 0;
-
-            // Teleport enemy
-            teleport();
-        }
-    }
-
-    // Accessor methods
-    AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* Teleporting::get_entity() const { return entity_; }
-
-    // Mutator methods
-    void Teleporting::set_entity(AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* entity) { entity_ = entity; }
+   void Teleporting::update()
+   {
+      time_since_last_teleport += 1.0f / 60.0f;
+      if (time_since_last_teleport >= 5)
+      {
+         time_since_last_teleport = 0;
+         int random_location_index = uniform_distribution(random_engine);
+         auto it = teleport_locations.begin();
+         std::advance(it, random_location_index);
+         entity->get_place_ref().position = { it->first, it->second };
+      }
+   }
 }
