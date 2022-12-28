@@ -16,6 +16,7 @@ namespace ChatGPT
       , uniform_distribution(0, 5)
       , origin(origin)
       , area_width_height(area_width_height)
+      , previous_random_location_index(0)
    {
       for (int i=0; i<6; i++)
       {
@@ -37,6 +38,14 @@ namespace ChatGPT
       {
          time_since_last_teleport = 0;
          int random_location_index = uniform_distribution(random_engine);
+         int attempts = 0;
+         while (random_location_index == previous_random_location_index)
+         {
+            random_location_index = uniform_distribution(random_engine);
+            attempts++;
+            if (attempts > 100) break;
+         }
+         previous_random_location_index = random_location_index;
          auto it = teleport_locations.begin();
          std::advance(it, random_location_index);
          entity->get_place_ref().position = { it->first + origin.first, it->second + origin.second };
