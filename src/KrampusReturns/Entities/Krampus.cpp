@@ -77,6 +77,14 @@ bool Krampus::set_state(uint32_t state, float time_now)
    if (this->state == state) return false; // TODO: consider "override_if_same" option
    if (state_is_busy) return false;
 
+   uint32_t exiting_state = this->state;
+   switch (exiting_state)
+   {
+      case STATE_WALKING:
+         get_bitmap_placement_ref().anchor = { 0, 0 }; // clear the bounce counter
+      break;
+   }
+
    this->state = state;
    state_changed_at = time_now;
 
@@ -157,7 +165,7 @@ void Krampus::update()
       case STATE_WALKING:
          {
             float bounce_counter = sin(time_now*34)*0.5 + 0.5;
-            get_bitmap_placement_ref().anchor = { 0, bounce_counter * 3.0f };
+            get_bitmap_placement_ref().anchor = { 0, -(bounce_counter * 3.0f) };
          }
       break;
 

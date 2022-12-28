@@ -1689,7 +1689,7 @@ functions:
                float w = entity->get_place_ref().size.x; // - little_shadow_bitmap_height / 2;
                //int hw = 
 
-               al_draw_filled_ellipse(x, y, 4 + w/8, 2, ALLEGRO_COLOR{0, 0, 0, 0.3});
+               al_draw_filled_ellipse(x, y, 4 + w/5, 2, ALLEGRO_COLOR{0, 0, 0, 0.3});
 
                //al_draw_scaled_bitmap(
                   //little_shadow_bitmap,
