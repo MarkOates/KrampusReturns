@@ -188,7 +188,8 @@ void Screen::set_state(uint32_t state, float time_now)
       break;
 
       case STATE_PLAYING_IN_LEVEL:
-         event_emitter->emit_play_music_track_event(main_background_music_identifier);
+         play_level_music();
+         //event_emitter->emit_play_music_track_event(main_background_music_identifier);
       break;
 
       case STATE_PLAYER_DIED:
@@ -357,6 +358,30 @@ void Screen::play_win_music()
       throw std::runtime_error("Screen::play_win_music: error: guard \"event_emitter\" not met");
    }
    event_emitter->emit_play_music_track_event("win_music");
+}
+
+void Screen::play_level_music()
+{
+   if (!(event_emitter))
+   {
+      std::stringstream error_message;
+      error_message << "[Screen::play_level_music]: error: guard \"event_emitter\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Screen::play_level_music: error: guard \"event_emitter\" not met");
+   }
+   event_emitter->emit_play_music_track_event(main_background_music_identifier);
+}
+
+void Screen::play_boss_music()
+{
+   if (!(event_emitter))
+   {
+      std::stringstream error_message;
+      error_message << "[Screen::play_boss_music]: error: guard \"event_emitter\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Screen::play_boss_music: error: guard \"event_emitter\" not met");
+   }
+   event_emitter->emit_play_music_track_event("boss_music");
 }
 
 void Screen::set_map_dictionary(std::map<std::string, std::string> map_dictionary)
@@ -542,6 +567,7 @@ void Screen::destroy_all()
    hide_banner_text();
    hide_banner_subtext();
    hide_full_color_overlay();
+
 
    initialized = false;
    destroyed = true;
@@ -775,6 +801,29 @@ void Screen::load_objects_from_map_files()
    }
 }
 
+std::pair<int, int> Screen::calc_room_coords(AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* entity)
+{
+   if (!entity) return std::pair<int, int>(0, 0);
+
+   std::pair<float, float> room_width = calc_room_width();
+
+   return std::pair<int, int>(
+      (int)(entity->get_place_ref().position.x / room_width.first),
+      (int)(entity->get_place_ref().position.y / room_width.second)
+   );
+}
+
+std::pair<float, float> Screen::calc_room_width()
+{
+   if (currently_active_map && currently_active_map->get_tile_mesh())
+   {
+      float room_width = currently_active_map->get_tile_mesh()->get_tile_width() * 25;
+      float room_height = currently_active_map->get_tile_mesh()->get_tile_height() * 15;
+      return {room_width, room_height};
+   }
+   return {0.0, 0.0};
+}
+
 AllegroFlare::Vec2D Screen::center_of(float x, float y, float w, float h)
 {
    return AllegroFlare::Vec2D(x + w*0.5, y + h*0.5);
@@ -809,12 +858,12 @@ void Screen::tmj_object_parse_callback_func(std::string object_class, float x, f
           auto entity = entity_factory.create_goalpost("map_a", goalpost_id, center.x, center.y);
           gameplay_screen->add_entity_to_pool(entity);
       }},
-      { "boss", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
+      //{ "boss", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
           // TODO: here, replace this blob with a proper boss
           //AllegroFlare::Vec2D center = center_of(x, y, w, h);
           //auto entity = entity_factory.create_blob("map_a", center.x, center.y);
           //gameplay_screen->add_entity_to_pool(entity);
-      }},
+      //}},
       { "blob", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
           AllegroFlare::Vec2D center = center_of(x, y, w, h);
           auto entity = entity_factory.create_blob("map_a", center.x, center.y);
@@ -1270,6 +1319,37 @@ void Screen::update_entities()
    // update the player colliding on the goalposts
    // TODO: allow this function to run without being coupled with a "player_controlled_entity"
    if (player_controlled_entity) update_player_collisions_with_goalposts();
+
+
+   // HACK: update is player fighting boss
+   AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* boss = find_boss();
+   static bool boss_fight_triggered = false;
+   if (player_controlled_entity && boss)
+   {
+      std::pair<int, int> player_room_coords = calc_room_coords(player_controlled_entity);
+      std::pair<int, int> boss_room_coords = calc_room_coords(boss);
+      bool in_same_room_coords = (player_room_coords == boss_room_coords);
+
+      std::cout << "player_room_coords: " << player_room_coords.first << " " << player_room_coords.second << std::endl;
+      std::cout << "boss_room_coords: " << boss_room_coords.first << " " << boss_room_coords.second << std::endl;
+
+      if (!boss_fight_triggered)
+      {
+         if (in_same_room_coords)
+         {
+            play_boss_music();
+            boss_fight_triggered = true;
+         }
+      }
+      else if (boss_fight_triggered)
+      {
+         if (!in_same_room_coords)
+         {
+            play_level_music();
+            boss_fight_triggered = false;
+         }
+      }
+   }
 
 
    update_enemy_collisions_with_damage_zones();
@@ -2090,6 +2170,19 @@ std::vector<ChatGPT::Enemy*> Screen::select_seekers_on_map_name(std::string map_
       result.push_back(static_cast<ChatGPT::Enemy*>(entity));
    }
    return result;
+}
+
+AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* Screen::find_boss()
+{
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+   //std::string on_map_name = map_name;
+
+   //std::vector<ChatGPT::Enemy*> result;
+   for (auto &entity : entity_pool)
+   {
+      if (entity->exists("is_boss")) return entity;
+   }
+   return nullptr;
 }
 
 int Screen::count_num_spawn_points_in_all_maps()

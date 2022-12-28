@@ -291,7 +291,8 @@ functions:
          break;
 
          case STATE_PLAYING_IN_LEVEL:
-            event_emitter->emit_play_music_track_event(main_background_music_identifier);
+            play_level_music();
+            //event_emitter->emit_play_music_track_event(main_background_music_identifier);
          break;
 
          case STATE_PLAYER_DIED:
@@ -458,6 +459,18 @@ functions:
     guards: [ event_emitter ]
     body: |
       event_emitter->emit_play_music_track_event("win_music");
+
+
+  - name: play_level_music
+    guards: [ event_emitter ]
+    body: |
+      event_emitter->emit_play_music_track_event(main_background_music_identifier);
+
+
+  - name: play_boss_music
+    guards: [ event_emitter ]
+    body: |
+      event_emitter->emit_play_music_track_event("boss_music");
 
 
   - name: set_map_dictionary
@@ -631,6 +644,7 @@ functions:
       hide_banner_text();
       hide_banner_subtext();
       hide_full_color_overlay();
+
 
       initialized = false;
       destroyed = true;
@@ -865,6 +879,35 @@ functions:
      - KrampusReturns::TMJObjectLoader
 
 
+  - name: calc_room_coords
+    type: std::pair<int, int>
+    parameters:
+      - name: entity
+        type: AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*
+        default_argument: nullptr
+    body: |
+      if (!entity) return std::pair<int, int>(0, 0);
+
+      std::pair<float, float> room_width = calc_room_width();
+
+      return std::pair<int, int>(
+         (int)(entity->get_place_ref().position.x / room_width.first),
+         (int)(entity->get_place_ref().position.y / room_width.second)
+      );
+
+
+  - name: calc_room_width
+    type: std::pair<float, float>
+    body: |
+      if (currently_active_map && currently_active_map->get_tile_mesh())
+      {
+         float room_width = currently_active_map->get_tile_mesh()->get_tile_width() * 25;
+         float room_height = currently_active_map->get_tile_mesh()->get_tile_height() * 15;
+         return {room_width, room_height};
+      }
+      return {0.0, 0.0};
+
+
   - name: center_of
     type: AllegroFlare::Vec2D
     static: true
@@ -928,12 +971,12 @@ functions:
              auto entity = entity_factory.create_goalpost("map_a", goalpost_id, center.x, center.y);
              gameplay_screen->add_entity_to_pool(entity);
          }},
-         { "boss", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
+         //{ "boss", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
              // TODO: here, replace this blob with a proper boss
              //AllegroFlare::Vec2D center = center_of(x, y, w, h);
              //auto entity = entity_factory.create_blob("map_a", center.x, center.y);
              //gameplay_screen->add_entity_to_pool(entity);
-         }},
+         //}},
          { "blob", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
              AllegroFlare::Vec2D center = center_of(x, y, w, h);
              auto entity = entity_factory.create_blob("map_a", center.x, center.y);
@@ -1297,7 +1340,7 @@ functions:
          }
       }
 
-   
+
 
       // update the entities (typically includes movement strategies)
       for (auto &entity : get_current_map_entities())
@@ -1366,6 +1409,37 @@ functions:
       // update the player colliding on the goalposts
       // TODO: allow this function to run without being coupled with a "player_controlled_entity"
       if (player_controlled_entity) update_player_collisions_with_goalposts();
+
+
+      // HACK: update is player fighting boss
+      AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* boss = find_boss();
+      static bool boss_fight_triggered = false;
+      if (player_controlled_entity && boss)
+      {
+         std::pair<int, int> player_room_coords = calc_room_coords(player_controlled_entity);
+         std::pair<int, int> boss_room_coords = calc_room_coords(boss);
+         bool in_same_room_coords = (player_room_coords == boss_room_coords);
+
+         std::cout << "player_room_coords: " << player_room_coords.first << " " << player_room_coords.second << std::endl;
+         std::cout << "boss_room_coords: " << boss_room_coords.first << " " << boss_room_coords.second << std::endl;
+
+         if (!boss_fight_triggered)
+         {
+            if (in_same_room_coords)
+            {
+               play_boss_music();
+               boss_fight_triggered = true;
+            }
+         }
+         else if (boss_fight_triggered)
+         {
+            if (!in_same_room_coords)
+            {
+               play_level_music();
+               boss_fight_triggered = false;
+            }
+         }
+      }
 
 
       update_enemy_collisions_with_damage_zones();
@@ -2185,6 +2259,22 @@ functions:
          result.push_back(static_cast<ChatGPT::Enemy*>(entity));
       }
       return result;
+    body_dependency_symbols:
+      - AllegroFlare::Prototypes::Platforming2D::EntityFlagNames
+
+
+  - name: find_boss
+    type: AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*
+    body: |
+      using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+      //std::string on_map_name = map_name;
+
+      //std::vector<ChatGPT::Enemy*> result;
+      for (auto &entity : entity_pool)
+      {
+         if (entity->exists("is_boss")) return entity;
+      }
+      return nullptr;
     body_dependency_symbols:
       - AllegroFlare::Prototypes::Platforming2D::EntityFlagNames
 

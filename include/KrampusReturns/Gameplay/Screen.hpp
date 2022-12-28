@@ -26,6 +26,7 @@
 #include <cstdint>
 #include <map>
 #include <string>
+#include <utility>
 #include <vector>
 
 
@@ -121,6 +122,8 @@ namespace KrampusReturns
          void update_state(float time_now=al_get_time());
          ALLEGRO_COLOR get_sparkle_win_color();
          void play_win_music();
+         void play_level_music();
+         void play_boss_music();
          void set_map_dictionary(std::map<std::string, std::string> map_dictionary={});
          void set_display(AllegroFlare::Display* display=nullptr);
          void set_event_emitter(AllegroFlare::EventEmitter* event_emitter=nullptr);
@@ -135,6 +138,8 @@ namespace KrampusReturns
          void load_level_and_start(KrampusReturns::Level* level=nullptr);
          void start_level();
          void load_objects_from_map_files();
+         std::pair<int, int> calc_room_coords(AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* entity=nullptr);
+         std::pair<float, float> calc_room_width();
          static AllegroFlare::Vec2D center_of(float x=0.0f, float y=0.0f, float w=0.0f, float h=0.0f);
          static void tmj_object_parse_callback_func(std::string object_class="[unset-object_class]", float x=0.0f, float y=0.0f, float w=0.0f, float h=0.0f, void* user_data=nullptr);
          void initialize_maps();
@@ -180,6 +185,7 @@ namespace KrampusReturns
          std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> get_current_map_entities_y_sorted();
          std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> select_spawn_points_on_map_name(std::string map_name="[unset-map_name]");
          std::vector<ChatGPT::Enemy*> select_seekers_on_map_name(std::string map_name="[unset-map_name]");
+         AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* find_boss();
          int count_num_spawn_points_in_all_maps();
          AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* find_first_spawn_point_on_any_map();
          ALLEGRO_FONT* obtain_banner_text_font();
