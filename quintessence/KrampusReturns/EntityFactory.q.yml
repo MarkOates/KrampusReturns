@@ -205,7 +205,7 @@ functions:
       - AllegroFlare::Prototypes::Platforming2D::EntityFlagNames
 
 
-  - name: create_generic_enemy
+  - name: create_skeleton_enemy
     type: ChatGPT::Enemy*
     const: true
     parameters:
@@ -232,6 +232,8 @@ functions:
       ChatGPT::Enemy* result = new ChatGPT::Enemy(health, attack);
       result->set_animation_book(get_animation_book());
       result->set_animation(animation);
+      result->get_place_ref().size = { 12, 4 };
+      //result->get_place_ref().scale = { 0.8, 0.8 };
       result->set_bitmap_alignment_strategy("bottom_centered");
 
       // NOTE: this class now needs a proper destruct process
@@ -250,7 +252,7 @@ functions:
       - ChatGPT::Seeker
 
 
-  - name: create_seeker_enemy
+  - name: create_skull_head_enemy
     type: ChatGPT::Enemy*
     const: true
     parameters:
@@ -279,6 +281,8 @@ functions:
       int attack = 1;
       ChatGPT::Enemy* result = new ChatGPT::Enemy(health, attack);
       result->set_animation_book(get_animation_book());
+      result->get_place_ref().size = { 8, 4 };
+      //result->get_place_ref().scale = { 0.8, 0.8 };
       result->set_animation(animation);
       result->set_bitmap_alignment_strategy("bottom_centered");
 
@@ -299,7 +303,7 @@ functions:
       - ChatGPT::Seeker
 
 
-  - name: create_teleporting_enemy
+  - name: create_teleporting_boss_enemy
     type: ChatGPT::Enemy*
     const: true
     parameters:
@@ -353,7 +357,6 @@ functions:
       - ChatGPT::RandomWanderer
       - ChatGPT::Seeker
       - ChatGPT::Teleporting
-
 
 
 dependencies:

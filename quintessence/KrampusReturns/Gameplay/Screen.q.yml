@@ -199,6 +199,10 @@ properties:
     type: std::string
     init_with: '"[unnset-main_background_music_identifier]"'
 
+  - name: little_shadow_bitmap
+    type: ALLEGRO_BITMAP*
+    init_with: nullptr
+
   - name: STATE_UNDEF
     type: uint32_t
     init_with: 0
@@ -646,6 +650,13 @@ functions:
       hide_full_color_overlay();
 
 
+      if (little_shadow_bitmap)
+      {
+         delete little_shadow_bitmap;
+         little_shadow_bitmap = nullptr;
+      }
+
+
       initialized = false;
       destroyed = true;
 
@@ -685,6 +696,24 @@ functions:
             "While cleaning/deleting all existing entities, some entities unexpectedly remained in the pool."
          );
       }
+
+
+
+      // destroy the little shadow bitmap if it exists
+      
+      if (little_shadow_bitmap)
+      {
+         delete little_shadow_bitmap;
+         little_shadow_bitmap = nullptr;
+      }
+
+      // load up the little shadow bitmap
+      //{
+      //}
+
+      //if (little_shadow_bitmap)
+
+      //little_shadow_bitmap = animation_book.get_still_frame("fly");
 
       //set_player_controlled_entity(nullptr);
 
@@ -984,20 +1013,20 @@ functions:
          }},
          { "teleporting_boss", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
              AllegroFlare::Vec2D center = center_of(x, y, w, h);
-             auto entity = entity_factory.create_teleporting_enemy(
+             auto entity = entity_factory.create_teleporting_boss_enemy(
                "map_a", center.x, center.y, w, h, "teleport_boss");
              entity->set("is_boss");
              gameplay_screen->add_entity_to_pool(entity);
          }},
          { "skeleton", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
              AllegroFlare::Vec2D center = center_of(x, y, w, h);
-             auto entity = entity_factory.create_generic_enemy("map_a", center.x, center.y, "skeleton");
+             auto entity = entity_factory.create_skeleton_enemy("map_a", center.x, center.y, "skeleton");
              gameplay_screen->add_entity_to_pool(entity);
          }},
          { "skull_head", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
              AllegroFlare::Vec2D center = center_of(x, y, w, h);
              //gameplay_screen->player_controlled_entity;
-             auto entity = entity_factory.create_seeker_enemy("map_a", center.x, center.y, "fly", nullptr);
+             auto entity = entity_factory.create_skull_head_enemy("map_a", center.x, center.y, "fly", nullptr);
              gameplay_screen->add_entity_to_pool(entity);
          }},
          { "door", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
@@ -1338,6 +1367,11 @@ functions:
                
                seeker_movement_strategy->set_target(thing);
             }
+
+            // HACK:
+            // flip the orientation of the bitmap direction
+            if (entity->get_velocity_ref().position.x < 0) entity->set_bitmap_flip_h(false);
+            else entity->set_bitmap_flip_h(false);
          }
       }
 
@@ -1639,33 +1673,36 @@ functions:
       //if (!animation_book_initialized) initialize_animation_book();
 
       //std::cout << "HHHHHHHHHHHEREE" << std::endl; // DEBUGGING
-      ALLEGRO_BITMAP *little_shadow_bitmap = nullptr;
-      //if (animation_book_initialized) little_shadow_bitmap = animation_book.get_still_frame("shadow_small");
       //ALLEGRO_BITMAP *little_shadow_bitmap = nullptr;
-      if (little_shadow_bitmap)
+      //little_shadow_bitmap = animation_book.get_still_frame("fly");
+      //ALLEGRO_BITMAP *little_shadow_bitmap = nullptr;
+      //if (little_shadow_bitmap)
       {
-         int little_shadow_bitmap_width = al_get_bitmap_width(little_shadow_bitmap);
-         int little_shadow_bitmap_height = al_get_bitmap_height(little_shadow_bitmap);
+         //int little_shadow_bitmap_width = al_get_bitmap_width(little_shadow_bitmap);
+         //int little_shadow_bitmap_height = al_get_bitmap_height(little_shadow_bitmap);
          for (auto &entity : get_current_map_entities_y_sorted())
          {
             if (!entity->exists(INVISIBLE))
             {
-               int x = entity->get_place_ref().position.x; // - little_shadow_bitmap_width / 2;
-               int y = entity->get_place_ref().position.y; // - little_shadow_bitmap_height / 2;
+               float x = entity->get_place_ref().position.x; // - little_shadow_bitmap_width / 2;
+               float y = entity->get_place_ref().position.y; // - little_shadow_bitmap_height / 2;
+               float w = entity->get_place_ref().size.x; // - little_shadow_bitmap_height / 2;
                //int hw = 
 
-               al_draw_scaled_bitmap(
-                  little_shadow_bitmap,
-                  0,
-                  0,
-                  little_shadow_bitmap_width,
-                  little_shadow_bitmap_height,
-                  x,
-                  y,
-                  little_shadow_bitmap_width,
-                  little_shadow_bitmap_height,
-                  0
-               );
+               al_draw_filled_ellipse(x, y, 4 + w/8, 2, ALLEGRO_COLOR{0, 0, 0, 0.3});
+
+               //al_draw_scaled_bitmap(
+                  //little_shadow_bitmap,
+                  //0,
+                  //0,
+                  //little_shadow_bitmap_width,
+                  //little_shadow_bitmap_height,
+                  //x,
+                  //y,
+                  //little_shadow_bitmap_width,
+                  //little_shadow_bitmap_height,
+                  //0
+               //);
             }
             //entity->get_place_ref().start_transform();
             //if (al_draw_scaled_bitmap(

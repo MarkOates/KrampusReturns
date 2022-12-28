@@ -90,6 +90,7 @@ namespace KrampusReturns
          bool state_is_busy;
          KrampusReturns::Level current_level_data;
          std::string main_background_music_identifier;
+         ALLEGRO_BITMAP* little_shadow_bitmap;
          void move_krampus_to_first_spawn_point_or_default(KrampusReturns::Entities::Krampus* krampus=nullptr, std::string map_name="[unset-map_name]");
          void initialize_shader();
          void initialize_camera();

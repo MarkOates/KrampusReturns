@@ -191,7 +191,7 @@ KrampusReturns::Entities::FlashEffect* EntityFactory::create_flash_fx1(std::stri
    return result;
 }
 
-ChatGPT::Enemy* EntityFactory::create_generic_enemy(std::string on_map, float x, float y, std::string animation) const
+ChatGPT::Enemy* EntityFactory::create_skeleton_enemy(std::string on_map, float x, float y, std::string animation) const
 {
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
    //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::Base
@@ -203,6 +203,8 @@ ChatGPT::Enemy* EntityFactory::create_generic_enemy(std::string on_map, float x,
    ChatGPT::Enemy* result = new ChatGPT::Enemy(health, attack);
    result->set_animation_book(get_animation_book());
    result->set_animation(animation);
+   result->get_place_ref().size = { 12, 4 };
+   //result->get_place_ref().scale = { 0.8, 0.8 };
    result->set_bitmap_alignment_strategy("bottom_centered");
 
    // NOTE: this class now needs a proper destruct process
@@ -217,7 +219,7 @@ ChatGPT::Enemy* EntityFactory::create_generic_enemy(std::string on_map, float x,
    return result;
 }
 
-ChatGPT::Enemy* EntityFactory::create_seeker_enemy(std::string on_map, float x, float y, std::string animation, AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target) const
+ChatGPT::Enemy* EntityFactory::create_skull_head_enemy(std::string on_map, float x, float y, std::string animation, AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target) const
 {
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
    //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::Base
@@ -228,6 +230,8 @@ ChatGPT::Enemy* EntityFactory::create_seeker_enemy(std::string on_map, float x, 
    int attack = 1;
    ChatGPT::Enemy* result = new ChatGPT::Enemy(health, attack);
    result->set_animation_book(get_animation_book());
+   result->get_place_ref().size = { 8, 4 };
+   //result->get_place_ref().scale = { 0.8, 0.8 };
    result->set_animation(animation);
    result->set_bitmap_alignment_strategy("bottom_centered");
 
@@ -244,7 +248,7 @@ ChatGPT::Enemy* EntityFactory::create_seeker_enemy(std::string on_map, float x, 
    return result;
 }
 
-ChatGPT::Enemy* EntityFactory::create_teleporting_enemy(std::string on_map, float x, float y, float area_width, float area_height, std::string animation, AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target) const
+ChatGPT::Enemy* EntityFactory::create_teleporting_boss_enemy(std::string on_map, float x, float y, float area_width, float area_height, std::string animation, AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target) const
 {
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
    //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::Base

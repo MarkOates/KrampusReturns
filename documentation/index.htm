@@ -512,13 +512,13 @@ table td
   <td class="method">create_flash_fx1()</td>
 </tr>
 <tr>
-  <td class="method">create_generic_enemy(std::string on_map=&quot;[unset-on_map]&quot;, float x=0.0f, float y=0.0f, std::string animation=&quot;[unset-animation]&quot;)</td>
+  <td class="method">create_skeleton_enemy(std::string on_map=&quot;[unset-on_map]&quot;, float x=0.0f, float y=0.0f, std::string animation=&quot;[unset-animation]&quot;)</td>
 </tr>
 <tr>
-  <td class="method">create_seeker_enemy(std::string on_map=&quot;[unset-on_map]&quot;, float x=0.0f, float y=0.0f, std::string animation=&quot;[unset-animation]&quot;, AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target=nullptr)</td>
+  <td class="method">create_skull_head_enemy(std::string on_map=&quot;[unset-on_map]&quot;, float x=0.0f, float y=0.0f, std::string animation=&quot;[unset-animation]&quot;, AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target=nullptr)</td>
 </tr>
 <tr>
-  <td class="method">create_teleporting_enemy(std::string on_map=&quot;[unset-on_map]&quot;, float x=0.0f, float y=0.0f, float area_width=0.0f, float area_height=0.0f, std::string animation=&quot;[unset-animation]&quot;, AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target=nullptr)</td>
+  <td class="method">create_teleporting_boss_enemy(std::string on_map=&quot;[unset-on_map]&quot;, float x=0.0f, float y=0.0f, float area_width=0.0f, float area_height=0.0f, std::string animation=&quot;[unset-animation]&quot;, AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target=nullptr)</td>
 </tr>
     </table>
      <table>
@@ -796,6 +796,10 @@ table td
 <tr>
   <td class="property">main_background_music_identifier</td>
   <td class="property">std::string</td>
+</tr>
+<tr>
+  <td class="property">little_shadow_bitmap</td>
+  <td class="property">ALLEGRO_BITMAP*</td>
 </tr>
 <tr>
   <td class="property">STATE_UNDEF</td>
