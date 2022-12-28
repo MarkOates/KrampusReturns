@@ -15,16 +15,17 @@ namespace ChatGPT
    {
    private:
       std::vector<std::pair<float, float>> teleport_locations;
+      std::pair<float, float> origin;
       std::default_random_engine random_engine;
       std::uniform_int_distribution<int> uniform_distribution;
       AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* entity;
       float time_since_last_teleport;
 
    public:
-      Teleporting(AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* entity);
+      Teleporting(AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* entity, std::pair<float, float> origin);
       virtual ~Teleporting();
 
-      void update() override;
+      virtual void update() override;
    };
 }
 

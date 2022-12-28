@@ -5,11 +5,12 @@
 
 namespace ChatGPT
 {
-   Teleporting::Teleporting(AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* entity)
+   Teleporting::Teleporting(AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* entity, std::pair<float, float> origin)
       : entity(entity)
       , time_since_last_teleport(0)
       , random_engine(std::random_device()())
       , uniform_distribution(0, 5)
+      , origin(origin)
    {
       for (int i=0; i<6; i++)
       {
@@ -30,7 +31,7 @@ namespace ChatGPT
          int random_location_index = uniform_distribution(random_engine);
          auto it = teleport_locations.begin();
          std::advance(it, random_location_index);
-         entity->get_place_ref().position = { it->first, it->second };
+         entity->get_place_ref().position = { it->first + origin.first, it->second + origin.second };
       }
    }
 }
