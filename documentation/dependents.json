@@ -107,6 +107,9 @@
     "KrampusReturns/EntityFactory",
     "KrampusReturns/Gameplay/Screen"
   ],
+  "ChatGPT/Teleporting": [
+    "KrampusReturns/EntityFactory"
+  ],
   "AllegroFlare/GameEventDatas/Base": [
     "KrampusReturns/GameEventDatas/GoalpostReached",
     "KrampusReturns/GameEventDatas/SpawnFlashFX"

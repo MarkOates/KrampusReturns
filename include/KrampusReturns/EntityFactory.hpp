@@ -39,6 +39,7 @@ namespace KrampusReturns
       KrampusReturns::Entities::FlashEffect* create_flash_fx1(std::string on_map="[unset-on_map]", float x=0.0f, float y=0.0f) const;
       ChatGPT::Enemy* create_generic_enemy(std::string on_map="[unset-on_map]", float x=0.0f, float y=0.0f, std::string animation="[unset-animation]") const;
       ChatGPT::Enemy* create_seeker_enemy(std::string on_map="[unset-on_map]", float x=0.0f, float y=0.0f, std::string animation="[unset-animation]", AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target=nullptr) const;
+      ChatGPT::Enemy* create_teleporting_enemy(std::string on_map="[unset-on_map]", float x=0.0f, float y=0.0f, float area_width=0.0f, float area_height=0.0f, std::string animation="[unset-animation]", AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target=nullptr) const;
    };
 }
 

@@ -5,17 +5,25 @@
 
 namespace ChatGPT
 {
-   Teleporting::Teleporting(AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* entity, std::pair<float, float> origin)
+   Teleporting::Teleporting(
+         AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* entity,
+         std::pair<float, float> origin,
+         std::pair<float, float> area_width_height
+   )
       : entity(entity)
       , time_since_last_teleport(0)
       , random_engine(std::random_device()())
       , uniform_distribution(0, 5)
       , origin(origin)
+      , area_width_height(area_width_height)
    {
       for (int i=0; i<6; i++)
       {
          float angle = i * (3.1415f * 2.0f / 6.0f);
-         teleport_locations.emplace_back(std::make_pair(std::cos(angle) * 100, std::sin(angle) * 100));
+         teleport_locations.emplace_back(std::make_pair(
+            std::cos(angle) * area_width_height.first * 0.5,
+            std::sin(angle) * area_width_height.second * 0.5
+         ));
       }
    }
 
