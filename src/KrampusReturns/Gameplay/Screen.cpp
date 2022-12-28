@@ -824,6 +824,7 @@ void Screen::tmj_object_parse_callback_func(std::string object_class, float x, f
           AllegroFlare::Vec2D center = center_of(x, y, w, h);
           auto entity = entity_factory.create_teleporting_enemy(
             "map_a", center.x, center.y, w, h, "teleport_boss");
+          entity->set("is_boss");
           gameplay_screen->add_entity_to_pool(entity);
       }},
       { "skeleton", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
