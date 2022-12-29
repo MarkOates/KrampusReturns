@@ -254,7 +254,7 @@ ChatGPT::Enemy* EntityFactory::create_skull_head_enemy(std::string on_map, float
    return result;
 }
 
-KrampusReturns::Entities::DamageZone* EntityFactory::create_krampus_attack_damage_zone(std::string on_map, float x, float y, float w, float h, int damage, uint32_t direction_of_force)
+KrampusReturns::Entities::DamageZone* EntityFactory::create_damage_zone_by_player(std::string on_map, float x, float y, float w, float h, int damage, uint32_t direction_of_force)
 {
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
 

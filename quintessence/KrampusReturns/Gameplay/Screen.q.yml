@@ -266,8 +266,20 @@ properties:
     const: true
     constexpr: true
 
+  - name: DUMMY_DEP
+    type: KrampusReturns::Entities::DamageZone*
+    init_with: nullptr
+
 
 functions:
+
+
+  - name: NOTE
+    body: |
+      // Interesting new pattern.  A  from an external class is used to initialize a value, but the type
+      // is not picked up by the quintessence extrapolation. So, as a HACK, I'm adding a dummy property
+      // DUMMY_DEP so it will list the extrenal class as a dependency (and include the header).
+      return;
 
 
   - name: set_state
@@ -2093,6 +2105,52 @@ functions:
       return;
 
 
+  - name: create_damage_zone_by_player
+    parameters:
+      - name: on_map
+        type: std::string
+        default_argument: '"[unset-on_map]"'
+      - name: point_of_impact_x
+        type: float
+        default_argument: 0.0f
+      - name: point_of_impact_y
+        type: float
+        default_argument: 0.0f
+      - name: impact_width
+        type: float
+        default_argument: 20.0f
+      - name: impact_height
+        type: float
+        default_argument: 8.0f
+      - name: damage
+        type: int
+        default_argument: 1
+      - name: direction_of_force
+        type: uint32_t
+        default_argument: KrampusReturns::Entities::DamageZone::DIRECTION_OF_FORCE_UNDEF
+    guards: [ currently_active_map ]
+    body: |
+      KrampusReturns::EntityFactory entity_factory;
+         entity_factory.set_animation_book(&animation_book);
+
+      KrampusReturns::Entities::DamageZone *damage_zone =
+         entity_factory.create_damage_zone_by_player(
+            on_map,
+            point_of_impact_x,
+            point_of_impact_y,
+            impact_width,
+            impact_height,
+            damage,
+            direction_of_force
+         );
+
+      add_entity_to_pool(damage_zone);
+
+      return;
+    body_dependency_symbols:
+      - KrampusReturns::Entities::DamageZone
+
+
   - name: game_event_func
     virtual: true
     override: true
@@ -2138,6 +2196,18 @@ functions:
                 // TODO: spawn teh element here
                 // HERE
                 //spawn_flash_effect("flash_fx1", 200, 200);
+               create_damage_zone_by_player(
+                  currently_active_map_name, // NOTE: this could eventually be a bug. The map where the 
+                                             // impact occurs should be transmitted from the time of impact.
+                                             // Delayed impacts occurred between door changes could spawn in 
+                                             // the wrong room, for example... I think...
+                  as_damage_zone_by_player->get_point_of_impact_x(),
+                  as_damage_zone_by_player->get_point_of_impact_y(),
+                  as_damage_zone_by_player->get_impact_width(),
+                  as_damage_zone_by_player->get_impact_height(),
+                  as_damage_zone_by_player->get_damage(),
+                  as_damage_zone_by_player->get_direction_of_force()
+               );
              }
          }},
          { "spawn_flash_effect", [this, ev, time_now](){
@@ -2663,5 +2733,7 @@ dependencies:
     headers: [ ChatGPT/Seeker.hpp ]
   - symbol: KrampusReturns::GameEventDatas::SpawnDamageZoneByPlayer
     headers: [ KrampusReturns/GameEventDatas/SpawnDamageZoneByPlayer.hpp ]
+  - symbol: KrampusReturns::Entities::DamageZone
+    headers: [ KrampusReturns/Entities/DamageZone.hpp ]
 
 

@@ -77,7 +77,8 @@
   "KrampusReturns/Entities/DamageZone": [
     "KrampusReturns/Entities/Krampus",
     "KrampusReturns/EntityFactory",
-    "KrampusReturns/GameEventDatas/SpawnDamageZoneByPlayer"
+    "KrampusReturns/GameEventDatas/SpawnDamageZoneByPlayer",
+    "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory": [
     "KrampusReturns/EntityFactory",

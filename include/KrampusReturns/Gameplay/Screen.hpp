@@ -18,6 +18,7 @@
 #include <AllegroFlare/TileMaps/TileMap.hpp>
 #include <AllegroFlare/Vec2D.hpp>
 #include <ChatGPT/Enemy.hpp>
+#include <KrampusReturns/Entities/DamageZone.hpp>
 #include <KrampusReturns/Entities/Krampus.hpp>
 #include <KrampusReturns/KrampusController.hpp>
 #include <KrampusReturns/Level.hpp>
@@ -91,6 +92,7 @@ namespace KrampusReturns
          KrampusReturns::Level current_level_data;
          std::string main_background_music_identifier;
          ALLEGRO_BITMAP* little_shadow_bitmap;
+         KrampusReturns::Entities::DamageZone* DUMMY_DEP;
          void move_krampus_to_first_spawn_point_or_default(KrampusReturns::Entities::Krampus* krampus=nullptr, std::string map_name="[unset-map_name]");
          void initialize_shader();
          void initialize_camera();
@@ -120,6 +122,7 @@ namespace KrampusReturns
          bool get_show_tile_mesh() const;
          bool get_show_collision_tile_mesh() const;
          AllegroFlare::FrameAnimation::Book &get_animation_book_ref();
+         void NOTE();
          void set_state(uint32_t state=STATE_UNDEF, float time_now=al_get_time());
          void update_state(float time_now=al_get_time());
          ALLEGRO_COLOR get_sparkle_win_color();
@@ -173,6 +176,7 @@ namespace KrampusReturns
          virtual void primary_timer_func() override;
          void shake_camera(float intensity=1.0, float duration=2.0, float time_now=al_get_time());
          void spawn_flash_effect(std::string type_str="[unset-type_str]", float x=0.0f, float y=0.0f);
+         void create_damage_zone_by_player(std::string on_map="[unset-on_map]", float point_of_impact_x=0.0f, float point_of_impact_y=0.0f, float impact_width=20.0f, float impact_height=8.0f, int damage=1, uint32_t direction_of_force=KrampusReturns::Entities::DamageZone::DIRECTION_OF_FORCE_UNDEF);
          virtual void game_event_func(AllegroFlare::GameEvent* ev=nullptr) override;
          virtual void key_char_func(ALLEGRO_EVENT* event=nullptr) override;
          virtual void key_up_func(ALLEGRO_EVENT* event=nullptr) override;

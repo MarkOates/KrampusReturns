@@ -41,7 +41,7 @@ namespace KrampusReturns
       KrampusReturns::Entities::FlashEffect* create_flash_fx1(std::string on_map="[unset-on_map]", float x=0.0f, float y=0.0f) const;
       ChatGPT::Enemy* create_skeleton_enemy(std::string on_map="[unset-on_map]", float x=0.0f, float y=0.0f, std::string animation="[unset-animation]") const;
       ChatGPT::Enemy* create_skull_head_enemy(std::string on_map="[unset-on_map]", float x=0.0f, float y=0.0f, std::string animation="[unset-animation]", AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target=nullptr) const;
-      KrampusReturns::Entities::DamageZone* create_krampus_attack_damage_zone(std::string on_map="[unset-on_map]", float x=0.0f, float y=0.0f, float w=20.0f, float h=8.0f, int damage=1, uint32_t direction_of_force=KrampusReturns::Entities::DamageZone::DIRECTION_OF_FORCE_UNDEF);
+      KrampusReturns::Entities::DamageZone* create_damage_zone_by_player(std::string on_map="[unset-on_map]", float x=0.0f, float y=0.0f, float w=20.0f, float h=8.0f, int damage=1, uint32_t direction_of_force=KrampusReturns::Entities::DamageZone::DIRECTION_OF_FORCE_UNDEF);
       ChatGPT::Enemy* create_teleporting_boss_enemy(std::string on_map="[unset-on_map]", float x=0.0f, float y=0.0f, float area_width=0.0f, float area_height=0.0f, std::string animation="[unset-animation]", AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target=nullptr) const;
    };
 }

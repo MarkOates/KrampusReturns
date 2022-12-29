@@ -591,7 +591,7 @@ table td
   <td class="method">create_skull_head_enemy(std::string on_map=&quot;[unset-on_map]&quot;, float x=0.0f, float y=0.0f, std::string animation=&quot;[unset-animation]&quot;, AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target=nullptr)</td>
 </tr>
 <tr>
-  <td class="method">create_krampus_attack_damage_zone(std::string on_map=&quot;[unset-on_map]&quot;, float x=0.0f, float y=0.0f, float w=20.0f, float h=8.0f, int damage=1, uint32_t direction_of_force=KrampusReturns::Entities::DamageZone::DIRECTION_OF_FORCE_UNDEF)</td>
+  <td class="method">create_damage_zone_by_player(std::string on_map=&quot;[unset-on_map]&quot;, float x=0.0f, float y=0.0f, float w=20.0f, float h=8.0f, int damage=1, uint32_t direction_of_force=KrampusReturns::Entities::DamageZone::DIRECTION_OF_FORCE_UNDEF)</td>
 </tr>
 <tr>
   <td class="method">create_teleporting_boss_enemy(std::string on_map=&quot;[unset-on_map]&quot;, float x=0.0f, float y=0.0f, float area_width=0.0f, float area_height=0.0f, std::string animation=&quot;[unset-animation]&quot;, AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target=nullptr)</td>
@@ -968,8 +968,15 @@ table td
   <td class="property">STATE_SHUTDOWN</td>
   <td class="property">uint32_t</td>
 </tr>
+<tr>
+  <td class="property">DUMMY_DEP</td>
+  <td class="property">KrampusReturns::Entities::DamageZone*</td>
+</tr>
     </table>
      <table>
+<tr>
+  <td class="method">NOTE()</td>
+</tr>
 <tr>
   <td class="method">set_state(uint32_t state=STATE_UNDEF, float time_now=al_get_time())</td>
 </tr>
@@ -1155,6 +1162,9 @@ table td
 </tr>
 <tr>
   <td class="method">spawn_flash_effect(std::string type_str=&quot;[unset-type_str]&quot;, float x=0.0f, float y=0.0f)</td>
+</tr>
+<tr>
+  <td class="method">create_damage_zone_by_player(std::string on_map=&quot;[unset-on_map]&quot;, float point_of_impact_x=0.0f, float point_of_impact_y=0.0f, float impact_width=20.0f, float impact_height=8.0f, int damage=1, uint32_t direction_of_force=KrampusReturns::Entities::DamageZone::DIRECTION_OF_FORCE_UNDEF)</td>
 </tr>
 <tr>
   <td class="method">game_event_func(AllegroFlare::GameEvent* ev=nullptr)</td>
@@ -1400,6 +1410,9 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::GameEventDatas::SpawnDamageZoneByPlayer&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/GameEventDatas/SpawnDamageZoneByPlayer.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Entities::DamageZone&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Entities/DamageZone.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -2150,7 +2163,8 @@ table td
   "KrampusReturns/Entities/DamageZone": [
     "KrampusReturns/Entities/Krampus",
     "KrampusReturns/EntityFactory",
-    "KrampusReturns/GameEventDatas/SpawnDamageZoneByPlayer"
+    "KrampusReturns/GameEventDatas/SpawnDamageZoneByPlayer",
+    "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory": [
     "KrampusReturns/EntityFactory",

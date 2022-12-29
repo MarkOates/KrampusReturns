@@ -20,6 +20,7 @@
 #include <ChatGPT/Seeker.hpp>
 #include <KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.hpp>
 #include <KrampusReturns/Entities/Blob.hpp>
+#include <KrampusReturns/Entities/DamageZone.hpp>
 #include <KrampusReturns/EntityFactory.hpp>
 #include <KrampusReturns/GameEventDatas/GoalpostReached.hpp>
 #include <KrampusReturns/GameEventDatas/SpawnDamageZoneByPlayer.hpp>
@@ -86,6 +87,7 @@ Screen::Screen(AllegroFlare::BitmapBin* bitmap_bin, AllegroFlare::FontBin* font_
    , current_level_data()
    , main_background_music_identifier("[unnset-main_background_music_identifier]")
    , little_shadow_bitmap(nullptr)
+   , DUMMY_DEP(nullptr)
 {
 }
 
@@ -166,6 +168,14 @@ AllegroFlare::FrameAnimation::Book &Screen::get_animation_book_ref()
    return animation_book;
 }
 
+
+void Screen::NOTE()
+{
+   // Interesting new pattern.  A  from an external class is used to initialize a value, but the type
+   // is not picked up by the quintessence extrapolation. So, as a HACK, I'm adding a dummy property
+   // DUMMY_DEP so it will list the extrenal class as a dependency (and include the header).
+   return;
+}
 
 void Screen::set_state(uint32_t state, float time_now)
 {
@@ -1985,6 +1995,34 @@ void Screen::spawn_flash_effect(std::string type_str, float x, float y)
    return;
 }
 
+void Screen::create_damage_zone_by_player(std::string on_map, float point_of_impact_x, float point_of_impact_y, float impact_width, float impact_height, int damage, uint32_t direction_of_force)
+{
+   if (!(currently_active_map))
+   {
+      std::stringstream error_message;
+      error_message << "[Screen::create_damage_zone_by_player]: error: guard \"currently_active_map\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Screen::create_damage_zone_by_player: error: guard \"currently_active_map\" not met");
+   }
+   KrampusReturns::EntityFactory entity_factory;
+      entity_factory.set_animation_book(&animation_book);
+
+   KrampusReturns::Entities::DamageZone *damage_zone =
+      entity_factory.create_damage_zone_by_player(
+         on_map,
+         point_of_impact_x,
+         point_of_impact_y,
+         impact_width,
+         impact_height,
+         damage,
+         direction_of_force
+      );
+
+   add_entity_to_pool(damage_zone);
+
+   return;
+}
+
 void Screen::game_event_func(AllegroFlare::GameEvent* ev)
 {
    if (!(ev))
@@ -2037,6 +2075,18 @@ void Screen::game_event_func(AllegroFlare::GameEvent* ev)
              // TODO: spawn teh element here
              // HERE
              //spawn_flash_effect("flash_fx1", 200, 200);
+            create_damage_zone_by_player(
+               currently_active_map_name, // NOTE: this could eventually be a bug. The map where the 
+                                          // impact occurs should be transmitted from the time of impact.
+                                          // Delayed impacts occurred between door changes could spawn in 
+                                          // the wrong room, for example... I think...
+               as_damage_zone_by_player->get_point_of_impact_x(),
+               as_damage_zone_by_player->get_point_of_impact_y(),
+               as_damage_zone_by_player->get_impact_width(),
+               as_damage_zone_by_player->get_impact_height(),
+               as_damage_zone_by_player->get_damage(),
+               as_damage_zone_by_player->get_direction_of_force()
+            );
           }
       }},
       { "spawn_flash_effect", [this, ev, time_now](){

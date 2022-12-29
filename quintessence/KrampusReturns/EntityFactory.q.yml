@@ -309,7 +309,7 @@ functions:
       - ChatGPT::Seeker
 
 
-  - name: create_krampus_attack_damage_zone
+  - name: create_damage_zone_by_player
     type: KrampusReturns::Entities::DamageZone*
     parameters:
       - name: on_map
