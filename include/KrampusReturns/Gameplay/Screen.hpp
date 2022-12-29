@@ -176,6 +176,7 @@ namespace KrampusReturns
          virtual void primary_timer_func() override;
          void shake_camera(float intensity=1.0, float duration=2.0, float time_now=al_get_time());
          void spawn_flash_effect(std::string type_str="[unset-type_str]", float x=0.0f, float y=0.0f);
+         void emit_spawn_flash_fx_event(float x=0.0f, float y=0.0f, std::string type_str="flash_fx1");
          void create_damage_zone_by_player(std::string on_map="[unset-on_map]", float point_of_impact_x=0.0f, float point_of_impact_y=0.0f, float impact_width=20.0f, float impact_height=8.0f, int damage=1, uint32_t direction_of_force=KrampusReturns::Entities::DamageZone::DIRECTION_OF_FORCE_UNDEF);
          virtual void game_event_func(AllegroFlare::GameEvent* ev=nullptr) override;
          virtual void key_char_func(ALLEGRO_EVENT* event=nullptr) override;

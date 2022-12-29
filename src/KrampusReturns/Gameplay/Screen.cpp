@@ -1264,6 +1264,8 @@ void Screen::update_collisions_with_damaging_zones()
             {
                as_blob->take_damage(1);
                if (as_blob->get_health() <= 0) as_blob->set(PLEASE_DELETE);
+
+               emit_spawn_flash_fx_event(as_blob->get_place_ref().position.x, as_blob->get_place_ref().position.y);
                //std::cout << "---- BLOB HIT" << std::endl;
             }
             else if (
@@ -1274,6 +1276,11 @@ void Screen::update_collisions_with_damaging_zones()
             {
                as_chat_gpt_enemy->take_damage(1);
                if (as_chat_gpt_enemy->get_health() <= 0) as_chat_gpt_enemy->set(PLEASE_DELETE);
+
+               emit_spawn_flash_fx_event(
+                  as_chat_gpt_enemy->get_place_ref().position.x,
+                  as_chat_gpt_enemy->get_place_ref().position.y
+               );
                //std::cout << "-------- ChatGPT Enemy Hit!" << std::endl;
             }
 
@@ -1429,6 +1436,16 @@ void Screen::update_entities()
    // HACK: update is player fighting boss music
    AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* boss = find_boss();
    static bool boss_fight_triggered = false;
+   static bool boss_beaten = false; // TODO: <-- make this a member variable, and reset it when loading a level
+
+   if (boss_fight_triggered && !boss && !boss_beaten)
+   {
+      // omg boss is beaten yay!
+      boss_beaten = true;
+      event_emitter->emit_stop_all_music_tracks_event();
+      //stop_all_music();
+      event_emitter->emit_play_sound_effect_event("boss_beaten_chime");
+   }
    if (player_controlled_entity && boss)
    {
       std::pair<int, int> player_room_coords = calc_room_coords(player_controlled_entity);
@@ -2037,6 +2054,17 @@ void Screen::spawn_flash_effect(std::string type_str, float x, float y)
    return;
 }
 
+void Screen::emit_spawn_flash_fx_event(float x, float y, std::string type_str)
+{
+   event_emitter->emit_game_event(
+      AllegroFlare::GameEvent(
+         "spawn_flash_effect", 
+         new KrampusReturns::GameEventDatas::SpawnFlashFX(type_str, x, y)
+      )
+   );
+   return;
+}
+
 void Screen::create_damage_zone_by_player(std::string on_map, float point_of_impact_x, float point_of_impact_y, float impact_width, float impact_height, int damage, uint32_t direction_of_force)
 {
    if (!(currently_active_map))
@@ -2144,7 +2172,11 @@ void Screen::game_event_func(AllegroFlare::GameEvent* ev)
              }
              KrampusReturns::GameEventDatas::SpawnFlashFX *as_spawn_flash_fx =
                 static_cast<KrampusReturns::GameEventDatas::SpawnFlashFX*>(ev->get_data());
-             spawn_flash_effect("flash_fx1", 200, 200);
+             spawn_flash_effect(
+               as_spawn_flash_fx->get_animation_name(),
+               as_spawn_flash_fx->get_x(),
+               as_spawn_flash_fx->get_y()
+             );
           }
       }},
    };
