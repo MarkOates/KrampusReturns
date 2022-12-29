@@ -2,8 +2,9 @@
 
 namespace ChatGPT {
 
-Enemy::Enemy(int health, int attack)
+Enemy::Enemy(int max_health, int health, int attack)
     : AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D()
+    , max_health_(max_health)
     , health_(health)
     , attack_(attack)
     , state_(state_t::SPAWNING)
@@ -16,6 +17,7 @@ void Enemy::take_damage(int damage) {
     state_ = state_t::TAKING_DAMAGE;
 }
 
+int Enemy::get_max_health() const { return max_health_; }
 int Enemy::get_health() const { return health_; }
 int Enemy::get_attack() const { return attack_; }
 Enemy::state_t Enemy::get_state() const { return state_; }

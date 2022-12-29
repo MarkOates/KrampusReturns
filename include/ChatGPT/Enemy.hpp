@@ -20,9 +20,10 @@ public:
         DEAD
     };
 
-    Enemy(int health, int attack);
+    Enemy(int max_health, int health, int attack);
 
     void take_damage(int damage);
+    int get_max_health() const;
     int get_health() const;
     int get_attack() const;
     state_t get_state() const;
@@ -34,6 +35,7 @@ public:
     virtual void update() override;
 
 private:
+    int max_health_;
     int health_;
     int attack_;
     state_t state_;

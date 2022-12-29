@@ -1918,8 +1918,16 @@ void Screen::draw_hud()
       bool player_fighting_boss = player_controled_entity_in_same_room_as_boss();
       if (player_fighting_boss)
       {
-         int boss_max_health = 20;
-         int boss_health = 18;
+         AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* boss = find_boss();
+         ChatGPT::Enemy *enemy = dynamic_cast<ChatGPT::Enemy*>(boss);
+         if (!enemy)
+         {
+            AllegroFlare::Errors::throw_error("KrampusReturns::Gameplay::Screen::draw_hud", "Unexpectedly, oss is a "
+                                              "nullptr, but somehow we got inside logic that expects it not to be.");
+         }
+
+         int boss_max_health = enemy->get_max_health();
+         int boss_health = enemy->get_health();
          AllegroFlare::Elements::HealthBars::Classic boss_health_bar(boss_max_health, boss_health);
          boss_health_bar.set_bar_width(32);
          boss_health_bar.set_bar_spacing(40);

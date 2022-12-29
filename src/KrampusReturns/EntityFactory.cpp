@@ -201,9 +201,10 @@ ChatGPT::Enemy* EntityFactory::create_skeleton_enemy(std::string on_map, float x
    //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls
    //headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/MovementStrategies2D/ReflectOffWalls.hpp ]
 
-   int health = 1;
+   int max_health = 1;
+   int health = max_health;
    int attack = 1;
-   ChatGPT::Enemy* result = new ChatGPT::Enemy(health, attack);
+   ChatGPT::Enemy* result = new ChatGPT::Enemy(max_health, health, attack);
    result->set_animation_book(get_animation_book());
    result->set_animation(animation);
    result->get_place_ref().size = { 12, 4 };
@@ -232,9 +233,10 @@ ChatGPT::Enemy* EntityFactory::create_skull_head_enemy(std::string on_map, float
    //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls
    //headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/MovementStrategies2D/ReflectOffWalls.hpp ]
 
-   int health = 1;
+   int max_health = 1;
+   int health = max_health;
    int attack = 1;
-   ChatGPT::Enemy* result = new ChatGPT::Enemy(health, attack);
+   ChatGPT::Enemy* result = new ChatGPT::Enemy(max_health, health, attack);
    result->set_animation_book(get_animation_book());
    result->get_place_ref().size = { 8, 4 };
    //result->get_place_ref().scale = { 0.8, 0.8 };
@@ -264,9 +266,10 @@ ChatGPT::Enemy* EntityFactory::create_teleporting_boss_enemy(std::string on_map,
    //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls
    //headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/MovementStrategies2D/ReflectOffWalls.hpp ]
 
-   int health = 1;
+   int max_health = 20;
+   int health = max_health;
    int attack = 1;
-   ChatGPT::Enemy* result = new ChatGPT::Enemy(health, attack);
+   ChatGPT::Enemy* result = new ChatGPT::Enemy(max_health, health, attack);
    result->set_animation_book(get_animation_book());
    result->set_animation(animation);
    result->set_bitmap_alignment_strategy("bottom_centered");
