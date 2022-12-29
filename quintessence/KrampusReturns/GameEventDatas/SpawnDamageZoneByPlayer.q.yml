@@ -9,9 +9,39 @@ parent_classes:
 properties:
 
 
-  - name: property
-    type: std::string
-    init_with: '"[unset-property]"'
+  - name: point_of_impact_x
+    type: float
+    init_with: 0.0f
+    constructor_arg: true
+    getter: true
+
+  - name: point_of_impact_y
+    type: float
+    init_with: 0.0f
+    constructor_arg: true
+    getter: true
+
+  - name: impact_width
+    type: float
+    init_with: 1.0f
+    constructor_arg: true
+    getter: true
+
+  - name: impact_height
+    type: float
+    init_with: 1.0f
+    constructor_arg: true
+    getter: true
+
+  - name: damage
+    type: int
+    init_with: 1
+    constructor_arg: true
+    getter: true
+
+  - name: direction_of_force
+    type: int32_t
+    init_with: KrampusReturns::Entities::DamageZone::DIRECTION_OF_FORCE_UNDEF
     constructor_arg: true
     getter: true
 
@@ -21,11 +51,28 @@ properties:
     static: true
     constexpr: true
 
+  - name: DUMMY_DEP
+    type: KrampusReturns::Entities::DamageZone*
+    init_with: nullptr
+
+
+functions:
+
+
+  - name: NOTE
+    body: |
+      // Interesting new pattern.  A `type` from an external class is used to initialize a value, but the type
+      // is not picked up by the quintessence extrapolation. So, as a HACK, I'm adding a dummy property
+      // DUMMY_DEP so it will list the extrenal class as a dependency (and include the header).
+      return;
+
 
 dependencies:
 
 
   - symbol: AllegroFlare::GameEventDatas::Base
     headers: [ AllegroFlare/GameEventDatas/Base.hpp ]
+  - symbol: KrampusReturns::Entities::DamageZone
+    headers: [ KrampusReturns/Entities/DamageZone.hpp ]
 
 

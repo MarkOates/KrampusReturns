@@ -70,6 +70,15 @@
     "KrampusReturns/Runner",
     "KrampusReturns/TMJObjectLoader"
   ],
+  "KrampusReturns/GameEventDatas/SpawnDamageZoneByPlayer": [
+    "KrampusReturns/Entities/Krampus",
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "KrampusReturns/Entities/DamageZone": [
+    "KrampusReturns/Entities/Krampus",
+    "KrampusReturns/EntityFactory",
+    "KrampusReturns/GameEventDatas/SpawnDamageZoneByPlayer"
+  ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory": [
     "KrampusReturns/EntityFactory",
     "KrampusReturns/Gameplay/Screen"
@@ -112,9 +121,6 @@
     "KrampusReturns/Gameplay/Screen"
   ],
   "ChatGPT/Teleporting": [
-    "KrampusReturns/EntityFactory"
-  ],
-  "KrampusReturns/Entities/DamageZone": [
     "KrampusReturns/EntityFactory"
   ],
   "AllegroFlare/GameEventDatas/Base": [
@@ -290,9 +296,6 @@
   "KrampusReturns/Level": [
     "KrampusReturns/Gameplay/Screen",
     "KrampusReturns/World"
-  ],
-  "KrampusReturns/GameEventDatas/SpawnDamageZoneByPlayer": [
-    "KrampusReturns/Gameplay/Screen"
   ],
   "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [
     "KrampusReturns/Runner"

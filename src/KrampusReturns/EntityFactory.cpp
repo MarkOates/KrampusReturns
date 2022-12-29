@@ -273,6 +273,7 @@ KrampusReturns::Entities::DamageZone* EntityFactory::create_krampus_attack_damag
 
    result->get_place_ref().position = { x, y };
    result->get_place_ref().size = { w, h };
+   result->get_place_ref().align = { 0.5, 0.5 }; // conceptually, the "position" is the central point of impact.
    result->set(ON_MAP_NAME, on_map);
    return result;
 }

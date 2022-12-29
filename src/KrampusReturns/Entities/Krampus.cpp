@@ -3,6 +3,8 @@
 #include <KrampusReturns/Entities/Krampus.hpp>
 
 #include <AllegroFlare/Errors.hpp>
+#include <KrampusReturns/Entities/DamageZone.hpp>
+#include <KrampusReturns/GameEventDatas/SpawnDamageZoneByPlayer.hpp>
 #include <cmath>
 #include <iostream>
 #include <sstream>
@@ -205,14 +207,54 @@ void Krampus::update()
          }
          else if (!attack_hit_activated && (get_current_animation_frame_num() >= ANIMATION_FRAME_NUM_ON_HIT))
          {
+            do_impact_hit();
             // TODO: add create emit damage zone
-            emit_bump_camera_shake_event();
-            emit_smash_club_sound_effect();
+            //emit_bump_camera_shake_event();
+            //emit_smash_club_sound_effect();
             attack_hit_activated = true;
          }
       break;
    }
 
+   return;
+}
+
+void Krampus::do_impact_hit()
+{
+   // NOTE: Data would vary by weapon, for for now, just a basic hit with relatively reasonable range and damage
+   float point_of_impact_x = get_place_ref().position.x;
+   float point_of_impact_y = get_place_ref().position.y;
+   float impact_width = 32;
+   float impact_height = 16;
+   int damage = 1;
+   int32_t direction_of_force = KrampusReturns::Entities::DamageZone::DIRECTION_OF_FORCE_UNDEF;
+
+   float x_distance_from_krampus_center = impact_width * 0.5;
+   if (is_facing_right())
+   {
+      point_of_impact_x += x_distance_from_krampus_center;
+      direction_of_force = KrampusReturns::Entities::DamageZone::DIRECTION_OF_FORCE_RIGHT;
+   }
+   else
+   {
+      point_of_impact_x -= x_distance_from_krampus_center;
+      direction_of_force = KrampusReturns::Entities::DamageZone::DIRECTION_OF_FORCE_LEFT;
+   }
+
+   event_emitter->emit_game_event(
+      AllegroFlare::GameEvent("spawn_damage_zone_by_player",
+         new KrampusReturns::GameEventDatas::SpawnDamageZoneByPlayer(
+            point_of_impact_x,
+            point_of_impact_y,
+            impact_width,
+            impact_height,
+            damage,
+            direction_of_force
+         )
+      )
+   );
+   emit_bump_camera_shake_event();
+   emit_smash_club_sound_effect();
    return;
 }
 
@@ -330,6 +372,16 @@ void Krampus::walk_left()
       get_velocity_ref().position.x = -1.5;
    }
    return;
+}
+
+bool Krampus::is_facing_left()
+{
+   return get_bitmap_flip_h();
+}
+
+bool Krampus::is_facing_right()
+{
+   return !get_bitmap_flip_h();
 }
 
 void Krampus::face_left()

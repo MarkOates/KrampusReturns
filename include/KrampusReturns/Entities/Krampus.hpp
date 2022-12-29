@@ -48,6 +48,7 @@ namespace KrampusReturns
          bool get_invincible_from_taking_damage() const;
          void initialize();
          virtual void update() override;
+         void do_impact_hit();
          void emit_bump_camera_shake_event();
          void emit_smash_club_sound_effect();
          void emit_take_damage_sound_effect();
@@ -59,6 +60,8 @@ namespace KrampusReturns
          void walk_up();
          void walk_down();
          void walk_left();
+         bool is_facing_left();
+         bool is_facing_right();
          void face_left();
          void face_right();
          void attack();

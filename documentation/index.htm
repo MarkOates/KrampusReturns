@@ -436,6 +436,9 @@ table td
   <td class="method">update()</td>
 </tr>
 <tr>
+  <td class="method">do_impact_hit()</td>
+</tr>
+<tr>
   <td class="method">emit_bump_camera_shake_event()</td>
 </tr>
 <tr>
@@ -469,6 +472,12 @@ table td
   <td class="method">walk_left()</td>
 </tr>
 <tr>
+  <td class="method">is_facing_left()</td>
+</tr>
+<tr>
+  <td class="method">is_facing_right()</td>
+</tr>
+<tr>
   <td class="method">face_left()</td>
 </tr>
 <tr>
@@ -499,6 +508,12 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;sin&quot;, &quot;headers&quot;=&gt;[&quot;cmath&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::GameEventDatas::SpawnDamageZoneByPlayer&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/GameEventDatas/SpawnDamageZoneByPlayer.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Entities::DamageZone&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Entities/DamageZone.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -664,19 +679,49 @@ table td
     <h3 id="quintessence/KrampusReturns/GameEventDatas/SpawnDamageZoneByPlayer.q.yml">quintessence/KrampusReturns/GameEventDatas/SpawnDamageZoneByPlayer.q.yml</h3>
      <table>
 <tr>
-  <td class="property">property</td>
-  <td class="property">std::string</td>
+  <td class="property">point_of_impact_x</td>
+  <td class="property">float</td>
+</tr>
+<tr>
+  <td class="property">point_of_impact_y</td>
+  <td class="property">float</td>
+</tr>
+<tr>
+  <td class="property">impact_width</td>
+  <td class="property">float</td>
+</tr>
+<tr>
+  <td class="property">impact_height</td>
+  <td class="property">float</td>
+</tr>
+<tr>
+  <td class="property">damage</td>
+  <td class="property">int</td>
+</tr>
+<tr>
+  <td class="property">direction_of_force</td>
+  <td class="property">int32_t</td>
 </tr>
 <tr>
   <td class="property">TYPE</td>
   <td class="property">char*</td>
 </tr>
+<tr>
+  <td class="property">DUMMY_DEP</td>
+  <td class="property">KrampusReturns::Entities::DamageZone*</td>
+</tr>
     </table>
      <table>
+<tr>
+  <td class="method">NOTE()</td>
+</tr>
     </table>
      <table>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::GameEventDatas::Base&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/GameEventDatas/Base.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Entities::DamageZone&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Entities/DamageZone.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -2098,6 +2143,15 @@ table td
     "KrampusReturns/Runner",
     "KrampusReturns/TMJObjectLoader"
   ],
+  "KrampusReturns/GameEventDatas/SpawnDamageZoneByPlayer": [
+    "KrampusReturns/Entities/Krampus",
+    "KrampusReturns/Gameplay/Screen"
+  ],
+  "KrampusReturns/Entities/DamageZone": [
+    "KrampusReturns/Entities/Krampus",
+    "KrampusReturns/EntityFactory",
+    "KrampusReturns/GameEventDatas/SpawnDamageZoneByPlayer"
+  ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory": [
     "KrampusReturns/EntityFactory",
     "KrampusReturns/Gameplay/Screen"
@@ -2140,9 +2194,6 @@ table td
     "KrampusReturns/Gameplay/Screen"
   ],
   "ChatGPT/Teleporting": [
-    "KrampusReturns/EntityFactory"
-  ],
-  "KrampusReturns/Entities/DamageZone": [
     "KrampusReturns/EntityFactory"
   ],
   "AllegroFlare/GameEventDatas/Base": [
@@ -2318,9 +2369,6 @@ table td
   "KrampusReturns/Level": [
     "KrampusReturns/Gameplay/Screen",
     "KrampusReturns/World"
-  ],
-  "KrampusReturns/GameEventDatas/SpawnDamageZoneByPlayer": [
-    "KrampusReturns/Gameplay/Screen"
   ],
   "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [
     "KrampusReturns/Runner"
