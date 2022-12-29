@@ -268,7 +268,7 @@ KrampusReturns::Entities::DamageZone* EntityFactory::create_damage_zone_by_playe
    result->set_animation("shadow_small");
    result->set_bitmap_alignment_strategy("bottom_centered");
 
-   // DEBUG: TEST:
+   // TESTING DEBUG
    result->set_draw_debug(true);
 
    result->get_place_ref().position = { x, y };

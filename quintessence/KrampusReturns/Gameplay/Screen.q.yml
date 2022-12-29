@@ -999,7 +999,7 @@ functions:
       KrampusReturns::Gameplay::Screen* gameplay_screen = as_custom_user_data->first;
 
       KrampusReturns::EntityFactory entity_factory;
-      //entity_factory.set_init_entities_drawing_debug(true); // <--- DEBUGGING: TESTING:
+      //entity_factory.set_init_entities_drawing_debug(true); // <--- TESTING DEBUG:
       entity_factory.set_event_emitter(gameplay_screen->event_emitter);
       entity_factory.set_bitmap_bin(gameplay_screen->bitmap_bin);
       entity_factory.set_animation_book(&gameplay_screen->animation_book);
@@ -1724,7 +1724,6 @@ functions:
       // potentially being called before init?  And the animation book is not initialized. Oh well.
       //if (!animation_book_initialized) initialize_animation_book();
 
-      //std::cout << "HHHHHHHHHHHEREE" << std::endl; // DEBUGGING
       //ALLEGRO_BITMAP *little_shadow_bitmap = nullptr;
       //little_shadow_bitmap = animation_book.get_still_frame("fly");
       //ALLEGRO_BITMAP *little_shadow_bitmap = nullptr;
@@ -2133,6 +2132,8 @@ functions:
       KrampusReturns::EntityFactory entity_factory;
          entity_factory.set_animation_book(&animation_book);
 
+      // DEBUG:
+
       KrampusReturns::Entities::DamageZone *damage_zone =
          entity_factory.create_damage_zone_by_player(
             on_map,
@@ -2279,7 +2280,7 @@ functions:
                "level_1_music"
             );
 
-            // DEBUG: // TESTING:
+            // TESTING DEBUG:
             load_level_and_start(&level);
 
             break;
@@ -2298,14 +2299,14 @@ functions:
                "level_1_music"
             );
 
-            // DEBUG: // TESTING:
+            // TESTING DEBUG
             load_level_and_start(&level);
 
             break;
          }
 
          case ALLEGRO_KEY_S:
-            // DEBUG: // TESTING:
+            // TESTING DEBUG
             event_emitter->emit_game_event(
                AllegroFlare::GameEvent(
                   "spawn_flash_effect", 

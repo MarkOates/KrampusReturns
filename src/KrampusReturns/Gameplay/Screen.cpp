@@ -883,7 +883,7 @@ void Screen::tmj_object_parse_callback_func(std::string object_class, float x, f
    KrampusReturns::Gameplay::Screen* gameplay_screen = as_custom_user_data->first;
 
    KrampusReturns::EntityFactory entity_factory;
-   //entity_factory.set_init_entities_drawing_debug(true); // <--- DEBUGGING: TESTING:
+   //entity_factory.set_init_entities_drawing_debug(true); // <--- TESTING DEBUG:
    entity_factory.set_event_emitter(gameplay_screen->event_emitter);
    entity_factory.set_bitmap_bin(gameplay_screen->bitmap_bin);
    entity_factory.set_animation_book(&gameplay_screen->animation_book);
@@ -1633,7 +1633,6 @@ void Screen::draw_entities()
    // potentially being called before init?  And the animation book is not initialized. Oh well.
    //if (!animation_book_initialized) initialize_animation_book();
 
-   //std::cout << "HHHHHHHHHHHEREE" << std::endl; // DEBUGGING
    //ALLEGRO_BITMAP *little_shadow_bitmap = nullptr;
    //little_shadow_bitmap = animation_book.get_still_frame("fly");
    //ALLEGRO_BITMAP *little_shadow_bitmap = nullptr;
@@ -2007,6 +2006,8 @@ void Screen::create_damage_zone_by_player(std::string on_map, float point_of_imp
    KrampusReturns::EntityFactory entity_factory;
       entity_factory.set_animation_book(&animation_book);
 
+   // DEBUG:
+
    KrampusReturns::Entities::DamageZone *damage_zone =
       entity_factory.create_damage_zone_by_player(
          on_map,
@@ -2161,7 +2162,7 @@ void Screen::key_char_func(ALLEGRO_EVENT* event)
             "level_1_music"
          );
 
-         // DEBUG: // TESTING:
+         // TESTING DEBUG:
          load_level_and_start(&level);
 
          break;
@@ -2180,14 +2181,14 @@ void Screen::key_char_func(ALLEGRO_EVENT* event)
             "level_1_music"
          );
 
-         // DEBUG: // TESTING:
+         // TESTING DEBUG
          load_level_and_start(&level);
 
          break;
       }
 
       case ALLEGRO_KEY_S:
-         // DEBUG: // TESTING:
+         // TESTING DEBUG
          event_emitter->emit_game_event(
             AllegroFlare::GameEvent(
                "spawn_flash_effect", 
