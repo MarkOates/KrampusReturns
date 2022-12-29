@@ -191,7 +191,6 @@ void Screen::set_state(uint32_t state, float time_now)
    this->state = state;
    state_changed_at = time_now;
 
-   // HERE:
    switch(state)
    {
       case STATE_SHUTDOWN:
@@ -1222,7 +1221,6 @@ void Screen::update_collisions_with_damaging_zones()
 
    // TODO: Implement the body logic of this function for entities damaging enemies
 
-   // HERE:
    if (!player_krampus || player_krampus->get_invincible_from_taking_damage())
    {
       // Nothing. Don't test damage on krampus here.
@@ -1288,28 +1286,6 @@ void Screen::update_collisions_with_damaging_zones()
    }
 
 
-
-   //select_damages_enemies_entities_on_map
-   //select_damages_player_entities_on_map
-
-   //for (auto &enemy : enemies)
-   //{
-      //if (player_krampus->get_place_ref().collide(enemy->get_place_ref()))
-      //{
-         //player_krampus->take_hit(1);
-         //if (enemy->exists("type", "blob"))
-         //{
-            ////HERE:
-            //// TODO: tweak this logic so that the blob is "stunned" and can't take damage
-            //KrampusReturns::Entities::Blob* as_blob = static_cast<KrampusReturns::Entities::Blob*>(enemy);
-            //as_blob->take_damage(1);
-
-            //// NOTE: this should be in the blob itself
-            //if (as_blob->get_health() <= 0) as_blob->set(PLEASE_DELETE);
-         //}
-         ////enemy->take_hit(1);
-      //}
-   //}
    return;
 }
 
@@ -1622,6 +1598,9 @@ void Screen::update_player_collisions_with_collectables()
 
    for (auto &entity : collection_helper.select_collectable_by_player())
    {
+      // HERE
+      // get item type
+      //
       if (entity->get_place_ref().collide(player_x, player_y, 4, 4, 4, 4))
       {
          entity->set(PLEASE_DELETE);
@@ -2137,9 +2116,6 @@ void Screen::game_event_func(AllegroFlare::GameEvent* ev)
              }
              KrampusReturns::GameEventDatas::SpawnDamageZoneByPlayer *as_damage_zone_by_player =
                 static_cast<KrampusReturns::GameEventDatas::SpawnDamageZoneByPlayer*>(ev->get_data());
-             // TODO: spawn teh element here
-             // HERE
-             //spawn_flash_effect("flash_fx1", 200, 200);
             create_damage_zone_by_player(
                currently_active_map_name, // NOTE: this could eventually be a bug. The map where the 
                                           // impact occurs should be transmitted from the time of impact.
@@ -2306,7 +2282,6 @@ void Screen::key_down_func(ALLEGRO_EVENT* event)
       throw std::runtime_error("Screen::key_down_func: error: guard \"event\" not met");
    }
    // TODO: implement here
-   // HERE
    if (state == STATE_WAITING_KEYPRESS_TO_RETRY_LEVEL)
    {
       event_emitter->emit_game_event(AllegroFlare::GameEvent("retry_level"));

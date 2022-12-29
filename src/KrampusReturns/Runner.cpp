@@ -156,6 +156,7 @@ void Runner::initialize()
 
 
 
+
    // setup the pause screen
    pause_screen.set_font_bin(&font_bin);
    pause_screen.set_bitmap_bin(&bitmap_bin);
@@ -188,7 +189,7 @@ void Runner::initialize()
          "Santa has no choice. He must face his biggest fear...",
 
          //"[image showing santa appraoching krampus]",
-         "...and team up with his ultimate rival...",
+         "...and seek help from his ultimate rival...",
          //"[image showing krampus turned around]",
          "Krampus.",
       });
