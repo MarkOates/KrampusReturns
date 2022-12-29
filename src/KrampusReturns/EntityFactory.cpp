@@ -260,6 +260,7 @@ KrampusReturns::Entities::DamageZone* EntityFactory::create_krampus_attack_damag
 
    KrampusReturns::Entities::DamageZone* result = new KrampusReturns::Entities::DamageZone(damage);
    result->set("damages_enemies");
+   result->set("is_DamageZone_class");
    result->set(EPHEMERAL);
 
    // HACK: these two lines to set the animation book, even though it's not needed.
