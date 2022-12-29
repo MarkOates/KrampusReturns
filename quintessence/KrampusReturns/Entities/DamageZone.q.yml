@@ -1,0 +1,96 @@
+parent_classes:
+
+
+  - class: AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D
+    scope: public
+    init_with: ''
+
+
+properties:
+
+
+  - name: damage
+    type: int
+    init_with: 0
+    constructor_arg: true
+    getter: true
+    setter: true
+
+  - name: direction_of_force
+    type: uint32_t
+    init_with: DIRECTION_OF_FORCE_UNDEF
+    constructor_arg: true
+    getter: true
+    setter: true
+
+  - name: TYPE
+    type: char*
+    init_with: '(char*)"Entities/DamageZone"'
+    static: true
+    const: true
+    constexpr: true
+    
+  - name: DIRECTION_OF_FORCE_UNDEF
+    type: uint32_t
+    init_with: 0
+    static: true
+    const: true
+    constexpr: true
+
+  - name: DIRECTION_OF_FORCE_UP
+    type: uint32_t
+    init_with: 1
+    static: true
+    const: true
+    constexpr: true
+
+  - name: DIRECTION_OF_FORCE_DOWN
+    type: uint32_t
+    init_with: 2
+    static: true
+    const: true
+    constexpr: true
+
+  - name: DIRECTION_OF_FORCE_LEFT
+    type: uint32_t
+    init_with: 3
+    static: true
+    const: true
+    constexpr: true
+
+  - name: DIRECTION_OF_FORCE_RIGHT
+    type: uint32_t
+    init_with: 4
+    static: true
+    const: true
+    constexpr: true
+
+  - name: DIRECTION_OF_FORCE_OUT
+    type: uint32_t
+    init_with: 5
+    static: true
+    const: true
+    constexpr: true
+
+
+functions:
+
+
+  - name: TODO
+    body: |
+      // HACK: this class derives from FrameAnimated2D, which is silly. It should derive from a Base of some kind.
+      // Unfortunately, the current KrampusReturns game system relies more on FrameAnimated2D as a kind of base class
+      // so will continue to rely on that for now until it can be fixed later. Sorry for the confusion.
+      // Also, the TYPE property is completely unused in this context.
+      return;
+
+
+dependencies:
+
+
+  - symbol: KrampusReturns::Entities::Base
+    headers: [ KrampusReturns/Entities/Base.hpp ]
+  - symbol: AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D
+    headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D.hpp ]
+
+
