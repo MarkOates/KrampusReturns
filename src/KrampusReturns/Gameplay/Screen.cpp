@@ -1589,14 +1589,14 @@ void Screen::update_player_collisions_with_collectables()
    // TODO: allow this function to run without being coupled with a "player_controlled_entity"
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
 
-   std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> _entities = get_current_map_entities();
-   AllegroFlare::Prototypes::Platforming2D::EntityCollectionHelper collection_helper(&_entities);
+   //std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> _entities = get_current_map_entities();
+   //AllegroFlare::Prototypes::Platforming2D::EntityCollectionHelper collection_helper(&_entities);
 
    // NOTE: collisions here occcur with the origin of the player character (bottom center of the sprite)
    float player_x = player_controlled_entity->get_place_ref().position.x;
    float player_y = player_controlled_entity->get_place_ref().position.y;
 
-   for (auto &entity : collection_helper.select_collectable_by_player())
+   for (auto &entity : select_collectable_by_player_on_map(currently_active_map_name))
    {
       // HERE
       // get item type
@@ -2475,6 +2475,20 @@ std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> Screen:
    for (auto &entity : entity_pool)
    {
       if (!entity->exists("damages_enemies")) continue;
+      if (!entity->exists(ON_MAP_NAME, on_map_name)) continue;
+      result.push_back(entity);
+   }
+   return result;
+}
+
+std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> Screen::select_collectable_by_player_on_map(std::string on_map_name)
+{
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+
+   std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> result;
+   for (auto &entity : entity_pool)
+   {
+      if (!entity->exists(COLLECTABLE_BY_PLAYER)) continue;
       if (!entity->exists(ON_MAP_NAME, on_map_name)) continue;
       result.push_back(entity);
    }
