@@ -298,7 +298,9 @@ void Screen::update_state(float time_now)
             ALLEGRO_COLOR win_color_final = al_color_name("aquamarine");
             ALLEGRO_COLOR final_level_clear_color;
 
-            if (state_age > fade_out_starts_at_age)
+            if (state_age > fade_out_starts_at_age) // TODO: fix this bug where it repeats the fading from
+                                                    // strobe when in STATE_WAITING_KEYPRESS_TO_FINISH
+                                                    // after STATE_FINISHED_LEVEL
             {
                fade_out_to_white_text_counter =
                   std::min(1.0f, std::max(0.0f, (state_age - fade_out_starts_at_age) / fade_out_to_white_duration));
