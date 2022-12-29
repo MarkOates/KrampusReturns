@@ -151,9 +151,7 @@ namespace KrampusReturns
          void initialize_animation_book();
          void initialize();
          void reverse_gravity();
-         std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> select_enemies(std::string on_map_name="[unset-on_map_name]");
-         void update_enemy_collisions_with_damage_zones();
-         void update_player_collisions_with_damage_zones();
+         void update_collisions_with_damaging_zones();
          bool player_controled_entity_in_same_room_as_boss();
          void update_entities();
          void dump_entity_data();
@@ -188,6 +186,7 @@ namespace KrampusReturns
          std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> get_current_map_entities_y_sorted();
          std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> select_spawn_points_on_map_name(std::string map_name="[unset-map_name]");
          std::vector<ChatGPT::Enemy*> select_seekers_on_map_name(std::string map_name="[unset-map_name]");
+         std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> select_damages_player_entities_on_map(std::string on_map_name="[unset-on_map_name]");
          std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> select_damages_enemies_entities_on_map(std::string on_map_name="[unset-map_name]");
          AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* find_boss();
          int count_num_spawn_points_in_all_maps();

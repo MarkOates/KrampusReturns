@@ -1178,56 +1178,45 @@ void Screen::reverse_gravity()
    gravity_reversed = !gravity_reversed;
 }
 
-std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> Screen::select_enemies(std::string on_map_name)
+void Screen::update_collisions_with_damaging_zones()
 {
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
 
-   std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> result;
-   for (auto &entity : entity_pool)
-   {
-      if (!entity->exists("damages_player")) continue;
-      if (!entity->exists(ON_MAP_NAME, on_map_name)) continue;
-      
-      result.push_back(entity);
-   }
-   return result;
-}
+   std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> damages_player =
+      select_damages_player_entities_on_map(currently_active_map_name);
 
-void Screen::update_enemy_collisions_with_damage_zones()
-{
-   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
-
-   std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> enemies =
-      select_enemies(currently_active_map_name);
+   std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> damages_enemies =
+      select_damages_enemies_entities_on_map(currently_active_map_name);
 
    // NOTE: for now, one player controlled character evaluated:
    KrampusReturns::Entities::Krampus* player_krampus =
       static_cast<KrampusReturns::Entities::Krampus*>(player_controlled_entity);
 
-   for (auto &enemy : enemies)
-   {
-      if (player_krampus->get_place_ref().collide(enemy->get_place_ref()))
-      {
-         player_krampus->take_hit(1);
-         if (enemy->exists("type", "blob"))
-         {
-            // HERE:
-            // TODO: tweak this logic so that the blob is "stunned" and can't take damage
-            KrampusReturns::Entities::Blob* as_blob = static_cast<KrampusReturns::Entities::Blob*>(enemy);
-            as_blob->take_damage(1);
 
-            // NOTE: this should be in the blob itself
-            if (as_blob->get_health() <= 0) as_blob->set(PLEASE_DELETE);
-         }
-         //enemy->take_hit(1);
-      }
-   }
-   return;
-}
+   // TODO: Implement the body logic of this function
 
-void Screen::update_player_collisions_with_damage_zones()
-{
-   // NOTE: This does not appear to need to be implemented for the time being
+
+   //select_damages_enemies_entities_on_map
+   //select_damages_player_entities_on_map
+
+   //for (auto &enemy : enemies)
+   //{
+      //if (player_krampus->get_place_ref().collide(enemy->get_place_ref()))
+      //{
+         //player_krampus->take_hit(1);
+         //if (enemy->exists("type", "blob"))
+         //{
+            ////HERE:
+            //// TODO: tweak this logic so that the blob is "stunned" and can't take damage
+            //KrampusReturns::Entities::Blob* as_blob = static_cast<KrampusReturns::Entities::Blob*>(enemy);
+            //as_blob->take_damage(1);
+
+            //// NOTE: this should be in the blob itself
+            //if (as_blob->get_health() <= 0) as_blob->set(PLEASE_DELETE);
+         //}
+         ////enemy->take_hit(1);
+      //}
+   //}
    return;
 }
 
@@ -1396,10 +1385,10 @@ void Screen::update_entities()
    }
 
 
-   update_enemy_collisions_with_damage_zones();
+   update_collisions_with_damaging_zones();
 
 
-   update_player_collisions_with_damage_zones();
+   //update_player_collisions_with_damage_zones();
 
 
    // update the player colliding on the doors
@@ -2313,12 +2302,25 @@ std::vector<ChatGPT::Enemy*> Screen::select_seekers_on_map_name(std::string map_
    return result;
 }
 
+std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> Screen::select_damages_player_entities_on_map(std::string on_map_name)
+{
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+
+   std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> result;
+   for (auto &entity : entity_pool)
+   {
+      if (!entity->exists("damages_player")) continue;
+      if (!entity->exists(ON_MAP_NAME, on_map_name)) continue;
+      result.push_back(entity);
+   }
+   return result;
+}
+
 std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> Screen::select_damages_enemies_entities_on_map(std::string on_map_name)
 {
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
 
    std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> result;
-   //std::vector<ChatGPT::Enemy*> result;
    for (auto &entity : entity_pool)
    {
       if (!entity->exists("damages_enemies")) continue;
