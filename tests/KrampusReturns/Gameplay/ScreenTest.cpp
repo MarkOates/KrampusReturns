@@ -57,7 +57,7 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
         { "intro_music", { "krampus-intro-1.wav", false } },
         { "level_1_music", { "8bit-dungeon-level-kevin-macleod-80kbps.ogg", true, "restart", 0.5 } },
         { "boss_music", { "krampus-boss-01.ogg", true, "restart", 0.78 } },
-        { "dead_krampus_music", { "dead-krampus-01.ogg", true, "restart", 0.78 } },
+        { "dead_krampus_music", { "dead-krampus-01.ogg", false, "restart", 0.78 } },
         { "win_music", { "win-music-01.ogg", false, "restart" } },
         //{ "fail_music", { "fail_moan.ogg", false} },
       });
