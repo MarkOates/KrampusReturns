@@ -1025,9 +1025,9 @@ functions:
              auto entity = entity_factory.create_blob("map_a", center.x, center.y);
              gameplay_screen->add_entity_to_pool(entity);
          }},
-         { "teleporting_boss", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
+         { "skull_head_boss", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
              AllegroFlare::Vec2D center = center_of(x, y, w, h);
-             auto entity = entity_factory.create_teleporting_boss_enemy(
+             auto entity = entity_factory.create_skull_head_boss_enemy(
                "map_a", center.x, center.y, w, h, "teleport_boss");
              entity->set("is_boss");
              gameplay_screen->add_entity_to_pool(entity);
@@ -1037,10 +1037,10 @@ functions:
              auto entity = entity_factory.create_skeleton_enemy("map_a", center.x, center.y, "skeleton");
              gameplay_screen->add_entity_to_pool(entity);
          }},
-         { "skull_head", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
+         { "flaming_skull", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
              AllegroFlare::Vec2D center = center_of(x, y, w, h);
              //gameplay_screen->player_controlled_entity;
-             auto entity = entity_factory.create_skull_head_enemy("map_a", center.x, center.y, "fly", nullptr);
+             auto entity = entity_factory.create_flaming_skull_enemy("map_a", center.x, center.y, "fly", nullptr);
              gameplay_screen->add_entity_to_pool(entity);
          }},
          { "door", [x, y, w, h, map_name, entity_factory, gameplay_screen](){

@@ -259,7 +259,7 @@ functions:
       - ChatGPT::Seeker
 
 
-  - name: create_skull_head_enemy
+  - name: create_flaming_skull_enemy
     type: ChatGPT::Enemy*
     const: true
     parameters:
@@ -314,7 +314,7 @@ functions:
       - ChatGPT::Seeker
 
 
-  - name: create_teleporting_boss_enemy
+  - name: create_skull_head_boss_enemy
     type: ChatGPT::Enemy*
     const: true
     parameters:
@@ -365,7 +365,7 @@ functions:
 
       result->get_place_ref().position = { x, y };
       result->set(ON_MAP_NAME, on_map);
-      result->set("seeker");
+      //result->set("seeker");
       return result;
     body_dependency_symbols:
       - AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls

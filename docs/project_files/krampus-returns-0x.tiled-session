@@ -1,4 +1,8 @@
 {
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
     "activeFile": "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-1-1-0x.tmj",
     "expandedProjectPaths": [
         "/Users/markoates/Repos/KrampusReturns/bin/programs/data"
@@ -9,16 +13,16 @@
             "scale": 2.5467,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 1609.3375741155219,
-                "y": 342.0112302194998
+                "x": 240.89998822004944,
+                "y": 331.8019397651863
             }
         },
         "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-2-1-0x.tmj": {
             "scale": 1.3317,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1199.5945032665013,
-                "y": 355.9360216264925
+                "x": 470.45130284598633,
+                "y": 347.6759029811519
             }
         },
         "/Users/markoates/tiles_dungeon_v1.1.tsx": {

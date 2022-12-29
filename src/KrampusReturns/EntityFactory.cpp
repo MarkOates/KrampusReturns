@@ -226,7 +226,7 @@ ChatGPT::Enemy* EntityFactory::create_skeleton_enemy(std::string on_map, float x
    return result;
 }
 
-ChatGPT::Enemy* EntityFactory::create_skull_head_enemy(std::string on_map, float x, float y, std::string animation, AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target) const
+ChatGPT::Enemy* EntityFactory::create_flaming_skull_enemy(std::string on_map, float x, float y, std::string animation, AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target) const
 {
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
    //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::Base
@@ -259,7 +259,7 @@ ChatGPT::Enemy* EntityFactory::create_skull_head_enemy(std::string on_map, float
    return result;
 }
 
-ChatGPT::Enemy* EntityFactory::create_teleporting_boss_enemy(std::string on_map, float x, float y, float area_width, float area_height, std::string animation, AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target) const
+ChatGPT::Enemy* EntityFactory::create_skull_head_boss_enemy(std::string on_map, float x, float y, float area_width, float area_height, std::string animation, AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target) const
 {
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
    //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::Base
@@ -286,7 +286,7 @@ ChatGPT::Enemy* EntityFactory::create_teleporting_boss_enemy(std::string on_map,
 
    result->get_place_ref().position = { x, y };
    result->set(ON_MAP_NAME, on_map);
-   result->set("seeker");
+   //result->set("seeker");
    return result;
 }
 
