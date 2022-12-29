@@ -64,41 +64,6 @@ functions:
       - AllegroFlare::Prototypes::Platforming2D::EntityFlagNames
 
 
-  - name: create_blob
-    const: true
-    type: KrampusReturns::Entities::Blob*
-    parameters:
-      - name: on_map
-        type: std::string
-        default_argument: '"[unset-on_map]"'
-      - name: x
-        type: float
-        default_argument: 0.0f
-      - name: y
-        type: float
-        default_argument: 0.0f
-    guards: [ get_animation_book() ]
-    parameters:
-    body: |
-      using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
-
-      KrampusReturns::Entities::Blob *result = new KrampusReturns::Entities::Blob();
-      result->set_animation_book(get_animation_book());
-      result->initialize();
-
-      result->get_place_ref().position = { x, y };
-      result->set(ON_MAP_NAME, on_map);
-
-      result->set("damages_player");
-
-      if (init_entities_drawing_debug) result->set_draw_debug(true);
-      //get_platforming_2d_ref().add_entity_to_pool(result);
-      return result;
-    body_dependency_symbols:
-      - KrampusReturns::Entities::Blob
-      - AllegroFlare::Prototypes::Platforming2D::EntityFlagNames
-
-
   - name: create_goalpost
     type: KrampusReturns::Entities::Goalpost*
     const: true
@@ -207,6 +172,42 @@ functions:
       - AllegroFlare::Prototypes::Platforming2D::EntityFlagNames
 
 
+  - name: create_blob
+    const: true
+    type: KrampusReturns::Entities::Blob*
+    parameters:
+      - name: on_map
+        type: std::string
+        default_argument: '"[unset-on_map]"'
+      - name: x
+        type: float
+        default_argument: 0.0f
+      - name: y
+        type: float
+        default_argument: 0.0f
+    guards: [ get_animation_book() ]
+    parameters:
+    body: |
+      using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+
+      KrampusReturns::Entities::Blob *result = new KrampusReturns::Entities::Blob();
+      result->set_animation_book(get_animation_book());
+      result->initialize();
+
+      result->get_place_ref().position = { x, y };
+      result->set(ON_MAP_NAME, on_map);
+
+      result->set("damages_player");
+      result->set("takes_damage_from_player_damage_zones");
+
+      if (init_entities_drawing_debug) result->set_draw_debug(true);
+      //get_platforming_2d_ref().add_entity_to_pool(result);
+      return result;
+    body_dependency_symbols:
+      - KrampusReturns::Entities::Blob
+      - AllegroFlare::Prototypes::Platforming2D::EntityFlagNames
+
+
   - name: create_skeleton_enemy
     type: ChatGPT::Enemy*
     const: true
@@ -246,6 +247,7 @@ functions:
       );
 
       result->set("damages_player");
+      result->set("takes_damage_from_player_damage_zones");
 
       result->get_place_ref().position = { x, y };
       result->set(ON_MAP_NAME, on_map);
@@ -298,6 +300,7 @@ functions:
       );
 
       result->set("damages_player");
+      result->set("takes_damage_from_player_damage_zones");
 
       result->get_place_ref().position = { x, y };
       result->set(ON_MAP_NAME, on_map);
@@ -307,53 +310,6 @@ functions:
       - AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls
       - ChatGPT::RandomWanderer
       - ChatGPT::Seeker
-
-
-  - name: create_damage_zone_by_player
-    type: KrampusReturns::Entities::DamageZone*
-    parameters:
-      - name: on_map
-        type: std::string
-        default_argument: '"[unset-on_map]"'
-      - name: x
-        type: float
-        default_argument: 0.0f
-      - name: y
-        type: float
-        default_argument: 0.0f
-      - name: w
-        type: float
-        default_argument: 20.0f
-      - name: h
-        type: float
-        default_argument: 8.0f
-      - name: damage
-        type: int
-        default_argument: 1
-      - name: direction_of_force
-        type: uint32_t
-        default_argument: KrampusReturns::Entities::DamageZone::DIRECTION_OF_FORCE_UNDEF
-    body: |
-      using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
-
-      KrampusReturns::Entities::DamageZone* result = new KrampusReturns::Entities::DamageZone(damage);
-      result->set("damages_enemies");
-      result->set("is_DamageZone_class");
-      result->set(EPHEMERAL);
-
-      // HACK: these two lines to set the animation book, even though it's not needed.
-      result->set_animation_book(get_animation_book());
-      result->set_animation("shadow_small");
-      result->set_bitmap_alignment_strategy("bottom_centered");
-
-      // TESTING DEBUG
-      result->set_draw_debug(true);
-
-      result->get_place_ref().position = { x, y };
-      result->get_place_ref().size = { w, h };
-      result->get_place_ref().align = { 0.5, 0.5 }; // conceptually, the "position" is the central point of impact.
-      result->set(ON_MAP_NAME, on_map);
-      return result;
 
 
   - name: create_teleporting_boss_enemy
@@ -402,6 +358,7 @@ functions:
       );
 
       result->set("damages_player");
+      result->set("takes_damage_from_player_damage_zones");
 
       result->get_place_ref().position = { x, y };
       result->set(ON_MAP_NAME, on_map);
@@ -412,6 +369,53 @@ functions:
       - ChatGPT::RandomWanderer
       - ChatGPT::Seeker
       - ChatGPT::Teleporting
+
+
+  - name: create_damage_zone_by_player
+    type: KrampusReturns::Entities::DamageZone*
+    parameters:
+      - name: on_map
+        type: std::string
+        default_argument: '"[unset-on_map]"'
+      - name: x
+        type: float
+        default_argument: 0.0f
+      - name: y
+        type: float
+        default_argument: 0.0f
+      - name: w
+        type: float
+        default_argument: 20.0f
+      - name: h
+        type: float
+        default_argument: 8.0f
+      - name: damage
+        type: int
+        default_argument: 1
+      - name: direction_of_force
+        type: uint32_t
+        default_argument: KrampusReturns::Entities::DamageZone::DIRECTION_OF_FORCE_UNDEF
+    body: |
+      using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+
+      KrampusReturns::Entities::DamageZone* result = new KrampusReturns::Entities::DamageZone(damage);
+      result->set("damages_enemies");
+      result->set("is_DamageZone_class");
+      result->set(EPHEMERAL);
+
+      // HACK: these two lines to set the animation book, even though it's not needed.
+      result->set_animation_book(get_animation_book());
+      result->set_animation("shadow_small");
+      result->set_bitmap_alignment_strategy("bottom_centered");
+
+      // TESTING DEBUG
+      result->set_draw_debug(true);
+
+      result->get_place_ref().position = { x, y };
+      result->get_place_ref().size = { w, h };
+      result->get_place_ref().align = { 0.5, 0.5 }; // conceptually, the "position" is the central point of impact.
+      result->set(ON_MAP_NAME, on_map);
+      return result;
 
 
 dependencies:

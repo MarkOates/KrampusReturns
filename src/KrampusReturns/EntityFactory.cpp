@@ -93,31 +93,6 @@ KrampusReturns::Entities::Krampus* EntityFactory::create_krampus(std::string on_
    return result;
 }
 
-KrampusReturns::Entities::Blob* EntityFactory::create_blob(std::string on_map, float x, float y) const
-{
-   if (!(get_animation_book()))
-   {
-      std::stringstream error_message;
-      error_message << "[EntityFactory::create_blob]: error: guard \"get_animation_book()\" not met.";
-      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
-      throw std::runtime_error("EntityFactory::create_blob: error: guard \"get_animation_book()\" not met");
-   }
-   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
-
-   KrampusReturns::Entities::Blob *result = new KrampusReturns::Entities::Blob();
-   result->set_animation_book(get_animation_book());
-   result->initialize();
-
-   result->get_place_ref().position = { x, y };
-   result->set(ON_MAP_NAME, on_map);
-
-   result->set("damages_player");
-
-   if (init_entities_drawing_debug) result->set_draw_debug(true);
-   //get_platforming_2d_ref().add_entity_to_pool(result);
-   return result;
-}
-
 KrampusReturns::Entities::Goalpost* EntityFactory::create_goalpost(std::string on_map, int goalpost_id, float x, float y) const
 {
    if (!(get_animation_book()))
@@ -193,6 +168,32 @@ KrampusReturns::Entities::FlashEffect* EntityFactory::create_flash_fx1(std::stri
    return result;
 }
 
+KrampusReturns::Entities::Blob* EntityFactory::create_blob(std::string on_map, float x, float y) const
+{
+   if (!(get_animation_book()))
+   {
+      std::stringstream error_message;
+      error_message << "[EntityFactory::create_blob]: error: guard \"get_animation_book()\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("EntityFactory::create_blob: error: guard \"get_animation_book()\" not met");
+   }
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+
+   KrampusReturns::Entities::Blob *result = new KrampusReturns::Entities::Blob();
+   result->set_animation_book(get_animation_book());
+   result->initialize();
+
+   result->get_place_ref().position = { x, y };
+   result->set(ON_MAP_NAME, on_map);
+
+   result->set("damages_player");
+   result->set("takes_damage_from_player_damage_zones");
+
+   if (init_entities_drawing_debug) result->set_draw_debug(true);
+   //get_platforming_2d_ref().add_entity_to_pool(result);
+   return result;
+}
+
 ChatGPT::Enemy* EntityFactory::create_skeleton_enemy(std::string on_map, float x, float y, std::string animation) const
 {
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
@@ -217,6 +218,7 @@ ChatGPT::Enemy* EntityFactory::create_skeleton_enemy(std::string on_map, float x
    );
 
    result->set("damages_player");
+   result->set("takes_damage_from_player_damage_zones");
 
    result->get_place_ref().position = { x, y };
    result->set(ON_MAP_NAME, on_map);
@@ -247,6 +249,37 @@ ChatGPT::Enemy* EntityFactory::create_skull_head_enemy(std::string on_map, float
    );
 
    result->set("damages_player");
+   result->set("takes_damage_from_player_damage_zones");
+
+   result->get_place_ref().position = { x, y };
+   result->set(ON_MAP_NAME, on_map);
+   result->set("seeker");
+   return result;
+}
+
+ChatGPT::Enemy* EntityFactory::create_teleporting_boss_enemy(std::string on_map, float x, float y, float area_width, float area_height, std::string animation, AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target) const
+{
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+   //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::Base
+   //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls
+   //headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/MovementStrategies2D/ReflectOffWalls.hpp ]
+
+   int health = 1;
+   int attack = 1;
+   ChatGPT::Enemy* result = new ChatGPT::Enemy(health, attack);
+   result->set_animation_book(get_animation_book());
+   result->set_animation(animation);
+   result->set_bitmap_alignment_strategy("bottom_centered");
+
+   // NOTE: this class now needs a proper destruct property
+   result->set_movement_strategy(
+      //new AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls(result)
+      //new ChatGPT::RandomWanderer(result, 1)
+      new ChatGPT::Teleporting(result, { x, y }, { area_width, area_height })
+   );
+
+   result->set("damages_player");
+   result->set("takes_damage_from_player_damage_zones");
 
    result->get_place_ref().position = { x, y };
    result->set(ON_MAP_NAME, on_map);
@@ -275,35 +308,6 @@ KrampusReturns::Entities::DamageZone* EntityFactory::create_damage_zone_by_playe
    result->get_place_ref().size = { w, h };
    result->get_place_ref().align = { 0.5, 0.5 }; // conceptually, the "position" is the central point of impact.
    result->set(ON_MAP_NAME, on_map);
-   return result;
-}
-
-ChatGPT::Enemy* EntityFactory::create_teleporting_boss_enemy(std::string on_map, float x, float y, float area_width, float area_height, std::string animation, AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target) const
-{
-   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
-   //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::Base
-   //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls
-   //headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/MovementStrategies2D/ReflectOffWalls.hpp ]
-
-   int health = 1;
-   int attack = 1;
-   ChatGPT::Enemy* result = new ChatGPT::Enemy(health, attack);
-   result->set_animation_book(get_animation_book());
-   result->set_animation(animation);
-   result->set_bitmap_alignment_strategy("bottom_centered");
-
-   // NOTE: this class now needs a proper destruct property
-   result->set_movement_strategy(
-      //new AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls(result)
-      //new ChatGPT::RandomWanderer(result, 1)
-      new ChatGPT::Teleporting(result, { x, y }, { area_width, area_height })
-   );
-
-   result->set("damages_player");
-
-   result->get_place_ref().position = { x, y };
-   result->set(ON_MAP_NAME, on_map);
-   result->set("seeker");
    return result;
 }
 

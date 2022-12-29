@@ -1199,6 +1199,12 @@ void Screen::update_collisions_with_damaging_zones()
    std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> damages_enemies_entities =
       select_damages_enemies_entities_on_map(currently_active_map_name);
 
+   std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*>
+      takes_damage_from_player_damage_zone_entities =
+         select_takes_damage_from_player_damage_zone_entities_on_map(currently_active_map_name);
+
+
+
    // NOTE: for now, one player controlled character evaluated:
    KrampusReturns::Entities::Krampus* player_krampus =
       static_cast<KrampusReturns::Entities::Krampus*>(player_controlled_entity);
@@ -1227,9 +1233,49 @@ void Screen::update_collisions_with_damaging_zones()
 
    // TODO: Implement the body logic of this function for entities damaging player
 
-   //for (auto &damages_player_entity : damages_player_entities)
-   //{
-   //}
+   for (auto &entity_that_takes_damage_from_player_damage_zone : takes_damage_from_player_damage_zone_entities)
+   {
+      for (auto &entity_that_damages_enemies : damages_enemies_entities)
+      {
+         //std::cout << "=0-0-0-0-0-0- entityt that damages enemies" << std::endl;
+         if (entity_that_damages_enemies->get_place_ref().collide(
+            entity_that_takes_damage_from_player_damage_zone->get_place_ref()))
+         {
+            // TODO: account for stunned enemies
+            // TODO: account for strength of damage
+            // TODO: consider if force of impact should be a thing
+
+            // TODO: have entity take damage:
+            //std::cout << "COLLISION!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+            
+
+            // Known types (at the moment):
+            KrampusReturns::Entities::Blob* as_blob =
+               dynamic_cast<KrampusReturns::Entities::Blob*>(entity_that_takes_damage_from_player_damage_zone);
+            if (as_blob)
+            {
+               as_blob->take_damage(1);
+               if (as_blob->get_health() <= 0) as_blob->set(PLEASE_DELETE);
+               //std::cout << "---- BLOB HIT" << std::endl;
+            }
+            else if (
+               ChatGPT::Enemy* as_chat_gpt_enemy =
+                  dynamic_cast<ChatGPT::Enemy*>(entity_that_takes_damage_from_player_damage_zone);
+               as_chat_gpt_enemy != nullptr
+            )
+            {
+               as_chat_gpt_enemy->take_damage(1);
+               if (as_chat_gpt_enemy->get_health() <= 0) as_chat_gpt_enemy->set(PLEASE_DELETE);
+               //std::cout << "-------- ChatGPT Enemy Hit!" << std::endl;
+            }
+
+
+            //type: ChatGPT::Enemy*
+
+            //entity_that_takes_damage_from_player_damage_zone->take_damage(1);
+         }
+      }
+   }
 
 
 
@@ -2408,6 +2454,20 @@ std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> Screen:
    for (auto &entity : entity_pool)
    {
       if (!entity->exists("damages_player")) continue;
+      if (!entity->exists(ON_MAP_NAME, on_map_name)) continue;
+      result.push_back(entity);
+   }
+   return result;
+}
+
+std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> Screen::select_takes_damage_from_player_damage_zone_entities_on_map(std::string on_map_name)
+{
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+
+   std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> result;
+   for (auto &entity : entity_pool)
+   {
+      if (!entity->exists("takes_damage_from_player_damage_zones")) continue;
       if (!entity->exists(ON_MAP_NAME, on_map_name)) continue;
       result.push_back(entity);
    }

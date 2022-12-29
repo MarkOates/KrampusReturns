@@ -191,6 +191,7 @@ namespace KrampusReturns
          std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> select_spawn_points_on_map_name(std::string map_name="[unset-map_name]");
          std::vector<ChatGPT::Enemy*> select_seekers_on_map_name(std::string map_name="[unset-map_name]");
          std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> select_damages_player_entities_on_map(std::string on_map_name="[unset-on_map_name]");
+         std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> select_takes_damage_from_player_damage_zone_entities_on_map(std::string on_map_name="[unset-on_map_name]");
          std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> select_damages_enemies_entities_on_map(std::string on_map_name="[unset-map_name]");
          AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* find_boss();
          int count_num_spawn_points_in_all_maps();
