@@ -119,6 +119,7 @@
   ],
   "AllegroFlare/GameEventDatas/Base": [
     "KrampusReturns/GameEventDatas/GoalpostReached",
+    "KrampusReturns/GameEventDatas/SpawnDamageZoneByPlayer",
     "KrampusReturns/GameEventDatas/SpawnFlashFX"
   ],
   "AllegroFlare/BitmapBin": [
@@ -289,6 +290,9 @@
   "KrampusReturns/Level": [
     "KrampusReturns/Gameplay/Screen",
     "KrampusReturns/World"
+  ],
+  "KrampusReturns/GameEventDatas/SpawnDamageZoneByPlayer": [
+    "KrampusReturns/Gameplay/Screen"
   ],
   "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [
     "KrampusReturns/Runner"

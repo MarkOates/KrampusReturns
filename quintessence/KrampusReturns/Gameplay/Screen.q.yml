@@ -2120,6 +2120,26 @@ functions:
          { "goalpost_reached", [this, time_now](){
              set_state(STATE_FINISHED_LEVEL, time_now);
          }},
+         { "spawn_damage_zone_by_player", [this, ev, time_now](){
+             if (!ev->get_data())
+             {
+                throw std::runtime_error("Gameplay::Screen::game_event_func on spawn_damage_zone_by_player: ERROR: "
+                                         "no ev->data");
+             }
+             else
+             {
+                if (!ev->get_data()->is_type(KrampusReturns::GameEventDatas::SpawnDamageZoneByPlayer::TYPE))
+                {
+                   throw std::runtime_error("Gameplay::Screen::game_event_func on spawn_damage_zone_by_player: "
+                                            "ERROR: game even data not of expected type");
+                }
+                KrampusReturns::GameEventDatas::SpawnDamageZoneByPlayer *as_damage_zone_by_player =
+                   static_cast<KrampusReturns::GameEventDatas::SpawnDamageZoneByPlayer*>(ev->get_data());
+                // TODO: spawn teh element here
+                // HERE
+                //spawn_flash_effect("flash_fx1", 200, 200);
+             }
+         }},
          { "spawn_flash_effect", [this, ev, time_now](){
              if (!ev->get_data())
              {
@@ -2155,6 +2175,7 @@ functions:
     body_dependency_symbols:
       - KrampusReturns::EntityFactory
       - KrampusReturns::GameEventDatas::SpawnFlashFX
+      - KrampusReturns::GameEventDatas::SpawnDamageZoneByPlayer
 
 
   - name: key_char_func
@@ -2640,5 +2661,7 @@ dependencies:
     headers: [ ChatGPT/Enemy.hpp ]
   - symbol: ChatGPT::Seeker
     headers: [ ChatGPT/Seeker.hpp ]
+  - symbol: KrampusReturns::GameEventDatas::SpawnDamageZoneByPlayer
+    headers: [ KrampusReturns/GameEventDatas/SpawnDamageZoneByPlayer.hpp ]
 
 

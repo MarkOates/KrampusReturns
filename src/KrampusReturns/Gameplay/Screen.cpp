@@ -22,6 +22,7 @@
 #include <KrampusReturns/Entities/Blob.hpp>
 #include <KrampusReturns/EntityFactory.hpp>
 #include <KrampusReturns/GameEventDatas/GoalpostReached.hpp>
+#include <KrampusReturns/GameEventDatas/SpawnDamageZoneByPlayer.hpp>
 #include <KrampusReturns/GameEventDatas/SpawnFlashFX.hpp>
 #include <KrampusReturns/Shaders/AllegroDefault.hpp>
 #include <KrampusReturns/Shaders/Primary.hpp>
@@ -2017,6 +2018,26 @@ void Screen::game_event_func(AllegroFlare::GameEvent* ev)
       }},
       { "goalpost_reached", [this, time_now](){
           set_state(STATE_FINISHED_LEVEL, time_now);
+      }},
+      { "spawn_damage_zone_by_player", [this, ev, time_now](){
+          if (!ev->get_data())
+          {
+             throw std::runtime_error("Gameplay::Screen::game_event_func on spawn_damage_zone_by_player: ERROR: "
+                                      "no ev->data");
+          }
+          else
+          {
+             if (!ev->get_data()->is_type(KrampusReturns::GameEventDatas::SpawnDamageZoneByPlayer::TYPE))
+             {
+                throw std::runtime_error("Gameplay::Screen::game_event_func on spawn_damage_zone_by_player: "
+                                         "ERROR: game even data not of expected type");
+             }
+             KrampusReturns::GameEventDatas::SpawnDamageZoneByPlayer *as_damage_zone_by_player =
+                static_cast<KrampusReturns::GameEventDatas::SpawnDamageZoneByPlayer*>(ev->get_data());
+             // TODO: spawn teh element here
+             // HERE
+             //spawn_flash_effect("flash_fx1", 200, 200);
+          }
       }},
       { "spawn_flash_effect", [this, ev, time_now](){
           if (!ev->get_data())
