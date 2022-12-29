@@ -258,6 +258,9 @@
   "AllegroFlare/Elements/HealthBars/Hearts": [
     "KrampusReturns/Gameplay/Screen"
   ],
+  "AllegroFlare/Elements/HealthBars/Classic": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
   "AllegroFlare/Color": [
     "KrampusReturns/Gameplay/Screen",
     "KrampusReturns/Runner",

@@ -7,6 +7,7 @@
 #include <AllegroFlare/CameraControlStrategies2D/SmoothSnapWithZoomEffect.hpp>
 #include <AllegroFlare/CameraControlStrategies2D/Snap.hpp>
 #include <AllegroFlare/Color.hpp>
+#include <AllegroFlare/Elements/HealthBars/Classic.hpp>
 #include <AllegroFlare/Elements/HealthBars/Hearts.hpp>
 #include <AllegroFlare/Errors.hpp>
 #include <AllegroFlare/EventNames.hpp>
@@ -1230,6 +1231,20 @@ void Screen::update_player_collisions_with_damage_zones()
    return;
 }
 
+bool Screen::player_controled_entity_in_same_room_as_boss()
+{
+   AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* boss = find_boss();
+   static bool boss_fight_triggered = false;
+   if (player_controlled_entity && boss)
+   {
+      std::pair<int, int> player_room_coords = calc_room_coords(player_controlled_entity);
+      std::pair<int, int> boss_room_coords = calc_room_coords(boss);
+      bool in_same_room_coords = (player_room_coords == boss_room_coords);
+      return in_same_room_coords;
+   }
+   return false;
+}
+
 void Screen::update_entities()
 {
    if (!(initialized))
@@ -1767,6 +1782,7 @@ void Screen::draw_hud()
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
       throw std::runtime_error("Screen::draw_hud: error: guard \"font_bin\" not met");
    }
+   static float showing_boss_meter_counter = 0.0f;
 
    if (!player_controlled_entity) return;
 
@@ -1809,6 +1825,43 @@ void Screen::draw_hud()
          hearts.set_heart_spacing(48+6);
          hearts.render();
       heart_placement.restore_transform();
+
+
+
+      bool player_fighting_boss = player_controled_entity_in_same_room_as_boss();
+      if (player_fighting_boss)
+      {
+         int boss_max_health = 20;
+         int boss_health = 18;
+         AllegroFlare::Elements::HealthBars::Classic boss_health_bar(boss_max_health, boss_health);
+         boss_health_bar.set_bar_width(32);
+         boss_health_bar.set_bar_spacing(40);
+         boss_health_bar.set_bar_height(18);
+         boss_health_bar.fit_placement_width_and_height();
+         boss_health_bar.get_placement_ref().position = { 1920 * 0.5, (float)1080 - 72 };
+
+
+         ALLEGRO_FONT *boss_font = font_bin->auto_get("Merriweather-Bold.ttf -46");
+         std::string boss_name = "Skull Head";
+         al_draw_text(
+            boss_font,
+            ALLEGRO_COLOR{1, 1, 1, 1},
+            1920 * 0.5,
+            boss_health_bar.get_placement_ref().position.y - al_get_font_line_height(boss_font) * 1.6,
+            ALLEGRO_ALIGN_CENTER,
+            boss_name.c_str()
+         );
+
+         //AllegroFlare::Placement2D boss_health_meter_placement;
+
+         //boss_health_meter_placement.position = { 1920 * 0.5, (float)1080 - 40 };
+         //boss_health_meter_placement.align = { 0.5, 0.5 };
+         // TODO: boss_health_meter_placement.size = { ?, ? };
+
+         //boss_health_meter_placement.start_transform();
+         boss_health_bar.render();
+         //boss_health_meter_placement.restore_transform();
+      }
    }
 
 

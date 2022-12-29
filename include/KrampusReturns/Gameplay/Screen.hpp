@@ -153,6 +153,7 @@ namespace KrampusReturns
          std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> select_enemies(std::string on_map_name="[unset-on_map_name]");
          void update_enemy_collisions_with_damage_zones();
          void update_player_collisions_with_damage_zones();
+         bool player_controled_entity_in_same_room_as_boss();
          void update_entities();
          void dump_entity_data();
          void draw_entities();
