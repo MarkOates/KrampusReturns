@@ -1368,7 +1368,7 @@ void Screen::update_entities()
    if (player_controlled_entity) update_player_collisions_with_goalposts();
 
 
-   // HACK: update is player fighting boss
+   // HACK: update is player fighting boss music
    AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* boss = find_boss();
    static bool boss_fight_triggered = false;
    if (player_controlled_entity && boss)
