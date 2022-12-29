@@ -94,6 +94,7 @@ namespace KrampusReturns
          void move_krampus_to_first_spawn_point_or_default(KrampusReturns::Entities::Krampus* krampus=nullptr, std::string map_name="[unset-map_name]");
          void initialize_shader();
          void initialize_camera();
+         void mark_all_ephemeral_entities_for_deletion();
          void cleanup_entities_flagged_for_deletion();
          void flag_all_entities_for_deletion();
          void check_player_collisions_with_doors();

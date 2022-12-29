@@ -1405,12 +1405,26 @@ void Screen::update_entities()
    // update the player colliding on the doors
    //check_player_collisions_with_doors(); // this is now done by pressing 'UP' when over a door
 
+   // mark all the ephemeral entities for deltion
+   mark_all_ephemeral_entities_for_deletion();
+
    // delete entities flagged to be deleted
    cleanup_entities_flagged_for_deletion();
 
    // update camera
    if (camera_control_strategy) camera_control_strategy->update();
 
+   return;
+}
+
+void Screen::mark_all_ephemeral_entities_for_deletion()
+{
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+
+   for (int i=0; i<entity_pool.size(); i++)
+   {
+      if (entity_pool[i]->exists(EPHEMERAL)) entity_pool[i]->set(PLEASE_DELETE);
+   }
    return;
 }
 

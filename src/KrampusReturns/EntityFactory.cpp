@@ -111,6 +111,8 @@ KrampusReturns::Entities::Blob* EntityFactory::create_blob(std::string on_map, f
    result->get_place_ref().position = { x, y };
    result->set(ON_MAP_NAME, on_map);
 
+   result->set("damages_player");
+
    if (init_entities_drawing_debug) result->set_draw_debug(true);
    //get_platforming_2d_ref().add_entity_to_pool(result);
    return result;
@@ -214,6 +216,8 @@ ChatGPT::Enemy* EntityFactory::create_skeleton_enemy(std::string on_map, float x
       //new ChatGPT::Seeker(result, 0.01)
    );
 
+   result->set("damages_player");
+
    result->get_place_ref().position = { x, y };
    result->set(ON_MAP_NAME, on_map);
    return result;
@@ -242,6 +246,8 @@ ChatGPT::Enemy* EntityFactory::create_skull_head_enemy(std::string on_map, float
       new ChatGPT::Seeker(result, target, 1.0)
    );
 
+   result->set("damages_player");
+
    result->get_place_ref().position = { x, y };
    result->set(ON_MAP_NAME, on_map);
    result->set("seeker");
@@ -253,8 +259,8 @@ KrampusReturns::Entities::DamageZone* EntityFactory::create_krampus_attack_damag
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
 
    KrampusReturns::Entities::DamageZone* result = new KrampusReturns::Entities::DamageZone(damage);
-   result->set("zone_damages_enemies");
-   result->set("ephemeral");
+   result->set("damages_enemies");
+   result->set(EPHEMERAL);
 
    // HACK: these two lines to set the animation book, even though it's not needed.
    result->set_animation_book(get_animation_book());
@@ -290,6 +296,8 @@ ChatGPT::Enemy* EntityFactory::create_teleporting_boss_enemy(std::string on_map,
       //new ChatGPT::RandomWanderer(result, 1)
       new ChatGPT::Teleporting(result, { x, y }, { area_width, area_height })
    );
+
+   result->set("damages_player");
 
    result->get_place_ref().position = { x, y };
    result->set(ON_MAP_NAME, on_map);
