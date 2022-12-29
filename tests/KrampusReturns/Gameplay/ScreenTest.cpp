@@ -50,6 +50,7 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
          { "smash_club", { "smash-club-01.ogg", false, "restart" } },
          { "krampus_hit", { "krampus_hit.ogg", false, "restart" } },
          //{ "win_cheer", { "win_cheer.ogg", false, "restart" } },
+         { "fail_moan_sound", { "fail_moan.ogg", false, "restart", 0.4 } },
       });
 
       framework.get_audio_controller_ref().set_and_load_music_track_elements({

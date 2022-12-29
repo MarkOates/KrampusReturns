@@ -196,9 +196,9 @@ void Screen::set_state(uint32_t state, float time_now)
 
       case STATE_PLAYER_DIED:
          set_full_color_overlay(al_color_name("firebrick"), 0.2);
+         event_emitter->emit_stop_all_music_tracks_event();
+         event_emitter->emit_play_sound_effect_event("fail_moan_sound");
          show_full_color_overlay();
-         // TODO: add one-time fail crash sound
-         //event_emitter->emit_play_sound_effect_event("fail_music");
          shake_camera(4, 1.0, time_now);
       break;
 
