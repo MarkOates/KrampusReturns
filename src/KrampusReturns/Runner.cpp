@@ -9,6 +9,7 @@
 #include <AllegroFlare/Prototypes/FixedRoom2D/ScriptEventDatas/CollectEvidence.hpp>
 #include <AllegroFlare/Prototypes/FixedRoom2D/ScriptEventDatas/CollectItem.hpp>
 #include <AllegroFlare/StoryboardFactory.hpp>
+#include <KrampusReturns/AssetFactory.hpp>
 #include <Wicked/Entities/Basic2DFactory.hpp>
 #include <iostream>
 #include <sstream>
@@ -98,22 +99,15 @@ void Runner::initialize()
 
 
    // pre-load the audio controller (TODO)
+   KrampusReturns::AssetFactory asset_factory;
 
    audio_controller.set_and_load_sound_effect_elements({
-      { "smash_club", { "smash-club-01.ogg", false, "restart", 0.9 } },
-      { "krampus_hit", { "krampus_hit.ogg", false, "restart" } },
-      { "menu_move", { "menu-move-01.ogg", false, "restart", 0.5 } },
-      { "menu_select", { "menu-select-big-01.ogg", false, "restart", 0.95 } },
-      //{ "win_cheer", { "win_cheer.ogg", false, "restart" } },
+      asset_factory.obtain_production_sound_effect_elements()
    });
 
    audio_controller.set_and_load_music_track_elements({
-     { "intro_music", { "krampus-intro-1.wav", false } },
-     { "level_1_music", { "8bit-dungeon-level-kevin-macleod-80kbps.ogg", true, "restart", 0.5 } },
-     { "win_music", { "win-music-01.ogg", false, "restart" } },
-     //{ "fail_music", { "fail_moan.ogg", false} },
+      asset_factory.obtain_production_music_track_elements()
    });
-
 
 
 

@@ -1,4 +1,7 @@
 {
+  "AllegroFlare/AudioRepositoryElement": [
+    "KrampusReturns/AssetFactory"
+  ],
   "AllegroFlare/CameraControlStrategies2D/Base": [
     "KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX",
     "KrampusReturns/Gameplay/Screen"
@@ -375,6 +378,9 @@
     "KrampusReturns/Testing/Gym"
   ],
   "KrampusReturns/World": [
+    "KrampusReturns/Runner"
+  ],
+  "KrampusReturns/AssetFactory": [
     "KrampusReturns/Runner"
   ],
   "AllegroFlare/Prototypes/FixedRoom2D/EntityCollectionHelper": [

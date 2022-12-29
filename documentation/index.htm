@@ -49,6 +49,7 @@ table td
 <body>
 <h1>TOC</h1>
 <ul>
+  <li><a href="#quintessence/KrampusReturns/AssetFactory.q.yml">quintessence/KrampusReturns/AssetFactory.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.q.yml">quintessence/KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Entities/Blob.q.yml">quintessence/KrampusReturns/Entities/Blob.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Entities/DamageZone.q.yml">quintessence/KrampusReturns/Entities/DamageZone.q.yml</a></li>
@@ -71,6 +72,26 @@ table td
   <li><a href="#quintessence/KrampusReturns/World.q.yml">quintessence/KrampusReturns/World.q.yml</a></li>
 </ul>
 <h1>Components</h1>
+<ul>
+  <div class="component">
+    <h3 id="quintessence/KrampusReturns/AssetFactory.q.yml">quintessence/KrampusReturns/AssetFactory.q.yml</h3>
+     <table>
+    </table>
+     <table>
+<tr>
+  <td class="method">obtain_production_sound_effect_elements()</td>
+</tr>
+<tr>
+  <td class="method">obtain_production_music_track_elements()</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::AudioRepositoryElement&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/AudioRepositoryElement.hpp&quot;]}</td>
+</tr>
+    </table>
+  </div>
+</ul>
 <ul>
   <div class="component">
     <h3 id="quintessence/KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.q.yml">quintessence/KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.q.yml</h3>
@@ -1784,6 +1805,9 @@ table td
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::World&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/World.hpp&quot;]}</td>
 </tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::AssetFactory&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/AssetFactory.hpp&quot;]}</td>
+</tr>
     </table>
   </div>
 </ul>
@@ -2091,6 +2115,9 @@ table td
 <h1>Dependents</h1>
 <pre>
 {
+  "AllegroFlare/AudioRepositoryElement": [
+    "KrampusReturns/AssetFactory"
+  ],
   "AllegroFlare/CameraControlStrategies2D/Base": [
     "KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX",
     "KrampusReturns/Gameplay/Screen"
@@ -2467,6 +2494,9 @@ table td
     "KrampusReturns/Testing/Gym"
   ],
   "KrampusReturns/World": [
+    "KrampusReturns/Runner"
+  ],
+  "KrampusReturns/AssetFactory": [
     "KrampusReturns/Runner"
   ],
   "AllegroFlare/Prototypes/FixedRoom2D/EntityCollectionHelper": [

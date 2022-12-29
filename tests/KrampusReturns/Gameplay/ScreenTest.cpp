@@ -6,6 +6,8 @@
 #include <AllegroFlare/Frameworks/Full.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/Basic2DFactory.hpp>
 #include <KrampusReturns/EntityFactory.hpp>
+#include <KrampusReturns/AssetFactory.hpp>
+//#include <AllegroFlare/AudioController.hpp>
 
 
 // TODO: improve this:
@@ -46,20 +48,17 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
    framework.get_sample_bin_ref().set_full_path(TEST_BASE_FOLDER "samples/");
 
 
-      framework.get_audio_controller_ref().set_and_load_sound_effect_elements({
-         { "smash_club", { "smash-club-01.ogg", false, "restart" } },
-         { "krampus_hit", { "krampus_hit.ogg", false, "restart" } },
-         //{ "win_cheer", { "win_cheer.ogg", false, "restart" } },
-         { "fail_moan_sound", { "fail_moan.ogg", false, "restart", 0.4 } },
+
+
+      KrampusReturns::AssetFactory asset_factory;
+      AllegroFlare::AudioController &audio_controller = framework.get_audio_controller_ref();
+
+      audio_controller.set_and_load_sound_effect_elements({
+         asset_factory.obtain_production_sound_effect_elements()
       });
 
-      framework.get_audio_controller_ref().set_and_load_music_track_elements({
-        { "intro_music", { "krampus-intro-1.wav", false } },
-        { "level_1_music", { "8bit-dungeon-level-kevin-macleod-80kbps.ogg", true, "restart", 0.5 } },
-        { "boss_music", { "krampus-boss-01.ogg", true, "restart", 0.78 } },
-        { "dead_krampus_music", { "dead-krampus-01.ogg", false, "restart", 0.78 } },
-        { "win_music", { "win-music-01.ogg", false, "restart" } },
-        //{ "fail_music", { "fail_moan.ogg", false} },
+      audio_controller.set_and_load_music_track_elements({
+         asset_factory.obtain_production_music_track_elements()
       });
 
 
