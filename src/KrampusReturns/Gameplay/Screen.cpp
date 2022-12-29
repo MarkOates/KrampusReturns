@@ -2313,6 +2313,21 @@ std::vector<ChatGPT::Enemy*> Screen::select_seekers_on_map_name(std::string map_
    return result;
 }
 
+std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> Screen::select_damages_enemies_entities_on_map(std::string on_map_name)
+{
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+
+   std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> result;
+   //std::vector<ChatGPT::Enemy*> result;
+   for (auto &entity : entity_pool)
+   {
+      if (!entity->exists("damages_enemies")) continue;
+      if (!entity->exists(ON_MAP_NAME, on_map_name)) continue;
+      result.push_back(entity);
+   }
+   return result;
+}
+
 AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* Screen::find_boss()
 {
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
