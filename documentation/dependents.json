@@ -25,6 +25,7 @@
   ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D": [
     "KrampusReturns/Entities/Blob",
+    "KrampusReturns/Entities/DamageZone",
     "KrampusReturns/Entities/FlashEffect",
     "KrampusReturns/Entities/Goalpost",
     "KrampusReturns/Entities/Krampus",
@@ -44,6 +45,9 @@
   ],
   "std/rand": [
     "KrampusReturns/Entities/Blob"
+  ],
+  "KrampusReturns/Entities/Base": [
+    "KrampusReturns/Entities/DamageZone"
   ],
   "AllegroFlare/Prototypes/Platforming2D/EntityFlagNames": [
     "KrampusReturns/Entities/FlashEffect",
@@ -108,6 +112,9 @@
     "KrampusReturns/Gameplay/Screen"
   ],
   "ChatGPT/Teleporting": [
+    "KrampusReturns/EntityFactory"
+  ],
+  "KrampusReturns/Entities/DamageZone": [
     "KrampusReturns/EntityFactory"
   ],
   "AllegroFlare/GameEventDatas/Base": [

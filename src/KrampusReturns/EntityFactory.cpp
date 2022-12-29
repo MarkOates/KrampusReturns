@@ -248,6 +248,28 @@ ChatGPT::Enemy* EntityFactory::create_skull_head_enemy(std::string on_map, float
    return result;
 }
 
+KrampusReturns::Entities::DamageZone* EntityFactory::create_krampus_attack_damage_zone(std::string on_map, float x, float y, float w, float h, int damage, uint32_t direction_of_force)
+{
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+
+   KrampusReturns::Entities::DamageZone* result = new KrampusReturns::Entities::DamageZone(damage);
+   result->set("zone_damages_enemies");
+   result->set("ephemeral");
+
+   // HACK: these two lines to set the animation book, even though it's not needed.
+   result->set_animation_book(get_animation_book());
+   result->set_animation("shadow_small");
+   result->set_bitmap_alignment_strategy("bottom_centered");
+
+   // DEBUG: TEST:
+   result->set_draw_debug(true);
+
+   result->get_place_ref().position = { x, y };
+   result->get_place_ref().size = { w, h };
+   result->set(ON_MAP_NAME, on_map);
+   return result;
+}
+
 ChatGPT::Enemy* EntityFactory::create_teleporting_boss_enemy(std::string on_map, float x, float y, float area_width, float area_height, std::string animation, AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target) const
 {
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;

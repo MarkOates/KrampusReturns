@@ -51,6 +51,7 @@ table td
 <ul>
   <li><a href="#quintessence/KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.q.yml">quintessence/KrampusReturns/CameraControlStrategies2D/SmoothSnapWithFX.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Entities/Blob.q.yml">quintessence/KrampusReturns/Entities/Blob.q.yml</a></li>
+  <li><a href="#quintessence/KrampusReturns/Entities/DamageZone.q.yml">quintessence/KrampusReturns/Entities/DamageZone.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Entities/FlashEffect.q.yml">quintessence/KrampusReturns/Entities/FlashEffect.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Entities/Goalpost.q.yml">quintessence/KrampusReturns/Entities/Goalpost.q.yml</a></li>
   <li><a href="#quintessence/KrampusReturns/Entities/Krampus.q.yml">quintessence/KrampusReturns/Entities/Krampus.q.yml</a></li>
@@ -215,6 +216,62 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;std::rand&quot;, &quot;headers&quot;=&gt;[&quot;cstdlib&quot;]}</td>
+</tr>
+    </table>
+  </div>
+</ul>
+<ul>
+  <div class="component">
+    <h3 id="quintessence/KrampusReturns/Entities/DamageZone.q.yml">quintessence/KrampusReturns/Entities/DamageZone.q.yml</h3>
+     <table>
+<tr>
+  <td class="property">damage</td>
+  <td class="property">int</td>
+</tr>
+<tr>
+  <td class="property">direction_of_force</td>
+  <td class="property">uint32_t</td>
+</tr>
+<tr>
+  <td class="property">TYPE</td>
+  <td class="property">char*</td>
+</tr>
+<tr>
+  <td class="property">DIRECTION_OF_FORCE_UNDEF</td>
+  <td class="property">uint32_t</td>
+</tr>
+<tr>
+  <td class="property">DIRECTION_OF_FORCE_UP</td>
+  <td class="property">uint32_t</td>
+</tr>
+<tr>
+  <td class="property">DIRECTION_OF_FORCE_DOWN</td>
+  <td class="property">uint32_t</td>
+</tr>
+<tr>
+  <td class="property">DIRECTION_OF_FORCE_LEFT</td>
+  <td class="property">uint32_t</td>
+</tr>
+<tr>
+  <td class="property">DIRECTION_OF_FORCE_RIGHT</td>
+  <td class="property">uint32_t</td>
+</tr>
+<tr>
+  <td class="property">DIRECTION_OF_FORCE_OUT</td>
+  <td class="property">uint32_t</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="method">TODO()</td>
+</tr>
+    </table>
+     <table>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Entities::Base&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Entities/Base.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -518,6 +575,9 @@ table td
   <td class="method">create_skull_head_enemy(std::string on_map=&quot;[unset-on_map]&quot;, float x=0.0f, float y=0.0f, std::string animation=&quot;[unset-animation]&quot;, AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target=nullptr)</td>
 </tr>
 <tr>
+  <td class="method">create_krampus_attack_damage_zone(std::string on_map=&quot;[unset-on_map]&quot;, float x=0.0f, float y=0.0f, float w=20.0f, float h=8.0f, int damage=1, uint32_t direction_of_force=KrampusReturns::Entities::DamageZone::DIRECTION_OF_FORCE_UNDEF)</td>
+</tr>
+<tr>
   <td class="method">create_teleporting_boss_enemy(std::string on_map=&quot;[unset-on_map]&quot;, float x=0.0f, float y=0.0f, float area_width=0.0f, float area_height=0.0f, std::string animation=&quot;[unset-animation]&quot;, AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target=nullptr)</td>
 </tr>
     </table>
@@ -569,6 +629,9 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;ChatGPT::Teleporting&quot;, &quot;headers&quot;=&gt;[&quot;ChatGPT/Teleporting.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::Entities::DamageZone&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/Entities/DamageZone.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -1961,6 +2024,7 @@ table td
   ],
   "AllegroFlare/Prototypes/Platforming2D/Entities/FrameAnimated2D": [
     "KrampusReturns/Entities/Blob",
+    "KrampusReturns/Entities/DamageZone",
     "KrampusReturns/Entities/FlashEffect",
     "KrampusReturns/Entities/Goalpost",
     "KrampusReturns/Entities/Krampus",
@@ -1980,6 +2044,9 @@ table td
   ],
   "std/rand": [
     "KrampusReturns/Entities/Blob"
+  ],
+  "KrampusReturns/Entities/Base": [
+    "KrampusReturns/Entities/DamageZone"
   ],
   "AllegroFlare/Prototypes/Platforming2D/EntityFlagNames": [
     "KrampusReturns/Entities/FlashEffect",
@@ -2044,6 +2111,9 @@ table td
     "KrampusReturns/Gameplay/Screen"
   ],
   "ChatGPT/Teleporting": [
+    "KrampusReturns/EntityFactory"
+  ],
+  "KrampusReturns/Entities/DamageZone": [
     "KrampusReturns/EntityFactory"
   ],
   "AllegroFlare/GameEventDatas/Base": [
