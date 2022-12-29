@@ -48,6 +48,7 @@ namespace KrampusReturns
          bool get_invincible_from_taking_damage() const;
          void initialize();
          virtual void update() override;
+         bool would_be_lethal_damage(int damage=1);
          void do_impact_hit();
          void emit_bump_camera_shake_event();
          void emit_smash_club_sound_effect();

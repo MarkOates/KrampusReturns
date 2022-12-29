@@ -314,6 +314,7 @@ functions:
          case STATE_PLAYER_DIED:
             set_full_color_overlay(al_color_name("firebrick"), 0.2);
             event_emitter->emit_stop_all_music_tracks_event();
+
             event_emitter->emit_play_sound_effect_event("fail_moan_sound");
             show_full_color_overlay();
             shake_camera(4, 1.0, time_now);
@@ -1024,6 +1025,14 @@ functions:
              AllegroFlare::Vec2D center = center_of(x, y, w, h);
              auto entity = entity_factory.create_blob("map_a", center.x, center.y);
              gameplay_screen->add_entity_to_pool(entity);
+         }},
+         { "Enemy", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
+             AllegroFlare::Vec2D center = center_of(x, y, w, h);
+             // NOTE: could consider loading this "custom class" of "Enemy" as defined in Tiled
+             //auto entity = entity_factory.create_skull_head_boss_enemy(
+               //"map_a", center.x, center.y, w, h, "teleport_boss");
+             //entity->set("is_boss");
+             //gameplay_screen->add_entity_to_pool(entity);
          }},
          { "skull_head_boss", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
              AllegroFlare::Vec2D center = center_of(x, y, w, h);

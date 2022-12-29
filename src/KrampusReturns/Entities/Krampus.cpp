@@ -219,6 +219,11 @@ void Krampus::update()
    return;
 }
 
+bool Krampus::would_be_lethal_damage(int damage)
+{
+   return (health - damage <= 0);
+}
+
 void Krampus::do_impact_hit()
 {
    // NOTE: Data would vary by weapon, for for now, just a basic hit with relatively reasonable range and damage
@@ -398,6 +403,8 @@ void Krampus::face_right()
 
 void Krampus::attack()
 {
+   // NOTE: the conditional check may not be necessary. The state machine in theory should prevent
+   // the player from interrupting the STATE_ATTACKING if it is currently busy (state_is_busy == true).
    if (state != STATE_ATTACKING) set_state(STATE_ATTACKING);
    return;
 }
@@ -407,15 +414,18 @@ void Krampus::take_hit(int damage)
    if (invincible_from_taking_damage) return;
    //if (state == STATE_STUNNED_FROM_TAKING_DAMAGE) return; // TODO: replace this with more recovery time
 
-   health -= damage;
+   // HACK: this line will override the state_is_busy if the state_is_busy is in the context of STATE_ATTACKING
+   if (state == STATE_ATTACKING) state_is_busy = false;
 
-   if (health > 0)
+   if (would_be_lethal_damage(damage))
    {
-      set_state(STATE_STUNNED_FROM_TAKING_DAMAGE);
+      bool state_change_was_successful = set_state(STATE_DYING);
+      if (state_change_was_successful) health = 0;
    }
    else
    {
-      set_state(STATE_DYING);
+      bool state_change_was_successful = set_state(STATE_STUNNED_FROM_TAKING_DAMAGE);
+      if (state_change_was_successful) health -= damage;
    }
    return;
 }

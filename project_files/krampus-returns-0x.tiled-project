@@ -5,8 +5,37 @@
     "extensionsPath": "extensions",
     "folders": [
         ".",
-        "../../bin/programs/data"
+        "../../bin/programs/data",
+        "../bin/programs/data/maps",
+        "../bin/programs/data/maps",
+        "../bin/programs/data/maps",
+        ".",
+        ".",
+        "."
     ],
     "propertyTypes": [
+        {
+            "color": "#ff3664b3",
+            "id": 1,
+            "members": [
+                {
+                    "name": "type",
+                    "type": "string",
+                    "value": "blob"
+                }
+            ],
+            "name": "Enemy",
+            "type": "class",
+            "useAs": [
+                "property",
+                "map",
+                "layer",
+                "object",
+                "tile",
+                "tileset",
+                "wangcolor",
+                "wangset"
+            ]
+        }
     ]
 }

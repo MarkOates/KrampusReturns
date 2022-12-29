@@ -5,15 +5,29 @@
     },
     "activeFile": "",
     "expandedProjectPaths": [
+        "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-1-1-0x.tmj": {
+            "scale": 1.9,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 456.57894736842104,
+                "y": 328.94736842105254
+            }
+        },
+        "/Users/markoates/tiles_dungeon_v1.1.tsx": {
+            "scaleInDock": 1
+        }
     },
     "map.lastUsedFormat": "json",
     "openFiles": [
     ],
     "project": "krampus-returns-0x.tiled-project",
+    "property.type": "Enemy",
     "recentFiles": [
+        "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-1-1-0x.tmj"
     ],
     "resizeMap.removeObjects": false
 }
