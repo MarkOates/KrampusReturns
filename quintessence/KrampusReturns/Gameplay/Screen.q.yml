@@ -356,8 +356,8 @@ functions:
                update_entities();
                if (state_age > 2.0 && !showing_banner_text)
                {
-                  event_emitter->emit_play_music_track_event("fail_music");
                   // TODO: add fail music
+                  event_emitter->emit_play_music_track_event("dead_krampus_music");
                   set_banner_text("YOU LOSE", al_color_name("firebrick"));
                   show_banner_text();
                }
@@ -1278,10 +1278,10 @@ functions:
     body: |
       using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
 
-      std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> damages_player =
+      std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> damages_player_entities =
          select_damages_player_entities_on_map(currently_active_map_name);
 
-      std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> damages_enemies =
+      std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> damages_enemies_entities =
          select_damages_enemies_entities_on_map(currently_active_map_name);
 
       // NOTE: for now, one player controlled character evaluated:
@@ -1289,9 +1289,35 @@ functions:
          static_cast<KrampusReturns::Entities::Krampus*>(player_controlled_entity);
 
 
-      // TODO: Implement the body logic of this function
+      // TODO: Implement the body logic of this function for entities damaging enemies
 
-      
+      // HERE:
+      if (!player_krampus || player_krampus->get_invincible_from_taking_damage())
+      {
+         // Nothing. Don't test damage on krampus here.
+      }
+      else
+      {
+         for (auto &damages_player_entity : damages_player_entities)
+         {
+            if (player_krampus->get_place_ref().collide(damages_player_entity->get_place_ref()))
+            {
+               // a collision happened here! woo!
+               player_krampus->take_hit(1); // TODO: Fix the ammount of damage delt. It could vary depending on
+                                            // the type, or the damage zone.
+               break;
+            }
+         }
+      }
+
+      // TODO: Implement the body logic of this function for entities damaging player
+
+      //for (auto &damages_player_entity : damages_player_entities)
+      //{
+      //}
+
+
+
       //select_damages_enemies_entities_on_map
       //select_damages_player_entities_on_map
 

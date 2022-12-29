@@ -53,6 +53,7 @@ properties:
   - name: invincible_from_taking_damage
     type: bool
     init_with: false
+    getter: true
 
   - name: initialized
     type: bool

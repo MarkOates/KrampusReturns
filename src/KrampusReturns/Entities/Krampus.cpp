@@ -55,6 +55,12 @@ int Krampus::get_max_health() const
 }
 
 
+bool Krampus::get_invincible_from_taking_damage() const
+{
+   return invincible_from_taking_damage;
+}
+
+
 void Krampus::initialize()
 {
    if (!((!initialized)))
