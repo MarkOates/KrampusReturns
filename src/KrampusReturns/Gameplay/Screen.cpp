@@ -2593,6 +2593,19 @@ std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> Screen:
    return result;
 }
 
+bool Screen::are_any_blobs_present()
+{
+   //using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+   //std::string on_map_name = map_name;
+
+   //std::vector<ChatGPT::Enemy*> result;
+   for (auto &entity : entity_pool)
+   {
+      if (entity->exists("type", "blob")) return true;
+   }
+   return false;
+}
+
 AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* Screen::find_boss()
 {
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;

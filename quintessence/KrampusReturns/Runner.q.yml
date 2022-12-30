@@ -173,6 +173,9 @@ functions:
 
       // setup the achievements
       achievements.set_achievements({
+         { "clear_all_blobs_level_1", {
+            new AllegroFlare::Achievement("Unblobbed", "Clear out all the blobs in Level 1" ), false, false }
+         },
          //{ "free_seat", { new AllegroFlare::Achievement("Free Seat at the Concert"), false, false } },
          //{ "start_the_game", { new AllegroFlare::Achievement("In Da House"), false, false } },
          //{ "do_thing", { new AllegroFlare::Achievement("Save the Zoo", "Will unhide when achieved"), false, false } },
