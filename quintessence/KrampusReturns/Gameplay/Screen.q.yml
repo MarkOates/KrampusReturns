@@ -1350,16 +1350,28 @@ functions:
                // TODO: account for strength of damage
                // TODO: consider if force of impact should be a thing
 
-               // TODO: have entity take damage:
-               //std::cout << "COLLISION!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+
+ 
+
+               int damage_to_be_delt = 1;
+
+               // HERE: Account for damage caused in damage zone
+               auto as_damage_zone = 
+                  dynamic_cast<KrampusReturns::Entities::DamageZone*>(entity_that_damages_enemies);
+               if (as_damage_zone)
+               {
+                  damage_to_be_delt = as_damage_zone->get_damage();
+               }
                
+
 
                // Known types (at the moment):
                KrampusReturns::Entities::Blob* as_blob =
                   dynamic_cast<KrampusReturns::Entities::Blob*>(entity_that_takes_damage_from_player_damage_zone);
                if (as_blob)
                {
-                  as_blob->take_damage(1);
+                  // HERE:
+                  as_blob->take_damage(damage_to_be_delt);
                   if (as_blob->get_health() <= 0) as_blob->set(PLEASE_DELETE);
 
                   emit_spawn_flash_fx_event(as_blob->get_place_ref().position.x, as_blob->get_place_ref().position.y);
@@ -1371,7 +1383,7 @@ functions:
                   as_chat_gpt_enemy != nullptr
                )
                {
-                  as_chat_gpt_enemy->take_damage(1);
+                  as_chat_gpt_enemy->take_damage(damage_to_be_delt);
                   if (as_chat_gpt_enemy->get_health() <= 0) as_chat_gpt_enemy->set(PLEASE_DELETE);
 
                   emit_spawn_flash_fx_event(
@@ -2399,6 +2411,26 @@ functions:
             // TESTING DEBUG:
             load_level_and_start(&level);
 
+            break;
+         }
+
+         case ALLEGRO_KEY_EQUALS: // aka PLUS
+         {
+            KrampusReturns::Entities::Krampus* player_krampus =
+              static_cast<KrampusReturns::Entities::Krampus*>(player_controlled_entity);
+
+            // TESTING DEBUG:
+            if (player_krampus) player_krampus->increment_attack_strength();
+            break;
+         }
+
+         case ALLEGRO_KEY_MINUS: // aka MINUS
+         {
+            KrampusReturns::Entities::Krampus* player_krampus =
+              static_cast<KrampusReturns::Entities::Krampus*>(player_controlled_entity);
+
+            // TESTING DEBUG:
+            if (player_krampus) player_krampus->decrement_attack_strength();
             break;
          }
 

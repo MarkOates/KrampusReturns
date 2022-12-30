@@ -261,7 +261,7 @@ void Krampus::do_impact_hit()
    float point_of_impact_y = get_place_ref().position.y;
    float impact_width = 32;
    float impact_height = 16;
-   int damage = 1;
+   int damage = attack_strength;
    int32_t direction_of_force = KrampusReturns::Entities::DamageZone::DIRECTION_OF_FORCE_UNDEF;
 
    float x_distance_from_krampus_center = impact_width * 0.5;
