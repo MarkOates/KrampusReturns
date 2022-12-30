@@ -205,7 +205,7 @@ void Runner::initialize()
       });
    game_won_outro_storyboard_screen->set_event_emitter(&event_emitter);
    game_won_outro_storyboard_screen->set_game_event_name_to_emit_after_completing(
-      "finish_new_game_intro_storyboard_screen"
+      "finish_game_won_outro_storyboard_screen"
       //"activate_nvestigation_room_screen"
    );
    framework->register_screen("game_won_outro_storyboard_screen", game_won_outro_storyboard_screen);
@@ -429,12 +429,21 @@ void Runner::game_event_func(AllegroFlare::GameEvent* ev)
          if (done_with_all_levels)
          {
             // TODO actiavate game credits you win screen
-            event_emitter->emit_game_event(AllegroFlare::GameEvent(EVENT_ACTIVATE_CREDITS_SCREEN));
+            event_emitter->emit_game_event(AllegroFlare::GameEvent("start_game_won_outro_storyboard_screen"));
          }
          else
          {
             platforming_2d_screen.load_level_and_start(&platforming_2d_world.get_levels_ref()[next_level_to_do]);
          }
+      }},
+      { "start_game_won_outro_storyboard_screen",  [this](){
+         framework->activate_screen("game_won_outro_storyboard_screen");
+         //framework->register_screen("game_won_outro_storyboard_screen", game_won_outro_storyboard_screen);
+      }},
+      { "finish_game_won_outro_storyboard_screen",  [this](){
+         event_emitter->emit_game_event(AllegroFlare::GameEvent(EVENT_ACTIVATE_CREDITS_SCREEN));
+         //framework->activate_screen("game_won_outro_storyboard_screen");
+         //framework->register_screen("game_won_outro_storyboard_screen", game_won_outro_storyboard_screen);
       }},
       //{ EVENT_ACTIVATE_TILE_DRIVE_SCREEN, [this](){
          //framework->activate_screen("tile_drive_screen");
