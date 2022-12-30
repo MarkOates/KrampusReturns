@@ -126,14 +126,14 @@ void Runner::initialize()
    title_screen.set_title_text("KRAMPUS RETURNS");
    title_screen.set_title_text_color(AllegroFlare::Color(AllegroFlare::Color::AliceBlue, 1.0).to_al());
    title_screen.set_title_font_size(-130);
-   title_screen.set_title_font_name("ChronoTrigger.ttf");
+   title_screen.set_title_font_name("ChronoType.otf");
    //title_screen.set_title_text_color(AllegroFlare::Color(0x000000, 1.0).to_al());
    //title_screen.set_background_bitmap_name("placeholder-title-background.jpg");
    title_screen.set_event_emitter(&event_emitter);
    title_screen.set_menu_font_size(-40);
    title_screen.set_menu_position_y(1080/32*19+10);
-   title_screen.set_copyright_text("Copyright 2022 - Mark Oates - CLUBCATT Games - www.clubcatt.com\n");
-   title_screen.set_copyright_text_color(AllegroFlare::Color(0x72aedd, 0.8).to_al());
+   title_screen.set_copyright_text("\nCopyright 2022     Mark Oates     CLUBCATT Games     www.clubcatt.com\n");
+   title_screen.set_copyright_text_color(AllegroFlare::Color(0xefefff, 0.2).to_al());
    title_screen.set_menu_option_selection_activation_delay(2.0);
    //title_screen.set_copyright_font_name(");
    title_screen.set_copyright_font_size(-26);
@@ -269,12 +269,17 @@ void Runner::initialize()
       ),
 
       section_factory.create_text(SPACER_TEXT),
+      section_factory.create_text(
+         "KrampusHack 2022\nhttps://tins.amarillion.org/krampu22"
+      ),
+
+      section_factory.create_text(SPACER_TEXT),
       section_factory.create_header("Programming"),
       section_factory.create_column_with_labels({
          { "Made with", "Allegro (5.2.9)" },
          {          "", "https://liballeg.org/" },
          //{          "", "by Allegro Developers" },
-         {    "Engine", "AllegroFlare (0.8.11-wip)" },
+         { "Game Framework", "AllegroFlare (0.8.11-wip)" },
          {          "", "https://github.com/allegroflare/allegro_flare" },
          {          "", "by Mark Oates" },
       }),
@@ -288,7 +293,12 @@ void Runner::initialize()
          { "Font Awesome Icons", "Dave Gandy" },
          {                   "", "https://fontawesome.com/" },
          {                   "", "SIL Open Font License, Version 1.1." },
-
+         //{    "ChronoType Font", "" },
+         //{                   "", "https://fontawesome.com/" },
+         //{                   "", "SIL Open Font License, Version 1.1." },
+         //{         "Inter Font", "Dave Gandy" },
+         //{                   "", "https://fontawesome.com/" },
+         //{                   "", "SIL Open Font License, Version 1.1." },
 
          //{ "Character Design and Art", "Mark Oates" },
       }),
@@ -566,6 +576,7 @@ void Runner::game_event_func(AllegroFlare::GameEvent* ev)
          //}
       }},
       { "start_title_screen", [this](){
+         event_emitter->emit_play_music_track_event("intro_music");
          framework->activate_screen("title_screen");
       }},
       { EVENT_START_NEW_GAME, [this](){
@@ -653,7 +664,8 @@ void Runner::game_event_func(AllegroFlare::GameEvent* ev)
       //}},
       { EVENT_CREDITS_SCREEN_FINISHED, [this](){
          unlock_achievement("stay_through_the_credits");
-         framework->activate_screen("title_screen");
+         event_emitter->emit_game_event(AllegroFlare::GameEvent("start_title_screen"));
+         //framework->activate_screen("title_screen");
       }},
       { EVENT_EXIT_GAME, [this](){
          event_emitter->emit_exit_game_event();
