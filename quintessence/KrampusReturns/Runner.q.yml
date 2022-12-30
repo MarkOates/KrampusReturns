@@ -621,8 +621,6 @@ functions:
       framework->register_screen("platforming_2d_screen", &platforming_2d_screen);
 
       return;
-    body_dependency_symbols:
-      - Wicked::Entities::Basic2DFactory
 
 
   - name: unlock_achievement
@@ -1011,8 +1009,6 @@ dependencies:
     headers: [ AllegroFlare/Shader.hpp ]
   - symbol: AllegroFlare::Screens::CharacterNameInput
     headers: [ AllegroFlare/Screens/CharacterNameInput.hpp ]
-  - symbol: Wicked::Entities::Basic2DFactory
-    headers: [ Wicked/Entities/Basic2DFactory.hpp ]
   - symbol: AllegroFlare::Prototypes::TileDrive::TerrainMeshDictionaryRecord
     headers: [ AllegroFlare/Prototypes/TileDrive/TerrainMeshDictionaryRecord.hpp ]
   - symbol: AllegroFlare::Inventory

@@ -337,9 +337,6 @@
   "AllegroFlare/Screens/CharacterNameInput": [
     "KrampusReturns/Runner"
   ],
-  "Wicked/Entities/Basic2DFactory": [
-    "KrampusReturns/Runner"
-  ],
   "AllegroFlare/Prototypes/TileDrive/TerrainMeshDictionaryRecord": [
     "KrampusReturns/Runner"
   ],

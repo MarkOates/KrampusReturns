@@ -12,7 +12,6 @@
 #include <AllegroFlare/Screens/RollingCredits.hpp>
 #include <AllegroFlare/StoryboardFactory.hpp>
 #include <KrampusReturns/AssetFactory.hpp>
-#include <Wicked/Entities/Basic2DFactory.hpp>
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
