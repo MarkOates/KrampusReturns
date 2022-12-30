@@ -421,6 +421,21 @@ functions:
       return result;
 
 
+  - name: create_attack_up_item
+    type: AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D*
+    const: true
+    parameters:
+      - name: map_name
+        type: std::string
+        default_argument: '"[map-name-not-set]"'
+      - name: x
+        type: float
+        default_argument: 0.0f
+      - name: y
+        type: float
+        default_argument: 0.0f
+    body: |
+      return _create_collectable(map_name, x, y, "attack_up", "generic_powerup");
 
 
   - name: _create_collectable
@@ -442,7 +457,7 @@ functions:
         default_argument: '"[unset-type_name]"'
       - name: animation
         type: std::string
-        default_argument: '"[unset-animation_name]"'
+        default_argument: '"generic_powerup"'
     body: |
       using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
 

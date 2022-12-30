@@ -928,6 +928,11 @@ void Screen::tmj_object_parse_callback_func(std::string object_class, float x, f
           auto entity = entity_factory.create_skeleton_enemy("map_a", center.x, center.y, "skeleton");
           gameplay_screen->add_entity_to_pool(entity);
       }},
+      { "attack_up_item", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
+          AllegroFlare::Vec2D center = center_of(x, y, w, h);
+          auto entity = entity_factory.create_attack_up_item("map_a", center.x, center.y);
+          gameplay_screen->add_entity_to_pool(entity);
+      }},
       { "flaming_skull", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
           AllegroFlare::Vec2D center = center_of(x, y, w, h);
           //gameplay_screen->player_controlled_entity;
@@ -1620,6 +1625,9 @@ void Screen::update_player_collisions_with_collectables()
 
    //std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> _entities = get_current_map_entities();
    //AllegroFlare::Prototypes::Platforming2D::EntityCollectionHelper collection_helper(&_entities);
+   KrampusReturns::Entities::Krampus* player_krampus =
+      dynamic_cast<KrampusReturns::Entities::Krampus*>(player_controlled_entity);
+   if (!player_krampus) return;
 
    // NOTE: collisions here occcur with the origin of the player character (bottom center of the sprite)
    float player_x = player_controlled_entity->get_place_ref().position.x;
@@ -1627,13 +1635,27 @@ void Screen::update_player_collisions_with_collectables()
 
    for (auto &entity : select_collectable_by_player_on_map(currently_active_map_name))
    {
-      // HERE
-      // get item type
-      //
       if (entity->get_place_ref().collide(player_x, player_y, 4, 4, 4, 4))
       {
+         std::string collectable_type = "unknown";
+         if (entity->exists("collectable_type")) collectable_type = entity->get("collectable_type");
+
+         bool collected = false;
+         // HERE
+         // TODO: add different items for powerups
+         if (collectable_type == "attack_up")
+         {
+            player_krampus->increment_attack_strength();
+            // TODO: play power-up sound effect
+            collected = true;
+         }
+         //if (collectable_type == "boobaz")
+         //{
+            //collected = true;
+         //}
+
          // TODO: make collectable sound effect
-         entity->set(PLEASE_DELETE);
+         if (collected) entity->set(PLEASE_DELETE);
          // NOTE: typically will do something here as a result of picking up the item
       }
    }

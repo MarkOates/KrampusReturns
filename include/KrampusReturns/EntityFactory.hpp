@@ -22,7 +22,7 @@ namespace KrampusReturns
    private:
       AllegroFlare::EventEmitter* event_emitter;
       bool init_entities_drawing_debug;
-      AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* _create_collectable(std::string map_name="[map-name-not-set]", float x=0.0f, float y=0.0f, std::string type_name="[unset-type_name]", std::string animation="[unset-animation_name]") const;
+      AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* _create_collectable(std::string map_name="[map-name-not-set]", float x=0.0f, float y=0.0f, std::string type_name="[unset-type_name]", std::string animation="generic_powerup") const;
 
    protected:
 
@@ -44,6 +44,7 @@ namespace KrampusReturns
       ChatGPT::Enemy* create_flaming_skull_enemy(std::string on_map="[unset-on_map]", float x=0.0f, float y=0.0f, std::string animation="[unset-animation]", AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target=nullptr) const;
       ChatGPT::Enemy* create_skull_head_boss_enemy(std::string on_map="[unset-on_map]", float x=0.0f, float y=0.0f, float area_width=0.0f, float area_height=0.0f, std::string animation="[unset-animation]", AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target=nullptr) const;
       KrampusReturns::Entities::DamageZone* create_damage_zone_by_player(std::string on_map="[unset-on_map]", float x=0.0f, float y=0.0f, float w=20.0f, float h=8.0f, int damage=1, uint32_t direction_of_force=KrampusReturns::Entities::DamageZone::DIRECTION_OF_FORCE_UNDEF);
+      AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* create_attack_up_item(std::string map_name="[map-name-not-set]", float x=0.0f, float y=0.0f) const;
    };
 }
 

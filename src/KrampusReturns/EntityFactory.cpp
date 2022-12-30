@@ -314,6 +314,11 @@ KrampusReturns::Entities::DamageZone* EntityFactory::create_damage_zone_by_playe
    return result;
 }
 
+AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* EntityFactory::create_attack_up_item(std::string map_name, float x, float y) const
+{
+   return _create_collectable(map_name, x, y, "attack_up", "generic_powerup");
+}
+
 AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* EntityFactory::_create_collectable(std::string map_name, float x, float y, std::string type_name, std::string animation) const
 {
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
