@@ -383,6 +383,12 @@
   "KrampusReturns/AssetFactory": [
     "KrampusReturns/Runner"
   ],
+  "AllegroFlare/Elements/RollingCredits/SectionFactory": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Screens/RollingCredits": [
+    "KrampusReturns/Runner"
+  ],
   "AllegroFlare/Prototypes/FixedRoom2D/EntityCollectionHelper": [
     "KrampusReturns/Shaders/Primary"
   ],

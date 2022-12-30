@@ -3,11 +3,13 @@
 #include <KrampusReturns/Runner.hpp>
 
 #include <AllegroFlare/Color.hpp>
+#include <AllegroFlare/Elements/RollingCredits/SectionFactory.hpp>
 #include <AllegroFlare/Errors.hpp>
 #include <AllegroFlare/EventNames.hpp>
 #include <AllegroFlare/Prototypes/FixedRoom2D/EventNames.hpp>
 #include <AllegroFlare/Prototypes/FixedRoom2D/ScriptEventDatas/CollectEvidence.hpp>
 #include <AllegroFlare/Prototypes/FixedRoom2D/ScriptEventDatas/CollectItem.hpp>
+#include <AllegroFlare/Screens/RollingCredits.hpp>
 #include <AllegroFlare/StoryboardFactory.hpp>
 #include <KrampusReturns/AssetFactory.hpp>
 #include <Wicked/Entities/Basic2DFactory.hpp>
@@ -35,6 +37,7 @@ Runner::Runner(std::string mode, AllegroFlare::Frameworks::Full* framework, Alle
    , finished_up_to_level(0)
    , achievements_screen()
    , credits_screen(nullptr)
+   , rolling_credits_screen()
    , blurry_background_screen_capture(nullptr)
    , prior_screens_stack()
    , initialized(false)
@@ -225,13 +228,48 @@ void Runner::initialize()
 
 
 
+
+
+   AllegroFlare::Elements::RollingCredits::SectionFactory section_factory;
+   //AllegroFlare::Screens::RollingCredits rolling_credits_screen;
+   rolling_credits_screen.set_font_bin(&font_bin);
+   rolling_credits_screen.set_event_emitter(&event_emitter);
+   rolling_credits_screen.set_sections({
+      section_factory.create_header("Production"),
+      section_factory.create_column_with_labels({
+         { "Producer", "Robyn Kendall" },
+         { "Production Design", "Tayyibah Samuels" },
+         { "Music", "Ryker Odling" },
+         { "Sound Design", "Aiza Rivera" },
+         { "Lead Programming", "Annaliese Bauer" },
+         { "Motion Design", "Ellenor Cote" },
+         { "Element Design", "Katy Swanson" },
+         { "Marketing Manager", "Melina Kelly" },
+         { "Set Design", "Abby Burton" },
+      }),
+      section_factory.create_header("Programming"),
+      section_factory.create_column_with_labels({
+         { "Programmer", "Ducky Donaldson" },
+         { "Programming", "Carla Cow" },
+         { "Motion Programmer", "Colt Cat" },
+         { "Scene Programmers", "John Calf" },
+      }),
+   });
+   rolling_credits_screen.initialize();
+   framework->register_screen("rolling_credits_screen", &rolling_credits_screen);
+   //rolling_credits_screen.on_activate();
+
+
+
+
+
    // setup the credits screen
    credits_screen = storyboard_factory.create_advancing_text_storyboard_screen({
          //"Thank you to Shawn Hargreaves for creating the first version of Allegro in the 90s.",
          "Thank you to all the members of the Allegro game programming community.",
             //"which had a huge impact in my development as a programmer.",
          "Thank you to Elias and SiegeLord for your continued dedication to Allegro.",
-         "Thank you to amarillion for your work to support Allegro, including creating KrampuHack.",
+         "Thank you to amarillion for your work to support the Allegro community, including creating KrampusHack.",
          //"Thank you to Matthew Leverton for creating allegro.cc",
          "Thank you to pmprog for your wishlist ideas.",
          "And thank you for playing.",

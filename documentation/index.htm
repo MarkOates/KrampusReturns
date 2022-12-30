@@ -1600,6 +1600,10 @@ table td
   <td class="property">AllegroFlare::Screens::Storyboard*</td>
 </tr>
 <tr>
+  <td class="property">rolling_credits_screen</td>
+  <td class="property">AllegroFlare::Screens::RollingCredits</td>
+</tr>
+<tr>
   <td class="property">blurry_background_screen_capture</td>
   <td class="property">ALLEGRO_BITMAP*</td>
 </tr>
@@ -1840,6 +1844,12 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;KrampusReturns::AssetFactory&quot;, &quot;headers&quot;=&gt;[&quot;KrampusReturns/AssetFactory.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Elements::RollingCredits::SectionFactory&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Elements/RollingCredits/SectionFactory.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::Screens::RollingCredits&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/Screens/RollingCredits.hpp&quot;]}</td>
 </tr>
     </table>
   </div>
@@ -2530,6 +2540,12 @@ table td
     "KrampusReturns/Runner"
   ],
   "KrampusReturns/AssetFactory": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Elements/RollingCredits/SectionFactory": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Screens/RollingCredits": [
     "KrampusReturns/Runner"
   ],
   "AllegroFlare/Prototypes/FixedRoom2D/EntityCollectionHelper": [

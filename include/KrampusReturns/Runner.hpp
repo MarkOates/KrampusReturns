@@ -7,6 +7,7 @@
 #include <AllegroFlare/Screens/Achievements.hpp>
 #include <AllegroFlare/Screens/Base.hpp>
 #include <AllegroFlare/Screens/PauseScreen.hpp>
+#include <AllegroFlare/Screens/RollingCredits.hpp>
 #include <AllegroFlare/Screens/Storyboard.hpp>
 #include <AllegroFlare/Screens/TitleScreen.hpp>
 #include <KrampusReturns/Gameplay/Screen.hpp>
@@ -49,6 +50,7 @@ namespace KrampusReturns
       int finished_up_to_level;
       AllegroFlare::Screens::Achievements achievements_screen;
       AllegroFlare::Screens::Storyboard* credits_screen;
+      AllegroFlare::Screens::RollingCredits rolling_credits_screen;
       ALLEGRO_BITMAP* blurry_background_screen_capture;
       std::vector<std::string> prior_screens_stack;
       bool initialized;
