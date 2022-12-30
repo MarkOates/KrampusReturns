@@ -42,6 +42,16 @@ properties:
     init_with: 5
     getter: true
 
+  - name: max_attack_strength
+    type: int
+    init_with: 3
+    getter: true
+
+  - name: attack_strength
+    type: int
+    init_with: 1
+    getter: true
+
   - name: stunned_from_damage_at
     type: float
     init_with: 0.0
@@ -198,6 +208,24 @@ functions:
       return true;
     body_dependency_symbols:
       - AllegroFlare::Errors
+
+
+  - name: increment_attack_strength
+    type: bool
+    body: |
+      int previous_attack_strength = attack_strength;
+      attack_strength++;
+      if (attack_strength >= max_attack_strength) attack_strength = max_attack_strength;
+      return (attack_strength != previous_attack_strength);
+
+
+  - name: decrement_attack_strength
+    type: bool
+    body: |
+      int previous_attack_strength = attack_strength;
+      attack_strength--;
+      if (attack_strength < 1) attack_strength = 1;
+      return (attack_strength != previous_attack_strength);
 
 
   - name: update

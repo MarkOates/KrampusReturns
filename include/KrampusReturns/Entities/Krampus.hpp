@@ -29,6 +29,8 @@ namespace KrampusReturns
          bool attack_hit_activated;
          int health;
          int max_health;
+         int max_attack_strength;
+         int attack_strength;
          float stunned_from_damage_at;
          float invincible_from_taking_damage_at;
          bool invincible_from_taking_damage;
@@ -45,8 +47,12 @@ namespace KrampusReturns
          void set_event_emitter(AllegroFlare::EventEmitter* event_emitter);
          int get_health() const;
          int get_max_health() const;
+         int get_max_attack_strength() const;
+         int get_attack_strength() const;
          bool get_invincible_from_taking_damage() const;
          void initialize();
+         bool increment_attack_strength();
+         bool decrement_attack_strength();
          virtual void update() override;
          bool would_be_lethal_damage(int damage=1);
          void do_impact_hit();

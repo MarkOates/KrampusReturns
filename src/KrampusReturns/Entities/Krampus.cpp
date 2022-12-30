@@ -26,6 +26,8 @@ Krampus::Krampus(AllegroFlare::EventEmitter* event_emitter)
    , attack_hit_activated(false)
    , health(5)
    , max_health(5)
+   , max_attack_strength(3)
+   , attack_strength(1)
    , stunned_from_damage_at(0.0)
    , invincible_from_taking_damage_at(0.0)
    , invincible_from_taking_damage(false)
@@ -54,6 +56,18 @@ int Krampus::get_health() const
 int Krampus::get_max_health() const
 {
    return max_health;
+}
+
+
+int Krampus::get_max_attack_strength() const
+{
+   return max_attack_strength;
+}
+
+
+int Krampus::get_attack_strength() const
+{
+   return attack_strength;
 }
 
 
@@ -145,6 +159,22 @@ bool Krampus::set_state(uint32_t state, float time_now)
    }
 
    return true;
+}
+
+bool Krampus::increment_attack_strength()
+{
+   int previous_attack_strength = attack_strength;
+   attack_strength++;
+   if (attack_strength >= max_attack_strength) attack_strength = max_attack_strength;
+   return (attack_strength != previous_attack_strength);
+}
+
+bool Krampus::decrement_attack_strength()
+{
+   int previous_attack_strength = attack_strength;
+   attack_strength--;
+   if (attack_strength < 1) attack_strength = 1;
+   return (attack_strength != previous_attack_strength);
 }
 
 void Krampus::update()
