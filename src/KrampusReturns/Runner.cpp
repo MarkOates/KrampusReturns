@@ -256,6 +256,7 @@ void Runner::initialize()
       }),
    });
    rolling_credits_screen.initialize();
+   rolling_credits_screen.set_game_event_name_to_emit_after_completing(EVENT_CREDITS_SCREEN_FINISHED);
    framework->register_screen("rolling_credits_screen", &rolling_credits_screen);
    //rolling_credits_screen.on_activate();
 
@@ -504,6 +505,7 @@ void Runner::game_event_func(AllegroFlare::GameEvent* ev)
       //}},
       { EVENT_ACTIVATE_CREDITS_SCREEN, [this](){
          framework->activate_screen("credits_screen");
+         //framework->activate_screen("rolling_credits_screen");
       }},
       { EVENT_ACTIVATE_ACHIEVEMENTS_SCREEN, [this](){
          push_screen();
