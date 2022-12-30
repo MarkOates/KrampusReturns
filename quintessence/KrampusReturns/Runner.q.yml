@@ -372,6 +372,7 @@ functions:
             "KrampusHack 2022\nhttps://tins.amarillion.org/krampu22"
          ),
 
+         section_factory.create_text(SHORT_SPACER_TEXT),
          section_factory.create_text(SPACER_TEXT),
          section_factory.create_header("Programming"),
          section_factory.create_column_with_labels({
@@ -402,7 +403,7 @@ functions:
             //{ "Character Design and Art", "Mark Oates" },
          }),
 
-         section_factory.create_text(SHORT_SPACER_TEXT),
+         section_factory.create_text(SPACER_TEXT),
          section_factory.create_header("Audio"),
          section_factory.create_column_with_labels({
             { "Sound Effect Design", "Mark Oates" },
@@ -411,7 +412,7 @@ functions:
             //{        "", "(https://pita.itch.io)" },
          }),
 
-         section_factory.create_text(SHORT_SPACER_TEXT),
+         section_factory.create_text(SPACER_TEXT),
          section_factory.create_header("Music"),
          //section_factory.create_column_with_labels({
             //{ "Music by", "Mark Oates" },
@@ -449,11 +450,6 @@ functions:
 
 
 
-         section_factory.create_text(SPACER_TEXT),
-         section_factory.create_text(
-            "Copyright 2022 - CLUBCATT Games\nhttps://www.clubcatt.com"
-         ),
-
          //section_factory.create_text("\n\n\n\n\n\n"),
 
 
@@ -487,6 +483,12 @@ functions:
             "And thank you for playing."
          ),
 
+
+         section_factory.create_text(SHORT_SPACER_TEXT),
+         section_factory.create_text(SPACER_TEXT),
+         section_factory.create_text(
+            "Copyright 2022 - CLUBCATT Games\nhttps://www.clubcatt.com"
+         ),
 
          section_factory.create_text(SHORT_SPACER_TEXT),
          //section_factory.create_text(SPACER_TEXT),
