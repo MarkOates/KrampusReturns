@@ -2018,8 +2018,10 @@ functions:
          AllegroFlare::Elements::HealthBars::Classic player_strength_bar(player_max_strength, player_strength);
          player_strength_bar.set_bar_width(34);
          player_strength_bar.set_bar_spacing(44);
-         player_strength_bar.set_bar_height(20);
+         player_strength_bar.set_bar_height(22);
          player_strength_bar.set_fill_color(al_color_name("dodgerblue"));
+         player_strength_bar.set_empty_box_outline_color(al_color_name("midnightblue"));
+         player_strength_bar.set_bar_stroke_thickness(4.0f);
          player_strength_bar.fit_placement_width_and_height();
          player_strength_bar.get_placement_ref().position = { 80 + width_of_health_bar, 60 };
          player_strength_bar.render();
