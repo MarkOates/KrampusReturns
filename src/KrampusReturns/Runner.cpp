@@ -279,7 +279,7 @@ void Runner::initialize()
          { "Made with", "Allegro (5.2.9)" },
          {          "", "https://liballeg.org/" },
          //{          "", "by Allegro Developers" },
-         { "Game Framework", "AllegroFlare (0.8.11-wip)" },
+         { "Framework", "AllegroFlare (0.8.11-wip)" },
          {          "", "https://github.com/allegroflare/allegro_flare" },
          {          "", "by Mark Oates" },
       }),
@@ -348,6 +348,12 @@ void Runner::initialize()
          "by Mark Oates"//, "centered"
       ),
 
+
+
+      section_factory.create_text(SPACER_TEXT),
+      section_factory.create_text(
+         "Copyright 2022 - CLUBCATT Games\nhttps://www.clubcatt.com"
+      ),
 
       //section_factory.create_text("\n\n\n\n\n\n"),
 
