@@ -29,6 +29,7 @@ std::map<std::string, AllegroFlare::AudioRepositoryElement> AssetFactory::obtain
       { "fail_moan_sound", { "fail_moan.ogg", false, "restart", 0.4 } },
       { "boss_beaten_chime", { "krampus-boss-beaten-chime.ogg", false, "ignore", 1.0 } },
       { "achievement_unlocked_sound", { "achievement-unlocked-01.ogg", false, "restart", 1.0 } },
+      { "pickup_powerup", { "pickup-generic-powerup-01.ogg", false, "restart", 0.9 } },
    };
    return result;
 }

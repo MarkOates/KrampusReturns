@@ -208,7 +208,7 @@ ChatGPT::Enemy* EntityFactory::create_skeleton_enemy(std::string on_map, float x
    result->set_animation_book(get_animation_book());
    result->set_animation(animation);
    result->get_place_ref().size = { 12, 4 };
-   result->get_place_ref().scale = { 0.6, 0.6 };
+   result->get_place_ref().scale = { 0.8, 0.8 };
    result->set_bitmap_alignment_strategy("bottom_centered");
 
    // NOTE: this class now needs a proper destruct process
@@ -239,7 +239,7 @@ ChatGPT::Enemy* EntityFactory::create_flaming_skull_enemy(std::string on_map, fl
    ChatGPT::Enemy* result = new ChatGPT::Enemy(max_health, health, attack);
    result->set_animation_book(get_animation_book());
    result->get_place_ref().size = { 8, 4 };
-   result->get_place_ref().scale = { 0.6, 0.6 };
+   result->get_place_ref().scale = { 0.8, 0.8 };
    result->set_animation(animation);
    result->set_bitmap_alignment_strategy("bottom_centered");
 
@@ -331,6 +331,7 @@ AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* EntityFactor
    result->get_place_ref().position.x = x;
    result->get_place_ref().position.y = y;
 
+   result->get_place_ref().scale = { 0.7, 0.7 };
 
    result->set_animation_book(get_animation_book());
    result->set_animation(animation);

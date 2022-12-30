@@ -1655,7 +1655,11 @@ void Screen::update_player_collisions_with_collectables()
          //}
 
          // TODO: make collectable sound effect
-         if (collected) entity->set(PLEASE_DELETE);
+         if (collected)
+         {
+            entity->set(PLEASE_DELETE);
+            event_emitter->emit_play_sound_effect_event("pickup_powerup");
+         }
          // NOTE: typically will do something here as a result of picking up the item
       }
    }
