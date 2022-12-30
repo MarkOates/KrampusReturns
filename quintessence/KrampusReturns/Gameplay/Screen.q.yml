@@ -1722,6 +1722,7 @@ functions:
          //
          if (entity->get_place_ref().collide(player_x, player_y, 4, 4, 4, 4))
          {
+            // TODO: make collectable sound effect
             entity->set(PLEASE_DELETE);
             // NOTE: typically will do something here as a result of picking up the item
          }

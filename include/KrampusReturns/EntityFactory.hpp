@@ -22,6 +22,7 @@ namespace KrampusReturns
    private:
       AllegroFlare::EventEmitter* event_emitter;
       bool init_entities_drawing_debug;
+      AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* _create_collectable(std::string map_name="[map-name-not-set]", float x=0.0f, float y=0.0f, std::string type_name="[unset-type_name]", std::string animation="[unset-animation_name]") const;
 
    protected:
 
