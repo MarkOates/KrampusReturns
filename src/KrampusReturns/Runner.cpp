@@ -231,29 +231,54 @@ void Runner::initialize()
 
 
    AllegroFlare::Elements::RollingCredits::SectionFactory section_factory;
-   //AllegroFlare::Screens::RollingCredits rolling_credits_screen;
+   std::string SPACER_TEXT = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
    rolling_credits_screen.set_font_bin(&font_bin);
    rolling_credits_screen.set_event_emitter(&event_emitter);
    rolling_credits_screen.set_sections({
-      section_factory.create_header("Production"),
-      section_factory.create_column_with_labels({
-         { "Producer", "Robyn Kendall" },
-         { "Production Design", "Tayyibah Samuels" },
-         { "Music", "Ryker Odling" },
-         { "Sound Design", "Aiza Rivera" },
-         { "Lead Programming", "Annaliese Bauer" },
-         { "Motion Design", "Ellenor Cote" },
-         { "Element Design", "Katy Swanson" },
-         { "Marketing Manager", "Melina Kelly" },
-         { "Set Design", "Abby Burton" },
-      }),
-      section_factory.create_header("Programming"),
-      section_factory.create_column_with_labels({
-         { "Programmer", "Ducky Donaldson" },
-         { "Programming", "Carla Cow" },
-         { "Motion Programmer", "Colt Cat" },
-         { "Scene Programmers", "John Calf" },
-      }),
+      //section_factory.create_header("Production"),
+      //section_factory.create_column_with_labels({
+         //{ "Producer", "Robyn Kendall" },
+         //{ "Production Design", "Tayyibah Samuels" },
+         //{ "Music", "Ryker Odling" },
+         //{ "Sound Design", "Aiza Rivera" },
+         //{ "Lead Programming", "Annaliese Bauer" },
+         //{ "Motion Design", "Ellenor Cote" },
+         //{ "Element Design", "Katy Swanson" },
+         //{ "Marketing Manager", "Melina Kelly" },
+         //{ "Set Design", "Abby Burton" },
+      //}),
+      //section_factory.create_header("Programming"),
+      //section_factory.create_column_with_labels({
+         //{ "Programmer", "Ducky Donaldson" },
+         //{ "Programming", "Carla Cow" },
+         //{ "Motion Programmer", "Colt Cat" },
+         //{ "Scene Programmers", "John Calf" },
+      //}),
+      //section_factory.create_text("This film is a work of fiction. Any resemblance to actual persons, "
+         //"living or dead, or events is purely coincidental."),
+      section_factory.create_text("\n\n\n\n\n\n"),
+      section_factory.create_text(
+         "Thank you to all the members of the Allegro game programming community."
+      ),
+      section_factory.create_text(SPACER_TEXT),
+      section_factory.create_text(
+         "Thank you to Elias and SiegeLord for your continued dedication to Allegro."
+      ),
+      section_factory.create_text(SPACER_TEXT),
+      section_factory.create_text(
+         "Thank you to amarillion for your work to support the Allegro community, including creating KrampusHack."
+      ),
+      section_factory.create_text(SPACER_TEXT),
+      section_factory.create_text(
+         "Thank you to pmprog for your wishlist ideas for KrampusHack."
+      ),
+      section_factory.create_text(SPACER_TEXT),
+      //section_factory.create_text(SPACER_TEXT),
+      section_factory.create_text(
+         "And thank you for playing."
+      ),
+      section_factory.create_text("\n\n\n\n\n\n"),
+      //section_factory.create_text(SPACER_TEXT),
    });
    rolling_credits_screen.initialize();
    rolling_credits_screen.set_game_event_name_to_emit_after_completing(EVENT_CREDITS_SCREEN_FINISHED);
@@ -504,8 +529,8 @@ void Runner::game_event_func(AllegroFlare::GameEvent* ev)
          //framework->activate_screen("");
       //}},
       { EVENT_ACTIVATE_CREDITS_SCREEN, [this](){
-         framework->activate_screen("credits_screen");
-         //framework->activate_screen("rolling_credits_screen");
+         //framework->activate_screen("credits_screen");
+         framework->activate_screen("rolling_credits_screen");
       }},
       { EVENT_ACTIVATE_ACHIEVEMENTS_SCREEN, [this](){
          push_screen();
