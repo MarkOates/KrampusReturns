@@ -329,8 +329,12 @@ functions:
 
 
 
+      using namespace AllegroFlare::Elements::RollingCredits;
+
+
       AllegroFlare::Elements::RollingCredits::SectionFactory section_factory;
       std::string SPACER_TEXT = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+      std::string SHORT_SPACER_TEXT = "\n\n\n\n\n\n";
       rolling_credits_screen.set_font_bin(&font_bin);
       rolling_credits_screen.set_event_emitter(&event_emitter);
       rolling_credits_screen.set_sections({
@@ -355,7 +359,64 @@ functions:
          //}),
          //section_factory.create_text("This film is a work of fiction. Any resemblance to actual persons, "
             //"living or dead, or events is purely coincidental."),
-         section_factory.create_text("\n\n\n\n\n\n"),
+
+         //jingle-bells-calm.ogg
+
+         section_factory.create_text(SHORT_SPACER_TEXT),
+         section_factory.create_text(
+            "A game by Mark Oates"
+         ),
+
+         section_factory.create_text(SPACER_TEXT),
+         section_factory.create_header("Visual"),
+         section_factory.create_column_with_labels({
+            { "Character Design and Art", "Mark Oates" },
+            { "RPG Dungeon Tileset", "Pita" },
+            {                     "", "https://pita.itch.io" },
+         }),
+
+         section_factory.create_text(SHORT_SPACER_TEXT),
+         section_factory.create_header("Audio"),
+         section_factory.create_column_with_labels({
+            { "Sound Effect Design", "Mark Oates" },
+            //{ "Fail Moan Sound Effect", "" },
+            //{ "Tileset", "Pita" },
+            //{        "", "(https://pita.itch.io)" },
+         }),
+
+         section_factory.create_text(SHORT_SPACER_TEXT),
+         section_factory.create_header("Music"),
+         //section_factory.create_column_with_labels({
+            //{ "Music by", "Mark Oates" },
+            //{ "Funeral March", "Frederic Chopin" },
+            //{ "\"8 Bit Dungeon\"", "Kevin MacLoed" },
+            //{ "Tileset", "Pita" },
+            //{        "", "(https://pita.itch.io)" },
+         //}),
+         section_factory.create_text(
+            "INTRO MUSIC\nMark Oates\n"// , RollingCredits::Sections::Text::ALLIGN_LEFT
+         ),
+         section_factory.create_text(
+            "FUNERAL MARCH\nFrederic Chopin\nArr. Mark Oates\n"// , RollingCredits::Sections::Text::ALLIGN_LEFT
+         ),
+         section_factory.create_text(
+            "8 BIT DUNGEON\nKevin MacLeod\nincompetech.com\n"//, "centered"
+         ),
+         section_factory.create_text(
+            "JINGLE BELLS (CALM)\nKevin MacLeod\nincompetech.com\n"//, "centered"
+         ),
+         section_factory.create_text(
+            "BOSS MUSIC\nMark Oates\n"//, "centered"
+         ),
+
+
+         //section_factory.create_text("\n\n\n\n\n\n"),
+
+
+         section_factory.create_text(SHORT_SPACER_TEXT),
+         section_factory.create_text(SPACER_TEXT),
+
+
          section_factory.create_text(
             "Thank you to all the members of the Allegro game programming community."
          ),
@@ -374,9 +435,15 @@ functions:
          section_factory.create_text(SPACER_TEXT),
          //section_factory.create_text(SPACER_TEXT),
          section_factory.create_text(
+            "Special thanks to my girlfrient, Louise, for her patience."
+         ),
+         section_factory.create_text(SPACER_TEXT),
+         section_factory.create_text(
             "And thank you for playing."
          ),
-         section_factory.create_text("\n\n\n\n\n\n"),
+
+
+         section_factory.create_text(SHORT_SPACER_TEXT),
          //section_factory.create_text(SPACER_TEXT),
       });
       rolling_credits_screen.initialize();
@@ -643,7 +710,7 @@ functions:
          //}},
          { EVENT_ACTIVATE_CREDITS_SCREEN, [this](){
             //framework->activate_screen("credits_screen");
-            event_emitter->emit_play_music_track_event("intro_music");
+            event_emitter->emit_play_music_track_event("end_music");
             framework->activate_screen("rolling_credits_screen");
          }},
          { EVENT_ACTIVATE_ACHIEVEMENTS_SCREEN, [this](){

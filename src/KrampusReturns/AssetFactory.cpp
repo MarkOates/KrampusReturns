@@ -23,7 +23,8 @@ std::map<std::string, AllegroFlare::AudioRepositoryElement> AssetFactory::obtain
 {
    std::map<std::string, AllegroFlare::AudioRepositoryElement> result = {
       { "smash_club", { "smash-club-01.ogg", false, "restart", 0.9 } },
-      { "krampus_hit", { "krampus_hit.ogg", false, "restart" } },
+      //{ "krampus_hit", { "krampus_hit.ogg", false, "restart" } },
+      { "krampus_hit", { "krampus-groan.ogg", false, "restart" } },
       { "menu_move", { "menu-move-01.ogg", false, "restart", 0.5 } },
       { "menu_select", { "menu-select-big-01.ogg", false, "restart", 0.95 } },
       { "fail_moan_sound", { "fail_moan.ogg", false, "restart", 0.4 } },
@@ -42,6 +43,7 @@ std::map<std::string, AllegroFlare::AudioRepositoryElement> AssetFactory::obtain
      { "boss_music", { "krampus-boss-01.ogg", true, "restart", 0.78 } },
      { "dead_krampus_music", { "dead-krampus-01.ogg", false, "restart", 0.78 } },
      { "win_music", { "win-music-01.ogg", false, "restart" } },
+     { "end_music", { "jingle-bells-calm.ogg", false, "restart", 0.8 } },
    };
    return result;
 }
