@@ -2832,13 +2832,13 @@ functions:
   - name: obtain_banner_text_font
     type: ALLEGRO_FONT*
     body: |
-      return font_bin->auto_get("ChronoTrigger.ttf -200");
+      return font_bin->auto_get("ChronoType.otf -200");
 
 
   - name: obtain_banner_subtext_font
     type: ALLEGRO_FONT*
     body: |
-      return font_bin->auto_get("ChronoTrigger.ttf -68");
+      return font_bin->auto_get("ChronoType.otf -68");
 
 
 dependencies:

@@ -2672,12 +2672,12 @@ AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* Screen::find_first_s
 
 ALLEGRO_FONT* Screen::obtain_banner_text_font()
 {
-   return font_bin->auto_get("ChronoTrigger.ttf -200");
+   return font_bin->auto_get("ChronoType.otf -200");
 }
 
 ALLEGRO_FONT* Screen::obtain_banner_subtext_font()
 {
-   return font_bin->auto_get("ChronoTrigger.ttf -68");
+   return font_bin->auto_get("ChronoType.otf -68");
 }
 
 
