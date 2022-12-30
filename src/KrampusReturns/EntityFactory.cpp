@@ -201,14 +201,14 @@ ChatGPT::Enemy* EntityFactory::create_skeleton_enemy(std::string on_map, float x
    //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls
    //headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/MovementStrategies2D/ReflectOffWalls.hpp ]
 
-   int max_health = 1;
+   int max_health = 4;
    int health = max_health;
    int attack = 1;
    ChatGPT::Enemy* result = new ChatGPT::Enemy(max_health, health, attack);
    result->set_animation_book(get_animation_book());
    result->set_animation(animation);
    result->get_place_ref().size = { 12, 4 };
-   //result->get_place_ref().scale = { 0.8, 0.8 };
+   result->get_place_ref().scale = { 0.6, 0.6 };
    result->set_bitmap_alignment_strategy("bottom_centered");
 
    // NOTE: this class now needs a proper destruct process
@@ -233,13 +233,13 @@ ChatGPT::Enemy* EntityFactory::create_flaming_skull_enemy(std::string on_map, fl
    //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls
    //headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/MovementStrategies2D/ReflectOffWalls.hpp ]
 
-   int max_health = 1;
+   int max_health = 2;
    int health = max_health;
    int attack = 1;
    ChatGPT::Enemy* result = new ChatGPT::Enemy(max_health, health, attack);
    result->set_animation_book(get_animation_book());
    result->get_place_ref().size = { 8, 4 };
-   //result->get_place_ref().scale = { 0.8, 0.8 };
+   result->get_place_ref().scale = { 0.6, 0.6 };
    result->set_animation(animation);
    result->set_bitmap_alignment_strategy("bottom_centered");
 
