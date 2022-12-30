@@ -508,6 +508,7 @@ void Runner::game_event_func(AllegroFlare::GameEvent* ev)
          }
       }},
       { "start_game_won_outro_storyboard_screen",  [this](){
+         event_emitter->emit_play_music_track_event("level_1_music");
          framework->activate_screen("game_won_outro_storyboard_screen");
          //framework->register_screen("game_won_outro_storyboard_screen", game_won_outro_storyboard_screen);
       }},
@@ -530,6 +531,7 @@ void Runner::game_event_func(AllegroFlare::GameEvent* ev)
       //}},
       { EVENT_ACTIVATE_CREDITS_SCREEN, [this](){
          //framework->activate_screen("credits_screen");
+         event_emitter->emit_play_music_track_event("intro_music");
          framework->activate_screen("rolling_credits_screen");
       }},
       { EVENT_ACTIVATE_ACHIEVEMENTS_SCREEN, [this](){
