@@ -36,6 +36,24 @@
                 "wangcolor",
                 "wangset"
             ]
+        },
+        {
+            "color": "#ffb3433c",
+            "id": 2,
+            "members": [
+            ],
+            "name": "skeleton",
+            "type": "class",
+            "useAs": [
+                "property",
+                "map",
+                "layer",
+                "object",
+                "tile",
+                "tileset",
+                "wangcolor",
+                "wangset"
+            ]
         }
     ]
 }

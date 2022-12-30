@@ -10,11 +10,22 @@
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-1-1-0x.tmj": {
-            "scale": 1.9,
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 1.4682,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 456.57894736842104,
-                "y": 328.94736842105254
+                "x": 1461.994278708623,
+                "y": 411.3880942650865
+            }
+        },
+        "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-2-1-0x.tmj": {
+            "scale": 1.2152,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 541.8861092824227,
+                "y": 7.406188281764344
             }
         },
         "/Users/markoates/tiles_dungeon_v1.1.tsx": {

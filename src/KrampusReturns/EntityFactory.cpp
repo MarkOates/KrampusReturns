@@ -107,6 +107,7 @@ KrampusReturns::Entities::Goalpost* EntityFactory::create_goalpost(std::string o
    KrampusReturns::Entities::Goalpost *result = new KrampusReturns::Entities::Goalpost();
    result->set_animation_book(get_animation_book());
    result->set("goalpost_id", goalpost_id);
+   result->set_animation("gift");
    result->initialize();
 
    result->get_place_ref().position = { x, y };
@@ -130,7 +131,6 @@ KrampusReturns::Entities::SpawnPoint* EntityFactory::create_spawn_point(std::str
 
    KrampusReturns::Entities::SpawnPoint *result = new KrampusReturns::Entities::SpawnPoint();
    result->set_animation_book(get_animation_book());
-   //result->set("goalpost_id", goalpost_id);
    result->initialize();
 
    result->get_place_ref().position = { x, y };
@@ -159,6 +159,7 @@ KrampusReturns::Entities::FlashEffect* EntityFactory::create_flash_fx1(std::stri
    // NOTE: for the time being FlashEffect sets the animation on initialization, so in this factory method
    // it's set here to build the object:
    result->set_animation("flash_fx1");
+   result->set("noshadow");
 
    result->get_place_ref().position = { x, y };
    result->set(ON_MAP_NAME, on_map);

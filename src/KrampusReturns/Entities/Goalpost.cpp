@@ -37,12 +37,13 @@ void Goalpost::initialize()
    }
    using namespace AllegroFlare::Prototypes::Platforming2D;
 
-   get_place_ref().size = { 100, 100 };
-   get_bitmap_placement_ref().scale = { 0.6, 0.6 };
+   get_place_ref().size = { 16, 16 };
+   get_bitmap_placement_ref().scale = { 0.7, 0.7 };
    set_bitmap_alignment_strategy("bottom_centered");
-   set_draw_debug(true);
+   //set_draw_debug(true);
    set(EntityFlagNames::TYPE, EntityFlagNames::GOALPOST);
-   set_animation("blob"); // TODO: change this type
+   set_animation("gift"); // TODO: change this type
+   set("noshadow");
 
    initialized = true;
    return;

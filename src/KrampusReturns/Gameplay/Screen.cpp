@@ -894,6 +894,7 @@ void Screen::tmj_object_parse_callback_func(std::string object_class, float x, f
           AllegroFlare::Vec2D center = center_of(x, y, w, h);
           // TODO: extract goalpost number (if present)
           int goalpost_id = 1;
+
           auto entity = entity_factory.create_goalpost("map_a", goalpost_id, center.x, center.y);
           gameplay_screen->add_entity_to_pool(entity);
       }},
@@ -1733,7 +1734,9 @@ void Screen::draw_entities()
       //int little_shadow_bitmap_height = al_get_bitmap_height(little_shadow_bitmap);
       for (auto &entity : get_current_map_entities_y_sorted())
       {
-         if (!entity->exists(INVISIBLE))
+         if (entity->exists("noshadow")) continue;
+         if (entity->exists(INVISIBLE)) continue;
+
          {
             float x = entity->get_place_ref().position.x; // - little_shadow_bitmap_width / 2;
             float y = entity->get_place_ref().position.y; // - little_shadow_bitmap_height / 2;
