@@ -402,6 +402,14 @@ table td
   <td class="property">int</td>
 </tr>
 <tr>
+  <td class="property">max_attack_strength</td>
+  <td class="property">int</td>
+</tr>
+<tr>
+  <td class="property">attack_strength</td>
+  <td class="property">int</td>
+</tr>
+<tr>
   <td class="property">stunned_from_damage_at</td>
   <td class="property">float</td>
 </tr>
@@ -452,6 +460,12 @@ table td
 </tr>
 <tr>
   <td class="private_method">set_state(uint32_t state=STATE_UNDEF, float time_now=al_get_time())</td>
+</tr>
+<tr>
+  <td class="method">increment_attack_strength()</td>
+</tr>
+<tr>
+  <td class="method">decrement_attack_strength()</td>
 </tr>
 <tr>
   <td class="method">update()</td>

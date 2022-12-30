@@ -1993,7 +1993,8 @@ functions:
          KrampusReturns::Entities::Krampus* player_krampus =
             static_cast<KrampusReturns::Entities::Krampus*>(player_controlled_entity);
 
-         // draw hearts
+
+         // draw player hearts
          AllegroFlare::Placement2D heart_placement;
          heart_placement.position = {80, 40};
          heart_placement.start_transform();
@@ -2006,6 +2007,37 @@ functions:
             hearts.set_heart_spacing(48+6);
             hearts.render();
          heart_placement.restore_transform();
+
+
+         float width_of_health_bar = 360; // <-- NOTE: may want to improve this
+
+         // draw player strength bar
+         //AllegroFlare::Placement2D strength_bar_placement;
+         int player_max_strength = player_krampus->get_max_attack_strength();
+         int player_strength = player_krampus->get_attack_strength();
+         AllegroFlare::Elements::HealthBars::Classic player_strength_bar(player_max_strength, player_strength);
+         player_strength_bar.set_bar_width(34);
+         player_strength_bar.set_bar_spacing(44);
+         player_strength_bar.set_bar_height(20);
+         player_strength_bar.set_fill_color(al_color_name("dodgerblue"));
+         player_strength_bar.fit_placement_width_and_height();
+         player_strength_bar.get_placement_ref().position = { 80 + width_of_health_bar, 60 };
+         player_strength_bar.render();
+
+
+
+         //AllegroFlare::Placement2D strength_bar_placement;
+         //heart_placement.position = {80 + 100, 40};
+         //heart_placement.start_transform();
+            //AllegroFlare::Elements::HealthBars::Classic strength_bar(
+               ////font_bin,
+               //player_krampus->get_max_health(),
+               //player_krampus->get_health()
+            //);
+            //hearts.set_heart_size(48);
+            //hearts.set_heart_spacing(48+6);
+            //hearts.render();
+         //heart_placement.restore_transform();
 
 
 

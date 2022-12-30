@@ -198,8 +198,10 @@ void Runner::initialize()
        "Krampus faught against the aliens who saught to take away Santa's special powers.",
        "Krampus was really brave and strong, and he won the fight!",
        "Krampus saved Christmas and made sure that the magic of the holiday was safe.",
-       "Krampus and Santa didn't always get along, but they worked together to defeat the aliens and make sure that Christmas was special.",
-       "In the end, they learned that the most important thing about Christmas is love and being friends with each other.",
+       "Krampus and Santa didn't always get along, but they worked together to defeat the aliens "
+          "and make sure that Christmas was special.",
+       "In the end, they learned that the most important thing about Christmas is love and being friends "
+          "with each other.",
        "That's what makes Christmas special.",
        "The End."
       });
