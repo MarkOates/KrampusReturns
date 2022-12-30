@@ -288,14 +288,14 @@ void Runner::initialize_world()
          },
          "level_1_music"
       ),
-      KrampusReturns::Level(
-         "level_2",
-         "The Second Rescue",
-         {
-            { "map_a", TEST_BASE_FOLDER + "maps/krampus-returns-level-2-1-0x.tmj" }
-         },
-         "level_1_music"
-      ),
+      //KrampusReturns::Level(
+         //"level_2",
+         //"The Second Rescue",
+         //{
+            //{ "map_a", TEST_BASE_FOLDER + "maps/krampus-returns-level-2-1-0x.tmj" }
+         //},
+         //"level_1_music"
+      //),
    });
 }
 
@@ -334,6 +334,7 @@ void Runner::setup_platforming_2d_screen()
 void Runner::unlock_achievement(std::string achievement_name)
 {
    // TODO: make this an event_emitter->emit_unlock_achievement_event();
+   event_emitter->emit_play_sound_effect_event("achievement_unlocked_sound");
    event_emitter->emit_event(
       ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT,
       intptr_t(new std::string(achievement_name))

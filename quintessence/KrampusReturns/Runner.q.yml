@@ -392,14 +392,14 @@ functions:
             },
             "level_1_music"
          ),
-         KrampusReturns::Level(
-            "level_2",
-            "The Second Rescue",
-            {
-               { "map_a", TEST_BASE_FOLDER + "maps/krampus-returns-level-2-1-0x.tmj" }
-            },
-            "level_1_music"
-         ),
+         //KrampusReturns::Level(
+            //"level_2",
+            //"The Second Rescue",
+            //{
+               //{ "map_a", TEST_BASE_FOLDER + "maps/krampus-returns-level-2-1-0x.tmj" }
+            //},
+            //"level_1_music"
+         //),
       });
 
 
@@ -444,6 +444,7 @@ functions:
         default_argument: '"[unset-achievement_name]"'
     body: |
       // TODO: make this an event_emitter->emit_unlock_achievement_event();
+      event_emitter->emit_play_sound_effect_event("achievement_unlocked_sound");
       event_emitter->emit_event(
          ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT,
          intptr_t(new std::string(achievement_name))
