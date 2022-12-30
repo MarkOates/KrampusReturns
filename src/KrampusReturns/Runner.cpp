@@ -285,7 +285,8 @@ void Runner::initialize()
          {          "", "by Mark Oates" },
       }),
 
-      section_factory.create_text(SPACER_TEXT),
+      section_factory.create_text(SHORT_SPACER_TEXT),
+      //section_factory.create_text(SPACER_TEXT),
       section_factory.create_header("Visual"),
       section_factory.create_column_with_labels({
          { "Character Design and Art", "Mark Oates" },
@@ -304,7 +305,8 @@ void Runner::initialize()
          //{ "Character Design and Art", "Mark Oates" },
       }),
 
-      section_factory.create_text(SPACER_TEXT),
+      section_factory.create_text(SHORT_SPACER_TEXT),
+      //section_factory.create_text(SPACER_TEXT),
       section_factory.create_header("Audio"),
       section_factory.create_column_with_labels({
          { "Sound Effect Design", "Mark Oates" },
@@ -313,7 +315,8 @@ void Runner::initialize()
          //{        "", "(https://pita.itch.io)" },
       }),
 
-      section_factory.create_text(SPACER_TEXT),
+      section_factory.create_text(SHORT_SPACER_TEXT),
+      //section_factory.create_text(SPACER_TEXT),
       section_factory.create_header("Music"),
       //section_factory.create_column_with_labels({
          //{ "Music by", "Mark Oates" },
