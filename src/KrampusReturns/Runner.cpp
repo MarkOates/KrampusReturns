@@ -269,11 +269,28 @@ void Runner::initialize()
       ),
 
       section_factory.create_text(SPACER_TEXT),
+      section_factory.create_header("Programming"),
+      section_factory.create_column_with_labels({
+         { "Made with", "Allegro (5.2.9)" },
+         {          "", "https://liballeg.org/" },
+         //{          "", "by Allegro Developers" },
+         {    "Engine", "AllegroFlare (0.8.11-wip)" },
+         {          "", "https://github.com/allegroflare/allegro_flare" },
+         {          "", "by Mark Oates" },
+      }),
+
+      section_factory.create_text(SPACER_TEXT),
       section_factory.create_header("Visual"),
       section_factory.create_column_with_labels({
          { "Character Design and Art", "Mark Oates" },
          { "RPG Dungeon Tileset", "Pita" },
-         {                     "", "https://pita.itch.io" },
+         {                   "", "https://pita.itch.io" },
+         { "Font Awesome Icons", "Dave Gandy" },
+         {                   "", "https://fontawesome.com/" },
+         {                   "", "SIL Open Font License, Version 1.1." },
+
+
+         //{ "Character Design and Art", "Mark Oates" },
       }),
 
       section_factory.create_text(SHORT_SPACER_TEXT),
@@ -295,19 +312,30 @@ void Runner::initialize()
          //{        "", "(https://pita.itch.io)" },
       //}),
       section_factory.create_text(
-         "INTRO MUSIC\nMark Oates\n"// , RollingCredits::Sections::Text::ALLIGN_LEFT
+         "INTRO MUSIC\n"
+         "by Mark Oates"// , RollingCredits::Sections::Text::ALLIGN_LEFT
       ),
       section_factory.create_text(
-         "FUNERAL MARCH\nFrederic Chopin\nArr. Mark Oates\n"// , RollingCredits::Sections::Text::ALLIGN_LEFT
+         "8 BIT DUNGEON\n"
+         "by Kevin MacLeod (incompetech.com)\n"
+         "Licensed under Creative Commons: By Attribution 3.0\n"
+         "http://creativecommons.org/licenses/by/3.0/"
       ),
       section_factory.create_text(
-         "8 BIT DUNGEON\nKevin MacLeod\nincompetech.com\n"//, "centered"
+         "FUNERAL MARCH\n"
+         "by Frederic Chopin\n"
+         "Public Domain\n"
+         "Arranged by Mark Oates"// , RollingCredits::Sections::Text::ALLIGN_LEFT
       ),
       section_factory.create_text(
-         "JINGLE BELLS (CALM)\nKevin MacLeod\nincompetech.com\n"//, "centered"
+         "JINGLE BELLS (CALM)\n"
+         "by Kevin MacLeod (incompetech.com)\n"
+         "Licensed under Creative Commons: By Attribution 3.0\n"
+         "http://creativecommons.org/licenses/by/3.0/"
       ),
       section_factory.create_text(
-         "BOSS MUSIC\nMark Oates\n"//, "centered"
+         "BOSS MUSIC\n"
+         "by Mark Oates"//, "centered"
       ),
 
 
@@ -336,8 +364,9 @@ void Runner::initialize()
       section_factory.create_text(SPACER_TEXT),
       //section_factory.create_text(SPACER_TEXT),
       section_factory.create_text(
-         "Special thanks to my girlfrient, Louise, for her patience."
+         "Special thanks to my girlfriend, Louise, for her patience."
       ),
+      section_factory.create_text(SHORT_SPACER_TEXT),
       section_factory.create_text(SPACER_TEXT),
       section_factory.create_text(
          "And thank you for playing."
