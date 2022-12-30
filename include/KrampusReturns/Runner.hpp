@@ -43,6 +43,7 @@ namespace KrampusReturns
       AllegroFlare::Screens::TitleScreen title_screen;
       AllegroFlare::Screens::PauseScreen pause_screen;
       AllegroFlare::Screens::Storyboard* new_game_intro_storyboard_screen;
+      AllegroFlare::Screens::Storyboard* game_won_outro_storyboard_screen;
       KrampusReturns::Gameplay::Screen platforming_2d_screen;
       KrampusReturns::World platforming_2d_world;
       int finished_up_to_level;

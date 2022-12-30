@@ -40,6 +40,10 @@ properties:
     type: AllegroFlare::Screens::Storyboard*
     init_with: nullptr
 
+  - name: game_won_outro_storyboard_screen
+    type: AllegroFlare::Screens::Storyboard*
+    init_with: nullptr
+
   - name: platforming_2d_screen
     type: KrampusReturns::Gameplay::Screen
     init_with: ''
@@ -264,29 +268,18 @@ functions:
 
 
 
+
+
+
       // setup the intro storyboards screen
       new_game_intro_storyboard_screen = storyboard_factory.create_advancing_text_storyboard_screen({
-            // music starts
-            "December 2022",
-            //"Christmas Eve.",
-            //"[image showing aliens invading]",
-            "Aliens have invaded Earth",
-            "They are after Santa's magical powers",
-
-            "And this night, Christmas Eve, is when his magical powers are the strongest",
-            //"[image showing santa's power chaimber, glowing]",
-
-            "Santa and his elves were unable to stop the aliens",
-            //"[image showing santa's losing battle]",
-
-            "With all options gone, Santa must now do the unthinkable",
-            //"[image showing krampus with his back to the screen]",
-            "Santa has no choice. He must face his biggest fear...",
-
-            //"[image showing santa appraoching krampus]",
-            "...and seek help from his ultimate rival...",
-            //"[image showing krampus turned around]",
-            "Krampus.",
+          "December 2022.",
+          "Aliens have come to Earth and they want to take away Santa's magical powers!",
+          "On Christmas Eve, when his powers are the strongest, Santa and his helpers tried to stop the aliens...",
+          "...but they couldn't.",
+          "There was no one left to help, except for Krampus.",
+          "Krampus is Santa's enemy, but he was Santa's only hope.",
+          "Santa was scared, but he knew he had to be brave and ask Krampus for help.",
          });
       new_game_intro_storyboard_screen->set_event_emitter(&event_emitter);
       new_game_intro_storyboard_screen->set_game_event_name_to_emit_after_completing(
@@ -294,6 +287,27 @@ functions:
          //"activate_nvestigation_room_screen"
       );
       framework->register_screen("new_game_intro_storyboard_screen", new_game_intro_storyboard_screen);
+
+
+
+
+      // setup the outro storyboards screen
+      game_won_outro_storyboard_screen = storyboard_factory.create_advancing_text_storyboard_screen({
+          "Krampus faught against the aliens who saught to take away Santa's special powers.",
+          "Krampus was really brave and strong, and he won the fight!",
+          "Krampus saved Christmas and made sure that the magic of the holiday was safe.",
+          "Krampus and Santa didn't always get along, but they worked together to defeat the aliens and make sure that Christmas was special.",
+          "In the end, they learned that the most important thing about Christmas is love and being friends with each other.",
+          "That's what makes Christmas special.",
+          "The End."
+         });
+      game_won_outro_storyboard_screen->set_event_emitter(&event_emitter);
+      game_won_outro_storyboard_screen->set_game_event_name_to_emit_after_completing(
+         "finish_new_game_intro_storyboard_screen"
+         //"activate_nvestigation_room_screen"
+      );
+      framework->register_screen("game_won_outro_storyboard_screen", game_won_outro_storyboard_screen);
+
 
 
 
