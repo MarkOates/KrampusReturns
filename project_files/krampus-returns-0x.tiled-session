@@ -24,22 +24,22 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.5383,
+            "scale": 0.5875,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 1037.525543377299,
-                "y": 404.97863644807717
+                "x": 1166.808510638298,
+                "y": 330.2127659574468
             }
         },
         "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-2-1-0x.tmj": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1.6206,
+            "scale": 0.542,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 322.4114525484389,
-                "y": 209.79883993582627
+                "x": 709.4095940959409,
+                "y": 699.2619926199261
             }
         },
         "/Users/markoates/tiles_dungeon_v1.1.tsx": {
