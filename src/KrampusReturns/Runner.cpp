@@ -83,9 +83,9 @@ void Runner::initialize()
    // setup the achievements
    achievements.set_achievements({
       // TODO: add this unblobed achievement
-      //{ "clear_all_blobs_level_1", {
-         //new AllegroFlare::Achievement("Unblobbed", "Clear out all the blobs in Level 1" ), false, false }
-      //},
+      { "blobs_done", {
+         new AllegroFlare::Achievement("Unblobbed", "Clear out all the blobs in Level 1" ), false, false }
+      },
       //{ "free_seat", { new AllegroFlare::Achievement("Free Seat at the Concert"), false, false } },
       //{ "start_the_game", { new AllegroFlare::Achievement("In Da House"), false, false } },
       //{ "do_thing", { new AllegroFlare::Achievement("Save the Zoo", "Will unhide when achieved"), false, false } },
@@ -587,7 +587,14 @@ bool Runner::prior_screen_is_in_stack()
 
 void Runner::check_achievements()
 {
-   //blob_achievement_done
+   std::cout << "Checking achievements" << std::endl;
+   int currently_at_level = (finished_up_to_level + 1);
+   if (currently_at_level == 1 && !blob_achievement_done && !platforming_2d_screen.are_any_blobs_present())
+   {
+      blob_achievement_done = true;
+      unlock_achievement("blobs_done");
+      // TODO: here emit achievement unlocked
+   }
    //skeleton_achievement_done
    //flaming_skull_achievement_done
    //all_bosses_achievement_done
