@@ -3,8 +3,9 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "tiles_dungeon_v1.1.tsx",
     "expandedProjectPaths": [
+        ".",
         "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -46,11 +47,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.8134,
+            "scale": 0.81,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 791.1236783870175,
-                "y": 462.2571920334398
+                "x": 790.7407407407406,
+                "y": 461.7283950617284
             }
         },
         "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-4-1-0x.tmj": {
@@ -69,7 +70,7 @@
             "scaleInEditor": 1
         },
         "tiles_dungeon_v1.1.tsx": {
-            "scaleInDock": 1,
+            "scaleInDock": 2.2817,
             "scaleInEditor": 1
         }
     },
@@ -79,12 +80,21 @@
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "json",
     "openFiles": [
+        "tiles_dungeon_v1.1.tsx",
+        "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-1-1-0x-fukt.tmj",
+        "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-1-1-0x.tmj",
+        "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-2-1-0x.tmj",
+        "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-3-1-0x.tmj",
+        "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-4-1-0x.tmj"
     ],
     "project": "krampus-returns-0x.tiled-project",
     "property.type": "Enemy",
     "recentFiles": [
-        "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-1-1-0x.tmj",
+        "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-4-1-0x.tmj",
+        "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-3-1-0x.tmj",
         "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-2-1-0x.tmj",
+        "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-1-1-0x.tmj",
+        "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-1-1-0x-fukt.tmj",
         "tiles_dungeon_v1.1.tsx",
         "/Users/markoates/tiles_dungeon_v1.1.tsx"
     ],
