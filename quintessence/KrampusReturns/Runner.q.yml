@@ -289,6 +289,10 @@ functions:
           "There was no one left to help, except for Krampus.",
           "Krampus is Santa's enemy, but he was Santa's only hope.",
           "Santa was scared, but he knew he had to be brave and ask Krampus for help.",
+          "Krampus accepted the challenge to fight the aliens!",
+          "At that moment, Krampus went out.",
+          "He was the last hope...",
+          "...to save Christmas.",
          });
       new_game_intro_storyboard_screen->set_event_emitter(&event_emitter);
       new_game_intro_storyboard_screen->set_game_event_name_to_emit_after_completing(
