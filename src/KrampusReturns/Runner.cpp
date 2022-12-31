@@ -40,6 +40,11 @@ Runner::Runner(std::string mode, AllegroFlare::Frameworks::Full* framework, Alle
    , blurry_background_screen_capture(nullptr)
    , prior_screens_stack()
    , initialized(false)
+   , blob_achievement_done(false)
+   , skeleton_achievement_done(false)
+   , flaming_skull_achievement_done(false)
+   , all_bosses_achievement_done(false)
+   , bosses_beaten(0)
 {
 }
 

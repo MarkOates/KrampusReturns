@@ -54,6 +54,11 @@ namespace KrampusReturns
       ALLEGRO_BITMAP* blurry_background_screen_capture;
       std::vector<std::string> prior_screens_stack;
       bool initialized;
+      bool blob_achievement_done;
+      bool skeleton_achievement_done;
+      bool flaming_skull_achievement_done;
+      bool all_bosses_achievement_done;
+      int bosses_beaten;
 
    protected:
 

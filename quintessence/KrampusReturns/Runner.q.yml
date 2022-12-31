@@ -80,6 +80,26 @@ properties:
     type: bool
     init_with: false
 
+  - name: blob_achievement_done
+    type: bool
+    init_with: false
+
+  - name: skeleton_achievement_done
+    type: bool
+    init_with: false
+
+  - name: flaming_skull_achievement_done
+    type: bool
+    init_with: false
+
+  - name: all_bosses_achievement_done
+    type: bool
+    init_with: false
+
+  - name: bosses_beaten
+    type: int
+    init_with: 0
+
   - name: MODE_TEST
     type: char*
     init_with: '"test"'
