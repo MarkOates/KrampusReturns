@@ -718,6 +718,16 @@ functions:
       return !prior_screens_stack.empty();
 
 
+  - name: check_achievements
+    body: |
+      //blob_achievement_done
+      //skeleton_achievement_done
+      //flaming_skull_achievement_done
+      //all_bosses_achievement_done
+      //bosses_beaten
+      return;
+
+
   - name: game_event_func
     virtual: true
     override: true
@@ -743,6 +753,9 @@ functions:
                //event_emitter->emit_game_event(AllegroFlare::GameEvent(EVENT_ACTIVATE_INVESTIGATION_ROOM_SCREEN));
                //event_emitter->emit_game_event(AllegroFlare::GameEvent("start_title_screen"));
             //}
+         }},
+         { "check_achievements", [this](){
+            check_achievements();
          }},
          { "start_title_screen", [this](){
             event_emitter->emit_play_music_track_event("intro_music");

@@ -190,6 +190,8 @@ KrampusReturns::Entities::Blob* EntityFactory::create_blob(std::string on_map, f
    result->set("damages_player");
    result->set("takes_damage_from_player_damage_zones");
 
+   result->set("--blob");
+
    if (init_entities_drawing_debug) result->set_draw_debug(true);
    //get_platforming_2d_ref().add_entity_to_pool(result);
    return result;
@@ -221,6 +223,7 @@ ChatGPT::Enemy* EntityFactory::create_skeleton_enemy(std::string on_map, float x
 
    result->set("damages_player");
    result->set("takes_damage_from_player_damage_zones");
+   result->set("--skeleton");
 
    result->get_place_ref().position = { x, y };
    result->set(ON_MAP_NAME, on_map);
@@ -253,6 +256,7 @@ ChatGPT::Enemy* EntityFactory::create_flaming_skull_enemy(std::string on_map, fl
 
    result->set("damages_player");
    result->set("takes_damage_from_player_damage_zones");
+   result->set("--flaming_skull");
 
    result->get_place_ref().position = { x, y };
    result->set(ON_MAP_NAME, on_map);
@@ -286,6 +290,7 @@ ChatGPT::Enemy* EntityFactory::create_flaming_skull_red_enemy(std::string on_map
 
    result->set("damages_player");
    result->set("takes_damage_from_player_damage_zones");
+   result->set("--flaming_skull_red");
 
    result->get_place_ref().position = { x, y };
    result->set(ON_MAP_NAME, on_map);
@@ -317,6 +322,7 @@ ChatGPT::Enemy* EntityFactory::create_skull_head_boss_enemy(std::string on_map, 
 
    result->set("damages_player");
    result->set("takes_damage_from_player_damage_zones");
+   result->set("--boss");
 
    result->get_place_ref().position = { x, y };
    result->set(ON_MAP_NAME, on_map);

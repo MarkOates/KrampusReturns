@@ -79,6 +79,7 @@ namespace KrampusReturns
       std::string pop_screen();
       void reactivate_prior_screen(std::string fallback_if_stack_is_empty="tile_drive_screen");
       bool prior_screen_is_in_stack();
+      void check_achievements();
       virtual void game_event_func(AllegroFlare::GameEvent* ev=nullptr) override;
       static void run(std::string mode="production");
       static bool is_test_mode(std::string mode="[unset-mode]");

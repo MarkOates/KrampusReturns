@@ -1535,6 +1535,7 @@ void Screen::mark_all_ephemeral_entities_for_deletion()
 void Screen::cleanup_entities_flagged_for_deletion()
 {
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+   bool some_entities_deleted = false;
 
    for (int i=0; i<entity_pool.size(); i++)
    {
@@ -1544,7 +1545,13 @@ void Screen::cleanup_entities_flagged_for_deletion()
          delete entity_pool[i];
          entity_pool.erase(entity_pool.begin() + i);
          i--;
+         some_entities_deleted = true;
       }
+   }
+   if (some_entities_deleted)
+   {
+      // emit the "check_achievements" for a global check
+      event_emitter->emit_game_event(AllegroFlare::GameEvent("check_achievements"));
    }
    return;
 }
@@ -2650,7 +2657,49 @@ bool Screen::are_any_blobs_present()
    //std::vector<ChatGPT::Enemy*> result;
    for (auto &entity : entity_pool)
    {
-      if (entity->exists("type", "blob")) return true;
+      if (entity->exists("--blob")) return true;
+   }
+   return false;
+}
+
+bool Screen::are_any_flaming_skull_reds_present()
+{
+   //using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+   //std::string on_map_name = map_name;
+
+   //std::vector<ChatGPT::Enemy*> result;
+   // HERE:
+   for (auto &entity : entity_pool)
+   {
+      if (entity->exists("--flaming_skull_red")) return true;
+   }
+   return false;
+}
+
+bool Screen::are_any_skeletons_present()
+{
+   //using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+   //std::string on_map_name = map_name;
+
+   //std::vector<ChatGPT::Enemy*> result;
+   // HERE:
+   for (auto &entity : entity_pool)
+   {
+      if (entity->exists("--skeleton")) return true;
+   }
+   return false;
+}
+
+bool Screen::are_any_bosses_present()
+{
+   //using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+   //std::string on_map_name = map_name;
+
+   //std::vector<ChatGPT::Enemy*> result;
+   // HERE:
+   for (auto &entity : entity_pool)
+   {
+      if (entity->exists("--boss")) return true;
    }
    return false;
 }

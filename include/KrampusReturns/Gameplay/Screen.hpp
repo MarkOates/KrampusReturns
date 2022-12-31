@@ -196,6 +196,9 @@ namespace KrampusReturns
          std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> select_damages_enemies_entities_on_map(std::string on_map_name="[unset-map_name]");
          std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> select_collectable_by_player_on_map(std::string on_map_name="[unset-map_name]");
          bool are_any_blobs_present();
+         bool are_any_flaming_skull_reds_present();
+         bool are_any_skeletons_present();
+         bool are_any_bosses_present();
          AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* find_boss();
          int count_num_spawn_points_in_all_maps();
          AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* find_first_spawn_point_on_any_map();

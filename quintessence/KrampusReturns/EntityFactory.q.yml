@@ -201,6 +201,8 @@ functions:
       result->set("damages_player");
       result->set("takes_damage_from_player_damage_zones");
 
+      result->set("--blob");
+
       if (init_entities_drawing_debug) result->set_draw_debug(true);
       //get_platforming_2d_ref().add_entity_to_pool(result);
       return result;
@@ -250,6 +252,7 @@ functions:
 
       result->set("damages_player");
       result->set("takes_damage_from_player_damage_zones");
+      result->set("--skeleton");
 
       result->get_place_ref().position = { x, y };
       result->set(ON_MAP_NAME, on_map);
@@ -304,6 +307,7 @@ functions:
 
       result->set("damages_player");
       result->set("takes_damage_from_player_damage_zones");
+      result->set("--flaming_skull");
 
       result->get_place_ref().position = { x, y };
       result->set(ON_MAP_NAME, on_map);
@@ -359,6 +363,7 @@ functions:
 
       result->set("damages_player");
       result->set("takes_damage_from_player_damage_zones");
+      result->set("--flaming_skull_red");
 
       result->get_place_ref().position = { x, y };
       result->set(ON_MAP_NAME, on_map);
@@ -418,6 +423,7 @@ functions:
 
       result->set("damages_player");
       result->set("takes_damage_from_player_damage_zones");
+      result->set("--boss");
 
       result->get_place_ref().position = { x, y };
       result->set(ON_MAP_NAME, on_map);

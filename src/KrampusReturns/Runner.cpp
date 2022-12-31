@@ -585,6 +585,16 @@ bool Runner::prior_screen_is_in_stack()
    return !prior_screens_stack.empty();
 }
 
+void Runner::check_achievements()
+{
+   //blob_achievement_done
+   //skeleton_achievement_done
+   //flaming_skull_achievement_done
+   //all_bosses_achievement_done
+   //bosses_beaten
+   return;
+}
+
 void Runner::game_event_func(AllegroFlare::GameEvent* ev)
 {
    if (!(ev))
@@ -617,6 +627,9 @@ void Runner::game_event_func(AllegroFlare::GameEvent* ev)
             //event_emitter->emit_game_event(AllegroFlare::GameEvent(EVENT_ACTIVATE_INVESTIGATION_ROOM_SCREEN));
             //event_emitter->emit_game_event(AllegroFlare::GameEvent("start_title_screen"));
          //}
+      }},
+      { "check_achievements", [this](){
+         check_achievements();
       }},
       { "start_title_screen", [this](){
          event_emitter->emit_play_music_track_event("intro_music");
