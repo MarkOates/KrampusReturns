@@ -182,8 +182,9 @@ void Runner::initialize()
    // setup the intro storyboards screen
    new_game_intro_storyboard_screen = storyboard_factory.create_advancing_text_storyboard_screen({
        "December 2022.",
-       "Aliens have come to Earth and they want to take away Santa's magical powers!",
-       "On Christmas Eve, when his powers are the strongest, Santa and his helpers tried to stop the aliens...",
+       "Aliens have come to Earth and they want to take away Santa's presents!",
+       "On Christmas Eve, after all of Santa's presents were wrapped, the aliens came.",
+       "Santa and his helpers tried to stop the aliens...",
        "...but they couldn't.",
        "There was no one left to help, except for Krampus.",
        "Krampus is Santa's enemy, but he was Santa's only hope.",
@@ -201,7 +202,7 @@ void Runner::initialize()
 
    // setup the outro storyboards screen
    game_won_outro_storyboard_screen = storyboard_factory.create_advancing_text_storyboard_screen({
-       "Krampus faught against the aliens who saught to take away Santa's special powers.",
+       "Krampus faught against the aliens who saught to take away Santa's presents.",
        "Krampus was really brave and strong, and he won the fight!",
        "Krampus saved Christmas and made sure that the magic of the holiday was safe.",
        "Krampus and Santa didn't always get along, but they worked together to defeat the aliens "
@@ -464,6 +465,7 @@ void Runner::initialize_world()
    // TODO: Load up actual data for the remaining levels of the game
    static std::string TEST_BASE_FOLDER = "/Users/markoates/Repos/KrampusReturns/bin/programs/data/";
    platforming_2d_world.set_levels({
+   /*
       KrampusReturns::Level(
          "level_1",
          "The First Rescue",
@@ -488,13 +490,14 @@ void Runner::initialize_world()
          },
          "level_1_music"
       ),
+   */
       KrampusReturns::Level(
          "level_1",
          "The Final",
          {
             { "map_a", TEST_BASE_FOLDER + "maps/krampus-returns-level-4-1-0x.tmj" }
          },
-         "level_1_music"
+         "final_level_music"
       ),
    });
 }

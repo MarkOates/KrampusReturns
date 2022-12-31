@@ -40,6 +40,7 @@ std::map<std::string, AllegroFlare::AudioRepositoryElement> AssetFactory::obtain
    std::map<std::string, AllegroFlare::AudioRepositoryElement> result = {
      { "intro_music", { "krampus-intro-1.wav", true, "ignore" } },
      { "level_1_music", { "8bit-dungeon-level-kevin-macleod-80kbps.ogg", true, "restart", 0.5 } },
+     { "final_level_music", { "final-level-music-kevin-macleod-01.ogg", true, "restart", 1.0 } },
      { "boss_music", { "krampus-boss-01.ogg", true, "restart", 0.78 } },
      { "dead_krampus_music", { "dead-krampus-01.ogg", false, "restart", 0.78 } },
      { "win_music", { "win-music-01.ogg", false, "restart" } },

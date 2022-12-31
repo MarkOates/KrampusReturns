@@ -12,4 +12,18 @@ fear - to team up with his ultimate rival, Krampus.
 
 # About This Game
 
-This is entry in the KrampusHack 2022 competition.
+This is entry in the KrampusHack 2022 competition.  This is a gift for pmprog.
+
+
+# How to Play
+
+There are only 5 buttons during gameplay:
+
+UP/DOWN/LEFT/RIGHT - move the player
+SPACE - attack
+
+
+- At *any* time, you may press ESC to exit the game.
+- There is no PAUSE feature.
+- Menus are navigated by UP/DOWN and ENTER to select the option.
+
