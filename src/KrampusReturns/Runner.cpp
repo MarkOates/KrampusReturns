@@ -349,7 +349,8 @@ void Runner::initialize()
          "FINAL COUNT\n"
          "by Kevin MacLeod (incompetech.com)\n"
          "Licensed under Creative Commons: By Attribution 3.0\n"
-         "http://creativecommons.org/licenses/by/3.0/"
+         "http://creativecommons.org/licenses/by/3.0/\n"
+         "Edited by Mark Oates"
       ),
       section_factory.create_text(
          "JINGLE BELLS (CALM)\n"
