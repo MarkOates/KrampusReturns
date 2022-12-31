@@ -346,6 +346,12 @@ void Runner::initialize()
          "Arranged by Mark Oates"// , RollingCredits::Sections::Text::ALLIGN_LEFT
       ),
       section_factory.create_text(
+         "FINAL COUNT\n"
+         "by Kevin MacLeod (incompetech.com)\n"
+         "Licensed under Creative Commons: By Attribution 3.0\n"
+         "http://creativecommons.org/licenses/by/3.0/"
+      ),
+      section_factory.create_text(
          "JINGLE BELLS (CALM)\n"
          "by Kevin MacLeod (incompetech.com)\n"
          "Licensed under Creative Commons: By Attribution 3.0\n"
