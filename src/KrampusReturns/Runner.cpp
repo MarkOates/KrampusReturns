@@ -465,7 +465,6 @@ void Runner::initialize_world()
    // TODO: Load up actual data for the remaining levels of the game
    static std::string TEST_BASE_FOLDER = "/Users/markoates/Repos/KrampusReturns/bin/programs/data/";
    platforming_2d_world.set_levels({
-   /*
       KrampusReturns::Level(
          "level_1",
          "The First Rescue",
@@ -490,7 +489,6 @@ void Runner::initialize_world()
          },
          "level_1_music"
       ),
-   */
       KrampusReturns::Level(
          "level_1",
          "The Final",
