@@ -177,6 +177,20 @@ bool Krampus::decrement_attack_strength()
    return (attack_strength != previous_attack_strength);
 }
 
+bool Krampus::increment_max_health()
+{
+   int previous_max_health = max_health;
+   max_health++;
+   if (max_health >= 10) max_health = 10;
+   return (max_health != previous_max_health);
+}
+
+bool Krampus::restore_all_health()
+{
+   health = max_health;
+   return true;
+}
+
 void Krampus::update()
 {
    if (!(event_emitter))

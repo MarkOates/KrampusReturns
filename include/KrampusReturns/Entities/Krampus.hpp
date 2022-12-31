@@ -53,6 +53,8 @@ namespace KrampusReturns
          void initialize();
          bool increment_attack_strength();
          bool decrement_attack_strength();
+         bool increment_max_health();
+         bool restore_all_health();
          virtual void update() override;
          bool would_be_lethal_damage(int damage=1);
          void do_impact_hit();

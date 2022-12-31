@@ -17,7 +17,7 @@
             "selectedLayer": 2,
             "viewCenter": {
                 "x": 1327.3584905660375,
-                "y": 507.5471698113207
+                "y": 505.66037735849045
             }
         },
         "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-1-1-0x.tmj": {
@@ -35,22 +35,33 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.8245,
-            "selectedLayer": 2,
+            "scale": 2.9147,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 860.5215281989083,
-                "y": 406.30685263796244
+                "x": 1350.9108999210898,
+                "y": 567.4683500874876
             }
         },
         "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-3-1-0x.tmj": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 1.125,
+            "scale": 0.9835,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 1223.5555555555554,
-                "y": 172.4444444444444
+                "x": 731.5709201830197,
+                "y": 554.1433655312659
+            }
+        },
+        "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-4-1-0x.tmj": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 0.7941,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 457.7509129832513,
+                "y": 730.3866011837299
             }
         },
         "/Users/markoates/tiles_dungeon_v1.1.tsx": {

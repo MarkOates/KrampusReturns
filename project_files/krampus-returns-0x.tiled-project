@@ -92,11 +92,47 @@
             ]
         },
         {
+            "color": "#ffac1bb3",
+            "id": 7,
+            "members": [
+            ],
+            "name": "full_health_item",
+            "type": "class",
+            "useAs": [
+                "property",
+                "map",
+                "layer",
+                "object",
+                "tile",
+                "tileset",
+                "wangcolor",
+                "wangset"
+            ]
+        },
+        {
             "color": "#ffb3433c",
             "id": 2,
             "members": [
             ],
             "name": "skeleton",
+            "type": "class",
+            "useAs": [
+                "property",
+                "map",
+                "layer",
+                "object",
+                "tile",
+                "tileset",
+                "wangcolor",
+                "wangset"
+            ]
+        },
+        {
+            "color": "#ffe9c000",
+            "id": 6,
+            "members": [
+            ],
+            "name": "spawn_point",
             "type": "class",
             "useAs": [
                 "property",

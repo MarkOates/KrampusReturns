@@ -231,7 +231,7 @@ functions:
       //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls
       //headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/MovementStrategies2D/ReflectOffWalls.hpp ]
 
-      int max_health = 4;
+      int max_health = 3;
       int health = max_health;
       int attack = 1;
       ChatGPT::Enemy* result = new ChatGPT::Enemy(max_health, health, attack);
@@ -492,6 +492,23 @@ functions:
         default_argument: 0.0f
     body: |
       return _create_collectable(map_name, x, y, "attack_up", "generic_powerup");
+
+
+  - name: create_full_health_item
+    type: AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D*
+    const: true
+    parameters:
+      - name: map_name
+        type: std::string
+        default_argument: '"[map-name-not-set]"'
+      - name: x
+        type: float
+        default_argument: 0.0f
+      - name: y
+        type: float
+        default_argument: 0.0f
+    body: |
+      return _create_collectable(map_name, x, y, "full_health", "full_health");
 
 
   - name: _create_collectable

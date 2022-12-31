@@ -202,7 +202,7 @@ ChatGPT::Enemy* EntityFactory::create_skeleton_enemy(std::string on_map, float x
    //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls
    //headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/MovementStrategies2D/ReflectOffWalls.hpp ]
 
-   int max_health = 4;
+   int max_health = 3;
    int health = max_health;
    int attack = 1;
    ChatGPT::Enemy* result = new ChatGPT::Enemy(max_health, health, attack);
@@ -351,6 +351,11 @@ KrampusReturns::Entities::DamageZone* EntityFactory::create_damage_zone_by_playe
 AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* EntityFactory::create_attack_up_item(std::string map_name, float x, float y) const
 {
    return _create_collectable(map_name, x, y, "attack_up", "generic_powerup");
+}
+
+AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* EntityFactory::create_full_health_item(std::string map_name, float x, float y) const
+{
+   return _create_collectable(map_name, x, y, "full_health", "full_health");
 }
 
 AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* EntityFactory::_create_collectable(std::string map_name, float x, float y, std::string type_name, std::string animation) const

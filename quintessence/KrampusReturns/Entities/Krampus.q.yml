@@ -228,6 +228,22 @@ functions:
       return (attack_strength != previous_attack_strength);
 
 
+  - name: increment_max_health
+    type: bool
+    body: |
+      int previous_max_health = max_health;
+      max_health++;
+      if (max_health >= 10) max_health = 10;
+      return (max_health != previous_max_health);
+
+
+  - name: restore_all_health
+    type: bool
+    body: |
+      health = max_health;
+      return true;
+
+
   - name: update
     virtual: true
     override: true

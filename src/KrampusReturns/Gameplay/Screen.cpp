@@ -934,6 +934,11 @@ void Screen::tmj_object_parse_callback_func(std::string object_class, float x, f
           auto entity = entity_factory.create_attack_up_item("map_a", center.x, center.y);
           gameplay_screen->add_entity_to_pool(entity);
       }},
+      { "full_health_item", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
+          AllegroFlare::Vec2D center = center_of(x, y, w, h);
+          auto entity = entity_factory.create_full_health_item("map_a", center.x, center.y);
+          gameplay_screen->add_entity_to_pool(entity);
+      }},
       { "flaming_skull", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
           AllegroFlare::Vec2D center = center_of(x, y, w, h);
           //gameplay_screen->player_controlled_entity;
@@ -1653,6 +1658,14 @@ void Screen::update_player_collisions_with_collectables()
          if (collectable_type == "attack_up")
          {
             player_krampus->increment_attack_strength();
+            // TODO: play power-up sound effect
+            collected = true;
+         }
+         if (collectable_type == "full_health")
+         {
+            player_krampus->increment_max_health();
+            player_krampus->restore_all_health();
+            //player_krampus->increment_attack_strength();
             // TODO: play power-up sound effect
             collected = true;
          }
