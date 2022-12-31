@@ -472,14 +472,14 @@ void Runner::initialize_world()
          },
          "level_1_music"
       ),
-      //KrampusReturns::Level(
-         //"level_2",
-         //"The Second Rescue",
-         //{
-            //{ "map_a", TEST_BASE_FOLDER + "maps/krampus-returns-level-2-1-0x.tmj" }
-         //},
-         //"level_1_music"
-      //),
+      KrampusReturns::Level(
+         "level_2",
+         "The Second Rescue",
+         {
+            { "map_a", TEST_BASE_FOLDER + "maps/krampus-returns-level-2-1-0x.tmj" }
+         },
+         "level_1_music"
+      ),
    });
 }
 

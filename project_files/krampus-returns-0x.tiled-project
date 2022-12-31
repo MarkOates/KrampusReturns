@@ -15,6 +15,24 @@
     ],
     "propertyTypes": [
         {
+            "color": "#ff8820b3",
+            "id": 3,
+            "members": [
+            ],
+            "name": "blob",
+            "type": "class",
+            "useAs": [
+                "property",
+                "map",
+                "layer",
+                "object",
+                "tile",
+                "tileset",
+                "wangcolor",
+                "wangset"
+            ]
+        },
+        {
             "color": "#ff3664b3",
             "id": 1,
             "members": [
