@@ -940,6 +940,12 @@ void Screen::tmj_object_parse_callback_func(std::string object_class, float x, f
           auto entity = entity_factory.create_flaming_skull_enemy("map_a", center.x, center.y, "fly", nullptr);
           gameplay_screen->add_entity_to_pool(entity);
       }},
+      { "flaming_skull_red", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
+          AllegroFlare::Vec2D center = center_of(x, y, w, h);
+          //gameplay_screen->player_controlled_entity;
+          auto entity = entity_factory.create_flaming_skull_red_enemy("map_a", center.x, center.y, "fly_red", nullptr);
+          gameplay_screen->add_entity_to_pool(entity);
+      }},
       { "door", [x, y, w, h, map_name, entity_factory, gameplay_screen](){
           // TODO: here
           AllegroFlare::Vec2D center = center_of(x, y, w, h);

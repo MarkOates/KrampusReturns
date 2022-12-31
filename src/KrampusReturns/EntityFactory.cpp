@@ -260,6 +260,39 @@ ChatGPT::Enemy* EntityFactory::create_flaming_skull_enemy(std::string on_map, fl
    return result;
 }
 
+ChatGPT::Enemy* EntityFactory::create_flaming_skull_red_enemy(std::string on_map, float x, float y, std::string animation, AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target) const
+{
+   using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;
+   //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::Base
+   //AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls
+   //headers: [ AllegroFlare/Prototypes/Platforming2D/Entities/MovementStrategies2D/ReflectOffWalls.hpp ]
+
+   int max_health = 5;
+   int health = max_health;
+   int attack = 1;
+   ChatGPT::Enemy* result = new ChatGPT::Enemy(max_health, health, attack);
+   result->set_animation_book(get_animation_book());
+   result->get_place_ref().size = { 16, 8 };
+   result->get_place_ref().scale = { 0.9, 0.9 };
+   result->set_animation(animation);
+   result->set_bitmap_alignment_strategy("bottom_centered");
+
+   // NOTE: this class now needs a proper destruct property
+   result->set_movement_strategy(
+      //new AllegroFlare::Prototypes::Platforming2D::Entities::MovementStrategies2D::ReflectOffWalls(result)
+      //new ChatGPT::RandomWanderer(result, 1)
+      new ChatGPT::Seeker(result, target, 1.0)
+   );
+
+   result->set("damages_player");
+   result->set("takes_damage_from_player_damage_zones");
+
+   result->get_place_ref().position = { x, y };
+   result->set(ON_MAP_NAME, on_map);
+   result->set("seeker");
+   return result;
+}
+
 ChatGPT::Enemy* EntityFactory::create_skull_head_boss_enemy(std::string on_map, float x, float y, float area_width, float area_height, std::string animation, AllegroFlare::Prototypes::Platforming2D::Entities::FrameAnimated2D* target) const
 {
    using namespace AllegroFlare::Prototypes::Platforming2D::EntityFlagNames;

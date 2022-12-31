@@ -13,11 +13,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.5328,
+            "scale": 0.53,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 1226.539039039039,
-                "y": 510.51051051051047
+                "x": 1327.3584905660375,
+                "y": 507.5471698113207
             }
         },
         "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-1-1-0x.tmj": {
@@ -27,19 +27,30 @@
             "scale": 0.5875,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 1166.808510638298,
-                "y": 330.2127659574468
+                "x": 1175.3191489361702,
+                "y": 486.8085106382978
             }
         },
         "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-2-1-0x.tmj": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.542,
+            "scale": 0.8245,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 709.4095940959409,
-                "y": 699.2619926199261
+                "x": 860.5215281989083,
+                "y": 406.30685263796244
+            }
+        },
+        "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-3-1-0x.tmj": {
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 0.7263,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 976.8690623709215,
+                "y": 623.7092110698061
             }
         },
         "/Users/markoates/tiles_dungeon_v1.1.tsx": {
@@ -53,6 +64,7 @@
     },
     "last.exportedFilePath": "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps",
     "last.externalTilesetPath": "/Users/markoates/Repos/KrampusReturns/project_files",
+    "last.imagePath": "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps",
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "json",
     "openFiles": [
