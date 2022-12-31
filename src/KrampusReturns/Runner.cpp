@@ -43,8 +43,11 @@ Runner::Runner(std::string mode, AllegroFlare::Frameworks::Full* framework, Alle
    , blob_achievement_done(false)
    , skeleton_achievement_done(false)
    , flaming_skull_achievement_done(false)
+   , boss1_done(false)
+   , boss2_done(false)
+   , boss3_done(false)
+   , boss4_done(false)
    , all_bosses_achievement_done(false)
-   , bosses_beaten(0)
 {
 }
 
@@ -617,8 +620,27 @@ void Runner::check_achievements()
       unlock_achievement("flaming_skull_reds_done");
       // TODO: here emit achievement unlocked
    }
-   if (currently_at_level == 4 && !all_bosses_achievement_done &&
-         !platforming_2d_screen.are_any_bosses_present())
+
+
+   if (currently_at_level == 1 && !platforming_2d_screen.are_any_bosses_present())
+   {
+      boss1_done = true;
+   }
+   if (currently_at_level == 2 && !platforming_2d_screen.are_any_bosses_present())
+   {
+      boss2_done = true;
+   }
+   if (currently_at_level == 3 && !platforming_2d_screen.are_any_bosses_present())
+   {
+      boss3_done = true;
+   }
+   if (currently_at_level == 4 && !platforming_2d_screen.are_any_bosses_present())
+   {
+      boss4_done = true;
+   }
+
+
+   if (boss1_done && boss2_done && boss3_done && boss4_done && !all_bosses_achievement_done)
    {
       all_bosses_achievement_done = true;
       unlock_achievement("bosses_done");

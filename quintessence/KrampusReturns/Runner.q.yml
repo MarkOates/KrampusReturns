@@ -92,13 +92,25 @@ properties:
     type: bool
     init_with: false
 
-  - name: all_bosses_achievement_done
+  - name: boss1_done
     type: bool
     init_with: false
 
-  - name: bosses_beaten
-    type: int
-    init_with: 0
+  - name: boss2_done
+    type: bool
+    init_with: false
+
+  - name: boss3_done
+    type: bool
+    init_with: false
+
+  - name: boss4_done
+    type: bool
+    init_with: false
+
+  - name: all_bosses_achievement_done
+    type: bool
+    init_with: false
 
   - name: MODE_TEST
     type: char*
@@ -750,8 +762,27 @@ functions:
          unlock_achievement("flaming_skull_reds_done");
          // TODO: here emit achievement unlocked
       }
-      if (currently_at_level == 4 && !all_bosses_achievement_done &&
-            !platforming_2d_screen.are_any_bosses_present())
+
+
+      if (currently_at_level == 1 && !platforming_2d_screen.are_any_bosses_present())
+      {
+         boss1_done = true;
+      }
+      if (currently_at_level == 2 && !platforming_2d_screen.are_any_bosses_present())
+      {
+         boss2_done = true;
+      }
+      if (currently_at_level == 3 && !platforming_2d_screen.are_any_bosses_present())
+      {
+         boss3_done = true;
+      }
+      if (currently_at_level == 4 && !platforming_2d_screen.are_any_bosses_present())
+      {
+         boss4_done = true;
+      }
+
+
+      if (boss1_done && boss2_done && boss3_done && boss4_done && !all_bosses_achievement_done)
       {
          all_bosses_achievement_done = true;
          unlock_achievement("bosses_done");

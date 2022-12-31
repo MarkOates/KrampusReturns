@@ -57,8 +57,11 @@ namespace KrampusReturns
       bool blob_achievement_done;
       bool skeleton_achievement_done;
       bool flaming_skull_achievement_done;
+      bool boss1_done;
+      bool boss2_done;
+      bool boss3_done;
+      bool boss4_done;
       bool all_bosses_achievement_done;
-      int bosses_beaten;
 
    protected:
 
