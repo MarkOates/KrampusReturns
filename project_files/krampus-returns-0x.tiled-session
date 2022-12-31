@@ -38,8 +38,8 @@
             "scale": 1.2204,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 1216.4044575549,
-                "y": 369.5509668960997
+                "x": 1408.964274008522,
+                "y": 344.14945919370695
             }
         },
         "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-3-1-0x.tmj": {
@@ -49,19 +49,19 @@
             "scale": 0.9007,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 415.78772066170757,
-                "y": 320.8615521261241
+                "x": 554.5686688131453,
+                "y": 442.98878649938933
             }
         },
         "/Users/markoates/Repos/KrampusReturns/bin/programs/data/maps/krampus-returns-level-4-1-0x.tmj": {
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.8988,
+            "scale": 0.8313,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 925.122385402759,
-                "y": 558.5224744103249
+                "x": 814.988572115963,
+                "y": 582.2206183086731
             }
         },
         "/Users/markoates/tiles_dungeon_v1.1.tsx": {
