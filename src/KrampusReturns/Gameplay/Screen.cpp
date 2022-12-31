@@ -2306,18 +2306,18 @@ void Screen::key_char_func(ALLEGRO_EVENT* event)
       case ALLEGRO_KEY_1:
       {
          // TODO: CRITICAL: remove this hard-coded base folder
-         //static std::string _TEST_BASE_FOLDER = "/Users/markoates/Repos/KrampusReturns/bin/programs/data/";
-         //KrampusReturns::Level level(
-            //"level_1",
-            //"The First Rescue",
-            //{
-               //{ "map_a", _TEST_BASE_FOLDER + "maps/krampus-returns-level-1-1-0x.tmj" }
-            //},
-            //"level_1_music"
-         //);
+         static std::string _TEST_BASE_FOLDER = "/Users/markoates/Repos/KrampusReturns/bin/programs/data/";
+         KrampusReturns::Level level(
+            "level_1",
+            "The First Rescue",
+            {
+               { "map_a", _TEST_BASE_FOLDER + "maps/krampus-returns-level-3-1-0x.tmj" }
+            },
+            "level_1_music"
+         );
 
          // TESTING DEBUG:
-         //load_level_and_start(&level);
+         load_level_and_start(&level);
 
          break;
       }

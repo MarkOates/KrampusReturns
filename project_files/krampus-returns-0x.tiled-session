@@ -46,11 +46,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.7263,
-            "selectedLayer": 0,
+            "scale": 1.125,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 976.8690623709215,
-                "y": 623.7092110698061
+                "x": 1223.5555555555554,
+                "y": 172.4444444444444
             }
         },
         "/Users/markoates/tiles_dungeon_v1.1.tsx": {

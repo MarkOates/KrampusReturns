@@ -56,6 +56,42 @@
             ]
         },
         {
+            "color": "#ff0192b3",
+            "id": 5,
+            "members": [
+            ],
+            "name": "flaming_skull",
+            "type": "class",
+            "useAs": [
+                "property",
+                "map",
+                "layer",
+                "object",
+                "tile",
+                "tileset",
+                "wangcolor",
+                "wangset"
+            ]
+        },
+        {
+            "color": "#ffb36324",
+            "id": 4,
+            "members": [
+            ],
+            "name": "flaming_skull_red",
+            "type": "class",
+            "useAs": [
+                "property",
+                "map",
+                "layer",
+                "object",
+                "tile",
+                "tileset",
+                "wangcolor",
+                "wangset"
+            ]
+        },
+        {
             "color": "#ffb3433c",
             "id": 2,
             "members": [
