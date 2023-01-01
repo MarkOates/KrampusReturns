@@ -883,6 +883,14 @@ void Runner::run(std::string mode)
       sample_bin.set_full_path("/Users/markoates/Repos/KrampusReturns/bin/programs/data/samples");
       model_bin.set_full_path("/Users/markoates/Repos/KrampusReturns/bin/programs/data/models");
    }
+   else
+   {
+      font_bin.set_full_path("./data/fonts");
+      bitmap_bin.set_full_path("./data/bitmaps");
+      sample_bin.set_full_path("./data/samples");
+      model_bin.set_full_path("./data/models");
+   }
+
 
    Runner runner(mode, &framework, &framework.get_event_emitter_ref());
    runner.initialize();
