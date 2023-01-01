@@ -1560,7 +1560,6 @@ functions:
       // HACK: update is player fighting boss music
       AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* boss = find_boss();
       static bool boss_fight_triggered = false;
-      //static bool boss_beaten = false; // TODO: <-- make this a member variable, and reset it when loading a level
 
       if (boss_fight_triggered && !boss && !boss_beaten)
       {

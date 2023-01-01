@@ -89,6 +89,7 @@ namespace KrampusReturns
          uint32_t state;
          float state_changed_at;
          bool state_is_busy;
+         bool boss_beaten;
          KrampusReturns::Level current_level_data;
          std::string main_background_music_identifier;
          ALLEGRO_BITMAP* little_shadow_bitmap;

@@ -84,6 +84,7 @@ Screen::Screen(AllegroFlare::BitmapBin* bitmap_bin, AllegroFlare::FontBin* font_
    , state(0)
    , state_changed_at(0.0f)
    , state_is_busy(false)
+   , boss_beaten(false)
    , current_level_data()
    , main_background_music_identifier("[unnset-main_background_music_identifier]")
    , little_shadow_bitmap(nullptr)
@@ -638,6 +639,10 @@ void Screen::load_level_and_start(KrampusReturns::Level* level)
          "While cleaning/deleting all existing entities, some entities unexpectedly remained in the pool."
       );
    }
+
+
+
+   boss_beaten = false;
 
 
 
@@ -1465,7 +1470,6 @@ void Screen::update_entities()
    // HACK: update is player fighting boss music
    AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* boss = find_boss();
    static bool boss_fight_triggered = false;
-   static bool boss_beaten = false; // TODO: <-- make this a member variable, and reset it when loading a level
 
    if (boss_fight_triggered && !boss && !boss_beaten)
    {
