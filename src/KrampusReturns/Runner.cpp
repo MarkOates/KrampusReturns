@@ -491,7 +491,17 @@ void Runner::initialize_world()
 {
    // TODO: CRITICAL: fix this TEST_BASE_FOLDER path
    // TODO: Load up actual data for the remaining levels of the game
-   static std::string TEST_BASE_FOLDER = "/Users/markoates/Repos/KrampusReturns/bin/programs/data/";
+   static std::string TEST_BASE_FOLDER = "[unset-TEST_BASE_FOLDER]";
+   if (is_test_mode(mode) || is_development_mode(mode))
+   {
+      TEST_BASE_FOLDER = "/Users/markoates/Repos/KrampusReturns/bin/programs/data/";
+   }
+   else
+   {
+      TEST_BASE_FOLDER = "./data/";
+   }
+
+
    platforming_2d_world.set_levels({
       KrampusReturns::Level(
          "level_1",
@@ -531,7 +541,19 @@ void Runner::initialize_world()
 void Runner::setup_platforming_2d_screen()
 {
    //return;
-   static std::string TEST_BASE_FOLDER = "/Users/markoates/Repos/KrampusReturns/bin/programs/data/";
+
+   static std::string TEST_BASE_FOLDER = "[unset-TEST_BASE_FOLDER]";
+   if (is_test_mode(mode) || is_development_mode(mode))
+   {
+      TEST_BASE_FOLDER = "/Users/markoates/Repos/KrampusReturns/bin/programs/data/";
+   }
+   else
+   {
+      TEST_BASE_FOLDER = "./data/";
+   }
+
+
+
    platforming_2d_screen.set_font_bin(&framework->get_font_bin_ref());
    platforming_2d_screen.set_bitmap_bin(&framework->get_bitmap_bin_ref());
    platforming_2d_screen.set_display(framework->get_primary_display());
