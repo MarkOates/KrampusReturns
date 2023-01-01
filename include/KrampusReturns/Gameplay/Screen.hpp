@@ -212,6 +212,8 @@ namespace KrampusReturns
          ALLEGRO_FONT* obtain_banner_text_font();
          ALLEGRO_FONT* obtain_banner_subtext_font();
          static bool is_production_mode(std::string mode="[unset-mode]");
+         static bool is_development_mode(std::string mode="[unset-mode]");
+         static bool is_test_mode(std::string mode="[unset-mode]");
          bool in_development_mode();
          bool in_production_mode();
          bool in_test_mode();

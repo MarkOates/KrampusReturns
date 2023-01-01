@@ -491,6 +491,7 @@ void Runner::initialize_world()
 {
    // TODO: CRITICAL: fix this TEST_BASE_FOLDER path
    // TODO: Load up actual data for the remaining levels of the game
+   // NOTE: TEST_BASE_FOLDER is the wrong name for this variable btw
    static std::string TEST_BASE_FOLDER = "[unset-TEST_BASE_FOLDER]";
    if (is_test_mode(mode) || is_development_mode(mode))
    {
@@ -542,6 +543,7 @@ void Runner::setup_platforming_2d_screen()
 {
    //return;
 
+   // NOTE: TEST_BASE_FOLDER is the wrong name for this variable btw
    static std::string TEST_BASE_FOLDER = "[unset-TEST_BASE_FOLDER]";
    if (is_test_mode(mode) || is_development_mode(mode))
    {

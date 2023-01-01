@@ -696,20 +696,33 @@ void Screen::load_level_and_start(KrampusReturns::Level* level)
    // grab the map dictionary from this level (if present)
    ///////////
 
+   // NOTE: TEST_BASE_FOLDER is the wrong name for this variable btw
+   static std::string TEST_BASE_FOLDER = "[unset-TEST_BASE_FOLDER]";
+   if (is_test_mode(mode) || is_development_mode(mode))
+   {
+      TEST_BASE_FOLDER = "/Users/markoates/Repos/KrampusReturns/bin/programs/data/";
+   }
+   else
+   {
+      TEST_BASE_FOLDER = "./data/";
+   }
+
+
    // TODO: CRITICAL: fix this folder
-   #if defined(_WIN32) || defined(_WIN64)
-   #define TEST_BASE_FOLDER "/msys64/home/Mark/Repos/KrampusReturns/bin/programs/data/"
-   #else
-   #define TEST_BASE_FOLDER "/Users/markoates/Repos/KrampusReturns/bin/programs/data/"
-   #endif
+   //#if defined(_WIN32) || defined(_WIN64)
+   //#define TEST_BASE_FOLDER "/msys64/home/Mark/Repos/KrampusReturns/bin/programs/data/"
+   //#else
+   //#define TEST_BASE_FOLDER "/Users/markoates/Repos/KrampusReturns/bin/programs/data/"
+   //#endif
 
 
    if (!level)
    {
+   // NOTE: TEST_BASE_FOLDER is the wrong name for this variable btw
       set_map_dictionary({
          //{ "map_a", TEST_BASE_FOLDER "maps/krampus-returns-map01-0x.tmj" },
          //{ "map_b", TEST_BASE_FOLDER "maps/krampus-returns-map02-0x.tmj" },
-         { "map_a", TEST_BASE_FOLDER "maps/krampus-returns-level-1-1-0x.tmj" },
+         { "map_a", TEST_BASE_FOLDER + "maps/krampus-returns-level-1-1-0x.tmj" },
       });
    }
    else
@@ -1119,12 +1132,24 @@ void Screen::initialize_animation_book()
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
       throw std::runtime_error("Screen::initialize_animation_book: error: guard \"(!animation_book_initialized)\" not met");
    }
+   // NOTE: TEST_BASE_FOLDER is the wrong name for this variable btw
+   static std::string TEST_BASE_FOLDER = "[unset-TEST_BASE_FOLDER]";
+   if (is_test_mode(mode) || is_development_mode(mode))
+   {
+      TEST_BASE_FOLDER = "/Users/markoates/Repos/KrampusReturns/bin/programs/data/";
+   }
+   else
+   {
+      TEST_BASE_FOLDER = "./data/";
+   }
+
+
    // TODO: CRITICAL: fix this path
    animation_book.set_png_source_filename(
-      "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.png"
+      TEST_BASE_FOLDER + "bitmaps/krampus-returns-sprites-0x.png"
    );
    animation_book.set_json_source_filename(
-      "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.json"
+      TEST_BASE_FOLDER + "bitmaps/krampus-returns-sprites-0x.json"
    );
    animation_book.set_sprite_sheet_scale(2);
    animation_book.initialize();
@@ -2768,6 +2793,16 @@ ALLEGRO_FONT* Screen::obtain_banner_subtext_font()
 bool Screen::is_production_mode(std::string mode)
 {
    return mode == MODE_PRODUCTION;
+}
+
+bool Screen::is_development_mode(std::string mode)
+{
+   return mode == MODE_DEVELOPMENT;
+}
+
+bool Screen::is_test_mode(std::string mode)
+{
+   return mode == MODE_TEST;
 }
 
 bool Screen::in_development_mode()

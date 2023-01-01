@@ -782,20 +782,33 @@ functions:
       // grab the map dictionary from this level (if present)
       ///////////
 
+      // NOTE: TEST_BASE_FOLDER is the wrong name for this variable btw
+      static std::string TEST_BASE_FOLDER = "[unset-TEST_BASE_FOLDER]";
+      if (is_test_mode(mode) || is_development_mode(mode))
+      {
+         TEST_BASE_FOLDER = "/Users/markoates/Repos/KrampusReturns/bin/programs/data/";
+      }
+      else
+      {
+         TEST_BASE_FOLDER = "./data/";
+      }
+
+
       // TODO: CRITICAL: fix this folder
-      #if defined(_WIN32) || defined(_WIN64)
-      #define TEST_BASE_FOLDER "/msys64/home/Mark/Repos/KrampusReturns/bin/programs/data/"
-      #else
-      #define TEST_BASE_FOLDER "/Users/markoates/Repos/KrampusReturns/bin/programs/data/"
-      #endif
+      //#if defined(_WIN32) || defined(_WIN64)
+      //#define TEST_BASE_FOLDER "/msys64/home/Mark/Repos/KrampusReturns/bin/programs/data/"
+      //#else
+      //#define TEST_BASE_FOLDER "/Users/markoates/Repos/KrampusReturns/bin/programs/data/"
+      //#endif
 
 
       if (!level)
       {
+      // NOTE: TEST_BASE_FOLDER is the wrong name for this variable btw
          set_map_dictionary({
             //{ "map_a", TEST_BASE_FOLDER "maps/krampus-returns-map01-0x.tmj" },
             //{ "map_b", TEST_BASE_FOLDER "maps/krampus-returns-map02-0x.tmj" },
-            { "map_a", TEST_BASE_FOLDER "maps/krampus-returns-level-1-1-0x.tmj" },
+            { "map_a", TEST_BASE_FOLDER + "maps/krampus-returns-level-1-1-0x.tmj" },
          });
       }
       else
@@ -1262,12 +1275,24 @@ functions:
   - name: initialize_animation_book
     guards: [ (!animation_book_initialized) ]
     body: |
+      // NOTE: TEST_BASE_FOLDER is the wrong name for this variable btw
+      static std::string TEST_BASE_FOLDER = "[unset-TEST_BASE_FOLDER]";
+      if (is_test_mode(mode) || is_development_mode(mode))
+      {
+         TEST_BASE_FOLDER = "/Users/markoates/Repos/KrampusReturns/bin/programs/data/";
+      }
+      else
+      {
+         TEST_BASE_FOLDER = "./data/";
+      }
+
+
       // TODO: CRITICAL: fix this path
       animation_book.set_png_source_filename(
-         "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.png"
+         TEST_BASE_FOLDER + "bitmaps/krampus-returns-sprites-0x.png"
       );
       animation_book.set_json_source_filename(
-         "/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps/krampus-returns-sprites-0x.json"
+         TEST_BASE_FOLDER + "bitmaps/krampus-returns-sprites-0x.json"
       );
       animation_book.set_sprite_sheet_scale(2);
       animation_book.initialize();
@@ -2953,6 +2978,28 @@ functions:
         default_argument: '"[unset-mode]"'
     body: |
       return mode == MODE_PRODUCTION;
+
+
+  - name: is_development_mode
+    type: bool
+    static: true
+    parameters:
+      - name: mode
+        type: std::string
+        default_argument: '"[unset-mode]"'
+    body: |
+      return mode == MODE_DEVELOPMENT;
+
+
+  - name: is_test_mode
+    type: bool
+    static: true
+    parameters:
+      - name: mode
+        type: std::string
+        default_argument: '"[unset-mode]"'
+    body: |
+      return mode == MODE_TEST;
 
 
   - name: in_development_mode
