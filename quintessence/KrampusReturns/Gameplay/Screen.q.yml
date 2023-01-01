@@ -207,6 +207,31 @@ properties:
     type: ALLEGRO_BITMAP*
     init_with: nullptr
 
+  - name: mode
+    type: std::string
+    init_with: MODE_PRODUCTION
+    constructor_arg: true
+    getter: true
+    setter: true
+
+  - name: MODE_TEST
+    type: char*
+    init_with: '"test"'
+    static: true
+    constexpr: true
+
+  - name: MODE_PRODUCTION
+    type: char*
+    init_with: '"production"'
+    static: true
+    constexpr: true
+
+  - name: MODE_DEVELOPMENT
+    type: char*
+    init_with: '"development"'
+    static: true
+    constexpr: true
+
   - name: STATE_UNDEF
     type: uint32_t
     init_with: 0
@@ -2917,6 +2942,35 @@ functions:
     type: ALLEGRO_FONT*
     body: |
       return font_bin->auto_get("ChronoType.otf -68");
+
+
+  - name: is_production_mode
+    type: bool
+    static: true
+    parameters:
+      - name: mode
+        type: std::string
+        default_argument: '"[unset-mode]"'
+    body: |
+      return mode == MODE_PRODUCTION;
+
+
+  - name: in_development_mode
+    type: bool
+    body: |
+      return mode == MODE_DEVELOPMENT;
+      
+
+  - name: in_production_mode
+    type: bool
+    body: |
+      return mode == MODE_PRODUCTION;
+      
+
+  - name: in_test_mode
+    type: bool
+    body: |
+      return mode == MODE_TEST;
 
 
 dependencies:

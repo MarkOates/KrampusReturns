@@ -42,7 +42,7 @@ namespace Gameplay
 {
 
 
-Screen::Screen(AllegroFlare::BitmapBin* bitmap_bin, AllegroFlare::FontBin* font_bin, AllegroFlare::Display* display, AllegroFlare::EventEmitter* event_emitter)
+Screen::Screen(AllegroFlare::BitmapBin* bitmap_bin, AllegroFlare::FontBin* font_bin, AllegroFlare::Display* display, AllegroFlare::EventEmitter* event_emitter, std::string mode)
    : AllegroFlare::Screens::Base("Prototypes::Platforming2D::Screen")
    , bitmap_bin(bitmap_bin)
    , font_bin(font_bin)
@@ -88,6 +88,7 @@ Screen::Screen(AllegroFlare::BitmapBin* bitmap_bin, AllegroFlare::FontBin* font_
    , current_level_data()
    , main_background_music_identifier("[unnset-main_background_music_identifier]")
    , little_shadow_bitmap(nullptr)
+   , mode(mode)
    , DUMMY_DEP(nullptr)
 {
 }
@@ -119,6 +120,12 @@ void Screen::set_show_tile_mesh(bool show_tile_mesh)
 void Screen::set_show_collision_tile_mesh(bool show_collision_tile_mesh)
 {
    this->show_collision_tile_mesh = show_collision_tile_mesh;
+}
+
+
+void Screen::set_mode(std::string mode)
+{
+   this->mode = mode;
 }
 
 
@@ -161,6 +168,12 @@ bool Screen::get_show_tile_mesh() const
 bool Screen::get_show_collision_tile_mesh() const
 {
    return show_collision_tile_mesh;
+}
+
+
+std::string Screen::get_mode() const
+{
+   return mode;
 }
 
 
@@ -2750,6 +2763,26 @@ ALLEGRO_FONT* Screen::obtain_banner_text_font()
 ALLEGRO_FONT* Screen::obtain_banner_subtext_font()
 {
    return font_bin->auto_get("ChronoType.otf -68");
+}
+
+bool Screen::is_production_mode(std::string mode)
+{
+   return mode == MODE_PRODUCTION;
+}
+
+bool Screen::in_development_mode()
+{
+   return mode == MODE_DEVELOPMENT;
+}
+
+bool Screen::in_production_mode()
+{
+   return mode == MODE_PRODUCTION;
+}
+
+bool Screen::in_test_mode()
+{
+   return mode == MODE_TEST;
 }
 
 

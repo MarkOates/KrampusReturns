@@ -38,6 +38,9 @@ namespace KrampusReturns
       class Screen : public AllegroFlare::Screens::Base
       {
       public:
+         static constexpr char* MODE_TEST = "test";
+         static constexpr char* MODE_PRODUCTION = "production";
+         static constexpr char* MODE_DEVELOPMENT = "development";
          static constexpr uint32_t STATE_UNDEF = 0;
          static constexpr uint32_t STATE_PRELOADING_LEVEL = 1;
          static constexpr uint32_t STATE_PLAYING_IN_LEVEL = 2;
@@ -93,6 +96,7 @@ namespace KrampusReturns
          KrampusReturns::Level current_level_data;
          std::string main_background_music_identifier;
          ALLEGRO_BITMAP* little_shadow_bitmap;
+         std::string mode;
          KrampusReturns::Entities::DamageZone* DUMMY_DEP;
          void move_krampus_to_first_spawn_point_or_default(KrampusReturns::Entities::Krampus* krampus=nullptr, std::string map_name="[unset-map_name]");
          void initialize_shader();
@@ -108,13 +112,14 @@ namespace KrampusReturns
 
 
       public:
-         Screen(AllegroFlare::BitmapBin* bitmap_bin=nullptr, AllegroFlare::FontBin* font_bin=nullptr, AllegroFlare::Display* display=nullptr, AllegroFlare::EventEmitter* event_emitter=nullptr);
+         Screen(AllegroFlare::BitmapBin* bitmap_bin=nullptr, AllegroFlare::FontBin* font_bin=nullptr, AllegroFlare::Display* display=nullptr, AllegroFlare::EventEmitter* event_emitter=nullptr, std::string mode=MODE_PRODUCTION);
          virtual ~Screen();
 
          void set_entity_pool(std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> entity_pool);
          void set_camera_baseline_zoom(AllegroFlare::Vec2D camera_baseline_zoom);
          void set_show_tile_mesh(bool show_tile_mesh);
          void set_show_collision_tile_mesh(bool show_collision_tile_mesh);
+         void set_mode(std::string mode);
          AllegroFlare::BitmapBin* get_bitmap_bin() const;
          AllegroFlare::FontBin* get_font_bin() const;
          std::map<std::string, std::string> get_map_dictionary() const;
@@ -122,6 +127,7 @@ namespace KrampusReturns
          AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* get_player_controlled_entity() const;
          bool get_show_tile_mesh() const;
          bool get_show_collision_tile_mesh() const;
+         std::string get_mode() const;
          AllegroFlare::FrameAnimation::Book &get_animation_book_ref();
          void NOTE();
          void set_state(uint32_t state=STATE_UNDEF, float time_now=al_get_time());
@@ -205,6 +211,10 @@ namespace KrampusReturns
          AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* find_first_spawn_point_on_any_map();
          ALLEGRO_FONT* obtain_banner_text_font();
          ALLEGRO_FONT* obtain_banner_subtext_font();
+         static bool is_production_mode(std::string mode="[unset-mode]");
+         bool in_development_mode();
+         bool in_production_mode();
+         bool in_test_mode();
       };
    }
 }
