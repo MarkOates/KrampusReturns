@@ -993,6 +993,22 @@ table td
   <td class="property">ALLEGRO_BITMAP*</td>
 </tr>
 <tr>
+  <td class="property">mode</td>
+  <td class="property">std::string</td>
+</tr>
+<tr>
+  <td class="property">MODE_TEST</td>
+  <td class="property">char*</td>
+</tr>
+<tr>
+  <td class="property">MODE_PRODUCTION</td>
+  <td class="property">char*</td>
+</tr>
+<tr>
+  <td class="property">MODE_DEVELOPMENT</td>
+  <td class="property">char*</td>
+</tr>
+<tr>
   <td class="property">STATE_UNDEF</td>
   <td class="property">uint32_t</td>
 </tr>
@@ -1306,6 +1322,24 @@ table td
 </tr>
 <tr>
   <td class="method">obtain_banner_subtext_font()</td>
+</tr>
+<tr>
+  <td class="method">is_production_mode(std::string mode=&quot;[unset-mode]&quot;)</td>
+</tr>
+<tr>
+  <td class="method">is_development_mode(std::string mode=&quot;[unset-mode]&quot;)</td>
+</tr>
+<tr>
+  <td class="method">is_test_mode(std::string mode=&quot;[unset-mode]&quot;)</td>
+</tr>
+<tr>
+  <td class="method">in_development_mode()</td>
+</tr>
+<tr>
+  <td class="method">in_production_mode()</td>
+</tr>
+<tr>
+  <td class="method">in_test_mode()</td>
 </tr>
     </table>
      <table>
