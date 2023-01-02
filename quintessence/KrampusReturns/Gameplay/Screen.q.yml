@@ -1959,14 +1959,17 @@ functions:
   - name: update
     guards: [ initialized ]
     body: |
+      if (profiler) profiler->start("update");
       float time_now = al_get_time();
       update_state(time_now);
+      if (profiler) profiler->stop("update");
       return;
 
 
   - name: draw
     guards: [ initialized, currently_active_map, get_tile_mesh() ]
     body: |
+      if (profiler) profiler->start("draw");
       al_clear_to_color(al_color_html("291d29")); // TODO: this double-clears the background color since
                                                   // framework does it already
 
@@ -1999,6 +2002,7 @@ functions:
       draw_hud();
       
       
+      if (profiler) profiler->stop("draw");
       return;
     body_dependency_symbols:
       - al_color_name
@@ -2973,6 +2977,12 @@ functions:
     type: ALLEGRO_FONT*
     body: |
       return font_bin->auto_get("ChronoType.otf -68");
+
+
+  - name: obtain_profiler_font
+    type: ALLEGRO_FONT*
+    body: |
+      return font_bin->auto_get("Inter-Medium.ttf -22");
 
 
   - name: is_production_mode

@@ -215,6 +215,7 @@ namespace KrampusReturns
          AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* find_first_spawn_point_on_any_map();
          ALLEGRO_FONT* obtain_banner_text_font();
          ALLEGRO_FONT* obtain_banner_subtext_font();
+         ALLEGRO_FONT* obtain_profiler_font();
          static bool is_production_mode(std::string mode="[unset-mode]");
          static bool is_development_mode(std::string mode="[unset-mode]");
          static bool is_test_mode(std::string mode="[unset-mode]");

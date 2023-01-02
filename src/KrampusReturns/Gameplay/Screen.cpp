@@ -1864,8 +1864,10 @@ void Screen::update()
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
       throw std::runtime_error("Screen::update: error: guard \"initialized\" not met");
    }
+   if (profiler) profiler->start("update");
    float time_now = al_get_time();
    update_state(time_now);
+   if (profiler) profiler->stop("update");
    return;
 }
 
@@ -1892,6 +1894,7 @@ void Screen::draw()
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
       throw std::runtime_error("Screen::draw: error: guard \"get_tile_mesh()\" not met");
    }
+   if (profiler) profiler->start("draw");
    al_clear_to_color(al_color_html("291d29")); // TODO: this double-clears the background color since
                                                // framework does it already
 
@@ -1924,6 +1927,7 @@ void Screen::draw()
    draw_hud();
 
 
+   if (profiler) profiler->stop("draw");
    return;
 }
 
@@ -2801,6 +2805,11 @@ ALLEGRO_FONT* Screen::obtain_banner_text_font()
 ALLEGRO_FONT* Screen::obtain_banner_subtext_font()
 {
    return font_bin->auto_get("ChronoType.otf -68");
+}
+
+ALLEGRO_FONT* Screen::obtain_profiler_font()
+{
+   return font_bin->auto_get("Inter-Medium.ttf -22");
 }
 
 bool Screen::is_production_mode(std::string mode)
