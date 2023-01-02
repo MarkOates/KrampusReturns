@@ -301,6 +301,9 @@
     "KrampusReturns/Gameplay/Screen",
     "KrampusReturns/World"
   ],
+  "AllegroFlare/Profiler": [
+    "KrampusReturns/Gameplay/Screen"
+  ],
   "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [
     "KrampusReturns/Runner"
   ],

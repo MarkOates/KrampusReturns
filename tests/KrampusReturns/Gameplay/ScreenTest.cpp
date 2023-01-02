@@ -78,6 +78,7 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
 
 
    KrampusReturns::Gameplay::Screen platforming_2d;
+   platforming_2d.set_mode("test");
    platforming_2d.set_font_bin(&framework.get_font_bin_ref());
    platforming_2d.set_bitmap_bin(&framework.get_bitmap_bin_ref());
    //platforming_2d.set_animation_book(&animation_book);

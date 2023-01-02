@@ -214,6 +214,12 @@ properties:
     getter: true
     setter: true
 
+  - name: profiler
+    type: AllegroFlare::Profiler*
+    init_with: nullptr
+    getter: true
+    setter: true
+
   - name: MODE_TEST
     type: char*
     init_with: '"test"'
@@ -3147,5 +3153,7 @@ dependencies:
     headers: [ KrampusReturns/GameEventDatas/SpawnDamageZoneByPlayer.hpp ]
   - symbol: KrampusReturns::Entities::DamageZone
     headers: [ KrampusReturns/Entities/DamageZone.hpp ]
+  - symbol: AllegroFlare::Profiler
+    headers: [ AllegroFlare/Profiler.hpp ]
 
 

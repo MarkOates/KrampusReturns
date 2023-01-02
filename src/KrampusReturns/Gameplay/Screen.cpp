@@ -89,6 +89,7 @@ Screen::Screen(AllegroFlare::BitmapBin* bitmap_bin, AllegroFlare::FontBin* font_
    , main_background_music_identifier("[unnset-main_background_music_identifier]")
    , little_shadow_bitmap(nullptr)
    , mode(mode)
+   , profiler(nullptr)
    , DUMMY_DEP(nullptr)
 {
 }
@@ -126,6 +127,12 @@ void Screen::set_show_collision_tile_mesh(bool show_collision_tile_mesh)
 void Screen::set_mode(std::string mode)
 {
    this->mode = mode;
+}
+
+
+void Screen::set_profiler(AllegroFlare::Profiler* profiler)
+{
+   this->profiler = profiler;
 }
 
 
@@ -174,6 +181,12 @@ bool Screen::get_show_collision_tile_mesh() const
 std::string Screen::get_mode() const
 {
    return mode;
+}
+
+
+AllegroFlare::Profiler* Screen::get_profiler() const
+{
+   return profiler;
 }
 
 

@@ -9,6 +9,7 @@
 #include <AllegroFlare/FontBin.hpp>
 #include <AllegroFlare/FrameAnimation/Book.hpp>
 #include <AllegroFlare/GameEvent.hpp>
+#include <AllegroFlare/Profiler.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/TileMaps/Basic2D.hpp>
 #include <AllegroFlare/Screens/Base.hpp>
@@ -97,6 +98,7 @@ namespace KrampusReturns
          std::string main_background_music_identifier;
          ALLEGRO_BITMAP* little_shadow_bitmap;
          std::string mode;
+         AllegroFlare::Profiler* profiler;
          KrampusReturns::Entities::DamageZone* DUMMY_DEP;
          void move_krampus_to_first_spawn_point_or_default(KrampusReturns::Entities::Krampus* krampus=nullptr, std::string map_name="[unset-map_name]");
          void initialize_shader();
@@ -120,6 +122,7 @@ namespace KrampusReturns
          void set_show_tile_mesh(bool show_tile_mesh);
          void set_show_collision_tile_mesh(bool show_collision_tile_mesh);
          void set_mode(std::string mode);
+         void set_profiler(AllegroFlare::Profiler* profiler);
          AllegroFlare::BitmapBin* get_bitmap_bin() const;
          AllegroFlare::FontBin* get_font_bin() const;
          std::map<std::string, std::string> get_map_dictionary() const;
@@ -128,6 +131,7 @@ namespace KrampusReturns
          bool get_show_tile_mesh() const;
          bool get_show_collision_tile_mesh() const;
          std::string get_mode() const;
+         AllegroFlare::Profiler* get_profiler() const;
          AllegroFlare::FrameAnimation::Book &get_animation_book_ref();
          void NOTE();
          void set_state(uint32_t state=STATE_UNDEF, float time_now=al_get_time());
