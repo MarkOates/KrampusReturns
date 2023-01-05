@@ -251,7 +251,7 @@ void Runner::initialize()
 
 
 
-   using namespace AllegroFlare::Elements::RollingCredits;
+   using namespace AllegroFlare::Elements;
 
 
    AllegroFlare::Elements::RollingCredits::SectionFactory section_factory;
@@ -348,36 +348,42 @@ void Runner::initialize()
       //}),
       section_factory.create_text(
          "INTRO MUSIC\n"
-         "by Mark Oates"// , RollingCredits::Sections::Text::ALLIGN_LEFT
+            "by Mark Oates",
+         RollingCredits::Sections::Text::ALIGN_CENTER
       ),
       section_factory.create_text(
          "8 BIT DUNGEON\n"
-         "by Kevin MacLeod (incompetech.com)\n"
-         "Licensed under Creative Commons: By Attribution 3.0\n"
-         "http://creativecommons.org/licenses/by/3.0/"
+            "by Kevin MacLeod (incompetech.com)\n"
+            "Licensed under Creative Commons: By Attribution 3.0\n"
+            "http://creativecommons.org/licenses/by/3.0/",
+         RollingCredits::Sections::Text::ALIGN_CENTER
       ),
       section_factory.create_text(
          "FUNERAL MARCH\n"
-         "by Frederic Chopin\n"
-         "Public Domain\n"
-         "Arranged by Mark Oates"// , RollingCredits::Sections::Text::ALLIGN_LEFT
+            "by Frederic Chopin\n"
+            "Public Domain\n"
+            "Arranged by Mark Oates",
+         RollingCredits::Sections::Text::ALIGN_CENTER
       ),
       section_factory.create_text(
          "FINAL COUNT\n"
-         "by Kevin MacLeod (incompetech.com)\n"
-         "Licensed under Creative Commons: By Attribution 3.0\n"
-         "http://creativecommons.org/licenses/by/3.0/\n"
-         "Edited by Mark Oates"
+            "by Kevin MacLeod (incompetech.com)\n"
+            "Licensed under Creative Commons: By Attribution 3.0\n"
+            "http://creativecommons.org/licenses/by/3.0/\n"
+            "Edited by Mark Oates",
+         RollingCredits::Sections::Text::ALIGN_CENTER
       ),
       section_factory.create_text(
          "JINGLE BELLS (CALM)\n"
-         "by Kevin MacLeod (incompetech.com)\n"
-         "Licensed under Creative Commons: By Attribution 3.0\n"
-         "http://creativecommons.org/licenses/by/3.0/"
+            "by Kevin MacLeod (incompetech.com)\n"
+            "Licensed under Creative Commons: By Attribution 3.0\n"
+            "http://creativecommons.org/licenses/by/3.0/",
+         RollingCredits::Sections::Text::ALIGN_CENTER
       ),
       section_factory.create_text(
          "BOSS MUSIC\n"
-         "by Mark Oates"//, "centered"
+            "by Mark Oates",
+         RollingCredits::Sections::Text::ALIGN_CENTER
       ),
 
 
