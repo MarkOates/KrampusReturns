@@ -85,26 +85,27 @@ void Runner::initialize()
 
    // setup the achievements
    achievements.set_achievements({
-      // TODO: add this unblobed achievement
-      { "blobs_done", {
-         new AllegroFlare::Achievement("Unblobbed", "Clear out all the blobs in Level 1" ), false, false }
+      { "blobs_done",
+         new AllegroFlare::Achievement("Unblobbed", "Clear out all the blobs in Level 1" ), false, false,
       },
-      { "skeletons_done", {
-         new AllegroFlare::Achievement("No more bones", "Clear out all the skeletons in Level 2" ), false, false }
+      { "skeletons_done",
+         new AllegroFlare::Achievement("No more bones", "Clear out all the skeletons in Level 2" ), false, false,
       },
-      { "flaming_skull_reds_done", {
-         new AllegroFlare::Achievement("Put out the fire", "Clear out all the red flaming skulls in Level 3" ), false, false }
+      { "flaming_skull_reds_done",
+         new AllegroFlare::Achievement("Put out the fire", "Clear out all the red flaming skulls in Level 3" ),
+         false,
+         false,
       },
-      { "bosses_done", {
-         new AllegroFlare::Achievement("No more boss", "Defeat all 4 bosses" ), false, false }
+      { "bosses_done",
+         new AllegroFlare::Achievement("No more boss", "Defeat all 4 bosses" ),
+         false,
+         false
       },
-      //{ "free_seat", { new AllegroFlare::Achievement("Free Seat at the Concert"), false, false } },
-      //{ "start_the_game", { new AllegroFlare::Achievement("In Da House"), false, false } },
-      //{ "do_thing", { new AllegroFlare::Achievement("Save the Zoo", "Will unhide when achieved"), false, false } },
-      //{ "a_hidden_gem2", { new AllegroFlare::Achievement("Hidden Gem", "Will unhide when achieved"), false, true } },
-      { "stay_through_the_credits", { new AllegroFlare::Achievement(
-         "Stay Through the Credits",
-         "Watch the credits"), false, false } },
+      { "stay_through_the_credits",
+         new AllegroFlare::Achievement("Stay Through the Credits", "Watch the credits"),
+         false,
+         false,
+      },
    });
 
 
