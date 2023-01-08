@@ -210,10 +210,14 @@ functions:
       // setup the achievements
       achievements.set_achievements({
          { "blobs_done",
-            new AllegroFlare::Achievement("Unblobbed", "Clear out all the blobs in Level 1" ), false, false,
+            new AllegroFlare::Achievement("Unblobbed", "Clear out all the blobs in Level 1" ),
+            false,
+            false,
          },
          { "skeletons_done",
-            new AllegroFlare::Achievement("No more bones", "Clear out all the skeletons in Level 2" ), false, false,
+            new AllegroFlare::Achievement("No more bones", "Clear out all the skeletons in Level 2" ),
+            false,
+            false,
          },
          { "flaming_skull_reds_done",
             new AllegroFlare::Achievement("Put out the fire", "Clear out all the red flaming skulls in Level 3" ),
