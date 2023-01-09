@@ -1,0 +1,687 @@
+{ "frames": [
+   {
+    "filename": "krampus-returns-sprites-0x 0.ase",
+    "frame": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 1.ase",
+    "frame": { "x": 48, "y": 0, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 2.ase",
+    "frame": { "x": 96, "y": 0, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 100
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 3.ase",
+    "frame": { "x": 144, "y": 0, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 4.ase",
+    "frame": { "x": 192, "y": 0, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 5.ase",
+    "frame": { "x": 240, "y": 0, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 6.ase",
+    "frame": { "x": 288, "y": 0, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 7.ase",
+    "frame": { "x": 336, "y": 0, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 8.ase",
+    "frame": { "x": 0, "y": 48, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 9.ase",
+    "frame": { "x": 48, "y": 48, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 10.ase",
+    "frame": { "x": 96, "y": 48, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 100
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 11.ase",
+    "frame": { "x": 144, "y": 48, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 100
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 12.ase",
+    "frame": { "x": 192, "y": 48, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 13.ase",
+    "frame": { "x": 240, "y": 48, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 14.ase",
+    "frame": { "x": 288, "y": 48, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 15.ase",
+    "frame": { "x": 336, "y": 48, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 16.ase",
+    "frame": { "x": 0, "y": 96, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 17.ase",
+    "frame": { "x": 48, "y": 96, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 18.ase",
+    "frame": { "x": 96, "y": 96, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 19.ase",
+    "frame": { "x": 144, "y": 96, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 20.ase",
+    "frame": { "x": 192, "y": 96, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 21.ase",
+    "frame": { "x": 240, "y": 96, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 22.ase",
+    "frame": { "x": 288, "y": 96, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 23.ase",
+    "frame": { "x": 336, "y": 96, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 24.ase",
+    "frame": { "x": 0, "y": 144, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 25.ase",
+    "frame": { "x": 48, "y": 144, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 26.ase",
+    "frame": { "x": 96, "y": 144, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 27.ase",
+    "frame": { "x": 144, "y": 144, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 28.ase",
+    "frame": { "x": 192, "y": 144, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 600
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 29.ase",
+    "frame": { "x": 240, "y": 144, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 100
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 30.ase",
+    "frame": { "x": 288, "y": 144, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 600
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 31.ase",
+    "frame": { "x": 336, "y": 144, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 100
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 32.ase",
+    "frame": { "x": 0, "y": 192, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 80
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 33.ase",
+    "frame": { "x": 48, "y": 192, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 220
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 34.ase",
+    "frame": { "x": 96, "y": 192, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 80
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 35.ase",
+    "frame": { "x": 144, "y": 192, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 70
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 36.ase",
+    "frame": { "x": 192, "y": 192, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 120
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 37.ase",
+    "frame": { "x": 240, "y": 192, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 38.ase",
+    "frame": { "x": 288, "y": 192, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 100
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 39.ase",
+    "frame": { "x": 336, "y": 192, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 100
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 40.ase",
+    "frame": { "x": 0, "y": 240, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 100
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 41.ase",
+    "frame": { "x": 48, "y": 240, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 100
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 42.ase",
+    "frame": { "x": 96, "y": 240, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 100
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 43.ase",
+    "frame": { "x": 144, "y": 240, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 44.ase",
+    "frame": { "x": 192, "y": 240, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 45.ase",
+    "frame": { "x": 240, "y": 240, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 46.ase",
+    "frame": { "x": 288, "y": 240, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 47.ase",
+    "frame": { "x": 336, "y": 240, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 48.ase",
+    "frame": { "x": 0, "y": 288, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 49.ase",
+    "frame": { "x": 48, "y": 288, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 50.ase",
+    "frame": { "x": 96, "y": 288, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 51.ase",
+    "frame": { "x": 144, "y": 288, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 52.ase",
+    "frame": { "x": 192, "y": 288, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 53.ase",
+    "frame": { "x": 240, "y": 288, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 54.ase",
+    "frame": { "x": 288, "y": 288, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 55.ase",
+    "frame": { "x": 336, "y": 288, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 56.ase",
+    "frame": { "x": 0, "y": 336, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 57.ase",
+    "frame": { "x": 48, "y": 336, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 58.ase",
+    "frame": { "x": 96, "y": 336, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 59.ase",
+    "frame": { "x": 144, "y": 336, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 60.ase",
+    "frame": { "x": 192, "y": 336, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 61.ase",
+    "frame": { "x": 240, "y": 336, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 50
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 62.ase",
+    "frame": { "x": 288, "y": 336, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 80
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 63.ase",
+    "frame": { "x": 336, "y": 336, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 100
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 64.ase",
+    "frame": { "x": 0, "y": 384, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 70
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 65.ase",
+    "frame": { "x": 48, "y": 384, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 60
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 66.ase",
+    "frame": { "x": 96, "y": 384, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 80
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 67.ase",
+    "frame": { "x": 144, "y": 384, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 100
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 68.ase",
+    "frame": { "x": 192, "y": 384, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 69.ase",
+    "frame": { "x": 240, "y": 384, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   },
+   {
+    "filename": "krampus-returns-sprites-0x 70.ase",
+    "frame": { "x": 288, "y": 384, "w": 48, "h": 48 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 48 },
+    "sourceSize": { "w": 48, "h": 48 },
+    "duration": 200
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.2.34.1-arm64",
+  "image": "krampus-returns-sprites-0x.png",
+  "format": "RGBA8888",
+  "size": { "w": 384, "h": 432 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "blob", "from": 1, "to": 3, "direction": "pingpong" },
+   { "name": "skeleton@", "from": 4, "to": 6, "direction": "pingpong" },
+   { "name": "skull head", "from": 7, "to": 11, "direction": "forward" },
+   { "name": "fly@", "from": 7, "to": 8, "direction": "forward" },
+   { "name": "die", "from": 9, "to": 11, "direction": "forward" },
+   { "name": "teleport_boss@", "from": 9, "to": 11, "direction": "pingpong" },
+   { "name": "solid@", "from": 9, "to": 9, "direction": "forward" },
+   { "name": "phasing@", "from": 10, "to": 11, "direction": "forward" },
+   { "name": "shadow_small", "from": 12, "to": 12, "direction": "forward" },
+   { "name": "spawn_point@", "from": 13, "to": 13, "direction": "forward" },
+   { "name": "door1@", "from": 14, "to": 14, "direction": "forward" },
+   { "name": "door2@", "from": 15, "to": 15, "direction": "forward" },
+   { "name": "door3@", "from": 16, "to": 16, "direction": "forward" },
+   { "name": "door4@", "from": 17, "to": 17, "direction": "forward" },
+   { "name": "door5@", "from": 18, "to": 18, "direction": "forward" },
+   { "name": "door6@", "from": 19, "to": 19, "direction": "forward" },
+   { "name": "gift@", "from": 20, "to": 20, "direction": "forward" },
+   { "name": "fly_red@", "from": 22, "to": 23, "direction": "forward" },
+   { "name": "krampus@", "from": 28, "to": 31, "direction": "forward" },
+   { "name": "attack", "from": 32, "to": 37, "direction": "forward" },
+   { "name": "take_damage@", "from": 38, "to": 39, "direction": "forward" },
+   { "name": "dying@", "from": 40, "to": 42, "direction": "forward" },
+   { "name": "Loop", "from": 40, "to": 42, "direction": "forward" },
+   { "name": "full_health@", "from": 44, "to": 44, "direction": "forward" },
+   { "name": "generic_powerup@", "from": 45, "to": 45, "direction": "forward" },
+   { "name": "shield", "from": 50, "to": 50, "direction": "forward" },
+   { "name": "gold_shield", "from": 51, "to": 51, "direction": "forward" },
+   { "name": "sword", "from": 53, "to": 53, "direction": "forward" },
+   { "name": "flash_fx1", "from": 61, "to": 67, "direction": "forward" }
+  ],
+  "layers": [
+   { "name": "Sprite Sheet", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
