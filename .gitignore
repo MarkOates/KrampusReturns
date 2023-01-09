@@ -1,6 +1,6 @@
 
 bin/*
-!bin/data/*
+!bin/programs/data/*
 .DS_Store
 *.a
 obj/*
