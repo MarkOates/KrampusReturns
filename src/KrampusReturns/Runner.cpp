@@ -903,8 +903,8 @@ void Runner::run(std::string mode)
    // setup the framework
    AllegroFlare::Frameworks::Full framework;
    //framework.disable_escape_key_will_shutdown();
-   framework.disable_clear_to_color_before_calling_primary_timer_funcs();
-   framework.disable_clear_depth_buffer_before_calling_primary_timer_funcs();
+   //framework.disable_clear_to_color_before_calling_primary_timer_funcs();
+   //framework.disable_clear_depth_buffer_before_calling_primary_timer_funcs();
    framework.initialize();
 
    AllegroFlare::FontBin &font_bin = framework.get_font_bin_ref();
