@@ -552,6 +552,7 @@ void Runner::initialize_world()
 
 void Runner::setup_platforming_2d_screen()
 {
+   AllegroFlare::RenderSurfaces::Base *primary_render_surface = framework->get_primary_render_surface();
    //return;
 
    // NOTE: TEST_BASE_FOLDER is the wrong name for this variable btw
@@ -570,7 +571,8 @@ void Runner::setup_platforming_2d_screen()
    platforming_2d_screen.set_font_bin(&framework->get_font_bin_ref());
    platforming_2d_screen.set_profiler(&framework->get_profiler_ref());
    platforming_2d_screen.set_bitmap_bin(&framework->get_bitmap_bin_ref());
-   platforming_2d_screen.set_display(framework->get_primary_display());
+   //platforming_2d_screen.set_display(framework->get_primary_display());
+   platforming_2d_screen.set_primary_render_surface(primary_render_surface);
    platforming_2d_screen.set_event_emitter(&framework->get_event_emitter_ref());
    platforming_2d_screen.set_map_dictionary({
       // TODO: here
@@ -712,14 +714,13 @@ void Runner::game_event_func(AllegroFlare::GameEvent* ev)
       { "initialize", [this](){
          //if (in_production_mode())
          //{
-            //event_emitter->emit_play_sound_effect_event("intro_music");
-            event_emitter->emit_play_music_track_event("intro_music");
-            framework->activate_screen("opening_logos_storyboard_screen");
+            //event_emitter->emit_play_music_track_event("intro_music");
+            //framework->activate_screen("opening_logos_storyboard_screen");
          //}
          //else
          //{
-            //event_emitter->emit_game_event(AllegroFlare::GameEvent(EVENT_ACTIVATE_INVESTIGATION_ROOM_SCREEN));
-            //event_emitter->emit_game_event(AllegroFlare::GameEvent("start_title_screen"));
+            framework->activate_screen("platforming_2d_screen");
+            platforming_2d_screen.load_level_and_start(&platforming_2d_world.get_levels_ref()[0]);
          //}
       }},
       { "check_achievements", [this](){
@@ -905,6 +906,8 @@ void Runner::run(std::string mode)
    //framework.disable_escape_key_will_shutdown();
    //framework.disable_clear_to_color_before_calling_primary_timer_funcs();
    //framework.disable_clear_depth_buffer_before_calling_primary_timer_funcs();
+   //framework.disable_using_display_backbuffer_as_primary_render_surface();
+   //framework.disable_using_display_backbuffer_as_primary_render_surface();
    framework.initialize();
 
    AllegroFlare::FontBin &font_bin = framework.get_font_bin_ref();

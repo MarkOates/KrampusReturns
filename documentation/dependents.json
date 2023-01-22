@@ -142,6 +142,10 @@
     "KrampusReturns/Shaders/Primary",
     "KrampusReturns/Testing/Gym"
   ],
+  "AllegroFlare/RenderSurfaces/Base": [
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Runner"
+  ],
   "al_color_name": [
     "KrampusReturns/Gameplay/Screen",
     "KrampusReturns/Gameplay/Screen",

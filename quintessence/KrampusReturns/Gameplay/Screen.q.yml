@@ -23,16 +23,16 @@ properties:
     getter: true
     setter: false
 
-  - name: display
-    type: AllegroFlare::Display*
-    init_with: nullptr
-    constructor_arg: true
-    setter: false
-
   - name: event_emitter
     type: AllegroFlare::EventEmitter*
     init_with: nullptr
     constructor_arg: true
+    setter: false
+
+  - name: primary_render_surface
+    type: AllegroFlare::RenderSurfaces::Base*
+    init_with: nullptr
+    getter: true
     setter: false
 
   - name: animation_book
@@ -537,17 +537,6 @@ functions:
       return;
 
 
-  - name: set_display
-    parameters:
-      - name: display
-        type: AllegroFlare::Display*
-        default_argument: nullptr
-    guards: [ (!initialized) ]
-    body: |
-      this->display = display;
-      return;
-
-
   - name: set_event_emitter
     parameters:
       - name: event_emitter
@@ -578,6 +567,17 @@ functions:
     guards: [ (!initialized) ]
     body: |
       this->font_bin = font_bin;
+      return;
+
+
+  - name: set_primary_render_surface
+    parameters:
+      - name: primary_render_surface
+        type: AllegroFlare::RenderSurfaces::Base*
+        default_argument: nullptr
+    guards: [ (!initialized) ]
+    body: |
+      this->primary_render_surface = primary_render_surface;
       return;
 
 
@@ -690,7 +690,7 @@ functions:
 
       delete shader;
       delete camera_control_strategy;
-      al_destroy_bitmap(backbuffer_sub_bitmap);
+      //al_destroy_bitmap(backbuffer_sub_bitmap);
 
       // hide all the banners
       hide_banner_text();
@@ -1257,27 +1257,6 @@ functions:
       - AllegroFlare::CameraControlStrategies2D::HorizontalRail
 
 
-  - name: initialize_backbuffer_sub_bitmap
-    body: |
-      ALLEGRO_BITMAP *backbuffer = al_get_backbuffer(al_get_current_display());
-      backbuffer_sub_bitmap = al_create_sub_bitmap(
-         backbuffer,
-         0,
-         0,
-         al_get_bitmap_width(backbuffer),
-         al_get_bitmap_height(backbuffer)
-      );
-
-      if (!backbuffer_sub_bitmap)
-      {
-         std::stringstream error_message;
-         error_message << "AllegroFlare::Prototypes::Platforming2D::Screen::initialize() error: "
-                       << "could not create backbuffer_sub_bitmap";
-         throw std::runtime_error(error_message.str());
-      }
-      return;
-
-
   - name: initialize_animation_book
     guards: [ (!animation_book_initialized) ]
     body: |
@@ -1310,10 +1289,10 @@ functions:
     type: void
     guards:
       - bitmap_bin
-      - al_get_current_display()
+      - primary_render_surface
     body: |
       //initialize_camera_control();
-      initialize_backbuffer_sub_bitmap();
+      //initialize_backbuffer_sub_bitmap();
       //if (!animation_book_initialized) initialize_animation_book();
       initialize_camera();
       initialize_shader();
@@ -1973,11 +1952,16 @@ functions:
       al_clear_to_color(al_color_html("291d29")); // TODO: this double-clears the background color since
                                                   // framework does it already
 
-      camera.setup_dimentional_projection(backbuffer_sub_bitmap);
+      //ALLEGRO_BITMAP *surface_bitmap = primary_render_surface->obtain_surface();
+      //camera.setup_dimentional_projection(surface_bitmap);
 
       ALLEGRO_STATE previous_target_bitmap;
       al_store_state(&previous_target_bitmap, ALLEGRO_STATE_TARGET_BITMAP);
-      al_set_target_bitmap(backbuffer_sub_bitmap);
+
+      ALLEGRO_BITMAP *surface_bitmap = primary_render_surface->obtain_surface();
+      primary_render_surface->set_as_target();
+      camera.setup_dimentional_projection(surface_bitmap);
+      //al_set_target_bitmap();
       camera.start_reverse_transform();
 
       al_set_render_state(ALLEGRO_DEPTH_FUNCTION, ALLEGRO_RENDER_LESS_EQUAL); // less or equal allows 
@@ -3043,6 +3027,8 @@ dependencies:
     headers: [ AllegroFlare/BitmapBin.hpp ]
   - symbol: AllegroFlare::FontBin
     headers: [ AllegroFlare/FontBin.hpp ]
+  - symbol: AllegroFlare::RenderSurfaces::Base
+    headers: [ AllegroFlare/RenderSurfaces/Base.hpp ]
   - symbol: al_color_name
     headers: [ allegro5/allegro_color.h ]
   - symbol: std::map<int, int>

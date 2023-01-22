@@ -47,6 +47,8 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
    framework.get_font_bin_ref().set_full_path(TEST_BASE_FOLDER "fonts/");
    framework.get_sample_bin_ref().set_full_path(TEST_BASE_FOLDER "samples/");
 
+   AllegroFlare::RenderSurfaces::Base *primary_render_surface = framework.get_primary_render_surface();
+
 
 
 
@@ -81,7 +83,8 @@ TEST(KrampusReturns_Gameplay_ScreenTest,
    platforming_2d.set_font_bin(&framework.get_font_bin_ref());
    platforming_2d.set_bitmap_bin(&framework.get_bitmap_bin_ref());
    //platforming_2d.set_animation_book(&animation_book);
-   platforming_2d.set_display(framework.get_primary_display());
+   //platforming_2d.set_display(framework.get_primary_display());
+   platforming_2d.set_primary_render_surface(primary_render_surface);
    platforming_2d.set_event_emitter(&framework.get_event_emitter_ref());
 
    //platforming_2d.initialize();

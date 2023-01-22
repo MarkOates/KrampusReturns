@@ -4,7 +4,6 @@
 #include <AllegroFlare/BitmapBin.hpp>
 #include <AllegroFlare/Camera2D.hpp>
 #include <AllegroFlare/CameraControlStrategies2D/Base.hpp>
-#include <AllegroFlare/Display.hpp>
 #include <AllegroFlare/EventEmitter.hpp>
 #include <AllegroFlare/FontBin.hpp>
 #include <AllegroFlare/FrameAnimation/Book.hpp>
@@ -12,6 +11,7 @@
 #include <AllegroFlare/Profiler.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/Basic2D.hpp>
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/TileMaps/Basic2D.hpp>
+#include <AllegroFlare/RenderSurfaces/Base.hpp>
 #include <AllegroFlare/Screens/Base.hpp>
 #include <AllegroFlare/Shader.hpp>
 #include <AllegroFlare/TileMaps/PrimMesh.hpp>
@@ -55,8 +55,8 @@ namespace KrampusReturns
       private:
          AllegroFlare::BitmapBin* bitmap_bin;
          AllegroFlare::FontBin* font_bin;
-         AllegroFlare::Display* display;
          AllegroFlare::EventEmitter* event_emitter;
+         AllegroFlare::RenderSurfaces::Base* primary_render_surface;
          AllegroFlare::FrameAnimation::Book animation_book;
          bool animation_book_initialized;
          int native_display_resolution_width;
@@ -114,7 +114,7 @@ namespace KrampusReturns
 
 
       public:
-         Screen(AllegroFlare::BitmapBin* bitmap_bin=nullptr, AllegroFlare::FontBin* font_bin=nullptr, AllegroFlare::Display* display=nullptr, AllegroFlare::EventEmitter* event_emitter=nullptr, std::string mode=MODE_PRODUCTION);
+         Screen(AllegroFlare::BitmapBin* bitmap_bin=nullptr, AllegroFlare::FontBin* font_bin=nullptr, AllegroFlare::EventEmitter* event_emitter=nullptr, std::string mode=MODE_PRODUCTION);
          virtual ~Screen();
 
          void set_entity_pool(std::vector<AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D*> entity_pool);
@@ -125,6 +125,7 @@ namespace KrampusReturns
          void set_profiler(AllegroFlare::Profiler* profiler);
          AllegroFlare::BitmapBin* get_bitmap_bin() const;
          AllegroFlare::FontBin* get_font_bin() const;
+         AllegroFlare::RenderSurfaces::Base* get_primary_render_surface() const;
          std::map<std::string, std::string> get_map_dictionary() const;
          AllegroFlare::Vec2D get_camera_baseline_zoom() const;
          AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* get_player_controlled_entity() const;
@@ -141,10 +142,10 @@ namespace KrampusReturns
          void play_level_music();
          void play_boss_music();
          void set_map_dictionary(std::map<std::string, std::string> map_dictionary={});
-         void set_display(AllegroFlare::Display* display=nullptr);
          void set_event_emitter(AllegroFlare::EventEmitter* event_emitter=nullptr);
          void set_bitmap_bin(AllegroFlare::BitmapBin* bitmap_bin=nullptr);
          void set_font_bin(AllegroFlare::FontBin* font_bin=nullptr);
+         void set_primary_render_surface(AllegroFlare::RenderSurfaces::Base* primary_render_surface=nullptr);
          void set_currently_active_map(std::string name="[unset-current-map-name-to-use]");
          void set_player_controlled_entity(KrampusReturns::Entities::Krampus* player_controlled_entity=nullptr);
          AllegroFlare::Prototypes::Platforming2D::Entities::TileMaps::Basic2D* find_map_by_name(std::string name="[unset-map-name]");
@@ -161,7 +162,6 @@ namespace KrampusReturns
          void initialize_maps();
          void add_entity_to_pool(AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* entity=nullptr);
          void reset_camera_control(AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* entity_to_follow=nullptr);
-         void initialize_backbuffer_sub_bitmap();
          void initialize_animation_book();
          void initialize();
          void reverse_gravity();

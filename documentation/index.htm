@@ -825,12 +825,12 @@ table td
   <td class="property">AllegroFlare::FontBin*</td>
 </tr>
 <tr>
-  <td class="property">display</td>
-  <td class="property">AllegroFlare::Display*</td>
-</tr>
-<tr>
   <td class="property">event_emitter</td>
   <td class="property">AllegroFlare::EventEmitter*</td>
+</tr>
+<tr>
+  <td class="property">primary_render_surface</td>
+  <td class="property">AllegroFlare::RenderSurfaces::Base*</td>
 </tr>
 <tr>
   <td class="property">animation_book</td>
@@ -1079,9 +1079,6 @@ table td
   <td class="method">set_map_dictionary(std::map&lt;std::string, std::string&gt; map_dictionary={})</td>
 </tr>
 <tr>
-  <td class="method">set_display(AllegroFlare::Display* display=nullptr)</td>
-</tr>
-<tr>
   <td class="method">set_event_emitter(AllegroFlare::EventEmitter* event_emitter=nullptr)</td>
 </tr>
 <tr>
@@ -1089,6 +1086,9 @@ table td
 </tr>
 <tr>
   <td class="method">set_font_bin(AllegroFlare::FontBin* font_bin=nullptr)</td>
+</tr>
+<tr>
+  <td class="method">set_primary_render_surface(AllegroFlare::RenderSurfaces::Base* primary_render_surface=nullptr)</td>
 </tr>
 <tr>
   <td class="method">set_currently_active_map(std::string name=&quot;[unset-current-map-name-to-use]&quot;)</td>
@@ -1140,9 +1140,6 @@ table td
 </tr>
 <tr>
   <td class="method">reset_camera_control(AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* entity_to_follow=nullptr)</td>
-</tr>
-<tr>
-  <td class="method">initialize_backbuffer_sub_bitmap()</td>
 </tr>
 <tr>
   <td class="method">initialize_animation_book()</td>
@@ -1355,6 +1352,9 @@ table td
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::FontBin&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/FontBin.hpp&quot;]}</td>
+</tr>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::RenderSurfaces::Base&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/RenderSurfaces/Base.hpp&quot;]}</td>
 </tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;al_color_name&quot;, &quot;headers&quot;=&gt;[&quot;allegro5/allegro_color.h&quot;]}</td>
@@ -1835,6 +1835,9 @@ table td
 </tr>
     </table>
      <table>
+<tr>
+  <td class="dependency">{&quot;symbol&quot;=&gt;&quot;AllegroFlare::RenderSurfaces::Base&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/RenderSurfaces/Base.hpp&quot;]}</td>
+</tr>
 <tr>
   <td class="dependency">{&quot;symbol&quot;=&gt;&quot;ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT&quot;, &quot;headers&quot;=&gt;[&quot;AllegroFlare/EventNames.hpp&quot;]}</td>
 </tr>
@@ -2401,6 +2404,10 @@ table td
     "KrampusReturns/Gameplay/Screen",
     "KrampusReturns/Shaders/Primary",
     "KrampusReturns/Testing/Gym"
+  ],
+  "AllegroFlare/RenderSurfaces/Base": [
+    "KrampusReturns/Gameplay/Screen",
+    "KrampusReturns/Runner"
   ],
   "al_color_name": [
     "KrampusReturns/Gameplay/Screen",

@@ -42,12 +42,12 @@ namespace Gameplay
 {
 
 
-Screen::Screen(AllegroFlare::BitmapBin* bitmap_bin, AllegroFlare::FontBin* font_bin, AllegroFlare::Display* display, AllegroFlare::EventEmitter* event_emitter, std::string mode)
+Screen::Screen(AllegroFlare::BitmapBin* bitmap_bin, AllegroFlare::FontBin* font_bin, AllegroFlare::EventEmitter* event_emitter, std::string mode)
    : AllegroFlare::Screens::Base("Prototypes::Platforming2D::Screen")
    , bitmap_bin(bitmap_bin)
    , font_bin(font_bin)
-   , display(display)
    , event_emitter(event_emitter)
+   , primary_render_surface(nullptr)
    , animation_book()
    , animation_book_initialized(false)
    , native_display_resolution_width(1920)
@@ -145,6 +145,12 @@ AllegroFlare::BitmapBin* Screen::get_bitmap_bin() const
 AllegroFlare::FontBin* Screen::get_font_bin() const
 {
    return font_bin;
+}
+
+
+AllegroFlare::RenderSurfaces::Base* Screen::get_primary_render_surface() const
+{
+   return primary_render_surface;
 }
 
 
@@ -433,19 +439,6 @@ void Screen::set_map_dictionary(std::map<std::string, std::string> map_dictionar
    return;
 }
 
-void Screen::set_display(AllegroFlare::Display* display)
-{
-   if (!((!initialized)))
-   {
-      std::stringstream error_message;
-      error_message << "[Screen::set_display]: error: guard \"(!initialized)\" not met.";
-      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
-      throw std::runtime_error("Screen::set_display: error: guard \"(!initialized)\" not met");
-   }
-   this->display = display;
-   return;
-}
-
 void Screen::set_event_emitter(AllegroFlare::EventEmitter* event_emitter)
 {
    if (!((!initialized)))
@@ -482,6 +475,19 @@ void Screen::set_font_bin(AllegroFlare::FontBin* font_bin)
       throw std::runtime_error("Screen::set_font_bin: error: guard \"(!initialized)\" not met");
    }
    this->font_bin = font_bin;
+   return;
+}
+
+void Screen::set_primary_render_surface(AllegroFlare::RenderSurfaces::Base* primary_render_surface)
+{
+   if (!((!initialized)))
+   {
+      std::stringstream error_message;
+      error_message << "[Screen::set_primary_render_surface]: error: guard \"(!initialized)\" not met.";
+      std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
+      throw std::runtime_error("Screen::set_primary_render_surface: error: guard \"(!initialized)\" not met");
+   }
+   this->primary_render_surface = primary_render_surface;
    return;
 }
 
@@ -602,7 +608,7 @@ void Screen::destroy_all()
 
    delete shader;
    delete camera_control_strategy;
-   al_destroy_bitmap(backbuffer_sub_bitmap);
+   //al_destroy_bitmap(backbuffer_sub_bitmap);
 
    // hide all the banners
    hide_banner_text();
@@ -1115,27 +1121,6 @@ void Screen::reset_camera_control(AllegroFlare::Prototypes::Platforming2D::Entit
    return;
 }
 
-void Screen::initialize_backbuffer_sub_bitmap()
-{
-   ALLEGRO_BITMAP *backbuffer = al_get_backbuffer(al_get_current_display());
-   backbuffer_sub_bitmap = al_create_sub_bitmap(
-      backbuffer,
-      0,
-      0,
-      al_get_bitmap_width(backbuffer),
-      al_get_bitmap_height(backbuffer)
-   );
-
-   if (!backbuffer_sub_bitmap)
-   {
-      std::stringstream error_message;
-      error_message << "AllegroFlare::Prototypes::Platforming2D::Screen::initialize() error: "
-                    << "could not create backbuffer_sub_bitmap";
-      throw std::runtime_error(error_message.str());
-   }
-   return;
-}
-
 void Screen::initialize_animation_book()
 {
    if (!((!animation_book_initialized)))
@@ -1179,15 +1164,15 @@ void Screen::initialize()
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
       throw std::runtime_error("Screen::initialize: error: guard \"bitmap_bin\" not met");
    }
-   if (!(al_get_current_display()))
+   if (!(primary_render_surface))
    {
       std::stringstream error_message;
-      error_message << "[Screen::initialize]: error: guard \"al_get_current_display()\" not met.";
+      error_message << "[Screen::initialize]: error: guard \"primary_render_surface\" not met.";
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
-      throw std::runtime_error("Screen::initialize: error: guard \"al_get_current_display()\" not met");
+      throw std::runtime_error("Screen::initialize: error: guard \"primary_render_surface\" not met");
    }
    //initialize_camera_control();
-   initialize_backbuffer_sub_bitmap();
+   //initialize_backbuffer_sub_bitmap();
    //if (!animation_book_initialized) initialize_animation_book();
    initialize_camera();
    initialize_shader();
@@ -1898,11 +1883,16 @@ void Screen::draw()
    al_clear_to_color(al_color_html("291d29")); // TODO: this double-clears the background color since
                                                // framework does it already
 
-   camera.setup_dimentional_projection(backbuffer_sub_bitmap);
+   //ALLEGRO_BITMAP *surface_bitmap = primary_render_surface->obtain_surface();
+   //camera.setup_dimentional_projection(surface_bitmap);
 
    ALLEGRO_STATE previous_target_bitmap;
    al_store_state(&previous_target_bitmap, ALLEGRO_STATE_TARGET_BITMAP);
-   al_set_target_bitmap(backbuffer_sub_bitmap);
+
+   ALLEGRO_BITMAP *surface_bitmap = primary_render_surface->obtain_surface();
+   primary_render_surface->set_as_target();
+   camera.setup_dimentional_projection(surface_bitmap);
+   //al_set_target_bitmap();
    camera.start_reverse_transform();
 
    al_set_render_state(ALLEGRO_DEPTH_FUNCTION, ALLEGRO_RENDER_LESS_EQUAL); // less or equal allows 
