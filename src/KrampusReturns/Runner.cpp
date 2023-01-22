@@ -714,13 +714,13 @@ void Runner::game_event_func(AllegroFlare::GameEvent* ev)
       { "initialize", [this](){
          //if (in_production_mode())
          //{
-            //event_emitter->emit_play_music_track_event("intro_music");
-            //framework->activate_screen("opening_logos_storyboard_screen");
+            event_emitter->emit_play_music_track_event("intro_music");
+            framework->activate_screen("opening_logos_storyboard_screen");
          //}
          //else
          //{
-            framework->activate_screen("platforming_2d_screen");
-            platforming_2d_screen.load_level_and_start(&platforming_2d_world.get_levels_ref()[0]);
+            //framework->activate_screen("platforming_2d_screen");
+            //platforming_2d_screen.load_level_and_start(&platforming_2d_world.get_levels_ref()[0]);
          //}
       }},
       { "check_achievements", [this](){
