@@ -10,13 +10,14 @@ namespace ChatGPT
          std::pair<float, float> origin,
          std::pair<float, float> area_width_height
    )
-      : entity(entity)
-      , time_since_last_teleport(0)
-      , random_engine(std::random_device()())
-      , uniform_distribution(0, 5)
+      : teleport_locations()
       , origin(origin)
       , area_width_height(area_width_height)
       , previous_random_location_index(0)
+      , random_engine(std::random_device()())
+      , uniform_distribution(0, 5)
+      , entity(entity)
+      , time_since_last_teleport(0)
    {
       for (int i=0; i<6; i++)
       {
