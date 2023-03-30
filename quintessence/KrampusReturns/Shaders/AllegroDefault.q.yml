@@ -1,9 +1,9 @@
 parent_classes:
 
 
-  - class: AllegroFlare::Shader
+  - class: AllegroFlare::Shaders::Base
     scope: public
-    init_with: "obtain_vertex_source(), obtain_fragment_source()"
+    init_with: '"KrampusReturns/Shaders/AllegroDefault", obtain_vertex_source(), obtain_fragment_source()'
 
 
 properties:
@@ -20,7 +20,7 @@ functions:
   - name: initialize
     type: void
     body: |
-      if (!initialized) AllegroFlare::Shader::initialize();
+      if (!initialized) AllegroFlare::Shaders::Base::initialize(); // NOTE: Unsure if this is proper usage
       initialized = true;
 
 
@@ -28,7 +28,7 @@ functions:
     type: void
     guards: [ initialized ]
     body: |
-      AllegroFlare::Shader::activate();
+      AllegroFlare::Shaders::Base::activate(); // NOTE: Unsure if this is proper usage
 
 
   - name: obtain_vertex_source
@@ -111,8 +111,8 @@ functions:
 dependencies:
 
 
-  - symbol: AllegroFlare::Shader
-    headers: [ AllegroFlare/Shader.hpp ]
+  - symbol: AllegroFlare::Shaders::Base
+    headers: [ AllegroFlare/Shaders/Base.hpp ]
   - symbol: ALLEGRO_COLOR
     headers: [ allegro5/allegro.h ]
 

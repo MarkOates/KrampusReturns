@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <AllegroFlare/VirtualControls.hpp>
+#include <AllegroFlare/VirtualController.hpp>
 #include <KrampusReturns/Entities/Krampus.hpp>
 
 
@@ -10,7 +10,7 @@ namespace KrampusReturns
    class KrampusController
    {
    private:
-      AllegroFlare::VirtualControls player_controls;
+      AllegroFlare::VirtualController player_controls;
       KrampusReturns::Entities::Krampus* krampus;
       void jump();
 

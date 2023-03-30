@@ -155,8 +155,7 @@
     "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/VirtualControls": [
-    "KrampusReturns/Gameplay/Screen",
-    "KrampusReturns/KrampusController"
+    "KrampusReturns/Gameplay/Screen"
   ],
   "AllegroFlare/VirtualControlsProcessor": [
     "KrampusReturns/Gameplay/Screen"
@@ -265,9 +264,8 @@
   "KrampusReturns/Shaders/AllegroDefault": [
     "KrampusReturns/Gameplay/Screen"
   ],
-  "AllegroFlare/Shader": [
+  "AllegroFlare/Shaders/Base": [
     "KrampusReturns/Gameplay/Screen",
-    "KrampusReturns/Runner",
     "KrampusReturns/Shaders/AllegroDefault",
     "KrampusReturns/Shaders/Primary"
   ],
@@ -308,6 +306,9 @@
   "AllegroFlare/Profiler": [
     "KrampusReturns/Gameplay/Screen"
   ],
+  "AllegroFlare/VirtualController": [
+    "KrampusReturns/KrampusController"
+  ],
   "ALLEGRO_FLARE_EVENT_UNLOCK_ACHIEVEMENT": [
     "KrampusReturns/Runner"
   ],
@@ -339,6 +340,9 @@
     "KrampusReturns/Runner"
   ],
   "AllegroFlare/Screens/Storyboard": [
+    "KrampusReturns/Runner"
+  ],
+  "AllegroFlare/Shader": [
     "KrampusReturns/Runner"
   ],
   "AllegroFlare/Screens/CharacterNameInput": [

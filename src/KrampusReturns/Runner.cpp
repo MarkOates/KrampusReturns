@@ -503,6 +503,10 @@ void Runner::initialize_world()
    // TODO: CRITICAL: fix this TEST_BASE_FOLDER path
    // TODO: Load up actual data for the remaining levels of the game
    // NOTE: TEST_BASE_FOLDER is the wrong name for this variable btw
+
+   std::string data_folder = framework->get_data_folder_path();
+
+   /*
    static std::string TEST_BASE_FOLDER = "[unset-TEST_BASE_FOLDER]";
    if (is_test_mode(mode) || is_development_mode(mode))
    {
@@ -512,6 +516,7 @@ void Runner::initialize_world()
    {
       TEST_BASE_FOLDER = "./data/";
    }
+   */
 
 
    platforming_2d_world.set_levels({
@@ -519,7 +524,7 @@ void Runner::initialize_world()
          "level_1",
          "The First Rescue",
          {
-            { "map_a", TEST_BASE_FOLDER + "maps/krampus-returns-level-1-1-0x.tmj" }
+            { "map_a", data_folder + "maps/krampus-returns-level-1-1-0x.tmj" }
          },
          "level_1_music"
       ),
@@ -527,7 +532,7 @@ void Runner::initialize_world()
          "level_2",
          "The Second Rescue",
          {
-            { "map_a", TEST_BASE_FOLDER + "maps/krampus-returns-level-2-1-0x.tmj" }
+            { "map_a", data_folder + "maps/krampus-returns-level-2-1-0x.tmj" }
          },
          "level_1_music"
       ),
@@ -535,7 +540,7 @@ void Runner::initialize_world()
          "level_1",
          "The Pits",
          {
-            { "map_a", TEST_BASE_FOLDER + "maps/krampus-returns-level-3-1-0x.tmj" }
+            { "map_a", data_folder + "maps/krampus-returns-level-3-1-0x.tmj" }
          },
          "level_1_music"
       ),
@@ -543,7 +548,7 @@ void Runner::initialize_world()
          "level_1",
          "The Final",
          {
-            { "map_a", TEST_BASE_FOLDER + "maps/krampus-returns-level-4-1-0x.tmj" }
+            { "map_a", data_folder + "maps/krampus-returns-level-4-1-0x.tmj" }
          },
          "final_level_music"
       ),
@@ -555,18 +560,7 @@ void Runner::setup_platforming_2d_screen()
    AllegroFlare::RenderSurfaces::Base *primary_render_surface = framework->get_primary_render_surface();
    //return;
 
-   // NOTE: TEST_BASE_FOLDER is the wrong name for this variable btw
-   static std::string TEST_BASE_FOLDER = "[unset-TEST_BASE_FOLDER]";
-   if (is_test_mode(mode) || is_development_mode(mode))
-   {
-      TEST_BASE_FOLDER = "/Users/markoates/Repos/KrampusReturns/bin/programs/data/";
-   }
-   else
-   {
-      TEST_BASE_FOLDER = "./data/";
-   }
-
-
+   std::string data_folder = framework->get_data_folder_path();
 
    platforming_2d_screen.set_font_bin(&framework->get_font_bin_ref());
    platforming_2d_screen.set_profiler(&framework->get_profiler_ref());
@@ -576,8 +570,8 @@ void Runner::setup_platforming_2d_screen()
    platforming_2d_screen.set_event_emitter(&framework->get_event_emitter_ref());
    platforming_2d_screen.set_map_dictionary({
       // TODO: here
-      { "map_a", TEST_BASE_FOLDER + "maps/krampus-returns-map01-0x.tmj" },
-      { "map_b", TEST_BASE_FOLDER + "maps/krampus-returns-map02-0x.tmj" },
+      { "map_a", data_folder + "maps/krampus-returns-map01-0x.tmj" },
+      { "map_b", data_folder + "maps/krampus-returns-map02-0x.tmj" },
       //{ "gym", "/Users/markoates/Repos/allegro_flare/bin/data/maps/map1-0x.tmj" },
       //{ "map_b", "/Users/markoates/Repos/allegro_flare/bin/data/maps/map1b-0x.tmj" },
    });
@@ -903,6 +897,7 @@ void Runner::run(std::string mode)
 
    // setup the framework
    AllegroFlare::Frameworks::Full framework;
+   framework.set_deployment_environment(mode);
    //framework.disable_escape_key_will_shutdown();
    //framework.disable_clear_to_color_before_calling_primary_timer_funcs();
    //framework.disable_clear_depth_buffer_before_calling_primary_timer_funcs();
@@ -910,27 +905,27 @@ void Runner::run(std::string mode)
    //framework.disable_using_display_backbuffer_as_primary_render_surface();
    framework.initialize();
 
-   AllegroFlare::FontBin &font_bin = framework.get_font_bin_ref();
-   AllegroFlare::BitmapBin &bitmap_bin = framework.get_bitmap_bin_ref();
-   AllegroFlare::SampleBin &sample_bin = framework.get_sample_bin_ref();
-   AllegroFlare::ModelBin &model_bin = framework.get_model_bin_ref();
+   //AllegroFlare::FontBin &font_bin = framework.get_font_bin_ref();
+   //AllegroFlare::BitmapBin &bitmap_bin = framework.get_bitmap_bin_ref();
+   //AllegroFlare::SampleBin &sample_bin = framework.get_sample_bin_ref();
+   //AllegroFlare::ModelBin &model_bin = framework.get_model_bin_ref();
 
    // TODO: develop a strategy where this branching can have dependable production
    // data when switching to "production"
-   if (is_test_mode(mode) || is_development_mode(mode))
-   {
-      font_bin.set_full_path("/Users/markoates/Repos/KrampusReturns/bin/programs/data/fonts");
-      bitmap_bin.set_full_path("/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps");
-      sample_bin.set_full_path("/Users/markoates/Repos/KrampusReturns/bin/programs/data/samples");
-      model_bin.set_full_path("/Users/markoates/Repos/KrampusReturns/bin/programs/data/models");
-   }
-   else
-   {
-      font_bin.set_full_path("./data/fonts");
-      bitmap_bin.set_full_path("./data/bitmaps");
-      sample_bin.set_full_path("./data/samples");
-      model_bin.set_full_path("./data/models");
-   }
+   //if (is_test_mode(mode) || is_development_mode(mode))
+   //{
+      //font_bin.set_full_path("/Users/markoates/Repos/KrampusReturns/bin/programs/data/fonts");
+      //bitmap_bin.set_full_path("/Users/markoates/Repos/KrampusReturns/bin/programs/data/bitmaps");
+      //sample_bin.set_full_path("/Users/markoates/Repos/KrampusReturns/bin/programs/data/samples");
+      //model_bin.set_full_path("/Users/markoates/Repos/KrampusReturns/bin/programs/data/models");
+   //}
+   //else
+   //{
+      //font_bin.set_full_path("./data/fonts");
+      //bitmap_bin.set_full_path("./data/bitmaps");
+      //sample_bin.set_full_path("./data/samples");
+      //model_bin.set_full_path("./data/models");
+   //}
 
 
    Runner runner(mode, &framework, &framework.get_event_emitter_ref());

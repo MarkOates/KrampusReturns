@@ -108,7 +108,7 @@ properties:
     setter: false
 
   - name: shader
-    type: AllegroFlare::Shader*
+    type: AllegroFlare::Shaders::Base*
     init_with: nullptr
 
   - name: show_tile_mesh
@@ -3111,8 +3111,8 @@ dependencies:
     headers: [ KrampusReturns/Shaders/Primary.hpp ]
   - symbol: KrampusReturns::Shaders::AllegroDefault
     headers: [ KrampusReturns/Shaders/AllegroDefault.hpp ]
-  - symbol: AllegroFlare::Shader
-    headers: [ AllegroFlare/Shader.hpp ]
+  - symbol: AllegroFlare::Shaders::Base
+    headers: [ AllegroFlare/Shaders/Base.hpp ]
   - symbol: KrampusReturns::KrampusController
     headers: [ KrampusReturns/KrampusController.hpp ]
   - symbol: KrampusReturns::Entities::Krampus

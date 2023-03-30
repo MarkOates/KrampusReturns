@@ -14,7 +14,7 @@ namespace Shaders
 
 
 AllegroDefault::AllegroDefault()
-   : AllegroFlare::Shader(obtain_vertex_source(), obtain_fragment_source())
+   : AllegroFlare::Shaders::Base("KrampusReturns/Shaders/AllegroDefault", obtain_vertex_source(), obtain_fragment_source())
    , initialized(false)
 {
 }
@@ -27,7 +27,7 @@ AllegroDefault::~AllegroDefault()
 
 void AllegroDefault::initialize()
 {
-   if (!initialized) AllegroFlare::Shader::initialize();
+   if (!initialized) AllegroFlare::Shaders::Base::initialize(); // NOTE: Unsure if this is proper usage
    initialized = true;
 }
 
@@ -40,7 +40,7 @@ void AllegroDefault::activate()
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
       throw std::runtime_error("AllegroDefault::activate: error: guard \"initialized\" not met");
    }
-   AllegroFlare::Shader::activate();
+   AllegroFlare::Shaders::Base::activate(); // NOTE: Unsure if this is proper usage
 }
 
 std::string AllegroDefault::obtain_vertex_source()

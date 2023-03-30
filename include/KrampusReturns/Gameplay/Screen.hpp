@@ -13,7 +13,7 @@
 #include <AllegroFlare/Prototypes/Platforming2D/Entities/TileMaps/Basic2D.hpp>
 #include <AllegroFlare/RenderSurfaces/Base.hpp>
 #include <AllegroFlare/Screens/Base.hpp>
-#include <AllegroFlare/Shader.hpp>
+#include <AllegroFlare/Shaders/Base.hpp>
 #include <AllegroFlare/TileMaps/PrimMesh.hpp>
 #include <AllegroFlare/TileMaps/PrimMeshAtlas.hpp>
 #include <AllegroFlare/TileMaps/TileMap.hpp>
@@ -73,7 +73,7 @@ namespace KrampusReturns
          AllegroFlare::Vec2D camera_baseline_zoom;
          KrampusReturns::KrampusController krampus_controller;
          AllegroFlare::Prototypes::Platforming2D::Entities::Basic2D* player_controlled_entity;
-         AllegroFlare::Shader* shader;
+         AllegroFlare::Shaders::Base* shader;
          bool show_tile_mesh;
          bool show_collision_tile_mesh;
          AllegroFlare::CameraControlStrategies2D::Base* camera_control_strategy;

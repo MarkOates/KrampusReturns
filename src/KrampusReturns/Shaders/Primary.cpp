@@ -14,7 +14,7 @@ namespace Shaders
 
 
 Primary::Primary()
-   : AllegroFlare::Shader(obtain_vertex_source(), obtain_fragment_source())
+   : AllegroFlare::Shaders::Base("KrampusReturns/Shaders/Primary", obtain_vertex_source(), obtain_fragment_source())
    , initialized(false)
    , tint(ALLEGRO_COLOR{1, 1, 1, 1})
    , tint_intensity(1.0f)
@@ -60,7 +60,7 @@ void Primary::initialize()
       std::cerr << "\033[1;31m" << error_message.str() << " An exception will be thrown to halt the program.\033[0m" << std::endl;
       throw std::runtime_error("Primary::initialize: error: guard \"(!initialized)\" not met");
    }
-   AllegroFlare::Shader::initialize();
+   AllegroFlare::Shaders::Base::initialize(); // NOTE: Unsure if this is correct usage
    initialized = true;
    return;
 }
@@ -72,7 +72,7 @@ void Primary::activate()
       throw std::runtime_error("[KrampusReturns::Shaders::Primary] Attempting to activate() "
                                "shader before it has been initialized");
    }
-   AllegroFlare::Shader::activate();
+   AllegroFlare::Shaders::Base::activate();
    set_values_to_activated_shader();
    return;
 }

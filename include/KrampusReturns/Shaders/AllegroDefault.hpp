@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <AllegroFlare/Shader.hpp>
+#include <AllegroFlare/Shaders/Base.hpp>
 #include <string>
 
 
@@ -9,7 +9,7 @@ namespace KrampusReturns
 {
    namespace Shaders
    {
-      class AllegroDefault : public AllegroFlare::Shader
+      class AllegroDefault : public AllegroFlare::Shaders::Base
       {
       private:
          bool initialized;
