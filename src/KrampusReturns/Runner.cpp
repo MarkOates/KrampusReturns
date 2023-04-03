@@ -31,6 +31,7 @@ Runner::Runner(std::string mode, AllegroFlare::Frameworks::Full* framework, Alle
    , pause_screen()
    , new_game_intro_storyboard_screen(nullptr)
    , game_won_outro_storyboard_screen(nullptr)
+   , version_screen(nullptr)
    , platforming_2d_screen()
    , platforming_2d_world()
    , finished_up_to_level(0)
@@ -168,6 +169,7 @@ void Runner::initialize()
       //{ "Investigate",    EVENT_ACTIVATE_INVESTIGATION_ROOM_SCREEN },
       { "Achievements",   EVENT_ACTIVATE_ACHIEVEMENTS_SCREEN },
       //{ "Storyboard",     EVENT_ACTIVATE_CUT_IN_STORYBOARD_SCREEN},
+      { "Version",        EVENT_ACTIVATE_VERSION_SCREEN },
       { "Credits",        EVENT_ACTIVATE_CREDITS_SCREEN },
       { "Quit",           EVENT_EXIT_GAME },
    });
@@ -244,6 +246,21 @@ void Runner::initialize()
       //"activate_nvestigation_room_screen"
    );
    framework->register_screen("game_won_outro_storyboard_screen", game_won_outro_storyboard_screen);
+
+
+
+
+
+   // setup the version screen
+   version_screen = new AllegroFlare::Screens::Version;
+   version_screen->set_event_emitter(&event_emitter);
+   version_screen->set_bitmap_bin(&bitmap_bin);
+   version_screen->set_font_bin(&font_bin);
+   version_screen->set_model_bin(&model_bin);
+   version_screen->initialize();
+
+   framework->register_screen("version_screen", version_screen);
+
 
 
 
@@ -785,6 +802,11 @@ void Runner::game_event_func(AllegroFlare::GameEvent* ev)
          //framework->activate_screen("credits_screen");
          event_emitter->emit_play_music_track_event("end_music");
          framework->activate_screen("rolling_credits_screen");
+      }},
+      { EVENT_ACTIVATE_VERSION_SCREEN, [this](){
+         //framework->activate_screen("credits_screen");
+         //event_emitter->emit_play_music_track_event("end_music");
+         framework->activate_screen("version_screen");
       }},
       { EVENT_ACTIVATE_ACHIEVEMENTS_SCREEN, [this](){
          push_screen();

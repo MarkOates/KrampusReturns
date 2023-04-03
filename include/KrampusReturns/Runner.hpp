@@ -10,6 +10,7 @@
 #include <AllegroFlare/Screens/RollingCredits.hpp>
 #include <AllegroFlare/Screens/Storyboard.hpp>
 #include <AllegroFlare/Screens/TitleScreen.hpp>
+#include <AllegroFlare/Screens/Version.hpp>
 #include <KrampusReturns/Gameplay/Screen.hpp>
 #include <KrampusReturns/World.hpp>
 #include <allegro5/allegro.h>
@@ -30,6 +31,7 @@ namespace KrampusReturns
       static constexpr char* EVENT_ACTIVATE_ACHIEVEMENTS_SCREEN = "activate_achievements_screen";
       static constexpr char* EVENT_EXIT_ACHIEVEMENTS_SCREEN = "exit_achievements_screen";
       static constexpr char* EVENT_ACTIVATE_CREDITS_SCREEN = "activate_credits_screen";
+      static constexpr char* EVENT_ACTIVATE_VERSION_SCREEN = "activate_version_screen";
       static constexpr char* EVENT_CREDITS_SCREEN_FINISHED = "credits_screen_finished";
       static constexpr char* EVENT_EXIT_GAME = "exit_game";
       static constexpr char* EVENT_PAUSE_GAME = "pause_game";
@@ -45,6 +47,7 @@ namespace KrampusReturns
       AllegroFlare::Screens::PauseScreen pause_screen;
       AllegroFlare::Screens::Storyboard* new_game_intro_storyboard_screen;
       AllegroFlare::Screens::Storyboard* game_won_outro_storyboard_screen;
+      AllegroFlare::Screens::Version* version_screen;
       KrampusReturns::Gameplay::Screen platforming_2d_screen;
       KrampusReturns::World platforming_2d_world;
       int finished_up_to_level;

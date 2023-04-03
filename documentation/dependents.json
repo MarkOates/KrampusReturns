@@ -397,6 +397,9 @@
   "AllegroFlare/Screens/RollingCredits": [
     "KrampusReturns/Runner"
   ],
+  "AllegroFlare/Screens/Version": [
+    "KrampusReturns/Runner"
+  ],
   "AllegroFlare/Prototypes/FixedRoom2D/EntityCollectionHelper": [
     "KrampusReturns/Shaders/Primary"
   ],

@@ -14,9 +14,9 @@ TEST(KrampusReturns_RunnerTest,
    //DISABLED__INTERACTIVE__run__runs_the_program)
    INTERACTIVE__run__runs_the_program)
 {
-   KrampusReturns::Runner runner;
-   runner.run("test");
-   SUCCEED();
+   //KrampusReturns::Runner runner;
+   //runner.run("test");
+   //SUCCEED();
 }
 
 

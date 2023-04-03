@@ -44,6 +44,10 @@ properties:
     type: AllegroFlare::Screens::Storyboard*
     init_with: nullptr
 
+  - name: version_screen
+    type: AllegroFlare::Screens::Version*
+    init_with: nullptr
+
   - name: platforming_2d_screen
     type: KrampusReturns::Gameplay::Screen
     init_with: ''
@@ -157,6 +161,12 @@ properties:
   - name: EVENT_ACTIVATE_CREDITS_SCREEN
     type: char*
     init_with: '"activate_credits_screen"'
+    static: true
+    constexpr: true
+
+  - name: EVENT_ACTIVATE_VERSION_SCREEN
+    type: char*
+    init_with: '"activate_version_screen"'
     static: true
     constexpr: true
 
@@ -292,6 +302,7 @@ functions:
          //{ "Investigate",    EVENT_ACTIVATE_INVESTIGATION_ROOM_SCREEN },
          { "Achievements",   EVENT_ACTIVATE_ACHIEVEMENTS_SCREEN },
          //{ "Storyboard",     EVENT_ACTIVATE_CUT_IN_STORYBOARD_SCREEN},
+         { "Version",        EVENT_ACTIVATE_VERSION_SCREEN },
          { "Credits",        EVENT_ACTIVATE_CREDITS_SCREEN },
          { "Quit",           EVENT_EXIT_GAME },
       });
@@ -368,6 +379,21 @@ functions:
          //"activate_nvestigation_room_screen"
       );
       framework->register_screen("game_won_outro_storyboard_screen", game_won_outro_storyboard_screen);
+
+
+
+
+
+      // setup the version screen
+      version_screen = new AllegroFlare::Screens::Version;
+      version_screen->set_event_emitter(&event_emitter);
+      version_screen->set_bitmap_bin(&bitmap_bin);
+      version_screen->set_font_bin(&font_bin);
+      version_screen->set_model_bin(&model_bin);
+      version_screen->initialize();
+
+      framework->register_screen("version_screen", version_screen);
+
 
 
 
@@ -921,6 +947,11 @@ functions:
             event_emitter->emit_play_music_track_event("end_music");
             framework->activate_screen("rolling_credits_screen");
          }},
+         { EVENT_ACTIVATE_VERSION_SCREEN, [this](){
+            //framework->activate_screen("credits_screen");
+            //event_emitter->emit_play_music_track_event("end_music");
+            framework->activate_screen("version_screen");
+         }},
          { EVENT_ACTIVATE_ACHIEVEMENTS_SCREEN, [this](){
             push_screen();
             framework->activate_screen("achievements_screen");
@@ -1217,5 +1248,7 @@ dependencies:
     headers: [ AllegroFlare/Elements/RollingCredits/SectionFactory.hpp ]
   - symbol: AllegroFlare::Screens::RollingCredits
     headers: [ AllegroFlare/Screens/RollingCredits.hpp ]
+  - symbol: AllegroFlare::Screens::Version
+    headers: [ AllegroFlare/Screens/Version.hpp ]
 
 
