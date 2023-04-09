@@ -26,9 +26,11 @@ Runner::Runner(std::string mode, AllegroFlare::Frameworks::Full* framework, Alle
    , mode(mode)
    , framework(framework)
    , event_emitter(event_emitter)
+   , release_info({})
    , opening_logos_storyboard_screen(nullptr)
    , title_screen()
    , pause_screen()
+   , pause_screen_background({})
    , new_game_intro_storyboard_screen(nullptr)
    , game_won_outro_storyboard_screen(nullptr)
    , version_screen(nullptr)
@@ -188,16 +190,20 @@ void Runner::initialize()
 
 
 
+   // setup the background for the pause screen (captures the backbuffer before)
+   pause_screen_background.initialize();
+
    // setup the pause screen
    pause_screen.set_font_bin(&font_bin);
    pause_screen.set_bitmap_bin(&bitmap_bin);
    pause_screen.set_event_emitter(&event_emitter);
+   pause_screen.set_footer_text(release_info.get_version());
+   pause_screen.set_background(&pause_screen_background);
    pause_screen.set_menu_options({
       { "Resume", "unpause_game" },
       { "Quit", "start_title_screen" },
    });
    framework->register_screen("pause_screen", &pause_screen);
-
 
 
 
@@ -851,7 +857,7 @@ void Runner::game_event_func(AllegroFlare::GameEvent* ev)
          framework->activate_screen("pause_screen");
       }},
       { EVENT_UNPAUSE_GAME, [this](){
-         reactivate_prior_screen("investigation_room_screen");
+         reactivate_prior_screen("title_screen");
       }},
       { AllegroFlare::Prototypes::FixedRoom2D::EventNames::SCRIPT_EVENT_NAME, [this, ev](){
          using namespace AllegroFlare::Prototypes::FixedRoom2D;

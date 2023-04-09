@@ -1,6 +1,7 @@
 #pragma once
 
 
+#include <AllegroFlare/Elements/Backgrounds/ScreenCapture.hpp>
 #include <AllegroFlare/EventEmitter.hpp>
 #include <AllegroFlare/Frameworks/Full.hpp>
 #include <AllegroFlare/GameEvent.hpp>
@@ -13,6 +14,7 @@
 #include <AllegroFlare/Screens/Version.hpp>
 #include <KrampusReturns/Gameplay/Screen.hpp>
 #include <KrampusReturns/World.hpp>
+#include <ReleaseInfo.hpp>
 #include <allegro5/allegro.h>
 #include <string>
 #include <vector>
@@ -42,9 +44,11 @@ namespace KrampusReturns
       std::string mode;
       AllegroFlare::Frameworks::Full* framework;
       AllegroFlare::EventEmitter* event_emitter;
+      ReleaseInfo release_info;
       AllegroFlare::Screens::Storyboard* opening_logos_storyboard_screen;
       AllegroFlare::Screens::TitleScreen title_screen;
       AllegroFlare::Screens::PauseScreen pause_screen;
+      AllegroFlare::Elements::Backgrounds::ScreenCapture pause_screen_background;
       AllegroFlare::Screens::Storyboard* new_game_intro_storyboard_screen;
       AllegroFlare::Screens::Storyboard* game_won_outro_storyboard_screen;
       AllegroFlare::Screens::Version* version_screen;

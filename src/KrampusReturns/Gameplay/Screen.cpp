@@ -2367,6 +2367,13 @@ void Screen::key_char_func(ALLEGRO_EVENT* event)
    // this function should remain in place so that the keyboard could be used for debugging control.
    switch (event->keyboard.keycode)
    {
+      case ALLEGRO_KEY_P:
+         event_emitter->emit_game_event(AllegroFlare::GameEvent("pause_game"));
+         //emit_game_event("pause_screen");
+      //set_state(STATE_FINISHED_LEVEL);
+      //toggle_show_collision_tile_mesh();
+      break;
+
       case ALLEGRO_KEY_W:
       //set_state(STATE_FINISHED_LEVEL);
       //toggle_show_collision_tile_mesh();

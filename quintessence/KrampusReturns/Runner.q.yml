@@ -24,6 +24,10 @@ properties:
     init_with: nullptr
     constructor_arg: true
 
+  - name: release_info
+    type: ReleaseInfo
+    init_with: '{}'
+
   - name: opening_logos_storyboard_screen
     type: AllegroFlare::Screens::Storyboard*
     init_with: nullptr
@@ -35,6 +39,10 @@ properties:
   - name: pause_screen
     type: AllegroFlare::Screens::PauseScreen
     init_with: ''
+
+  - name: pause_screen_background
+    type: AllegroFlare::Elements::Backgrounds::ScreenCapture
+    init_with: '{}'
 
   - name: new_game_intro_storyboard_screen
     type: AllegroFlare::Screens::Storyboard*
@@ -321,16 +329,20 @@ functions:
 
 
 
+      // setup the background for the pause screen (captures the backbuffer before)
+      pause_screen_background.initialize();
+
       // setup the pause screen
       pause_screen.set_font_bin(&font_bin);
       pause_screen.set_bitmap_bin(&bitmap_bin);
       pause_screen.set_event_emitter(&event_emitter);
+      pause_screen.set_footer_text(release_info.get_version());
+      pause_screen.set_background(&pause_screen_background);
       pause_screen.set_menu_options({
          { "Resume", "unpause_game" },
          { "Quit", "start_title_screen" },
       });
       framework->register_screen("pause_screen", &pause_screen);
-
 
 
 
@@ -995,7 +1007,7 @@ functions:
             framework->activate_screen("pause_screen");
          }},
          { EVENT_UNPAUSE_GAME, [this](){
-            reactivate_prior_screen("investigation_room_screen");
+            reactivate_prior_screen("title_screen");
          }},
          { AllegroFlare::Prototypes::FixedRoom2D::EventNames::SCRIPT_EVENT_NAME, [this, ev](){
             using namespace AllegroFlare::Prototypes::FixedRoom2D;
@@ -1250,5 +1262,9 @@ dependencies:
     headers: [ AllegroFlare/Screens/RollingCredits.hpp ]
   - symbol: AllegroFlare::Screens::Version
     headers: [ AllegroFlare/Screens/Version.hpp ]
+  - symbol: AllegroFlare::Elements::Backgrounds::ScreenCapture
+    headers: [ AllegroFlare/Elements/Backgrounds/ScreenCapture.hpp ]
+  - symbol: ReleaseInfo
+    headers: [ ReleaseInfo.hpp ]
 
 
