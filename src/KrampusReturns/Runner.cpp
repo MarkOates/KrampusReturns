@@ -314,18 +314,22 @@ void Runner::initialize()
 
       //jingle-bells-calm.ogg
 
-      section_factory.create_text(SHORT_SPACER_TEXT),
+      //section_factory.create_text(SHORT_SPACER_TEXT),
       section_factory.create_text(
-         "A game by Mark Oates"
+         "Krampus Returns\nA game by Mark Oates"
       ),
 
-      section_factory.create_text(SPACER_TEXT),
+      section_factory.create_section_spacer(),
+      //section_factory.create_text(SPACER_TEXT),
       section_factory.create_text(
          "KrampusHack 2022\nhttps://tins.amarillion.org/krampu22"
       ),
 
-      section_factory.create_text(SHORT_SPACER_TEXT),
-      section_factory.create_text(SPACER_TEXT),
+      section_factory.create_section_spacer(),
+      //section_factory.create_spacer(),
+      //section_factory.create_section_spacer(),
+      //section_factory.create_text(SHORT_SPACER_TEXT),
+      //section_factory.create_text(SPACER_TEXT),
       section_factory.create_header("Programming"),
       section_factory.create_column_with_labels({
          { "Made with", "Allegro (5.2.9)" },
@@ -336,7 +340,8 @@ void Runner::initialize()
          {          "", "by Mark Oates" },
       }),
 
-      section_factory.create_text(SHORT_SPACER_TEXT),
+      section_factory.create_spacer(),
+      //section_factory.create_text(SHORT_SPACER_TEXT),
       //section_factory.create_text(SPACER_TEXT),
       section_factory.create_header("Visual"),
       section_factory.create_column_with_labels({
@@ -356,7 +361,8 @@ void Runner::initialize()
          //{ "Character Design and Art", "Mark Oates" },
       }),
 
-      section_factory.create_text(SHORT_SPACER_TEXT),
+      section_factory.create_spacer(),
+      //section_factory.create_text(SHORT_SPACER_TEXT),
       //section_factory.create_text(SPACER_TEXT),
       section_factory.create_header("Audio"),
       section_factory.create_column_with_labels({
@@ -366,7 +372,8 @@ void Runner::initialize()
          //{        "", "(https://pita.itch.io)" },
       }),
 
-      section_factory.create_text(SHORT_SPACER_TEXT),
+      section_factory.create_spacer(),
+      //section_factory.create_text(SHORT_SPACER_TEXT),
       //section_factory.create_text(SPACER_TEXT),
       section_factory.create_header("Music"),
       //section_factory.create_column_with_labels({
@@ -420,45 +427,53 @@ void Runner::initialize()
 
       //section_factory.create_text("\n\n\n\n\n\n"),
 
+      section_factory.create_section_spacer(),
 
-      section_factory.create_text(SHORT_SPACER_TEXT),
-      section_factory.create_text(SPACER_TEXT),
+      //section_factory.create_text(SHORT_SPACER_TEXT),
+      //section_factory.create_text(SPACER_TEXT),
 
 
       section_factory.create_text(
          "Thank you to all the members of the Allegro game programming community."
       ),
-      section_factory.create_text(SPACER_TEXT),
+      section_factory.create_spacer(),
+      //section_factory.create_text(SPACER_TEXT),
       section_factory.create_text(
          "Thank you to Elias and SiegeLord for your continued dedication to Allegro."
       ),
-      section_factory.create_text(SPACER_TEXT),
+      section_factory.create_spacer(),
+      //section_factory.create_text(SPACER_TEXT),
       section_factory.create_text(
          "Thank you to amarillion for your work to support the Allegro community, including creating KrampusHack."
       ),
-      section_factory.create_text(SPACER_TEXT),
+      section_factory.create_spacer(),
+      //section_factory.create_text(SPACER_TEXT),
       section_factory.create_text(
          "Thank you to pmprog for your wishlist ideas for KrampusHack."
       ),
-      section_factory.create_text(SPACER_TEXT),
+      section_factory.create_spacer(),
+      //section_factory.create_text(SPACER_TEXT),
       //section_factory.create_text(SPACER_TEXT),
       section_factory.create_text(
          "Special thanks to my girlfriend, Louise, for her patience."
       ),
-      section_factory.create_text(SHORT_SPACER_TEXT),
-      section_factory.create_text(SPACER_TEXT),
+      //section_factory.create_text(SHORT_SPACER_TEXT),
+      section_factory.create_section_spacer(),
+      //section_factory.create_text(SPACER_TEXT),
       section_factory.create_text(
          "And thank you for playing."
       ),
 
 
-      section_factory.create_text(SHORT_SPACER_TEXT),
-      section_factory.create_text(SPACER_TEXT),
+      section_factory.create_section_spacer(),
+      //section_factory.create_text(SHORT_SPACER_TEXT),
+      //section_factory.create_text(SPACER_TEXT),
       section_factory.create_text(
          "Copyright 2022 - CLUBCATT Games\nhttps://www.clubcatt.com"
       ),
 
-      section_factory.create_text(SHORT_SPACER_TEXT),
+      section_factory.create_spacer(),
+      //section_factory.create_text(SHORT_SPACER_TEXT),
       //section_factory.create_text(SPACER_TEXT),
    });
    rolling_credits_screen.initialize();
