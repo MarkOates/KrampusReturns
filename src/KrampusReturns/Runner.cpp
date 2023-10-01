@@ -117,7 +117,9 @@ void Runner::initialize()
 
 
    // setup our helper factories
-   AllegroFlare::StoryboardFactory storyboard_factory(&font_bin, &event_emitter);
+   AllegroFlare::StoryboardFactory storyboard_factory;
+   storyboard_factory.set_font_bin(&font_bin);
+   storyboard_factory.set_event_emitter(&event_emitter);
 
 
    // create the opening logos storyboard screen
@@ -158,7 +160,7 @@ void Runner::initialize()
    title_screen.set_menu_position_y(1080/32*19+10);
    title_screen.set_copyright_text("\nCopyright 2022     Mark Oates     CLUBCATT Games     www.clubcatt.com\n");
    title_screen.set_copyright_text_color(AllegroFlare::Color(0xefefff, 0.2).to_al());
-   title_screen.set_menu_option_selection_activation_delay(2.0);
+   title_screen.set_menu_option_selection_to_activation_delay(2.0);
    //title_screen.set_copyright_font_name(");
    title_screen.set_copyright_font_size(-26);
    title_screen.set_menu_options({

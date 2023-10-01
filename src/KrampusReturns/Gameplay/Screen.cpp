@@ -1884,14 +1884,14 @@ void Screen::draw()
                                                // framework does it already
 
    //ALLEGRO_BITMAP *surface_bitmap = primary_render_surface->obtain_surface();
-   //camera.setup_dimentional_projection(surface_bitmap);
+   //camera.setup_dimensional_projection(surface_bitmap);
 
    ALLEGRO_STATE previous_target_bitmap;
    al_store_state(&previous_target_bitmap, ALLEGRO_STATE_TARGET_BITMAP);
 
    ALLEGRO_BITMAP *surface_bitmap = primary_render_surface->obtain_surface();
    primary_render_surface->set_as_target();
-   camera.setup_dimentional_projection(surface_bitmap);
+   camera.setup_dimensional_projection(surface_bitmap);
    //al_set_target_bitmap();
    camera.start_reverse_transform();
 
@@ -2227,8 +2227,6 @@ void Screen::create_damage_zone_by_player(std::string on_map, float point_of_imp
    }
    KrampusReturns::EntityFactory entity_factory;
       entity_factory.set_animation_book(&animation_book);
-
-   // DEBUG:
 
    KrampusReturns::Entities::DamageZone *damage_zone =
       entity_factory.create_damage_zone_by_player(
